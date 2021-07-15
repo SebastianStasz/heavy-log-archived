@@ -1,0 +1,17 @@
+# Documentation
+# https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
+
+name: "HeavyLog"
+options:
+  createIntermediateGroups: true
+  indentWidth: 4
+  tabWidth: 4
+  bundleIdPrefix: "de.number42"
+  groupSortPosition: "top"
+targets: 
+  HeavyLog:
+    type: "application"
+    platform: "iOS"
+    deploymentTarget: "14.0"
+    sources:
+      - path: "HeavyLog"
