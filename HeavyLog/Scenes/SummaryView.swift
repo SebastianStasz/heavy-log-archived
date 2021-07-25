@@ -10,7 +10,7 @@ import SwiftUI
 struct SummaryView: View {
 
     @StateObject private var recordsVM = HorizontalPaginationVM<RecordTile>(items: [
-        .powerliftingx1, .powerliftingx3, .powerliftingx5
+        .powerliftingX1, .powerliftingX3, .powerliftingX5
     ], tileWidth: 290)
 
     var body: some View {

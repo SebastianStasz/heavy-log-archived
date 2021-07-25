@@ -48,7 +48,7 @@ struct HorizontalPaginationView<Content: View, T: Identifiable>: View {
 struct HorizontalPaginationView_Previews: PreviewProvider {
     static var previews: some View {
 
-        let vm = HorizontalPaginationVM<RecordTile>(items: [.powerliftingx1, .powerliftingx3, .powerliftingx5, .squatx1], tileWidth: 290)
+        let vm = HorizontalPaginationVM<RecordTile>(items: [.powerliftingX1, .powerliftingX3, .powerliftingX5, .squat], tileWidth: 290)
 
         NavigationView {
             VStack {

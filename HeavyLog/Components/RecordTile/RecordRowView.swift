@@ -22,12 +22,12 @@ struct RecordRowView: View {
             VStack(alignment: .leading) {
                 Text(title).textBodyMedium
                 Spacer()
-                Text(subtitle).textBodyNormal
+                HStack {
+                    Text(subtitle).textBodyNormal
+                    Spacer()
+                    Text(footnote).textFootnoteMain
+                }
             }
-
-            Spacer()
-
-            Text(footnote).textFootnoteMain
         }
         .frame(height: 49)
     }
@@ -53,7 +53,7 @@ struct RecordRowView_Previews: PreviewProvider {
             RecordRowView(record: .squatX1)
             RecordRowView(record: .squatX3)
             RecordRowView(record: .squatX5)
-            RecordRowView(record: .deadliftx1)
+            RecordRowView(record: .deadliftX1)
         }
         .previewLayout(.sizeThatFits)
         .padding()
