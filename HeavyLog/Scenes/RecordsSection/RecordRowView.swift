@@ -9,17 +9,15 @@ import SwiftUI
 
 struct RecordRowView: View {
 
-    var title: String
-    var subtitle: String
-    var footnote: String
-    var value: String
-    var squareColor: Color
-    var valueColor: Color
+    let title: String
+    let subtitle: String
+    let footnote: String
+    let repsIndicatorView: ValueIndicatorSquareView
 
     var body: some View {
         HStack(alignment: .bottom, spacing: .spacingMedium) {
 
-            ValueIndicatorSquareView(value: value, valueColor: valueColor, squareColor: squareColor)
+            repsIndicatorView
 
             VStack(alignment: .leading) {
                 Text(title).textBodyMedium
@@ -35,11 +33,29 @@ struct RecordRowView: View {
     }
 }
 
+// MARK: - Initializers
+
+extension RecordRowView {
+    init(record: Record) {
+        title = record.exerciseName
+        subtitle = record.valueStr
+        footnote = record.dateStr
+        repsIndicatorView = ValueIndicatorSquareView(reps: record.reps)
+    }
+}
+
 
 // MARK: - Preview
 
 struct RecordRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordRowView(title: "Squat", subtitle: "140 kg", footnote: "17 jul 2021", value: "x1", squareColor: .red.opacity(0.5), valueColor: .red)
+        VStack(spacing: 30) {
+            RecordRowView(record: .squatX1)
+            RecordRowView(record: .squatX3)
+            RecordRowView(record: .squatX5)
+            RecordRowView(record: .deadliftx1)
+        }
+        .previewLayout(.sizeThatFits)
+        .padding()
     }
 }

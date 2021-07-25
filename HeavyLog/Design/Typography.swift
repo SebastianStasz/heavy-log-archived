@@ -21,6 +21,12 @@ extension Text {
             .foregroundColor(.textMainNormal)
     }
 
+    var textBodyThin: Text {
+        self.textBody
+            .fontWeight(.regular)
+            .foregroundColor(.textMainThin)
+    }
+
     var textHeadlineBig: Text {
         self.font(.title3)
             .fontWeight(.medium)

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ValueIndicatorSquareView: View {
 
-    var value: String
-    var valueColor: Color
-    var squareColor: Color
+    let value: String
+    let valueColor: Color
+    let squareColor: Color
 
     var body: some View {
         Rectangle()

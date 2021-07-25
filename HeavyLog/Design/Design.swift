@@ -9,11 +9,14 @@ import SwiftUI
 
 enum Spacing {
     case medium
+    case big
 
-    var valule: CGFloat {
+    var value: CGFloat {
         switch self {
         case .medium:
             return 16
+        case .big:
+            return 24
         }
     }
 
@@ -37,6 +40,10 @@ extension CGFloat {
     }
 
     static var spacingMedium: CGFloat {
-        Spacing.medium.valule
+        Spacing.medium.value
+    }
+
+    static var spacingBig: CGFloat {
+        Spacing.big.value
     }
 }

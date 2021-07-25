@@ -11,6 +11,7 @@ enum AppColor {
     private typealias design = ColorDesign
 
     case backgroundMain
+    case backgroundSecondary
 
     case textMainBold
     case textMainNormal
@@ -28,6 +29,8 @@ enum AppColor {
         switch self {
         case .backgroundMain:
             return Color(.secondarySystemBackground)
+        case .backgroundSecondary:
+            return Color(.systemBackground)
 
         case .textMainBold:
             return .primary
