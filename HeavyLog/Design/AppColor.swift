@@ -13,6 +13,9 @@ enum AppColor {
     case backgroundMain
     case backgroundSecondary
 
+    case accentMain
+    case accentGrayMain
+
     case textMainBold
     case textMainNormal
     case textMainLight
@@ -31,6 +34,11 @@ enum AppColor {
             return Color(.secondarySystemBackground)
         case .backgroundSecondary:
             return Color(.systemBackground)
+
+        case .accentMain:
+            return Color("accentMain")
+        case .accentGrayMain:
+            return Color("accentGrayMain")
 
         case .textMainBold:
             return .primary
