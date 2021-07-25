@@ -13,10 +13,6 @@ struct Record {
     let date: Date
     let reps: Reps
 
-    var dateStr: String {
-        "\(date)"
-    }
-
     var numberOfReps: String {
         reps.indicator
     }

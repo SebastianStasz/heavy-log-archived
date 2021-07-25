@@ -39,7 +39,7 @@ extension RecordRowView {
     init(record: Record) {
         title = record.exerciseName
         subtitle = record.valueStr
-        footnote = record.dateStr
+        footnote = record.date.string(format: .medium)
         repsIndicatorView = ValueIndicatorSquareView(reps: record.reps)
     }
 }
