@@ -35,17 +35,17 @@ enum RecordTile: Int {
     var records: [Record] {
         switch self {
         case .powerliftingX1:
-            return Self.powerliftingx1
+            return Self.samplePowerliftingX1
         case .powerliftingX3:
-            return Self.powerliftingx3
+            return Self.samplePowerliftingX3
         case .powerliftingX5:
-            return Self.powerliftingx5
+            return Self.samplePowerliftingX5
         case .squat:
-            return Self.squatSample
+            return Self.sampleSquat
         case .benchPress:
-            return Self.benchPressSample
+            return Self.sampleBenchPress
         case .deadlift:
-            return Self.deadliftSample
+            return Self.sampleDeadlift
         }
     }
 }
@@ -57,10 +57,10 @@ extension RecordTile: Identifiable {
 // MARK: - Sample Data
 
 extension RecordTile {
-    static let squatSample: [Record] = [.squatX1, .squatX3, .squatX5]
-    static let deadliftSample: [Record] = [.deadliftX1, .deadliftX3, .deadliftX5]
-    static let benchPressSample: [Record] = [.benchPressX1, .benchPressX3, .benchPressX5]
-    static let powerliftingx1: [Record] = [.squatX1, .benchPressX1, .deadliftX1]
-    static let powerliftingx3: [Record] = [.squatX3, .benchPressX3, .deadliftX3]
-    static let powerliftingx5: [Record] = [.squatX5, .benchPressX5, .deadliftX5]
+    static let sampleSquat: [Record] = [.sampleSquatX1, .sampleSquatX3, .sampleSquatX5]
+    static let sampleDeadlift: [Record] = [.sampleDeadliftX1, .sampleDeadliftX3, .sampleDeadliftX5]
+    static let sampleBenchPress: [Record] = [.sampleBenchPressX1, .sampleBenchPressX3, .sampleBenchPressX5]
+    static let samplePowerliftingX1: [Record] = [.sampleSquatX1, .sampleBenchPressX1, .sampleDeadliftX1]
+    static let samplePowerliftingX3: [Record] = [.sampleSquatX3, .sampleBenchPressX3, .sampleDeadliftX3]
+    static let samplePowerliftingX5: [Record] = [.sampleSquatX5, .sampleBenchPressX5, .sampleDeadliftX5]
 }

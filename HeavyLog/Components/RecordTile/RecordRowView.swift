@@ -50,10 +50,10 @@ extension RecordRowView {
 struct RecordRowView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 30) {
-            RecordRowView(record: .squatX1)
-            RecordRowView(record: .squatX3)
-            RecordRowView(record: .squatX5)
-            RecordRowView(record: .deadliftX1)
+            RecordRowView(record: .sampleSquatX1)
+            RecordRowView(record: .sampleSquatX3)
+            RecordRowView(record: .sampleSquatX5)
+            RecordRowView(record: .sampleDeadliftX1)
         }
         .previewLayout(.sizeThatFits)
         .padding()

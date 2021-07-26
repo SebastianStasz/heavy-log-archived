@@ -75,13 +75,13 @@ extension RecordTileView {
 struct RecordTileView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            let recordsFull = [Record.squatX1, Record.squatX3, Record.squatX5]
+            let recordsFull = [Record.sampleSquatX1, Record.sampleSquatX3, Record.sampleSquatX5]
             RecordTileView(title: "Squats", records: recordsFull)
 
-            let recordsEmpty1 = [Record.squatX1, Record.squatX3]
+            let recordsEmpty1 = [Record.sampleSquatX1, Record.sampleSquatX3]
             RecordTileView(title: "Squats", records: recordsEmpty1)
 
-            let recordsEmpty2 = [Record.squatX1]
+            let recordsEmpty2 = [Record.sampleSquatX1]
             RecordTileView(title: "Squats", records: recordsEmpty2)
         }
         .previewLayout(.sizeThatFits)
