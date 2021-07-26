@@ -17,6 +17,7 @@ enum AppColor {
 
     case accentMain
     case accentGrayMain
+    case grayLight
 
     case textMainBold
     case textMainNormal
@@ -41,6 +42,8 @@ enum AppColor {
             return Color("accentMain")
         case .accentGrayMain:
             return Color("accentGrayMain")
+        case .grayLight:
+            return design.gray100.color
 
         case .textMainBold:
             return .primary
@@ -72,12 +75,15 @@ enum AppColor {
 private enum ColorDesign {
     typealias design = Self
 
+    case gray100
     case gray500
     case gray400
     case gray500_05
 
     var color: Color {
         switch self {
+        case .gray100:
+            return Color("gray100")
         case .gray500:
             return Color("gray500")
         case .gray400:
@@ -106,6 +112,10 @@ extension Color {
 
     static var accentGrayMain: Color {
         AppColor.accentGrayMain.color
+    }
+
+    static var grayLight: Color {
+        AppColor.grayLight.color
     }
 
     static var textMainBold: Color {
