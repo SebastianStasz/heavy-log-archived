@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// MARK: - App Color
+
 enum AppColor {
     private typealias design = ColorDesign
 
@@ -65,6 +67,8 @@ enum AppColor {
     }
 }
 
+// MARK: - Color Design
+
 private enum ColorDesign {
     typealias design = Self
 
@@ -81,5 +85,66 @@ private enum ColorDesign {
         case .gray500_05:
             return design.gray500.color.opacity(0.5)
         }
+    }
+}
+
+// MARK: - Color Extensions
+
+extension Color {
+
+    static var backgroundMain: Color {
+        AppColor.backgroundMain.color
+    }
+
+    static var backgroundSecondary: Color {
+        AppColor.backgroundSecondary.color
+    }
+
+    static var accentMain: Color {
+        AppColor.accentMain.color
+    }
+
+    static var accentGrayMain: Color {
+        AppColor.accentGrayMain.color
+    }
+
+    static var textMainBold: Color {
+        AppColor.textMainBold.color
+    }
+
+    static var textMainNormal: Color {
+        AppColor.textMainNormal.color
+    }
+
+    static var textMainLight: Color {
+        AppColor.backgroundSecondary.color
+    }
+
+    static var textMainThin: Color {
+        AppColor.backgroundSecondary.color
+    }
+
+    static var accentGreen: Color {
+        AppColor.accentGreen.color
+    }
+
+    static var accentRed: Color {
+        AppColor.accentRed.color
+    }
+
+    static var accentOrange: Color {
+        AppColor.accentOrange.color
+    }
+
+    static var accentGreenLight: Color {
+        AppColor.accentGreenLight.color
+    }
+
+    static var accentRedLight: Color {
+        AppColor.accentRedLight.color
+    }
+
+    static var accentOrangeLight: Color {
+        AppColor.accentOrangeLight.color
     }
 }

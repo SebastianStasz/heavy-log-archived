@@ -53,22 +53,3 @@ extension Text {
         self.font(.callout)
     }
 }
-
-extension Color {
-
-    static var textMainBold: Color {
-        AppColor.textMainBold.color
-    }
-
-    static var textMainNormal: Color {
-        AppColor.textMainNormal.color
-    }
-
-    static var textMainLight: Color {
-        AppColor.textMainLight.color
-    }
-
-    static var textMainThin: Color {
-        AppColor.textMainThin.color
-    }
-}
