@@ -33,14 +33,17 @@ final class AppController {
     }
 
     func present(alert: AlertModel) {
+        guard app.alert == nil else { return }
         app.alert = alert
     }
 
     func present(actionSheet: ActionSheetModel) {
+        guard app.actionSheet == nil else { return }
         app.actionSheet = actionSheet
     }
 
     func present(sheet: SheetModel) {
+        guard app.sheet == nil else { return }
         app.sheet = sheet
     }
 }
