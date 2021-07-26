@@ -127,11 +127,11 @@ extension Color {
     }
 
     static var textMainLight: Color {
-        AppColor.backgroundSecondary.color
+        AppColor.textMainLight.color
     }
 
     static var textMainThin: Color {
-        AppColor.backgroundSecondary.color
+        AppColor.textMainThin.color
     }
 
     static var accentGreen: Color {
