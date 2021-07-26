@@ -8,11 +8,14 @@
 import SwiftUI
 
 enum Spacing {
+    case small
     case medium
     case big
 
     var value: CGFloat {
         switch self {
+        case .small:
+            return 12
         case .medium:
             return 16
         case .big:
@@ -37,6 +40,10 @@ extension CGFloat {
 
     static var cornerRadiusBase: CGFloat {
         CornerRadius.base.value
+    }
+
+    static var spacingSmall: CGFloat {
+        Spacing.small.value
     }
 
     static var spacingMedium: CGFloat {
