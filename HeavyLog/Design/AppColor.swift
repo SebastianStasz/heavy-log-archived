@@ -76,18 +76,18 @@ private enum ColorDesign {
     typealias design = Self
 
     case gray100
-    case gray500
     case gray400
+    case gray500
     case gray500_05
 
     var color: Color {
         switch self {
         case .gray100:
             return Color("gray100")
-        case .gray500:
-            return Color("gray500")
         case .gray400:
             return Color("gray400")
+        case .gray500:
+            return Color("gray500")
         case .gray500_05:
             return design.gray500.color.opacity(0.5)
         }

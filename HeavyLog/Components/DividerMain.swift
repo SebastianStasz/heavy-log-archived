@@ -10,15 +10,21 @@ import SwiftUI
 struct DividerMain: View {
 
     private let color: Color
+    private let paddingTop: CGFloat
+    private let paddingBottom: CGFloat
 
-    init(color: Color = .grayLight) {
+    init(color: Color = .grayLight, paddingTop: CGFloat = 0, paddingBottom: CGFloat = 0) {
         self.color = color
+        self.paddingTop = paddingTop
+        self.paddingBottom = paddingBottom
     }
 
     var body: some View {
         Rectangle()
             .fill(color)
             .frame(height: 1)
+            .padding(.top, paddingTop)
+            .padding(.bottom, paddingBottom)
     }
 }
 
