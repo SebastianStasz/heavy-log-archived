@@ -7,10 +7,8 @@
 
 import SwiftUI
 
-enum SheetModel: Int, Identifiable, View {
+enum SheetModel: Int, View {
     case test
-
-    var id: Int { rawValue }
 
     var body: some View {
         switch self {
@@ -18,4 +16,8 @@ enum SheetModel: Int, Identifiable, View {
             Text("Test")
         }
     }
+}
+
+extension SheetModel: Identifiable {
+    var id: Int { rawValue }
 }

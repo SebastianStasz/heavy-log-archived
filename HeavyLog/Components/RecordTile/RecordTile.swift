@@ -50,6 +50,8 @@ enum RecordTile: Int {
     }
 }
 
+// MARK: - Helpers
+
 extension RecordTile: Identifiable {
     var id: Int { rawValue }
 }

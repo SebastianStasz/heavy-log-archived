@@ -12,6 +12,8 @@ struct TabBarActionButton: View {
 
     @ObservedObject var tabBar: TabBarVM
 
+    // MARK: - View
+
     var body: some View {
         Button("Add", action: tabBar.arePopupsShown.toggle())
             .buttonStyle(TabBarActionButtonStyle(isEnabled: tabBar.arePopupsShown))

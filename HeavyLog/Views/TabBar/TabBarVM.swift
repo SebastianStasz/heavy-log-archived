@@ -15,11 +15,11 @@ final class TabBarVM: ObservableObject {
 
     private unowned let parent: AppVM
 
-    var availableTabs: [Tab] { Tab.allCases }
-
     init(parent: AppVM) {
         self.parent = parent
     }
+
+    var availableTabs: [Tab] { Tab.allCases }
 }
 
 // MARK: - Navigator

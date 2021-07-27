@@ -13,14 +13,14 @@ enum TabBarModel: Int {
     case summary
     case settings
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .dashboard:
-            return "Dashboard"
+            return "tab.dashboard.title"
         case .workouts:
-            return "Workouts"
+            return "tab.workouts.title"
         case .summary:
-            return "Summary"
+            return "tab.summary.title"
         case .settings:
             return "Settings"
         }
@@ -38,6 +38,15 @@ enum TabBarModel: Int {
             return "gearshape"
         }
     }
+
+    var navigationTitle: LocalizedStringKey? {
+        switch self {
+        case .dashboard:
+            return nil
+        default:
+            return title
+        }
+    }
 }
 
 // MARK: - Tab Views
@@ -47,13 +56,13 @@ extension TabBarModel: View {
     var body: some View {
         switch self {
         case .dashboard:
-            Text(self.title).tag(self)
+            Text(self.title)
         case .workouts:
-            Text(self.title).tag(self)
+            Text(self.title)
         case .summary:
-            SummaryView().tag(self)
+            SummaryView()
         case .settings:
-            Text(self.title).tag(self)
+            Text(self.title)
         }
     }
 }

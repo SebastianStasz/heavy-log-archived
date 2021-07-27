@@ -9,10 +9,12 @@ import UIKit
 
 extension UIScreen {
 
+    /// Returns the width of the screen.
     static var width: CGFloat {
         UIScreen.main.bounds.width
     }
 
+    /// Returns the height of the screen.
     static var height: CGFloat {
         UIScreen.main.bounds.height
     }

@@ -14,6 +14,8 @@ struct WorkoutBigTileView: View {
     private let color: Color
     private let efforts: [(String, String)]
 
+    // MARK: - View
+
     var body: some View {
         VStack(spacing: 0) {
             HStack {

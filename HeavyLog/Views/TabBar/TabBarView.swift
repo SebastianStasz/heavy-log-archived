@@ -23,9 +23,9 @@ struct TabBarView: View {
         VStack(spacing: 0) {
             // TabView
             TabView(selection: $tabBar.selectedTab ) {
-                ForEach(tabBar.availableTabs) { $0 }
-                    .infiniteFrame()
-                    .backgroundIgnoringSafeArea(backgroundColor)
+                ForEach(tabBar.availableTabs) { tab in
+                    tab.embedInNavigationView(title: tab.navigationTitle)
+                }
             }
             .allowsHitTesting(!tabBar.arePopupsShown)
 

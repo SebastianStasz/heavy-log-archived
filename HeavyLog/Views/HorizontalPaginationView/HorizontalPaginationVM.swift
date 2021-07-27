@@ -31,6 +31,11 @@ final class HorizontalPaginationVM<T: Identifiable>: ObservableObject {
         self.items = items
     }
 
+    private var isTileOnRight: Bool { page != numOfTiles }
+    private var isTileOnLeft: Bool { page != 1 }
+
+    // MARK: - External Access
+
     func changeItems(to items: [T]) {
         withAnimation(.easeInOut) {
             self.items = items
@@ -54,9 +59,6 @@ final class HorizontalPaginationVM<T: Identifiable>: ObservableObject {
             backToPreviousOffset()
         }
     }
-
-    private var isTileOnRight: Bool { page != numOfTiles }
-    private var isTileOnLeft: Bool { page != 1 }
 
     // MARK: - Swiping Logic
 

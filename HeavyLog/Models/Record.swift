@@ -30,6 +30,8 @@ struct Record {
     }
 }
 
+// MARK: - Helpers
+
 extension Record: Hashable {}
 
 // MARK: - Sample Data

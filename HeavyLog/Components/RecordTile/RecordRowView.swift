@@ -14,6 +14,8 @@ struct RecordRowView: View {
     let footnote: String
     let repsIndicatorView: ValueIndicatorSquareView
 
+    // MARK: - View
+
     var body: some View {
         HStack(alignment: .bottom, spacing: .spacingMedium) {
 

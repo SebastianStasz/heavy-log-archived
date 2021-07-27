@@ -17,6 +17,8 @@ struct HorizontalPaginationView<Content: View, T: Identifiable>: View {
         self.itemView = itemView
     }
 
+    // MARK: - View
+
     var body: some View {
         HStack(spacing: viewModel.spacing) {
             ForEach(viewModel.items, content: itemView)
@@ -26,6 +28,8 @@ struct HorizontalPaginationView<Content: View, T: Identifiable>: View {
         }
         .padding(.horizontal, .spacingMedium)
     }
+
+    // MARK: Interactions
 
     private var dragGesture: _EndedGesture<_ChangedGesture<DragGesture>> {
         DragGesture()

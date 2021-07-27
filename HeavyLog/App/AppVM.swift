@@ -13,6 +13,7 @@ struct HeavyLogApp: App {
     var body: some Scene {
         WindowGroup {
             AppView(appVM: AppVM.shared)
+                .environment(\.locale, .init(identifier: "en"))
         }
     }
 }

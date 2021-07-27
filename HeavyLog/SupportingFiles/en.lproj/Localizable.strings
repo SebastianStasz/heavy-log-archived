@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  HeavyLog
+
+  Created by Sebastian Staszczyk on 27/07/2021.
+  
+*/
+
+"tab.dashboard.title" = "Dashboard";
+"tab.workouts.title" = "Wokrouts";
+"tab.summary.title" = "Summary";
+"tab.settings.title" = "Settings";

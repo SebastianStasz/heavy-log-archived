@@ -8,6 +8,7 @@
 import Foundation
 
 extension TabBarModel {
+
     enum Popup {
         case first
         case second

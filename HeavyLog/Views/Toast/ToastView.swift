@@ -75,12 +75,12 @@ struct Toast1View_Previews: PreviewProvider {
             AppColor.backgroundMain.color.edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 10) {
-                Toast1View(toast: ToastModel.failureSample, dismiss: nil)
-                Toast1View(toast: ToastModel.failureSampleDismissable, dismiss: nil)
-                Toast1View(toast: ToastModel.successSample, dismiss: nil)
-                Toast1View(toast: ToastModel.successSampleDismissable, dismiss: nil)
-                Toast1View(toast: ToastModel.warningSample, dismiss: nil)
-                Toast1View(toast: ToastModel.infoSample, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleFailure, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleFailureDismissable, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleSuccess, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleSuccessDismissable, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleWarning, dismiss: nil)
+                Toast1View(toast: ToastModel.sampleInfo, dismiss: nil)
             }
             .padding(.horizontal, 16)
         }

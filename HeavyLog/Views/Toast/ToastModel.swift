@@ -21,6 +21,11 @@ struct ToastModel {
         self.isDismissable = isDismissable
         self.presentingTime = presentingTime
     }
+}
+
+// MARK: - Toast Type
+
+extension ToastModel {
 
     enum ToastType {
         case success
@@ -56,16 +61,20 @@ struct ToastModel {
     }
 }
 
-extension ToastModel {
-    static let failureSample = ToastModel(title: "Server error", message: "Your photo could not upload.", type: .failure)
-    static let failureSampleDismissable = ToastModel(title: "Server error", message: "Your photo could not upload.", type: .failure, isDismissable: true)
-
-    static let successSample = ToastModel(title: "The operation was successful", message: "Profile photo was updated.", type: .success)
-    static let successSampleDismissable = ToastModel(title: "Success", message: "Profile photo was updated.", type: .success, isDismissable: true)
-
-    static let warningSample = ToastModel(title: "Warning", message: "Sample warning message.", type: .warning)
-    static let infoSample = ToastModel(title: "Information", message: "Sample information message.", type: .info)
-    static let infoSampleLong = ToastModel(title: "Information", message: "Sample information message which is a bit long.", type: .info, isDismissable: true, presentingTime: 5)
-}
+// MARK: - Helpers
 
 extension ToastModel: Equatable {}
+
+// MARK: - Sample Data
+
+extension ToastModel {
+    static let sampleFailure = ToastModel(title: "Server error", message: "Your photo could not upload.", type: .failure)
+    static let sampleFailureDismissable = ToastModel(title: "Server error", message: "Your photo could not upload.", type: .failure, isDismissable: true)
+
+    static let sampleSuccess = ToastModel(title: "The operation was successful", message: "Profile photo was updated.", type: .success)
+    static let sampleSuccessDismissable = ToastModel(title: "Success", message: "Profile photo was updated.", type: .success, isDismissable: true)
+
+    static let sampleWarning = ToastModel(title: "Warning", message: "Sample warning message.", type: .warning)
+    static let sampleInfo = ToastModel(title: "Information", message: "Sample information message.", type: .info)
+    static let sampleInfoLong = ToastModel(title: "Information", message: "Sample information message which is a bit long.", type: .info, isDismissable: true, presentingTime: 5)
+}

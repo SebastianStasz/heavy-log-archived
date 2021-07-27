@@ -13,6 +13,8 @@ struct RecordTileView: View {
     private let records: [Record]
     private var emptyMessage: String?
 
+    // MARK: - View
+
     var body: some View {
         VStack(alignment: .leading, spacing: .spacingBig) {
             Text(title).textHeadlineSmall
@@ -62,6 +64,8 @@ struct RecordTileView: View {
         else if numOfRecords == 1 { emptyMessage = "You're on the irght track!" }
     }
 }
+
+// MARK: - Initializers
 
 extension RecordTileView {
     init?(recordTile: RecordTile) {
