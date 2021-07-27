@@ -10,3 +10,6 @@
 "tab.workouts.title" = "Wokrouts";
 "tab.summary.title" = "Summary";
 "tab.settings.title" = "Settings";
+
+"common.motivation.message.1" = "Keep it up!";
+"common.motivation.message.2" = "You're on the right track!";

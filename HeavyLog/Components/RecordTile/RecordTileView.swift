@@ -11,7 +11,7 @@ struct RecordTileView: View {
 
     private let title: String
     private let records: [Record]
-    private var emptyMessage: String?
+    private var emptyMessage: LocalizedStringKey?
 
     // MARK: - View
 
@@ -21,10 +21,10 @@ struct RecordTileView: View {
 
             VStack(spacing: .spacingMedium) {
                 RecordRowView(record: records[0])
-                Divider()
+                DividerMain()
                 if records.indices.contains(1) {
                     RecordRowView(record: records[1])
-                    Divider()
+                    DividerMain()
                     if records.indices.contains(2) {
                         RecordRowView(record: records[2])
                     }
@@ -48,20 +48,20 @@ struct RecordTileView: View {
     init?(title: String, records: [Record]) {
         let numOfRecords = records.count
         guard numOfRecords > 0 else {
-            assert(numOfRecords > 0, "Initialization with empty records array should be avoided.")
+            assertionFailure("Initialization with empty records array should be avoided.")
             return nil
         }
 
         guard numOfRecords < 4 else {
-            assert(numOfRecords < 4, "Records above 3 won't be presented.")
+            assertionFailure("Records above 3 won't be presented.")
             return nil
         }
 
         self.title = title
         self.records = records
 
-        if numOfRecords == 2 { emptyMessage = "Keep it up!" }
-        else if numOfRecords == 1 { emptyMessage = "You're on the irght track!" }
+        if numOfRecords == 2 { emptyMessage = "common.motivation.message.1" }
+        else if numOfRecords == 1 { emptyMessage = "common.motivation.message.2" }
     }
 }
 
