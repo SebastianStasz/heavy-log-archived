@@ -24,7 +24,7 @@ struct TabBarView: View {
             // TabView
             TabView(selection: $tabBar.selectedTab ) {
                 ForEach(tabBar.availableTabs) { tab in
-                    tab.embedInNavigationView(title: tab.navigationTitle)
+                    tab.embedInNavigationView(title: tab.navigationTitle).tag(tab)
                 }
             }
             .allowsHitTesting(!tabBar.arePopupsShown)

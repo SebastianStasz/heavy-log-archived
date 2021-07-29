@@ -11,6 +11,7 @@ enum Spacing {
     case small
     case medium
     case big
+    case huge
 
     var value: CGFloat {
         switch self {
@@ -20,6 +21,8 @@ enum Spacing {
             return 16
         case .big:
             return 24
+        case .huge:
+            return 32
         }
     }
 
@@ -38,19 +41,28 @@ enum CornerRadius {
 
 extension CGFloat {
 
+    /// Corner radius of 10.
     static var cornerRadiusBase: CGFloat {
         CornerRadius.base.value
     }
 
+    /// Spacing of 12.
     static var spacingSmall: CGFloat {
         Spacing.small.value
     }
 
+    /// Spacing of 16.
     static var spacingMedium: CGFloat {
         Spacing.medium.value
     }
 
+    /// Spacing of 24.
     static var spacingBig: CGFloat {
         Spacing.big.value
+    }
+
+    /// Spacing of 32.
+    static var spacingHuge: CGFloat {
+        Spacing.huge.value
     }
 }

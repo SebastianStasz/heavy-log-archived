@@ -27,6 +27,7 @@ struct HorizontalPaginationView<Content: View, T: Identifiable>: View {
                 .gesture(dragGesture)
         }
         .padding(.horizontal, .spacingMedium)
+        .frame(width: UIScreen.width)
     }
 
     // MARK: Interactions
