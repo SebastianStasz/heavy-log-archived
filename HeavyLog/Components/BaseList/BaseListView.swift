@@ -13,25 +13,37 @@ struct BaseListView: View {
     @ObservedObject var viewModel: BaseListVM
 
     var body: some View {
-        VStack(alignment: .leading, spacing: .spacingBig) {
+        VStack(alignment: .leading, spacing: 0) {
             Text(title).textHeadlineBig
 
-            ScrollView {
-                LazyVStack(spacing: .spacingMedium) {
-                    ForEach(viewModel.rows) { row in
-                        if row.isClicable {
+            ZStack(alignment: .top) {
+                ScrollView {
+                    LazyVStack(spacing: .spacingMedium) {
+                        ForEach(viewModel.rows) { row in
                             BaseListRowView(row: row)
                                 .onNavigation { viewModel.open(row) }
-                        } else {
-                            BaseListRowView(row: row)
+                                .allowsHitTesting(row.isClicable)
+                            DividerMain(color: .grayMedium)
                         }
-
-                        DividerMain(color: .grayMedium)
                     }
+                    .padding(.top, .spacingMedium)
                 }
+
+                // Header spacing gradient
+                Rectangle()
+                    .fill(linearGradient)
+                    .frame(height: .spacingMedium)
             }
             .padding(.horizontal, .spacingMedium)
         }
+    }
+
+    private var linearGradient: LinearGradient {
+        LinearGradient(gradient: gradient, startPoint: .top, endPoint: .bottom)
+    }
+
+    private var gradient: Gradient {
+        Gradient(colors: [.backgroundMain, .backgroundMain, .backgroundMain.opacity(0.1)])
     }
 }
 
@@ -45,5 +57,6 @@ struct BaseListView_Previews: PreviewProvider {
         viewModel.rows = rows
         return BaseListView(title: "Body Measurements", viewModel: viewModel)
                 .padding()
+                .background(Color.backgroundMain.edgesIgnoringSafeArea(.all))
     }
 }
