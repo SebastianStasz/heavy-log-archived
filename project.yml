@@ -15,3 +15,12 @@ targets:
     deploymentTarget: "14.0"
     sources:
       - path: "HeavyLog"
+  HeavyLogTests:
+    type: "bundle.unit-test"
+    platform: "iOS"
+    deploymentTarget: "14.0"
+    sources:
+      - path: "HeavyLogTests"
+    dependencies:
+      - target: "HeavyLog"
+
