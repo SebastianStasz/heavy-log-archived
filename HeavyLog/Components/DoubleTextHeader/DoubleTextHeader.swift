@@ -34,6 +34,7 @@ struct DoubleTextHeader: View {
 struct DoubleHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         DoubleTextHeader(viewData: .sample1)
-            .previewLayout(.sizeThatFits)
+            .background(Color.white)
+            .previewSizeThatFits()
     }
 }

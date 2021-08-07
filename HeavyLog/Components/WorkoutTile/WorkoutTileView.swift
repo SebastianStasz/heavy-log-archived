@@ -43,8 +43,6 @@ struct WorkoutTileBig_Previews: PreviewProvider {
         Group {
             WorkoutTileView(viewData: .sample1)
         }
-        .padding()
-        .background(Color.gray.opacity(0.7))
-        .previewLayout(.sizeThatFits)
+        .previewSizeThatFits()
     }
 }

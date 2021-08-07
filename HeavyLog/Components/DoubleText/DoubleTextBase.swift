@@ -26,6 +26,7 @@ struct DoubleTextBase: View {
 struct DoubleTextBase_Previews: PreviewProvider {
     static var previews: some View {
         DoubleTextBase(viewData: .init("Left text", "Right text"))
-            .previewLayout(.sizeThatFits)
+            .background(Color.white)
+            .previewSizeThatFits()
     }
 }

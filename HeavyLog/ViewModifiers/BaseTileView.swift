@@ -12,7 +12,7 @@ struct BaseTileView: ViewModifier {
     let headerViewData: DoubleTextHeaderViewData
 
     func body(content: Content) -> some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             DoubleTextHeader(viewData: headerViewData)
             content
         }

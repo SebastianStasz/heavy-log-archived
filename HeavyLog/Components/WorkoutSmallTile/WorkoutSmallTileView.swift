@@ -30,8 +30,6 @@ struct WorkoutSmallTileView: View {
 struct WorkoutSmallTileView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutSmallTileView(viewData: .sample1)
-            .padding()
-            .background(Color.gray.opacity(0.7))
-            .previewLayout(.sizeThatFits)
+            .previewSizeThatFits()
     }
 }
