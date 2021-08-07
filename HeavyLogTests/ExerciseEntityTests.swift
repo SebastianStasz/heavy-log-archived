@@ -20,6 +20,8 @@ class ExerciseEntityTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // MARK: - Tests
+
     private func test_create_exercise_entity() throws {
         // Before creating there should not be exercises.
         try exerciseRequestShouldReturnElements(0)
@@ -66,6 +68,8 @@ class ExerciseEntityTests: XCTestCase {
         }
     }
 }
+
+// MARK: - Steps
 
 extension ExerciseEntityTests {
 

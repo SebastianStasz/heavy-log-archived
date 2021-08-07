@@ -16,13 +16,13 @@ enum TabBarModel: Int {
     var title: LocalizedStringKey {
         switch self {
         case .dashboard:
-            return "tab.dashboard.title"
+            return LocalizedString.tab_dashboard_title.key
         case .workouts:
-            return "tab.workouts.title"
+            return LocalizedString.tab_workouts_title.key
         case .summary:
-            return "tab.summary.title"
+            return LocalizedString.tab_summary_title.key
         case .settings:
-            return "Settings"
+            return LocalizedString.tab_settings_title.key
         }
     }
 

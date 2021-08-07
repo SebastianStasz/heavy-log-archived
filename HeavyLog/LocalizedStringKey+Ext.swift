@@ -8,6 +8,14 @@
 import SwiftUI
 
 enum LocalizedString: String {
+    case tab_dashboard_title
+    case tab_workouts_title
+    case tab_summary_title
+    case tab_settings_title
+
+    case common_motivation_message_1
+    case common_motivation_message_2
+
     case common_difficulty_easy
     case common_difficulty_moderate
     case common_difficulty_hard
