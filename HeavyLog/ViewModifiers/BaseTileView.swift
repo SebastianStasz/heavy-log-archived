@@ -9,11 +9,11 @@ import SwiftUI
 
 struct BaseTileView: ViewModifier {
 
-    let headerViewData: DoubleHeaderViewData
+    let headerViewData: DoubleTextHeaderViewData
 
     func body(content: Content) -> some View {
         VStack(spacing: 0) {
-            DoubleHeaderView(viewData: headerViewData)
+            DoubleTextHeader(viewData: headerViewData)
             content
         }
         .padding(.spacingMedium)
@@ -23,7 +23,7 @@ struct BaseTileView: ViewModifier {
 }
 
 extension View {
-    func embedInBaseTileView(headerViewData: DoubleHeaderViewData) -> some View {
+    func embedInBaseTileView(headerViewData: DoubleTextHeaderViewData) -> some View {
         self.modifier(BaseTileView(headerViewData: headerViewData))
     }
 }

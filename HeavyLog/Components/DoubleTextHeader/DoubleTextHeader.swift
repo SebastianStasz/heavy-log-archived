@@ -1,5 +1,5 @@
 //
-//  DoubleHeaderView.swift
+//  DoubleTextHeader.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 02/08/2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DoubleHeaderView: View {
+struct DoubleTextHeader: View {
 
     let title: String
     let subtitle: String
@@ -33,7 +33,7 @@ struct DoubleHeaderView: View {
 
 struct DoubleHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        DoubleHeaderView(viewData: .sample1)
+        DoubleTextHeader(viewData: .sample1)
             .previewLayout(.sizeThatFits)
     }
 }

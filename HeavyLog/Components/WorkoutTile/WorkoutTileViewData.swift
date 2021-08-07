@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkoutTileViewData {
-    let headerViewData: DoubleHeaderViewData
+    let headerViewData: DoubleTextHeaderViewData
     let doubleTextRows: [DoubleTextViewData]
 
     init(title: String, date: String, color: Color, efforts: [(String, String)]) {
