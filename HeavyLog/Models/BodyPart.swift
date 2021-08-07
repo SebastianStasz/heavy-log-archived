@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum BodyPart {
+enum BodyPart: String {
     case calves
     case quadriceps
     case hamstrings
@@ -25,6 +25,7 @@ enum BodyPart {
     case triceps
     case forearms
     case neck
+    case unknown
 
     var name: LocalizedStringKey {
         switch self {
@@ -62,6 +63,12 @@ enum BodyPart {
             return LocalizedString.common_bodyPart_forearms.key
         case .neck:
             return LocalizedString.common_bodyPart_neck.key
+        case .unknown:
+            return LocalizedString.error_enum_unknown.key
         }
     }
+}
+
+extension BodyPart: UnknownValueSupport {
+    static var unknownCase: BodyPart { .unknown }
 }

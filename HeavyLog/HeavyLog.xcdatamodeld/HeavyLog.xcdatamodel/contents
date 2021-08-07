@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ExerciseEntity" representedClassName="ExerciseEntity" syncable="YES">
+        <attribute name="additionalBodyParts" optional="YES" attributeType="String"/>
         <attribute name="difficulty_" attributeType="String"/>
         <attribute name="information" optional="YES" attributeType="String"/>
+        <attribute name="mainBodyPart_" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <attribute name="shortName" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ExerciseEntity" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="ExerciseEntity" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>
