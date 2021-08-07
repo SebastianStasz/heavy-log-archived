@@ -9,20 +9,15 @@ import SwiftUI
 
 struct WorkoutTileView: View {
 
-    private let headerViewData: DoubleHeaderViewData
-    private let efforts: [(String, String)]
+    let viewData: WorkoutTileViewData
 
     // MARK: - View
 
     var body: some View {
         VStack(spacing: .spacingSmall) {
-            ForEach(efforts, id: \.self.0) { effort in
-                HStack {
-                    Text("\(effort.0):").textBodyMedium
-                    Spacer()
-                    Text(effort.1).textBodyNormal
-                }
-                .overlay(getGradient(isLast: effort == efforts.last!))
+            ForEach(viewData.doubleTextRows, id: \.self) {
+                DoubleTextBase(viewData: $0)
+                    .overlay(getGradient(isLast: viewData.isLast($0)))
             }
 
             Button("Show workout") {
@@ -30,22 +25,13 @@ struct WorkoutTileView: View {
             }
             .buttonStyle(DefaultButtonStyle())
         }
-        .embedInBaseTileView(headerViewData: headerViewData)
+        .embedInBaseTileView(headerViewData: viewData.headerViewData)
     }
 
     private func getGradient(isLast: Bool) -> LinearGradient {
         let gradient = Gradient(colors: [.white, .white.opacity(0)])
         let empty = Gradient(colors: [])
         return LinearGradient(gradient: isLast ? gradient : empty, startPoint: .bottom, endPoint: .top)
-    }
-}
-
-// MARK: - Initializer
-
-extension WorkoutTileView {
-    init(viewData: WorkoutTileViewData) {
-        headerViewData = .init(title: viewData.title, subtitle: viewData.date, color: viewData.color)
-        efforts = viewData.efforts
     }
 }
 

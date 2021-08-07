@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct WorkoutTileViewData {
-    let title: String
-    let date: String
-    let color: Color
-    let efforts: [(String, String)]
+    let headerViewData: DoubleHeaderViewData
+    let doubleTextRows: [DoubleTextViewData]
 
     init(title: String, date: String, color: Color, efforts: [(String, String)]) {
         assert(efforts.isNotEmpty, "Initialization with an empty efforts array should not happend.")
-        self.title = title
-        self.date = date
-        self.color = color
-        self.efforts = efforts
+        headerViewData = .init(title: title, subtitle: date, color: color)
+        doubleTextRows = efforts.map { .init($0.0, $0.1) }
+    }
+
+    func isLast(_ row: DoubleTextViewData) -> Bool {
+        doubleTextRows.last == row
     }
 }
 
