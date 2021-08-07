@@ -13,3 +13,11 @@
 
 "common.motivation.message.1" = "Tak trzymaj!";
 "common.motivation.message.2" = "Jesteś na dobrej drodze!";
+
+"common.difficulty.easy" = "Łatwe";
+"common.difficulty.moderate" = "Średnie";
+"common.difficulty.hard" = "Trudne";
+
+"common.exerciseType.push" = "Wypychanie";
+"common.exerciseType.pull" = "Przyciąganie";
+"common.exerciseType.static" = "Statyczne";

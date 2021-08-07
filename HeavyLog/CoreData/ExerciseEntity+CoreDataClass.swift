@@ -19,9 +19,18 @@ public class ExerciseEntity: NSManagedObject {
     @NSManaged public var name: String
     @NSManaged public var shortName: String?
     @NSManaged public var information: String?
-    @NSManaged public var difficulty: Int16
-    @NSManaged public var type: Int16
+    @NSManaged private var difficulty_: String
+    @NSManaged private var type_: String
 
+    var difficulty: Difficulty {
+        get { .init(rawValue: difficulty_)! }
+        set { difficulty_ = newValue.rawValue }
+    }
+
+    var type: ExerciseType {
+        get { .init(rawValue: type_)! }
+        set { type_ = newValue.rawValue }
+    }
 }
 
 extension ExerciseEntity: Identifiable {}
