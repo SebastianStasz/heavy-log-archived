@@ -52,7 +52,7 @@ struct BaseListView: View {
 
 struct BaseListView_Previews: PreviewProvider {
     static var previews: some View {
-        let rows: [BaseListRow] = [.sampleC1, .sampleC2, .sampleC3]
+        let rows: [BaseListRowViewData] = [.sampleC1, .sampleC2, .sampleC3]
         let viewModel = BaseListVM(parent: SummaryVM())
         viewModel.rows = rows
         return BaseListView(title: "Body Measurements", viewModel: viewModel)

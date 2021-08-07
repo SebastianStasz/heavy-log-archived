@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BaseListRowView: View {
 
-    let row: BaseListRow
+    let row: BaseListRowViewData
 
     var body: some View {
         HStack(spacing: 0) {
@@ -42,6 +42,7 @@ struct ListBaseRowView_Previews: PreviewProvider {
             BaseListRowView(row: .sampleC1)
             BaseListRowView(row: .sampleC2)
             BaseListRowView(row: .sampleC3)
+            BaseListRowView(row: .sampleIC1)
         }
         .previewLayout(.sizeThatFits)
         .padding()

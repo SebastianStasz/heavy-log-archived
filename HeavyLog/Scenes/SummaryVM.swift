@@ -10,7 +10,7 @@ import Foundation
 final class SummaryVM: ObservableObject {
 
     @Published var baseListVM: BaseListVM!
-    @Published var listItemVM: BaseListRow?
+    @Published var listItemVM: BaseListRowViewData?
 
     init() {
         baseListVM = BaseListVM(parent: self)
@@ -20,7 +20,7 @@ final class SummaryVM: ObservableObject {
 
 extension SummaryVM: BaseListSupport {
 
-    func open(_ row: BaseListRow) {
+    func open(_ row: BaseListRowViewData) {
         listItemVM = row
     }
 }

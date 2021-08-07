@@ -8,19 +8,19 @@
 import Foundation
 
 protocol BaseListSupport: AnyObject {
-    func open(_ row: BaseListRow)
+    func open(_ row: BaseListRowViewData)
 }
 
 final class BaseListVM: ObservableObject {
 
-    var rows: [BaseListRow] = []
+    var rows: [BaseListRowViewData] = []
     private unowned let parent: BaseListSupport
 
     init(parent: SummaryVM) {
         self.parent = parent
     }
 
-    func open(_ row: BaseListRow) {
+    func open(_ row: BaseListRowViewData) {
         parent.open(row)
     }
 }
