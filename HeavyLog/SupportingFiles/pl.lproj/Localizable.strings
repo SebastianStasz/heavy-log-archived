@@ -6,20 +6,38 @@
   
 */
 
-"tab.dashboard.title" = "Pulpit";
-"tab.workouts.title" = "Treningi";
-"tab.summary.title" = "Podsumowanie";
-"tab.settings.title" = "Ustawienia";
+"tab_dashboard_title" = "Pulpit";
+"tab_workouts_title" = "Treningi";
+"tab_summary_title" = "Podsumowanie";
+"tab_settings_title" = "Ustawienia";
 
-"common.motivation.message.1" = "Tak trzymaj!";
-"common.motivation.message.2" = "Jesteś na dobrej drodze!";
+"common_motivation_message_1" = "Tak trzymaj!";
+"common_motivation_message_2" = "Jesteś na dobrej drodze!";
 
-"common.difficulty.easy" = "Łatwe";
-"common.difficulty.moderate" = "Średnie";
-"common.difficulty.hard" = "Trudne";
+"common_difficulty_easy" = "Łatwe";
+"common_difficulty_moderate" = "Średnie";
+"common_difficulty_hard" = "Trudne";
 
-"common.exerciseType.push" = "Wypychanie";
-"common.exerciseType.pull" = "Przyciąganie";
-"common.exerciseType.static" = "Statyczne";
+"common_exerciseType_push" = "Wypychanie";
+"common_exerciseType_pull" = "Przyciąganie";
+"common_exerciseType_static" = "Statyczne";
 
-"error.enum.unknown" = "Nieznaty typ";
+"error_enum_unknown" = "Nieznaty typ";
+
+"common_bodyPart_calves" = "Łydki";
+"common_bodyPart_quadriceps" = "Czworogłowy";
+"common_bodyPart_hamstrings" = "Dwugłowy";
+"common_bodyPart_glutes" = "Pośladki";
+"common_bodyPart_abdominalOblique" = "Skośne brzucha";
+"common_bodyPart_rectusAbdominis" = "Proste brzucha";
+"common_bodyPart_lowerBack" = "Dół pleców";
+"common_bodyPart_upperBack" = "Góra pleców";
+"common_bodyPart_traps" = "Czworoboczne";
+"common_bodyPart_anteriorDeltoid" = "Przedni naramienny";
+"common_bodyPart_medialDeltoid" = "Środkowy naramienny";
+"common_bodyPart_rearDeltoid" = "Tylny naramienny";
+"common_bodyPart_chest" = "Klatka piersiowa";
+"common_bodyPart_biceps" = "Biceps";
+"common_bodyPart_triceps" = "Triceps";
+"common_bodyPart_forearms" = "Przedramiona";
+"common_bodyPart_neck" = "Szyja";

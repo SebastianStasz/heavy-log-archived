@@ -13,16 +13,16 @@ enum ExerciseType: String {
     case `static`
     case unknown
 
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
         case .push:
-            return LocalizedStringKey.common_exerciseType_push
+            return LocalizedString.common_exerciseType_push.key
         case .pull:
-            return LocalizedStringKey.common_exerciseType_pull
+            return LocalizedString.common_exerciseType_pull.key
         case .static:
-            return LocalizedStringKey.common_exerciseType_static
+            return LocalizedString.common_exerciseType_static.key
         case .unknown:
-            return LocalizedStringKey.error_enum_unknown
+            return LocalizedString.error_enum_unknown.key
         }
     }
 }

@@ -6,20 +6,38 @@
   
 */
 
-"tab.dashboard.title" = "Dashboard";
-"tab.workouts.title" = "Wokrouts";
-"tab.summary.title" = "Summary";
-"tab.settings.title" = "Settings";
+"tab_dashboard_title" = "Dashboard";
+"tab_workouts_title" = "Wokrouts";
+"tab_summary_title" = "Summary";
+"tab_settings_title" = "Settings";
 
-"common.motivation.message.1" = "Keep it up!";
-"common.motivation.message.2" = "You're on the right track!";
+"common_motivation_message_1" = "Keep it up!";
+"common_motivation_message_2" = "You're on the right track!";
 
-"common.difficulty.easy" = "Easy";
-"common.difficulty.moderate" = "Moderate";
-"common.difficulty.hard" = "Hard";
+"common_difficulty_easy" = "Easy";
+"common_difficulty_moderate" = "Moderate";
+"common_difficulty_hard" = "Hard";
 
-"common.exerciseType.push" = "Push";
-"common.exerciseType.pull" = "Pull";
-"common.exerciseType.static" = "Static";
+"common_exerciseType_push" = "Push";
+"common_exerciseType_pull" = "Pull";
+"common_exerciseType_static" = "Static";
 
-"error.enum.unknown" = "Unknown type";
+"error_enum_unknown" = "Unknown type";
+
+"common_bodyPart_calves" = "Calves";
+"common_bodyPart_quadriceps" = "Quadriceps";
+"common_bodyPart_hamstrings" = "Hamstrings";
+"common_bodyPart_glutes" = "Glutes";
+"common_bodyPart_abdominalOblique" = "Abdominal oblique";
+"common_bodyPart_rectusAbdominis" = "Rectus abdominis";
+"common_bodyPart_lowerBack" = "Lower back";
+"common_bodyPart_upperBack" = "Upper back";
+"common_bodyPart_traps" = "Traps";
+"common_bodyPart_anteriorDeltoid" = "Anterior deltoid";
+"common_bodyPart_medialDeltoid" = "Medial deltoid";
+"common_bodyPart_rearDeltoid" = "Rear deltoid";
+"common_bodyPart_chest" = "Chest";
+"common_bodyPart_biceps" = "Biceps";
+"common_bodyPart_triceps" = "Triceps";
+"common_bodyPart_forearms" = "Forearms";
+"common_bodyPart_neck" = "Neck";

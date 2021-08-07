@@ -13,16 +13,16 @@ enum Difficulty: String {
     case hard
     case unknown
 
-    var name: String {
+    var name: LocalizedStringKey {
         switch self {
         case .easy:
-            return LocalizedStringKey.common_difficulty_easy
+            return LocalizedString.common_difficulty_easy.key
         case .moderate:
-            return LocalizedStringKey.common_difficulty_moderate
+            return LocalizedString.common_difficulty_moderate.key
         case .hard:
-            return LocalizedStringKey.common_difficulty_hard
+            return LocalizedString.common_difficulty_hard.key
         case .unknown:
-            return LocalizedStringKey.error_enum_unknown
+            return LocalizedString.error_enum_unknown.key
         }
     }
 }
