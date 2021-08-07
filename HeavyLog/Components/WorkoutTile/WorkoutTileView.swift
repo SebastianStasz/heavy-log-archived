@@ -1,5 +1,5 @@
 //
-//  WorkoutBigTileView.swift
+//  WorkoutTileView.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 26/07/2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorkoutBigTileView: View {
+struct WorkoutTileView: View {
 
     private let headerViewData: DoubleHeaderViewData
     private let efforts: [(String, String)]
@@ -42,8 +42,8 @@ struct WorkoutBigTileView: View {
 
 // MARK: - Initializer
 
-extension WorkoutBigTileView {
-    init(viewData: WorkoutBigTileViewData) {
+extension WorkoutTileView {
+    init(viewData: WorkoutTileViewData) {
         headerViewData = .init(title: viewData.title, subtitle: viewData.date, color: viewData.color)
         efforts = viewData.efforts
     }
@@ -55,7 +55,7 @@ extension WorkoutBigTileView {
 struct WorkoutTileBig_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            WorkoutBigTileView(viewData: .sample1)
+            WorkoutTileView(viewData: .sample1)
         }
         .padding()
         .background(Color.gray.opacity(0.7))

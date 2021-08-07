@@ -1,5 +1,5 @@
 //
-//  WorkoutBigTileViewData.swift
+//  WorkoutTileViewData.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct WorkoutBigTileViewData {
+struct WorkoutTileViewData {
     let title: String
     let date: String
     let color: Color
@@ -25,7 +25,7 @@ struct WorkoutBigTileViewData {
 
 // MARK: - Sample Data
 
-extension WorkoutBigTileViewData {
+extension WorkoutTileViewData {
     static private let efforts = [("Deadlift", "150kg 3x1, 150kg x3 x2"), ("OHP", "40kg 4x8"), ("Machine leg extensions", "11kg 4x10"), ("Dumbbell rowing", "27.5kg 4x8")]
     static let sample1 = Self.init(title: "FBW A", date: Date().string(format: .medium), color: .accentOrangeLight, efforts: Self.efforts)
 }
