@@ -23,12 +23,12 @@ public class ExerciseEntity: NSManagedObject {
     @NSManaged private var type_: String
 
     var difficulty: Difficulty {
-        get { .init(rawValue: difficulty_)! }
+        get { .getCase(for: difficulty_) }
         set { difficulty_ = newValue.rawValue }
     }
 
     var type: ExerciseType {
-        get { .init(rawValue: type_)! }
+        get { .getCase(for: type_) }
         set { type_ = newValue.rawValue }
     }
 }

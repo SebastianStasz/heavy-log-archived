@@ -21,3 +21,5 @@
 "common.exerciseType.push" = "Wypychanie";
 "common.exerciseType.pull" = "Przyciąganie";
 "common.exerciseType.static" = "Statyczne";
+
+"error.enum.unknown" = "Nieznaty typ";

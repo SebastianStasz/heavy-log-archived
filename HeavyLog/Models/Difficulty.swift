@@ -11,6 +11,7 @@ enum Difficulty: String {
     case easy
     case moderate
     case hard
+    case unknown
 
     var name: String {
         switch self {
@@ -20,6 +21,12 @@ enum Difficulty: String {
             return LocalizedStringKey.common_difficulty_moderate
         case .hard:
             return LocalizedStringKey.common_difficulty_hard
+        case .unknown:
+            return LocalizedStringKey.error_enum_unknown
         }
     }
+}
+
+extension Difficulty: UnknownValueSupport {
+    static var unknownCase: Difficulty = .unknown
 }

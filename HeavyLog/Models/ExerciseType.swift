@@ -11,6 +11,7 @@ enum ExerciseType: String {
     case push
     case pull
     case `static`
+    case unknown
 
     var name: String {
         switch self {
@@ -20,6 +21,12 @@ enum ExerciseType: String {
             return LocalizedStringKey.common_exerciseType_pull
         case .static:
             return LocalizedStringKey.common_exerciseType_static
+        case .unknown:
+            return LocalizedStringKey.error_enum_unknown
         }
     }
+}
+
+extension ExerciseType: UnknownValueSupport {
+    static let unknownCase: ExerciseType = .unknown
 }

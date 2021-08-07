@@ -15,4 +15,6 @@ extension LocalizedStringKey {
     static let common_exerciseType_push = "common.exerciseType.push"
     static let common_exerciseType_pull = "common.exerciseType.pull"
     static let common_exerciseType_static = "common.exerciseType.static"
+
+    static let error_enum_unknown = "error.enum.unknown"
 }
