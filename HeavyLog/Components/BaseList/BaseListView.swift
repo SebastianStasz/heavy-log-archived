@@ -29,13 +29,16 @@ struct BaseListView: View {
                     .padding(.top, .spacingMedium)
                 }
 
-                // Header spacing gradient
-                Rectangle()
-                    .fill(linearGradient)
-                    .frame(height: .spacingMedium)
+                headerSpacingGradient
             }
             .padding(.horizontal, .spacingMedium)
         }
+    }
+
+    private var headerSpacingGradient: some View {
+        Rectangle()
+            .fill(linearGradient)
+            .frame(height: .spacingMedium)
     }
 
     private var linearGradient: LinearGradient {
