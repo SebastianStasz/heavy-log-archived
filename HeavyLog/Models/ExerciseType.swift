@@ -27,6 +27,8 @@ enum ExerciseType: String {
     }
 }
 
+extension ExerciseType: Decodable {}
+
 extension ExerciseType: UnknownValueSupport {
     static let unknownCase: ExerciseType = .unknown
 }

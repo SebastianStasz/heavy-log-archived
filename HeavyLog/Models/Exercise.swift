@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Exercise {
     let name: String
     let shortName: String?
@@ -16,6 +15,16 @@ struct Exercise {
     let type: ExerciseType
     let mainBodyPart: BodyPart
     let additionalBodyParts: [BodyPart]?
+}
+
+extension Exercise: Decodable {
+
+    enum CodingKeys: String, CodingKey {
+        case name, information, difficulty, type
+        case shortName = "short_name"
+        case mainBodyPart = "main_body_part"
+        case additionalBodyParts = "additional_body_parts"
+    }
 }
 
 // MARK: - Sample Data

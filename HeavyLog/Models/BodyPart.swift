@@ -12,14 +12,14 @@ enum BodyPart: String {
     case quadriceps
     case hamstrings
     case glutes
-    case abdominalOblique
-    case rectusAbdominis
-    case lowerBack
-    case upperBack
+    case abdominalOblique = "abdominal_oblique"
+    case rectusAbdominis = "rectus_abdominis"
+    case lowerBack = "lower_back"
+    case upperBack = "upper_back"
     case traps
-    case anteriorDeltoid
-    case medialDeltoid
-    case rearDeltoid
+    case anteriorDeltoid = "anterior_deltoid"
+    case medialDeltoid = "medial_deltoid"
+    case rearDeltoid = "rear_deltoid"
     case chest
     case biceps
     case triceps
@@ -68,6 +68,8 @@ enum BodyPart: String {
         }
     }
 }
+
+extension BodyPart: Decodable {}
 
 extension BodyPart: UnknownValueSupport {
     static var unknownCase: BodyPart { .unknown }

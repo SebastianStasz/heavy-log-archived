@@ -6,6 +6,7 @@
 //
 //
 
+import Combine
 import Foundation
 import CoreData
 
@@ -67,6 +68,21 @@ extension ExerciseEntity {
         self.mainBodyPart = data.mainBodyPart
         self.additionalBodyParts = data.additionalBodyParts
         return self
+    }
+
+    static func loadStaticData(to context: NSManagedObjectContext, using apiService: APIProvider = APIService.shared) -> AnyCancellable {
+        getExercisesData(using: apiService)
+            .sink { completion in
+                if case .failure(let error) = completion {
+                    assertionFailure("Loading exercise data failed: \(error.error)")
+                }
+            } receiveValue: { exercises in
+                _ = exercises.map { create(in: context, data: $0) }
+            }
+    }
+
+    static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[Exercise], AppError> {
+        apiService.getData(fromFile: "exercisesData", withExtension: ".json")
     }
 }
 

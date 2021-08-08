@@ -5,24 +5,28 @@
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
 
+import Combine
 import XCTest
 @testable import HeavyLog
 
 class ExerciseEntityTests: XCTestCase {
 
-    private let context = PersistenceController.preview.context
+    private var cancellable: AnyCancellable?
+    private var context = PersistenceController.preview.context
 
     override func setUpWithError() throws {
         context.reset()
+        cancellable = nil
+        context = PersistenceController.preview.context
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+
     }
 
     // MARK: - Tests
 
-    private func test_create_exercise_entity() throws {
+    func test_create_exercise_entity() throws {
         // Before creating there should not be exercises.
         try exerciseRequestShouldReturnElements(0)
 
@@ -36,7 +40,7 @@ class ExerciseEntityTests: XCTestCase {
         try verifyExerciseEntityData(exercise, data: .sampleBenchPress)
     }
 
-    private func test_edit_exercise_entity() throws {
+    func test_edit_exercise_entity() throws {
         // Create exercise entity using bench press data.
         let exercise = createExerciseEntity(data: .sampleBenchPress)
 
@@ -47,9 +51,9 @@ class ExerciseEntityTests: XCTestCase {
         try verifyExerciseEntityData(exercise, data: .sampleClassicDeadlift)
     }
 
-    private func test_delete_exercise_entity() throws {
+    func test_delete_exercise_entity() throws {
         // Create exercise entity.
-        let exercise = createExerciseEntity(data: .sampleBenchPress)
+        let exercise = createExerciseEntity(data: .sampleClassicDeadlift)
 
         // Verify that exercise entity was created.
         try exerciseRequestShouldReturnElements(1)
@@ -61,17 +65,25 @@ class ExerciseEntityTests: XCTestCase {
         try exerciseRequestShouldReturnElements(0)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func test_load_exercises_data() throws {
+        // Before loading there should not be exercises.
+        try exerciseRequestShouldReturnElements(0)
+
+        // Load exercises data
+        loadExerciseData()
+
+        // Verify that data has been loaded.
+        try exerciseRequestShouldReturnElements(2)
     }
 }
 
 // MARK: - Steps
 
 extension ExerciseEntityTests {
+    private func loadExerciseData() {
+        cancellable = ExerciseEntity.loadStaticData(to: context)
+        sleep(1)
+    }
 
     private func createExerciseEntity(data: Exercise) -> ExerciseEntity {
         ExerciseEntity.create(in: context, data: data)

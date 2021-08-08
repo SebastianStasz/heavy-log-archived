@@ -27,6 +27,8 @@ enum Difficulty: String {
     }
 }
 
+extension Difficulty: Decodable {}
+
 extension Difficulty: UnknownValueSupport {
     static var unknownCase: Difficulty = .unknown
 }
