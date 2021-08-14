@@ -74,13 +74,17 @@ extension ExerciseEntity {
 
     @discardableResult
     func modify(data: Exercise) -> ExerciseEntity {
-        self.name_ = data.name
-        self.shortName_ = data.shortName
-        self.information_ = data.information
-        self.difficulty = data.difficulty
-        self.type = data.type
-        self.mainBodyPart = data.mainBodyPart
-        self.additionalBodyParts = data.additionalBodyParts
+        guard self.isEditable else {
+            assertionFailure("Editing \"not editable\" exercise entity is not allowed.")
+            return self
+        }
+        name_ = data.name
+        shortName_ = data.shortName
+        information_ = data.information
+        difficulty = data.difficulty
+        type = data.type
+        mainBodyPart = data.mainBodyPart
+        additionalBodyParts = data.additionalBodyParts
         return self
     }
 
