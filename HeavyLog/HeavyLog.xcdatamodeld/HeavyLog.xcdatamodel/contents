@@ -10,7 +10,15 @@
         <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
     </entity>
+    <entity name="WorkoutEntity" representedClassName="WorkoutEntity" syncable="YES">
+        <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="rate_" attributeType="String"/>
+        <attribute name="startDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
     <elements>
         <element name="ExerciseEntity" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="WorkoutEntity" positionX="-63" positionY="45" width="128" height="104"/>
     </elements>
 </model>

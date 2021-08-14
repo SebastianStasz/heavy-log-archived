@@ -11,6 +11,10 @@
 "tab_summary_title" = "Summary";
 "tab_settings_title" = "Exercises";
 
+"common_workoutRate_bad" = "Bad";
+"common_workoutRate_good" = "Good";
+"common_workoutRate_excelent" = "Excelent";
+
 "common_motivation_message_1" = "Keep it up!";
 "common_motivation_message_2" = "You're on the right track!";
 
