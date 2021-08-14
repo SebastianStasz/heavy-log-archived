@@ -11,9 +11,9 @@ enum TabBarModel: Int {
     case dashboard
     case workouts
     case summary
-    case settings
+    case exercises
 
-    var title: LocalizedStringKey {
+    var title: String {
         switch self {
         case .dashboard:
             return LocalizedString.tab_dashboard_title.key
@@ -21,7 +21,7 @@ enum TabBarModel: Int {
             return LocalizedString.tab_workouts_title.key
         case .summary:
             return LocalizedString.tab_summary_title.key
-        case .settings:
+        case .exercises:
             return LocalizedString.tab_settings_title.key
         }
     }
@@ -34,12 +34,12 @@ enum TabBarModel: Int {
             return "speedometer"
         case .summary:
             return "calendar"
-        case .settings:
+        case .exercises:
             return "gearshape"
         }
     }
 
-    var navigationTitle: LocalizedStringKey? {
+    var navigationTitle: String? {
         switch self {
         case .dashboard:
             return nil
@@ -56,13 +56,13 @@ extension TabBarModel: View {
     var body: some View {
         switch self {
         case .dashboard:
-            Text(self.title)
+            Text(self.title.localize())
         case .workouts:
-            Text(self.title)
+            Text(self.title.localize())
         case .summary:
             SummaryView()
-        case .settings:
-            Text(self.title)
+        case .exercises:
+            ExercisesView()
         }
     }
 }

@@ -9,14 +9,14 @@ import SwiftUI
 
 private struct ExtendedNavigationView: ViewModifier {
 
-    let title: LocalizedStringKey?
+    let title: String?
     let displayMode: NavigationBarItem.TitleDisplayMode
 
     func body(content: Content) -> some View {
         NavigationView {
             if let title = title {
                 content
-                    .navigationTitle(title)
+                    .navigationTitle(LocalizedStringKey(title))
                     .navigationBarTitleDisplayMode(displayMode)
             } else {
                 content
@@ -26,7 +26,7 @@ private struct ExtendedNavigationView: ViewModifier {
 }
 
 extension View {
-    func embedInNavigationView(title: LocalizedStringKey? = nil, displayMode: NavigationBarItem.TitleDisplayMode = .automatic) -> some View {
+    func embedInNavigationView(title: String? = nil, displayMode: NavigationBarItem.TitleDisplayMode = .automatic) -> some View {
         self.modifier(ExtendedNavigationView(title: title, displayMode: displayMode))
     }
 }

@@ -18,6 +18,16 @@ struct ExerciseTileViewData {
     }
 }
 
+extension ExerciseTileViewData {
+    init(_ exercise: ExerciseEntity) {
+        title = exercise.name
+        type = exercise.type.name
+        color = exercise.difficulty.color
+        let additionalBodyParts = (exercise.additionalBodyParts ?? []).map { $0.name }.joined(separator: ", ")
+        bodyParts = "\(exercise.mainBodyPart.name), \(additionalBodyParts)"
+    }
+}
+
 
 // MARK: - Sample Data
 

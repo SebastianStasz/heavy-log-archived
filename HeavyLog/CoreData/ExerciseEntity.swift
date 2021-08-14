@@ -13,19 +13,26 @@ import CoreData
 @objc(ExerciseEntity)
 public class ExerciseEntity: NSManagedObject {
 
-    @nonobjc public class func createFetchRequest() -> NSFetchRequest<ExerciseEntity> {
-        NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
-    }
-
+    @NSManaged private var name_: String
+    @NSManaged private var shortName_: String?
+    @NSManaged private var information_: String?
     @NSManaged private var type_: String
     @NSManaged private var difficulty_: String
     @NSManaged private var mainBodyPart_: String
     @NSManaged private var additionalBodyParts_: String?
-
-    @NSManaged private(set) var name: String
-    @NSManaged private(set) var shortName: String?
-    @NSManaged private(set) var information: String?
     @NSManaged private(set) var isEditable: Bool
+
+    var name: String {
+        name_.localize()
+    }
+
+    var shortName: String? {
+        shortName_?.localize()
+    }
+
+    var information: String? {
+        information_?.localize()
+    }
 
     private(set) var difficulty: Difficulty {
         get { .getCase(for: difficulty_) }
@@ -50,6 +57,13 @@ public class ExerciseEntity: NSManagedObject {
 
 extension ExerciseEntity {
 
+    static func createFetchRequest() -> NSFetchRequest<ExerciseEntity> {
+        let request = NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
+        request.sortDescriptors = []
+        request.predicate = nil
+        return request
+    }
+
     @discardableResult
     static func create(in context: NSManagedObjectContext, data: Exercise, isEditable: Bool = true) -> ExerciseEntity {
         let exercise = ExerciseEntity(context: context)
@@ -60,9 +74,9 @@ extension ExerciseEntity {
 
     @discardableResult
     func modify(data: Exercise) -> ExerciseEntity {
-        self.name = data.name
-        self.shortName = data.shortName
-        self.information = data.information
+        self.name_ = data.name
+        self.shortName_ = data.shortName
+        self.information_ = data.information
         self.difficulty = data.difficulty
         self.type = data.type
         self.mainBodyPart = data.mainBodyPart
@@ -85,6 +99,8 @@ extension ExerciseEntity {
         apiService.getData(fromFile: "exercisesData", withExtension: ".json")
     }
 }
+
+// MARK: - Helpers
 
 extension ExerciseEntity {
 

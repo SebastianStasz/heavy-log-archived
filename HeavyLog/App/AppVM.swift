@@ -5,15 +5,19 @@
 //  Created by Sebastian Staszczyk on 25/07/2021.
 //
 
+import Combine
 import SwiftUI
 
 @main
 struct HeavyLogApp: App {
 
+    @State private var context = AppVM.shared.context
+
     var body: some Scene {
         WindowGroup {
             AppView(appVM: AppVM.shared)
                 .environment(\.locale, .init(identifier: "en"))
+                .environment(\.managedObjectContext, context)
         }
     }
 }
@@ -60,8 +64,12 @@ final class AppVM: ObservableObject {
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
 
+    fileprivate let context = PersistenceController.preview.context
+    private var cancellable: AnyCancellable?
+
     init() {
         tabBarVM = TabBarVM(parent: self)
+        cancellable = ExerciseEntity.loadStaticData(to: context)
     }
 }
 

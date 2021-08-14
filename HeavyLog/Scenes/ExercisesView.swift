@@ -8,10 +8,25 @@
 import SwiftUI
 
 struct ExercisesView: View {
+
+    @Environment(\.managedObjectContext) private var context
+    @FetchRequest(fetchRequest: ExerciseEntity.createFetchRequest()) private var exercises: FetchedResults<ExerciseEntity>
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView {
+            LazyVStack(spacing: .spacingMedium) {
+                ForEach(exercises) { exercise in
+                    ExerciseTileView(viewData: .init(exercise))
+                }
+            }
+        }
+        .padding(.horizontal, .spacingMedium)
+        .backgroundIgnoringSafeArea(Color.backgroundMain)
     }
 }
+
+
+// MARK: - Preview
 
 struct ExercisesView_Previews: PreviewProvider {
     static var previews: some View {
