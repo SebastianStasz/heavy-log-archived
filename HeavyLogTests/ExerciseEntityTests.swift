@@ -9,10 +9,10 @@ import Combine
 import XCTest
 @testable import HeavyLog
 
-class ExerciseEntityTests: XCTestCase {
+class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
     private var cancellable: AnyCancellable?
-    private var context = PersistenceController.preview.context
+    var context = PersistenceController.preview.context
 
     override func setUpWithError() throws {
         context.reset()
@@ -28,13 +28,13 @@ class ExerciseEntityTests: XCTestCase {
 
     func test_create_exercise_entity() throws {
         // Before creating there should not be exercises.
-        try exerciseRequestShouldReturnElements(0)
+        try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
         // Create exercise entity.
         let exercise = createExerciseEntity(data: .sampleBenchPress)
 
         // After creating there should be one exercise.
-        try exerciseRequestShouldReturnElements(1)
+        try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
         // Verify that exercise entit data is correct.
         try verifyExerciseEntityData(exercise, data: .sampleBenchPress)
@@ -56,24 +56,24 @@ class ExerciseEntityTests: XCTestCase {
         let exercise = createExerciseEntity(data: .sampleClassicDeadlift)
 
         // Verify that exercise entity was created.
-        try exerciseRequestShouldReturnElements(1)
+        try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
         // Delete exercise entity
         exercise.delete()
 
         // Verify that exercise entity was deleted.
-        try exerciseRequestShouldReturnElements(0)
+        try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
     }
 
     func test_load_exercises_data() throws {
         // Before loading there should not be exercises.
-        try exerciseRequestShouldReturnElements(0)
+        try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
         // Load exercises data
         loadExerciseData()
 
         // Verify that data has been loaded.
-        try exerciseRequestShouldReturnElements(2)
+        try fetchRequestShouldReturnElements(2, for: ExerciseEntity.self)
     }
 }
 
@@ -87,12 +87,6 @@ extension ExerciseEntityTests {
 
     private func createExerciseEntity(data: Exercise) -> ExerciseEntity {
         ExerciseEntity.create(in: context, data: data)
-    }
-
-    private func exerciseRequestShouldReturnElements(_ amount: Int) throws {
-        let request = ExerciseEntity.createFetchRequest()
-        let exercises = try! context.fetch(request)
-        XCTAssertEqual(exercises.count, amount)
     }
 
     private func verifyExerciseEntityData(_ exercise: ExerciseEntity, data: Exercise) throws {

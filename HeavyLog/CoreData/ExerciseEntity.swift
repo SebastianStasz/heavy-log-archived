@@ -57,16 +57,9 @@ public class ExerciseEntity: NSManagedObject {
 
 extension ExerciseEntity {
 
-    static func createFetchRequest() -> NSFetchRequest<ExerciseEntity> {
-        let request = NSFetchRequest<ExerciseEntity>(entityName: "ExerciseEntity")
-        request.sortDescriptors = []
-        request.predicate = nil
-        return request
-    }
-
     @discardableResult
     static func create(in context: NSManagedObjectContext, data: Exercise, isEditable: Bool = true) -> ExerciseEntity {
-        let exercise = ExerciseEntity(context: context)
+        let exercise = ExerciseEntity(in: context)
         exercise.isEditable = isEditable
         exercise.modify(data: data)
         return exercise

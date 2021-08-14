@@ -8,9 +8,9 @@
 import XCTest
 @testable import HeavyLog
 
-class WorkoutEntityTests: XCTestCase {
+class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
-    private var context = PersistenceController.preview.context
+    var context = PersistenceController.preview.context
 
     override func setUpWithError() throws {
         context.reset()
@@ -25,13 +25,13 @@ class WorkoutEntityTests: XCTestCase {
 
     func test_create_workout_entity() throws {
         // Before creating there should not be any workouts.
-        try workoutRequestShouldReturnElements(0)
+        try fetchRequestShouldReturnElements(0, for: WorkoutEntity.self)
 
         // Create workout entity.
         let workout = createWorkoutEntity(data: .sample1)
 
         // After creating there should be one workout.
-        try workoutRequestShouldReturnElements(1)
+        try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
         // Verify that workout entit data is correct.
         try verifyWorkoutEntityData(workout, data: .sample1)
@@ -53,13 +53,16 @@ class WorkoutEntityTests: XCTestCase {
         let workout = createWorkoutEntity(data: .sample1)
 
         // Verify that exercworkoutise entity was created.
-        try workoutRequestShouldReturnElements(1)
+        try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
         // Delete workout entity
         workout.delete()
 
         // Verify that workout entity was deleted.
-        try workoutRequestShouldReturnElements(0)
+        try fetchRequestShouldReturnElements(0, for: WorkoutEntity.self)
+
+        // Verify that efforts relatet to this entity were deleted.
+        try fetchRequestShouldReturnElements(0, for: EffortEntity.self)
     }
 }
 
@@ -67,21 +70,12 @@ class WorkoutEntityTests: XCTestCase {
 
 extension WorkoutEntityTests {
 
-    private func createWorkoutEntity(data: Workout) -> WorkoutEntity {
-        WorkoutEntity.create(in: context, data: data)
-    }
-
-    private func workoutRequestShouldReturnElements(_ amount: Int) throws {
-        let request = WorkoutEntity.createFetchRequest()
-        let exercises = try! context.fetch(request)
-        XCTAssertEqual(exercises.count, amount)
-    }
-
     private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil) throws {
         XCTAssertEqual(workout.title, data.title)
         XCTAssertEqual(workout.notes, data.notes)
         XCTAssertEqual(workout.startDate, startDate ?? data.startDate )
         XCTAssertEqual(workout.endDate, data.endDate)
+        XCTAssertEqual(workout.efforts.count, data.efforts.count)
         XCTAssertEqual(workout.rate, data.rate)
     }
 }
