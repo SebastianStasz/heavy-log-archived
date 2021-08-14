@@ -44,7 +44,7 @@ enum LocalizedString: String {
     case common_bodyPart_forearms
     case common_bodyPart_neck
 
-    var key: LocalizedStringKey {
-        LocalizedStringKey(self.rawValue)
+    var key: String {
+        self.rawValue
     }
 }

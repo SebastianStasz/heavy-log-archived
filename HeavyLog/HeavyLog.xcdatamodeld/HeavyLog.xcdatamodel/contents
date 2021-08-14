@@ -3,14 +3,14 @@
     <entity name="ExerciseEntity" representedClassName="ExerciseEntity" syncable="YES">
         <attribute name="additionalBodyParts_" optional="YES" attributeType="String"/>
         <attribute name="difficulty_" attributeType="String"/>
-        <attribute name="information" optional="YES" attributeType="String"/>
+        <attribute name="information_" optional="YES" attributeType="String"/>
         <attribute name="isEditable" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="mainBodyPart_" attributeType="String"/>
-        <attribute name="name" attributeType="String"/>
-        <attribute name="shortName" optional="YES" attributeType="String"/>
+        <attribute name="name_" attributeType="String"/>
+        <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
     </entity>
     <elements>
-        <element name="ExerciseEntity" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="ExerciseEntity" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>
