@@ -52,6 +52,9 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
         // Create workout entity.
         let workout = createWorkoutEntity(data: .sample1)
 
+        // Add effort to workout
+        try createEffortEntity(in: workout, data: .sample1)
+
         // Verify that exercworkoutise entity was created.
         try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 

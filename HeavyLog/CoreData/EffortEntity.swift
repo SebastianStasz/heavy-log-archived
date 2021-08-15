@@ -13,6 +13,7 @@ import Foundation
 public class EffortEntity: NSManagedObject {
 
     @NSManaged private(set) var workout: WorkoutEntity
+    @NSManaged private(set) var exercises: [ExerciseEntity]
 }
 
 extension EffortEntity {
@@ -27,6 +28,7 @@ extension EffortEntity {
 
     @discardableResult
     func modify(data: Effort) -> EffortEntity {
+        exercises = data.exercises
         return self
     }
 }

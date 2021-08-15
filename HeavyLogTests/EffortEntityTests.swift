@@ -82,10 +82,6 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
 extension EffortEntityTests {
 
-    private func createEffortEntity(in workout: WorkoutEntity, data: Effort) throws -> EffortEntity {
-        try XCTUnwrap(EffortEntity.create(in: workout, data: data))
-    }
-
     private func verifyEffortEntityData(_ effort: EffortEntity, data: Effort, workout: WorkoutEntity) throws {
         XCTAssertEqual(effort.workout, workout)
     }

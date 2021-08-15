@@ -8,6 +8,7 @@
 import Foundation
 
 struct Effort {
+    let exercises: [ExerciseEntity] = []
 }
 
 // MARK: - Sample Data

@@ -97,5 +97,6 @@ extension ExerciseEntityTests {
         XCTAssertEqual(exercise.type, data.type)
         XCTAssertEqual(exercise.mainBodyPart, data.mainBodyPart)
         XCTAssertEqual(exercise.additionalBodyParts, data.additionalBodyParts)
+        XCTAssertEqual(exercise.efforts.count, 0)
     }
 }

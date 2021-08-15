@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="EffortEntity" representedClassName="EffortEntity" syncable="YES">
+        <relationship name="exercises" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="efforts" inverseEntity="ExerciseEntity"/>
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEntity" inverseName="efforts" inverseEntity="WorkoutEntity"/>
     </entity>
     <entity name="ExerciseEntity" representedClassName="ExerciseEntity" syncable="YES">
@@ -12,6 +13,7 @@
         <attribute name="name_" attributeType="String"/>
         <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
+        <relationship name="efforts" toMany="YES" deletionRule="Nullify" destinationEntity="EffortEntity" inverseName="exercises" inverseEntity="EffortEntity"/>
     </entity>
     <entity name="WorkoutEntity" representedClassName="WorkoutEntity" syncable="YES">
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
@@ -22,8 +24,8 @@
         <relationship name="efforts" toMany="YES" deletionRule="Cascade" destinationEntity="EffortEntity" inverseName="workout" inverseEntity="EffortEntity"/>
     </entity>
     <elements>
-        <element name="ExerciseEntity" positionX="-318.361083984375" positionY="-9.577545166015625" width="128" height="163"/>
+        <element name="EffortEntity" positionX="-39.43994140625" positionY="170.24658203125" width="128" height="73"/>
+        <element name="ExerciseEntity" positionX="-318.361083984375" positionY="-9.577545166015625" width="128" height="178"/>
         <element name="WorkoutEntity" positionX="-90.870849609375" positionY="-13.37887573242188" width="128" height="133"/>
-        <element name="EffortEntity" positionX="-39.43994140625" positionY="170.24658203125" width="128" height="58"/>
     </elements>
 </model>

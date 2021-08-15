@@ -21,6 +21,7 @@ public class ExerciseEntity: NSManagedObject {
     @NSManaged private var mainBodyPart_: String
     @NSManaged private var additionalBodyParts_: String?
     @NSManaged private(set) var isEditable: Bool
+    @NSManaged private(set) var efforts: [EffortEntity]
 
     var name: String {
         name_.localize()
