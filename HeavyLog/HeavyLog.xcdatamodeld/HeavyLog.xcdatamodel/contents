@@ -3,6 +3,7 @@
     <entity name="EffortEntity" representedClassName="EffortEntity" syncable="YES">
         <attribute name="exerciseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercise" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="efforts" inverseEntity="ExerciseEntity"/>
+        <relationship name="sets" toMany="YES" deletionRule="Cascade" destinationEntity="SetEntity" inverseName="effort" inverseEntity="SetEntity"/>
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEntity" inverseName="efforts" inverseEntity="WorkoutEntity"/>
     </entity>
     <entity name="ExerciseEntity" representedClassName="ExerciseEntity" syncable="YES">
@@ -17,6 +18,11 @@
         <attribute name="type_" attributeType="String"/>
         <relationship name="efforts" toMany="YES" deletionRule="Nullify" destinationEntity="EffortEntity" inverseName="exercise" inverseEntity="EffortEntity"/>
     </entity>
+    <entity name="SetEntity" representedClassName="SetEntity" syncable="YES">
+        <attribute name="reps" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="weight" attributeType="Double" usesScalarValueType="YES"/>
+        <relationship name="effort" maxCount="1" deletionRule="Nullify" destinationEntity="EffortEntity" inverseName="sets" inverseEntity="EffortEntity"/>
+    </entity>
     <entity name="WorkoutEntity" representedClassName="WorkoutEntity" syncable="YES">
         <attribute name="endDate" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
@@ -26,8 +32,9 @@
         <relationship name="efforts" toMany="YES" deletionRule="Cascade" destinationEntity="EffortEntity" inverseName="workout" inverseEntity="EffortEntity"/>
     </entity>
     <elements>
-        <element name="EffortEntity" positionX="29.9468994140625" positionY="183.9692077636719" width="128" height="88"/>
-        <element name="ExerciseEntity" positionX="-318.361083984375" positionY="-9.577545166015625" width="128" height="193"/>
+        <element name="EffortEntity" positionX="29.9468994140625" positionY="183.9692077636719" width="128" height="103"/>
+        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="128" height="193"/>
         <element name="WorkoutEntity" positionX="-146.0069580078125" positionY="-10.98150634765626" width="128" height="133"/>
+        <element name="SetEntity" positionX="187.9822692871094" positionY="281.2301025390625" width="128" height="88"/>
     </elements>
 </model>

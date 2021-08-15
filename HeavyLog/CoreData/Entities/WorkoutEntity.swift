@@ -41,37 +41,39 @@ extension WorkoutEntity {
 
 }
 
+// MARK: - Methods
+
 extension WorkoutEntity {
 
-    @discardableResult
-    static func create(in context: NSManagedObjectContext, data: Workout) -> WorkoutEntity {
+    @discardableResult static func create(in context: NSManagedObjectContext, workoutData: Workout) -> WorkoutEntity {
         let workout = WorkoutEntity(in: context)
-        workout.startDate = data.startDate
-        workout.modify(data: data)
+        workout.startDate = workoutData.startDate
+        workout.modify(workout: workoutData)
         return workout
     }
 
-    @discardableResult
-    func modify(data: Workout) -> WorkoutEntity {
-        deleteEfforts()
-        createEfforts(data.efforts)
-        title = data.title
-        notes = data.notes
-        endDate = data.endDate
-        rate = data.rate
+    @discardableResult func modify(workout: Workout) -> WorkoutEntity {
+        addEfforts(workout.efforts)
+        title = workout.title
+        notes = workout.notes
+        endDate = workout.endDate
+        rate = workout.rate
         return self
     }
 
-    private func createEfforts(_ efforts: [Effort]) {
-        for effort in efforts {
-            EffortEntity.create(in: self, data: effort)
-        }
+    // MARK: - Helpers
+
+    private func addEfforts(_ efforts: [Effort]) {
+        clearEfforts()
+        _ = efforts.map { addEffort($0) }
     }
 
-    private func deleteEfforts() {
-        for effort in efforts {
-            effort.delete()
-        }
+    private func clearEfforts() {
+        _ = efforts.map { $0.delete() }
+    }
+
+    private func addEffort(_ effort: Effort) {
+        EffortEntity.create(in: self, effortData: effort)
     }
 }
 

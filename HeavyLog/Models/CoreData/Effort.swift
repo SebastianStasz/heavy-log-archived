@@ -10,9 +10,11 @@ import Foundation
 struct Effort {
     let exerciseId: Int
     let exercise: ExerciseEntity
+    let sets: [WorkoutSet]
 
-    init(exercise: ExerciseEntity) {
+    init(exercise: ExerciseEntity, sets: [WorkoutSet] = []) {
         self.exercise = exercise
         self.exerciseId = exercise.id_
+        self.sets = sets
     }
 }

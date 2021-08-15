@@ -1,14 +1,14 @@
 //
-//  EffortEntityTests.swift
+//  SetEntityTests.swift
 //  HeavyLogTests
 //
-//  Created by Sebastian Staszczyk on 14/08/2021.
+//  Created by Sebastian Staszczyk on 15/08/2021.
 //
 
 import XCTest
 @testable import HeavyLog
 
-class EffortEntityTests: XCTestCase, CoreDataSteps {
+class SetEntityTests: XCTestCase, CoreDataSteps {
 
     var context = PersistenceController.preview.context
 
@@ -23,9 +23,9 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
     // MARK: - Tests
 
-    func test_create_effort_entity() throws {
-        // Before creating there should not be any efforts.
-        try fetchRequestShouldReturnElements(0, for: EffortEntity.self)
+    func test_create_set_entity() throws {
+        // Before creating there should not be any sets.
+        try fetchRequestShouldReturnElements(0, for: SetEntity.self)
 
         // Create exercise entity.
         let exercise = try createExerciseEntity(data: .sampleBenchPress)
@@ -33,43 +33,37 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
         // Create effort data.
         let effortData = Effort(exercise: exercise)
 
-        // Create workout entity using sample1 data.
-        let workout = createWorkoutEntity(data: .sample1)
+        // Create effort entity.
+        let effort = try createEffortEntity(workoutData: .sample1, effortData: effortData)
 
-        // Create effort entity using sample1 data.
-        let effort = try createEffortEntity(in: workout, data: effortData)
+        // Create set entity.
+        let workoutSet = try createSetEntity(in: effort, data: .sample1)
 
-        // After creating there should be one effort.
-        try fetchRequestShouldReturnElements(1, for: EffortEntity.self)
+        // After creating there should be one set.
+        try fetchRequestShouldReturnElements(1, for: SetEntity.self)
 
-        // Verify that effort entity data is correct.
-        try verifyEffortEntityData(effort, data: effortData, workout: workout)
+        // Verify that set entity data is correct.
+        try verifySetEntityData(set: workoutSet, in: effort, data: .sample1)
     }
 
     func test_edit_effort_entity() throws {
-        // Create workout entity using sample1 data.
-        let workout = createWorkoutEntity(data: .sample1)
-
         // Create exercise entity.
         let exercise = try createExerciseEntity(data: .sampleBenchPress)
 
         // Create effort data.
         let effortData = Effort(exercise: exercise)
 
-        // Create effort entity using sample1 data.
-        let effort = try createEffortEntity(in: workout, data: effortData)
+        // Create effort entity.
+        let effort = try createEffortEntity(workoutData: .sample1, effortData: effortData)
 
-        // Create exercise2 entity.
-        let exercise2 = try createExerciseEntity(data: .sampleClassicDeadlift)
-
-        // Create effort data 2.
-        let effortData2 = Effort(exercise: exercise2)
+        // Create set entity.
+        let workoutSet = try createSetEntity(in: effort, data: .sample1)
 
         // Modify effort entity using sample2 data.
-        effort.modify(effort: effortData2)
+        workoutSet.modify(workoutSet: .sample2)
 
         // Verify that data has been changed.
-        try verifyEffortEntityData(effort, data: effortData2, workout: workout)
+        try verifySetEntityData(set: workoutSet, in: effort, data: .sample2)
     }
 
     func test_delete_effort_entity() throws {
@@ -95,19 +89,18 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
         try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
         // Verify that workout relatet to this entity has no efforts.
-        try workoutEffortsCountIsEqual(workout: workout, 0)
+//        try workoutEffortsCountIsEqual(workout: workout, 0)
     }
 }
 
 // MARK: - Steps
 
-extension EffortEntityTests {
+extension SetEntityTests {
 
-    private func verifyEffortEntityData(_ effort: EffortEntity, data: Effort, workout: WorkoutEntity) throws {
-        XCTAssertEqual(effort.workout, workout)
-    }
-
-    private func workoutEffortsCountIsEqual(workout: WorkoutEntity, _ amount: Int) throws {
-        XCTAssertEqual(workout.efforts.count, amount)
+    private func verifySetEntityData(set: SetEntity, in effort: EffortEntity, data: WorkoutSet) throws {
+        XCTAssertEqual(set.effort, effort)
+        XCTAssertEqual(set.reps, data.reps)
+        XCTAssertEqual(set.weight, data.weight)
     }
 }
+

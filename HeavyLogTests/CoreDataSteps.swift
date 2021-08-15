@@ -18,16 +18,26 @@ protocol CoreDataSteps {
 extension CoreDataSteps {
 
     func createWorkoutEntity(data: Workout) -> WorkoutEntity {
-        WorkoutEntity.create(in: context, data: data)
+        WorkoutEntity.create(in: context, workoutData: data)
     }
 
     @discardableResult
     func createEffortEntity(in workout: WorkoutEntity, data: Effort) throws -> EffortEntity {
-        try XCTUnwrap(EffortEntity.create(in: workout, data: data))
+        try XCTUnwrap(EffortEntity.create(in: workout, effortData: data))
+    }
+
+    @discardableResult
+    func createEffortEntity(workoutData: Workout, effortData: Effort) throws -> EffortEntity {
+        let workout = createWorkoutEntity(data: workoutData)
+        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
     }
 
     func createExerciseEntity(data: Exercise) throws -> ExerciseEntity {
-        try XCTUnwrap(ExerciseEntity.create(in: context, data: data))
+        try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: data))
+    }
+
+    func createSetEntity(in effort: EffortEntity, data: WorkoutSet) throws -> SetEntity {
+        try XCTUnwrap(SetEntity.create(in: effort, workoutSet: data))
     }
 
     func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws {

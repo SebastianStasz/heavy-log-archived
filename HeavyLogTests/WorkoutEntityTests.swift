@@ -42,7 +42,7 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
         let workout = createWorkoutEntity(data: .sample1)
 
         // Modify workout entity using sample2 data.
-        workout.modify(data: .sample2)
+        workout.modify(workout: .sample2)
 
         // Verify that data has been changed.
         try verifyWorkoutEntityData(workout, data: .sample2, startDate: Workout.sample1.startDate)

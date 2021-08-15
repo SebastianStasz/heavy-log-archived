@@ -48,7 +48,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         let exercise = try createExerciseEntity(data: .sampleBenchPress)
 
         // Modify exercise entity using classic deadlift data.
-        exercise.modify(data: .sampleClassicDeadlift)
+        exercise.modify(exerciseData: .sampleClassicDeadlift)
 
         // Verify that data has been changed.
         try verifyExerciseEntityData(exercise, data: .sampleClassicDeadlift)

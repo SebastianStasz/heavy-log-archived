@@ -7,11 +7,10 @@
 //
 
 import Combine
-import Foundation
 import CoreData
+import Foundation
 
-@objc(ExerciseEntity)
-public class ExerciseEntity: NSManagedObject {
+@objc(ExerciseEntity) public class ExerciseEntity: NSManagedObject {
 
     @NSManaged private var name_: String
     @NSManaged private var shortName_: String?
@@ -58,29 +57,28 @@ public class ExerciseEntity: NSManagedObject {
     }
 }
 
+// MARK: - Methods
+
 extension ExerciseEntity {
 
-    @discardableResult
-    static func create(in context: NSManagedObjectContext, data: Exercise, isUserExercise: Bool = true) -> ExerciseEntity? {
-        guard checkIsIdCorrect(data.id, isUserExercise: isUserExercise) else { return nil }
+    @discardableResult static func create(in context: NSManagedObjectContext, exerciseData: Exercise, isUserExercise: Bool = true) -> ExerciseEntity? {
+        guard checkIsIdCorrect(exerciseData.id, isUserExercise: isUserExercise) else { return nil }
         let exercise = ExerciseEntity(in: context)
-        exercise.id_ = data.id
+        exercise.id_ = exerciseData.id
         exercise.isEditable = isUserExercise
-        exercise.fillInData(data: data)
+        exercise.fillInData(data: exerciseData)
         return exercise
     }
 
-    @discardableResult
-    func modify(data: Exercise) -> ExerciseEntity {
+    @discardableResult func modify(exerciseData: Exercise) -> ExerciseEntity {
         guard self.isEditable else {
             assertionFailure("Editing \"not editable\" exercise entity is not allowed.")
             return self
         }
-        return fillInData(data: data)
+        return fillInData(data: exerciseData)
     }
 
-    @discardableResult
-    private func fillInData(data: Exercise) -> ExerciseEntity {
+    @discardableResult private func fillInData(data: Exercise) -> ExerciseEntity {
         name_ = data.name
         shortName_ = data.shortName
         information_ = data.information
@@ -98,18 +96,11 @@ extension ExerciseEntity {
                     assertionFailure("Loading exercise data failed: \(error.error)")
                 }
             } receiveValue: { exercises in
-                _ = exercises.map { create(in: context, data: $0, isUserExercise: false) }
+                _ = exercises.map { create(in: context, exerciseData: $0, isUserExercise: false) }
             }
     }
 
-    static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[Exercise], AppError> {
-        apiService.getData(fromFile: "exercisesData", withExtension: ".json")
-    }
-}
-
-// MARK: - Helpers
-
-extension ExerciseEntity {
+    // MARK: - Helpers
 
     private func decodeBodyParts() -> [BodyPart]? {
         guard let parts = additionalBodyParts_ else { return nil }
@@ -122,6 +113,10 @@ extension ExerciseEntity {
         guard let bodyParts = bodyParts else { additionalBodyParts_ = nil ; return }
         let keys = bodyParts.map { $0.rawValue }.joined(separator: ",")
         additionalBodyParts_ = keys
+    }
+
+    static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[Exercise], AppError> {
+        apiService.getData(fromFile: "exercisesData", withExtension: ".json")
     }
 
     static private func checkIsIdCorrect(_ id: Int, isUserExercise: Bool) -> Bool {
