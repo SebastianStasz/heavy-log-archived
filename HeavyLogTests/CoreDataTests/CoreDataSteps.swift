@@ -26,23 +26,33 @@ extension CoreDataSteps {
         try XCTUnwrap(EffortEntity.create(in: workout, effortData: data))
     }
 
-    @discardableResult
-    func createEffortEntity(workoutData: Workout, effortData: Effort) throws -> EffortEntity {
-        let workout = createWorkoutEntity(data: workoutData)
-        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
-    }
-
     func createExerciseEntity(data: Exercise) throws -> ExerciseEntity {
         try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: data))
     }
 
-    func createSetEntity(in effort: EffortEntity, data: WorkoutSet) throws -> SetEntity {
-        try XCTUnwrap(SetEntity.create(in: effort, workoutSet: data))
+    func createSetEntity(in effort: EffortEntity, workoutSet: WorkoutSet) throws -> SetEntity {
+        try XCTUnwrap(SetEntity.create(in: effort, workoutSet: workoutSet))
     }
 
     func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws {
         let request: NSFetchRequest<T> = T.createFetchRequest()
         let entities = try! context.fetch(request)
         XCTAssertEqual(entities.count, amount)
+    }
+
+    func createEffortData(exercise: Exercise, sets: [WorkoutSet]) throws -> Effort {
+        let exercise = try createExerciseEntity(data: exercise)
+        return Effort(exercise: exercise, sets: sets)
+    }
+
+    @discardableResult func createEffortEntity(workoutData: Workout, effortData: Effort) throws -> EffortEntity {
+        let workout = createWorkoutEntity(data: workoutData)
+        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
+    }
+
+    @discardableResult func createEffortEntity(workoutData: Workout, exercise: Exercise, sets: [WorkoutSet]) throws -> EffortEntity {
+        let effortData = try createEffortData(exercise: exercise, sets: sets)
+        let workout = createWorkoutEntity(data: workoutData)
+        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
     }
 }
