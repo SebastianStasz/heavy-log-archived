@@ -1,5 +1,6 @@
 [
     {
+        "id": 0,
         "name": "Bench press",
         "short_name": null,
         "description": "An upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench.",
@@ -9,6 +10,7 @@
         "additional_body_parts": ["triceps"]
     }, 
     {
+        "id": 1,
         "name": "Classic deadlift",
         "short_name": null,
         "description": "It is one of the three powerlifting exercises, along with the squat and bench press.",

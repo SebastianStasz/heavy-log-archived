@@ -52,13 +52,16 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
         // Create workout entity.
         let workout = createWorkoutEntity(data: .sample1)
 
-        // Add effort to workout
-        try createEffortEntity(in: workout, data: .sample1)
+        // Create exercise entity.
+        let exercise = try createExerciseEntity(data: .sampleBenchPress)
 
-        // Verify that exercworkoutise entity was created.
+        // Add effort to workout.
+        try createEffortEntity(in: workout, data: .init(exercise: exercise))
+
+        // Verify that workout entity was created.
         try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
-        // Delete workout entity
+        // Delete workout entity.
         workout.delete()
 
         // Verify that workout entity was deleted.
@@ -76,9 +79,9 @@ extension WorkoutEntityTests {
     private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil) throws {
         XCTAssertEqual(workout.title, data.title)
         XCTAssertEqual(workout.notes, data.notes)
+        XCTAssertEqual(workout.rate, data.rate)
+        XCTAssertEqual(workout.efforts.count, data.efforts.count)
         XCTAssertEqual(workout.startDate, startDate ?? data.startDate )
         XCTAssertEqual(workout.endDate, data.endDate)
-        XCTAssertEqual(workout.efforts.count, data.efforts.count)
-        XCTAssertEqual(workout.rate, data.rate)
     }
 }

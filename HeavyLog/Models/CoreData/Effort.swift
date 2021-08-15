@@ -8,12 +8,11 @@
 import Foundation
 
 struct Effort {
-    let exercises: [ExerciseEntity] = []
-}
+    let exerciseId: Int
+    let exercise: ExerciseEntity
 
-// MARK: - Sample Data
-
-extension Effort {
-    static let sample1 = Effort()
-    static let sample2 = Effort()
+    init(exercise: ExerciseEntity) {
+        self.exercise = exercise
+        self.exerciseId = exercise.id_
+    }
 }

@@ -27,22 +27,25 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
     // MARK: - Tests
 
     func test_create_exercise_entity() throws {
+        // Define exercise data.
+        let exerciseData = Exercise.sampleBenchPress
+
         // Before creating there should not be exercises.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
-        // Create exercise entity.
-        let exercise = createExerciseEntity(data: .sampleBenchPress)
+        // Create exercise entity using defined data.
+        let exercise = try createExerciseEntity(data: exerciseData)
 
         // After creating there should be one exercise.
         try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
         // Verify that exercise entit data is correct.
-        try verifyExerciseEntityData(exercise, data: .sampleBenchPress)
+        try verifyExerciseEntityData(exercise, data: exerciseData)
     }
 
     func test_edit_exercise_entity() throws {
         // Create exercise entity using bench press data.
-        let exercise = createExerciseEntity(data: .sampleBenchPress)
+        let exercise = try createExerciseEntity(data: .sampleBenchPress)
 
         // Modify exercise entity using classic deadlift data.
         exercise.modify(data: .sampleClassicDeadlift)
@@ -52,17 +55,32 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
     }
 
     func test_delete_exercise_entity() throws {
+        // Define exercise data.
+        let exerciseData = Exercise.sampleClassicDeadlift
+
         // Create exercise entity.
-        let exercise = createExerciseEntity(data: .sampleClassicDeadlift)
+        let exercise = try createExerciseEntity(data: exerciseData)
 
         // Verify that exercise entity was created.
         try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
-        // Delete exercise entity
+        // Create workout entity.
+        let workout = createWorkoutEntity(data: .sample1)
+
+        // Create effort entity.
+        let effort = try createEffortEntity(in: workout, data: .init(exercise: exercise))
+
+        // Verify that created effort is related with exercise.
+        try verifyExerciseIsRelatedToEffort(exercise: exercise, effort: effort)
+
+        // Delete exercise entity.
         exercise.delete()
 
         // Verify that exercise entity was deleted.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
+
+        // Verify effort properties after deleting an exercise.
+        try verifyEffortPropertiesAfterExerciseDeleted(effort: effort, data: exerciseData)
     }
 
     func test_load_exercises_data() throws {
@@ -80,13 +98,10 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 // MARK: - Steps
 
 extension ExerciseEntityTests {
+
     private func loadExerciseData() {
         cancellable = ExerciseEntity.loadStaticData(to: context)
         sleep(1)
-    }
-
-    private func createExerciseEntity(data: Exercise) -> ExerciseEntity {
-        ExerciseEntity.create(in: context, data: data)
     }
 
     private func verifyExerciseEntityData(_ exercise: ExerciseEntity, data: Exercise) throws {
@@ -98,5 +113,17 @@ extension ExerciseEntityTests {
         XCTAssertEqual(exercise.mainBodyPart, data.mainBodyPart)
         XCTAssertEqual(exercise.additionalBodyParts, data.additionalBodyParts)
         XCTAssertEqual(exercise.efforts.count, 0)
+    }
+
+    private func verifyExerciseIsRelatedToEffort(exercise: ExerciseEntity, effort: EffortEntity) throws {
+        XCTAssertEqual(effort.exercise, exercise)
+        XCTAssertEqual(effort.exerciseId, exercise.id_)
+    }
+
+    private func verifyEffortPropertiesAfterExerciseDeleted(effort: EffortEntity, data: Exercise) throws {
+        // Related exercise should be nil.
+        XCTAssertEqual(effort.exercise, nil)
+        // Related exercise id should contain previous exercise id.
+        XCTAssertEqual(effort.exerciseId, data.id)
     }
 }

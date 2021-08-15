@@ -26,6 +26,10 @@ extension CoreDataSteps {
         try XCTUnwrap(EffortEntity.create(in: workout, data: data))
     }
 
+    func createExerciseEntity(data: Exercise) throws -> ExerciseEntity {
+        try XCTUnwrap(ExerciseEntity.create(in: context, data: data))
+    }
+
     func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws {
         let request: NSFetchRequest<T> = T.createFetchRequest()
         let entities = try! context.fetch(request)

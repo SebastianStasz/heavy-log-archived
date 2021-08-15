@@ -20,6 +20,8 @@ public class ExerciseEntity: NSManagedObject {
     @NSManaged private var difficulty_: String
     @NSManaged private var mainBodyPart_: String
     @NSManaged private var additionalBodyParts_: String?
+
+    @NSManaged private(set) var id_: Int
     @NSManaged private(set) var isEditable: Bool
     @NSManaged private(set) var efforts: [EffortEntity]
 
@@ -59,10 +61,12 @@ public class ExerciseEntity: NSManagedObject {
 extension ExerciseEntity {
 
     @discardableResult
-    static func create(in context: NSManagedObjectContext, data: Exercise, isEditable: Bool = true) -> ExerciseEntity {
+    static func create(in context: NSManagedObjectContext, data: Exercise, isUserExercise: Bool = true) -> ExerciseEntity? {
+        guard checkIsIdCorrect(data.id, isUserExercise: isUserExercise) else { return nil }
         let exercise = ExerciseEntity(in: context)
-        exercise.isEditable = isEditable
-        exercise.modify(data: data)
+        exercise.id_ = data.id
+        exercise.isEditable = isUserExercise
+        exercise.fillInData(data: data)
         return exercise
     }
 
@@ -72,6 +76,11 @@ extension ExerciseEntity {
             assertionFailure("Editing \"not editable\" exercise entity is not allowed.")
             return self
         }
+        return fillInData(data: data)
+    }
+
+    @discardableResult
+    private func fillInData(data: Exercise) -> ExerciseEntity {
         name_ = data.name
         shortName_ = data.shortName
         information_ = data.information
@@ -89,7 +98,7 @@ extension ExerciseEntity {
                     assertionFailure("Loading exercise data failed: \(error.error)")
                 }
             } receiveValue: { exercises in
-                _ = exercises.map { create(in: context, data: $0) }
+                _ = exercises.map { create(in: context, data: $0, isUserExercise: false) }
             }
     }
 
@@ -113,7 +122,16 @@ extension ExerciseEntity {
         guard let bodyParts = bodyParts else { additionalBodyParts_ = nil ; return }
         let keys = bodyParts.map { $0.rawValue }.joined(separator: ",")
         additionalBodyParts_ = keys
-        
+    }
+
+    static private func checkIsIdCorrect(_ id: Int, isUserExercise: Bool) -> Bool {
+        guard isUserExercise ? id < 0 : id >= 0 else {
+            print(isUserExercise)
+            print(id)
+            assertionFailure("Id for exercise created by user should be negative. Id for exercise created from static data should be non-negative.")
+            return false
+        }
+        return true
     }
 }
 
