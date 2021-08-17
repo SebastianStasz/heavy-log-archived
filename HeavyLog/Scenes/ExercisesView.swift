@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 10/08/2021.
 //
 
+import HeavyLogCoreData
 import SwiftUI
 
 struct ExercisesView: View {

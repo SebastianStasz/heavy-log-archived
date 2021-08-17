@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 24/07/2021.
 //
 
+import HeavyLogCoreData
 import SwiftUI
 
 struct RecordRowView: View {

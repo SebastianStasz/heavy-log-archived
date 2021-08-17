@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 25/07/2021.
 //
 
+import Shared
 import SwiftUI
 
 enum TabBarModel: Int {

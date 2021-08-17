@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import HeavyLogCoreData
 
 @main
 struct HeavyLogApp: App {
