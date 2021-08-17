@@ -1,13 +1,13 @@
 //
 //  CoreDataSteps.swift
-//  HeavyLogTests
+//  HeavyLogCoreDataTests
 //
 //  Created by Sebastian Staszczyk on 14/08/2021.
 //
 
 import CoreData
 import XCTest
-@testable import HeavyLog
+@testable import HeavyLogCoreData
 
 protocol CoreDataSteps {
     var context: NSManagedObjectContext { get set }

@@ -1,6 +1,6 @@
 //
 //  Difficulty.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //

@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "Shared"
-               BuildableName = "Shared"
-               BlueprintName = "Shared"
+               BlueprintIdentifier = "HeavyLogCoreData"
+               BuildableName = "HeavyLogCoreData"
+               BlueprintName = "HeavyLogCoreData"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "HeavyLogCoreData_HeavyLogCoreDataTests"
+               BuildableName = "HeavyLogCoreData_HeavyLogCoreDataTests"
+               BlueprintName = "HeavyLogCoreData_HeavyLogCoreDataTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "SharedTests"
-               BuildableName = "SharedTests"
-               BlueprintName = "SharedTests"
+               BlueprintIdentifier = "HeavyLogCoreDataTests"
+               BuildableName = "HeavyLogCoreDataTests"
+               BlueprintName = "HeavyLogCoreDataTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -60,9 +74,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "Shared"
-            BuildableName = "Shared"
-            BlueprintName = "Shared"
+            BlueprintIdentifier = "HeavyLogCoreData"
+            BuildableName = "HeavyLogCoreData"
+            BlueprintName = "HeavyLogCoreData"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

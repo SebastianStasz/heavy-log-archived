@@ -1,13 +1,13 @@
 //
 //  ExerciseEntityTests.swift
-//  HeavyLogTests
+//  HeavyLogCoreDataTests
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
 
 import Combine
 import XCTest
-@testable import HeavyLog
+@testable import HeavyLogCoreData
 
 class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 

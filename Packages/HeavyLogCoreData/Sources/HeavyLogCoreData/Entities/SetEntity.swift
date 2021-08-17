@@ -1,6 +1,6 @@
 //
 //  SetEntity+CoreDataClass.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 15/08/2021.
 //

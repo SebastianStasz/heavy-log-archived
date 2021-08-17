@@ -1,6 +1,6 @@
 //
 //  WorkoutRate.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 14/08/2021.
 //

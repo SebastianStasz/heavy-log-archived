@@ -1,6 +1,6 @@
 //
 //  Record.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 24/07/2021.
 //

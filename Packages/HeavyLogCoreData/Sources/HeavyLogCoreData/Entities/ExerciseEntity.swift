@@ -1,6 +1,6 @@
 //
 //  ExerciseEntity.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
@@ -122,7 +122,10 @@ public extension ExerciseEntity {
     }
 
     static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[Exercise], AppError> {
-        apiService.getData(fromFile: "exercisesData", withExtension: ".json")
+        guard let url = Bundle.module.url(forResource: "exercisesData", withExtension: "json") else {
+            fatalError("Failed to load exercisesData.json file.")
+        }
+        return apiService.getData(from: url)
     }
 
     static private func checkIsIdCorrect(_ id: Int, isUserExercise: Bool) -> Bool {

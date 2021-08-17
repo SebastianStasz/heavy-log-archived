@@ -1,12 +1,12 @@
 //
 //  EffortEntityTests.swift
-//  HeavyLogTests
+//  HeavyLogCoreDataTests
 //
 //  Created by Sebastian Staszczyk on 14/08/2021.
 //
 
 import XCTest
-@testable import HeavyLog
+@testable import HeavyLogCoreData
 
 class EffortEntityTests: XCTestCase, CoreDataSteps {
 

@@ -1,6 +1,6 @@
 //
 //  PersistenceController.swift
-//  HeavyLog
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
@@ -13,14 +13,14 @@ public final class PersistenceController {
     static let shared = PersistenceController()
 
     private var cancellables: Set<AnyCancellable> = []
-    private let container: NSPersistentContainer
+    private var container: NSPersistentContainer!
 
     public var context: NSManagedObjectContext {
         container.viewContext
     }
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "HeavyLog")
+        container = NSPersistentContainer(name:"HeavyLog", managedObjectModel: getNSManagedObjectModel())
 
         if inMemory { container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null") }
 
@@ -43,6 +43,21 @@ public final class PersistenceController {
           .debounce(for: .seconds(10), scheduler: DispatchQueue.main)
           .sink { [weak self] notification in self?.save() }
           .store(in: &cancellables)
+    }
+
+    private func getModelURL() -> URL {
+        guard let url = Bundle.module.url(forResource:"HeavyLog", withExtension: "momd") else {
+            fatalError("Failed to find url for the resource HeavyLog.momd")
+        }
+        return url
+    }
+
+    private func getNSManagedObjectModel() -> NSManagedObjectModel {
+        let modelURL = getModelURL()
+        guard let model = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Failed to initialize managed object model from path: \(modelURL)")
+        }
+        return model
     }
 }
 

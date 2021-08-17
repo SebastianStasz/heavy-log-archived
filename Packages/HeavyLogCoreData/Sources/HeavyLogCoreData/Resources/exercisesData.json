@@ -6,8 +6,8 @@
         "description": "An upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench.",
         "difficulty": "hard",
         "type": "push",
-        "main_body_part": "Chest",
-        "additional_body_parts": ["Triceps"]
+        "main_body_part": "chest",
+        "additional_body_parts": ["triceps"]
     }, 
     {
         "id": 1,
@@ -16,7 +16,7 @@
         "description": "It is one of the three powerlifting exercises, along with the squat and bench press.",
         "difficulty": "hard",
         "type": "pull",
-        "main_body_part": "Glutes",
-        "additional_body_parts": ["Lower back", "Traps", "Hamstrings"]
+        "main_body_part": "glutes",
+        "additional_body_parts": ["lower_back", "traps", "hamstrings"]
     }
 ]
