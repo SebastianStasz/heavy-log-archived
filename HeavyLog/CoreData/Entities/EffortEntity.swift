@@ -14,7 +14,7 @@ import Foundation
     @NSManaged private(set) var exerciseId: Int
     @NSManaged private(set) var exercise: ExerciseEntity
     @NSManaged private(set) var workout: WorkoutEntity
-    @NSManaged private var sets: Set<SetEntity>
+    @NSManaged private(set) var sets: Set<SetEntity>
 
     var numberOfSets: Int {
         sets.count
@@ -25,10 +25,10 @@ import Foundation
 
 extension EffortEntity {
 
-    @discardableResult static func create(in workout: WorkoutEntity, effortData: Effort) -> EffortEntity? {
-        guard let context = workout.getContext() else { return nil }
+    @discardableResult static func create(in workoutEntity: WorkoutEntity, effortData: Effort) -> EffortEntity? {
+        guard let context = workoutEntity.getContext() else { return nil }
         let effort = EffortEntity(in: context)
-        effort.workout = workout
+        effort.workout = workoutEntity
         effort.modify(effort: effortData)
         return effort
     }

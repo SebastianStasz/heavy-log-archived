@@ -24,7 +24,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
         try fetchRequestShouldReturnElements(0, for: SetEntity.self)
 
         // Create effort entity.
-        let effort = try createEffortEntity(workoutData: .sample1, exercise: .sampleBenchPress, sets: [])
+        let effort = try createEffortEntity(workoutData: .sample1, exerciseData: .sampleBenchPress, setsData: [])
 
         // Create set entity.
         let setEntity = try createSetEntity(in: effort, workoutSet: .sample1)
@@ -38,7 +38,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
     func test_edit_set_entity() throws {
         // Create effort entity.
-        let effortEntity = try createEffortEntity(workoutData: .sample1, exercise: .sampleBenchPress, sets: [.sample1, .sample2])
+        let effortEntity = try createEffortEntity(workoutData: .sample1, exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2])
 
         // Create set entity using sample1 data.
         let setEntity = try createSetEntity(in: effortEntity, workoutSet: .sample1)
@@ -52,7 +52,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
     func test_delete_set_entity() throws {
         // Create effort entity.
-        let effortEntity = try createEffortEntity(workoutData: .sample1, exercise: .sampleBenchPress, sets: [])
+        let effortEntity = try createEffortEntity(workoutData: .sample1, exerciseData: .sampleBenchPress, setsData: [])
 
         // Create set entity.
         let setEntity = try createSetEntity(in: effortEntity, workoutSet: .sample1)

@@ -11,59 +11,55 @@ import XCTest
 
 protocol CoreDataSteps {
     var context: NSManagedObjectContext { get set }
-
-    func createWorkoutEntity(data: Workout) -> WorkoutEntity
 }
 
 extension CoreDataSteps {
 
-    func createWorkoutEntity(data: Workout) -> WorkoutEntity {
-        WorkoutEntity.create(in: context, workoutData: data)
-    }
-
-    func createWorkoutEntity(data: Workout, efforts: [Effort]) -> WorkoutEntity {
-        var workoutData = data
+    func createWorkoutEntity(workoutData: Workout, efforts: [Effort] = []) -> WorkoutEntity {
+        var workoutData = workoutData
         workoutData.efforts = efforts
         return WorkoutEntity.create(in: context, workoutData: workoutData)
     }
 
-    @discardableResult
-    func createEffortEntity(in workout: WorkoutEntity, data: Effort) throws -> EffortEntity {
-        try XCTUnwrap(EffortEntity.create(in: workout, effortData: data))
+    func createExerciseEntity(exerciseData: Exercise) throws -> ExerciseEntity {
+        try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: exerciseData))
     }
 
-    func createExerciseEntity(data: Exercise) throws -> ExerciseEntity {
-        try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: data))
+    func createSetEntity(in effortEntity: EffortEntity, workoutSet: WorkoutSet) throws -> SetEntity {
+        try XCTUnwrap(SetEntity.create(in: effortEntity, workoutSet: workoutSet))
     }
 
-    func createSetEntity(in effort: EffortEntity, workoutSet: WorkoutSet) throws -> SetEntity {
-        try XCTUnwrap(SetEntity.create(in: effort, workoutSet: workoutSet))
+    func createEffortData(exerciseData: Exercise, setsData: [WorkoutSet]) throws -> Effort {
+        let exercise = try createExerciseEntity(exerciseData: exerciseData)
+        return Effort(exercise: exercise, sets: setsData)
+    }
+
+    // Create Effort Entity
+
+    @discardableResult func createEffortEntity(in workoutEntity: WorkoutEntity, effortData: Effort) throws -> EffortEntity {
+        try XCTUnwrap(EffortEntity.create(in: workoutEntity, effortData: effortData))
+    }
+
+    @discardableResult func createEffortEntity(in workoutEntity: WorkoutEntity, exerciseData: Exercise, setsData: [WorkoutSet]) throws -> EffortEntity {
+        let effortData = try createEffortData(exerciseData: exerciseData, setsData: setsData)
+        return try createEffortEntity(in: workoutEntity, effortData: effortData)
+    }
+
+    @discardableResult func createEffortEntity(workoutData: Workout, exerciseEntity: ExerciseEntity, setsData: [WorkoutSet]) throws -> EffortEntity {
+        let effortData = Effort(exercise: exerciseEntity, sets: setsData)
+        let workoutEntity = createWorkoutEntity(workoutData: workoutData)
+        return try createEffortEntity(in: workoutEntity, effortData: effortData)
+    }
+
+    @discardableResult func createEffortEntity(workoutData: Workout, exerciseData: Exercise, setsData: [WorkoutSet]) throws -> EffortEntity {
+        let effortData = try createEffortData(exerciseData: exerciseData, setsData: setsData)
+        let workoutEntity = createWorkoutEntity(workoutData: workoutData)
+        return try createEffortEntity(in: workoutEntity, effortData: effortData)
     }
 
     func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws {
         let request: NSFetchRequest<T> = T.createFetchRequest()
         let entities = try! context.fetch(request)
         XCTAssertEqual(entities.count, amount)
-    }
-
-    func createEffortData(exercise: Exercise, sets: [WorkoutSet]) throws -> Effort {
-        let exercise = try createExerciseEntity(data: exercise)
-        return Effort(exercise: exercise, sets: sets)
-    }
-
-    @discardableResult func createEffortEntity(workoutData: Workout, effortData: Effort) throws -> EffortEntity {
-        let workout = createWorkoutEntity(data: workoutData)
-        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
-    }
-
-    @discardableResult func createEffortEntity(workoutData: Workout, exercise: Exercise, sets: [WorkoutSet]) throws -> EffortEntity {
-        let effortData = try createEffortData(exercise: exercise, sets: sets)
-        let workout = createWorkoutEntity(data: workoutData)
-        return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
-    }
-
-    @discardableResult func createEffortEntity(in workoutEntity: WorkoutEntity, exercise: Exercise, sets: [WorkoutSet]) throws -> EffortEntity {
-        let effortData = try createEffortData(exercise: exercise, sets: sets)
-        return try XCTUnwrap(EffortEntity.create(in: workoutEntity, effortData: effortData))
     }
 }

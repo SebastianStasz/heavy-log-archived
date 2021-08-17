@@ -30,24 +30,27 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
         // Create exercise entity using defined data.
-        let exercise = try createExerciseEntity(data: exerciseData)
+        let exerciseEntity = try createExerciseEntity(exerciseData: exerciseData)
 
         // After creating there should be one exercise.
         try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
-        // Verify that exercise entit data is correct.
-        try verifyExerciseEntityData(exercise, data: exerciseData)
+        // Verify that exercise entity data is correct.
+        try verifyExerciseEntityData(exerciseEntity, data: exerciseData)
     }
 
     func test_edit_exercise_entity() throws {
-        // Create exercise entity using bench press data.
-        let exercise = try createExerciseEntity(data: .sampleBenchPress)
+        // Define initial exercise data.
+        let exerciseData = Exercise.sampleBenchPress
+
+        // Create exercise entity using defined data.
+        let exerciseEntity = try createExerciseEntity(exerciseData: exerciseData)
 
         // Modify exercise entity using classic deadlift data.
-        exercise.modify(exerciseData: .sampleClassicDeadlift)
+        exerciseEntity.modify(exerciseData: .sampleClassicDeadlift)
 
-        // Verify that data has been changed.
-        try verifyExerciseEntityData(exercise, data: .sampleClassicDeadlift)
+        // Verify that data has been changed, but id is the same.
+        try verifyExerciseEntityData(exerciseEntity, data: .sampleClassicDeadlift, id: exerciseData.id)
     }
 
     func test_delete_exercise_entity() throws {
@@ -55,38 +58,35 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         let exerciseData = Exercise.sampleClassicDeadlift
 
         // Create exercise entity.
-        let exercise = try createExerciseEntity(data: exerciseData)
+        let exerciseEntity = try createExerciseEntity(exerciseData: exerciseData)
 
         // Verify that exercise entity was created.
         try fetchRequestShouldReturnElements(1, for: ExerciseEntity.self)
 
-        // Create workout entity.
-        let workout = createWorkoutEntity(data: .sample1)
-
         // Create effort entity.
-        let effort = try createEffortEntity(in: workout, data: .init(exercise: exercise))
+        let effortEntity = try createEffortEntity(workoutData: .sample1, exerciseEntity: exerciseEntity, setsData: [])
 
         // Verify that created effort is related with exercise.
-        try verifyExerciseIsRelatedToEffort(exercise: exercise, effort: effort)
+        try verifyExerciseIsRelatedToEffort(exercise: exerciseEntity, effort: effortEntity)
 
         // Delete exercise entity.
-        exercise.delete()
+        exerciseEntity.delete()
 
         // Verify that exercise entity was deleted.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
         // Verify effort properties after deleting an exercise.
-        try verifyEffortPropertiesAfterExerciseDeleted(effort: effort, data: exerciseData)
+        try verifyEffortPropertiesAfterExerciseDeleted(effort: effortEntity, data: exerciseData)
     }
 
     func test_load_exercises_data() throws {
         // Before loading there should not be exercises.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
 
-        // Load exercises data
+        // Load exercise data.
         loadExerciseData()
 
-        // Verify that data has been loaded.
+        // After loading there should be two exercises.
         try fetchRequestShouldReturnElements(2, for: ExerciseEntity.self)
     }
 }
@@ -100,18 +100,21 @@ extension ExerciseEntityTests {
         sleep(1)
     }
 
-    private func verifyExerciseEntityData(_ exercise: ExerciseEntity, data: Exercise) throws {
+    private func verifyExerciseEntityData(_ exercise: ExerciseEntity, data: Exercise, id: Int? = nil) throws {
+        XCTAssertEqual(exercise.type, data.type)
         XCTAssertEqual(exercise.name, data.name)
         XCTAssertEqual(exercise.shortName, data.shortName)
-        XCTAssertEqual(exercise.information, data.information)
         XCTAssertEqual(exercise.difficulty, data.difficulty)
-        XCTAssertEqual(exercise.type, data.type)
+        XCTAssertEqual(exercise.information, data.information)
         XCTAssertEqual(exercise.mainBodyPart, data.mainBodyPart)
         XCTAssertEqual(exercise.additionalBodyParts, data.additionalBodyParts)
         XCTAssertEqual(exercise.numberOfEfforts, 0)
+        XCTAssertEqual(exercise.isEditable, true)
+        XCTAssertEqual(exercise.id_, id ?? data.id)
     }
 
     private func verifyExerciseIsRelatedToEffort(exercise: ExerciseEntity, effort: EffortEntity) throws {
+        XCTAssert(exercise.efforts.contains(effort))
         XCTAssertEqual(effort.exercise, exercise)
         XCTAssertEqual(effort.exerciseId, exercise.id_)
     }

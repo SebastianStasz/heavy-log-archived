@@ -16,8 +16,8 @@ public class WorkoutEntity: NSManagedObject {
     @NSManaged private(set) var startDate: Date
     @NSManaged private(set) var endDate: Date
     @NSManaged private(set) var notes: String?
+    @NSManaged private(set) var efforts: Set<EffortEntity>
     @NSManaged private var rate_: String
-    @NSManaged private var efforts: Set<EffortEntity>
 
     private(set) var rate: WorkoutRate {
         get { .getCase(for: rate_) }

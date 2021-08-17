@@ -24,13 +24,13 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
         try fetchRequestShouldReturnElements(0, for: EffortEntity.self)
 
         // Create effort data.
-        let effortData = try createEffortData(exercise: .sampleBenchPress, sets: [.sample1, .sample2])
+        let effortData = try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2])
 
         // Create workout entity using sample1 data.
-        let workoutEntity = createWorkoutEntity(data: .sample1)
+        let workoutEntity = createWorkoutEntity(workoutData: .sample1)
 
         // Create effort entity.
-        let effortEntity = try createEffortEntity(in: workoutEntity, data: effortData)
+        let effortEntity = try createEffortEntity(in: workoutEntity, effortData: effortData)
 
         // After creating there should be one effort.
         try fetchRequestShouldReturnElements(1, for: EffortEntity.self)
@@ -41,13 +41,13 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
     func test_edit_effort_entity() throws {
         // Create workout entity using sample1 data.
-        let workoutEntity = createWorkoutEntity(data: .sample1)
+        let workoutEntity = createWorkoutEntity(workoutData: .sample1)
 
         // Create effort entity.
-        let effort = try createEffortEntity(in: workoutEntity, exercise: .sampleBenchPress, sets: [.sample1, .sample2])
+        let effort = try createEffortEntity(in: workoutEntity, exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2])
 
         // Create effort data 2.
-        let effortData2 = try createEffortData(exercise: .sampleClassicDeadlift, sets: [.sample3])
+        let effortData2 = try createEffortData(exerciseData: .sampleClassicDeadlift, setsData: [.sample3])
 
         // Modify effort entity.
         effort.modify(effort: effortData2)
@@ -61,13 +61,13 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
     func test_delete_effort_entity() throws {
         // Create workout entity using sample1 data.
-        let workout = createWorkoutEntity(data: .sample1)
+        let workout = createWorkoutEntity(workoutData: .sample1)
 
         // Create exercise entity.
-        let exercise = try createExerciseEntity(data: .sampleBenchPress)
+        let exercise = try createExerciseEntity(exerciseData: .sampleBenchPress)
 
         // Create effort entity using sample1 data.
-        let effort = try createEffortEntity(in: workout, data: .init(exercise: exercise))
+        let effort = try createEffortEntity(in: workout, effortData: .init(exercise: exercise))
 
         // Verify that effort entity was created.
         try fetchRequestShouldReturnElements(1, for: EffortEntity.self)

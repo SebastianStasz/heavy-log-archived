@@ -16,7 +16,6 @@ import Foundation
     @NSManaged private var type_: String
     @NSManaged private var difficulty_: String
     @NSManaged private var mainBodyPart_: String
-    @NSManaged private var efforts: Set<EffortEntity>
 
     @NSManaged private var shortName_: String?
     @NSManaged private var information_: String?
@@ -24,6 +23,7 @@ import Foundation
 
     @NSManaged private(set) var id_: Int
     @NSManaged private(set) var isEditable: Bool
+    @NSManaged private(set) var efforts: Set<EffortEntity>
 
     var name: String {
         name_.localize()
