@@ -12,7 +12,7 @@ import Foundation
 @objc(EffortEntity) public class EffortEntity: NSManagedObject {
 
     @NSManaged private(set) var exerciseId: Int
-    @NSManaged private(set) var exercise: ExerciseEntity
+    @NSManaged private(set) var exercise: ExerciseEntity?
     @NSManaged private(set) var workout: WorkoutEntity
     @NSManaged private(set) var sets: Set<SetEntity>
 

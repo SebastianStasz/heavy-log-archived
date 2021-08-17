@@ -41,6 +41,9 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that workout entity data is correct.
         try verifyWorkoutEntityData(workoutEntity, data: workoutData, efforts: effortEntities)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_edit_exercise_entity() throws {
@@ -69,6 +72,9 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that data has been changed, start date should be the same.
         try verifyWorkoutEntityData(workoutEntity, data: .sample2, startDate: initialWorkoutData.startDate, efforts: effortEntities)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_delete_workout_entity() throws {
@@ -87,6 +93,9 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that efforts relatet to this entity were deleted.
         try fetchRequestShouldReturnElements(0, for: EffortEntity.self)
+
+        // Save context.
+        try saveContext()
     }
 }
 

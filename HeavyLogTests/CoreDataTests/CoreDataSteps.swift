@@ -63,4 +63,19 @@ extension CoreDataSteps {
         XCTAssertEqual(entities.count, amount)
         return entities
     }
+
+    func saveContext() throws {
+        XCTAssert(savePreviewContext())
+    }
+
+    private func savePreviewContext() -> Bool {
+        do {
+            try context.save()
+            return true
+        }
+        catch let error {
+            print("Saving context error: \(error)")
+            return false
+        }
+    }
 }

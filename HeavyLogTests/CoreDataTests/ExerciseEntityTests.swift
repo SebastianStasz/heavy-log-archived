@@ -37,6 +37,9 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that exercise entity data is correct.
         try verifyExerciseEntityData(exerciseEntity, exerciseData: exerciseData)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_edit_exercise_entity() throws {
@@ -51,6 +54,9 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that data has been changed, but ID is the same.
         try verifyExerciseEntityData(exerciseEntity, exerciseData: .sampleClassicDeadlift, id: exerciseData.id)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_delete_exercise_entity() throws {
@@ -74,6 +80,9 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify effort properties after deleting an exercise.
         try verifyEffortPropertiesAfterExerciseDeleted(effort: effortEntity, id: exerciseData.id)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_load_exercises_data() throws {
@@ -85,6 +94,9 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
         // After loading there should be two exercises.
         try fetchRequestShouldReturnElements(2, for: ExerciseEntity.self)
+
+        // Save context.
+        try saveContext()
     }
 }
 

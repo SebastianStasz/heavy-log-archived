@@ -49,6 +49,9 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify effort entity is related to workout entity.
         XCTAssert(workoutEntity.efforts.contains(effortEntity))
+
+        // Save context.
+        try saveContext()
     }
 
     func test_edit_effort_entity() throws {
@@ -82,6 +85,9 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify initial exercise entity is not related to any efforts.
         XCTAssert(initialExercise.efforts.isEmpty)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_delete_effort_entity() throws {
@@ -111,6 +117,9 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that exercise related to this entity has no efforts.
         XCTAssert(exerciseEntity.efforts.isEmpty)
+
+        // Save context.
+        try saveContext()
     }
 }
 

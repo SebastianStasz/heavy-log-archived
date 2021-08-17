@@ -34,6 +34,9 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that set entity data is correct.
         try verifySetEntityData(set: setEntity, effort: effortEntity, setData: .sample1)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_edit_set_entity() throws {
@@ -51,6 +54,9 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that data has been changed.
         try verifySetEntityData(set: setEntity, effort: effortEntity, setData: modifiedSetData)
+
+        // Save context.
+        try saveContext()
     }
 
     func test_delete_set_entity() throws {
@@ -71,6 +77,9 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
         // Verify that effort entity relatet to this set entity has no sets.
         XCTAssertEqual(effortEntity.numberOfSets, 0)
+
+        // Save context.
+        try saveContext()
     }
 }
 

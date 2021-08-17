@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="EffortEntity" representedClassName="EffortEntity" syncable="YES">
         <attribute name="exerciseId" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="exercise" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="efforts" inverseEntity="ExerciseEntity"/>
+        <relationship name="exercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="efforts" inverseEntity="ExerciseEntity"/>
         <relationship name="sets" toMany="YES" deletionRule="Cascade" destinationEntity="SetEntity" inverseName="effort" inverseEntity="SetEntity"/>
         <relationship name="workout" maxCount="1" deletionRule="Nullify" destinationEntity="WorkoutEntity" inverseName="efforts" inverseEntity="WorkoutEntity"/>
     </entity>
@@ -35,6 +35,6 @@
         <element name="EffortEntity" positionX="84.4190673828125" positionY="189.1649475097656" width="128" height="103"/>
         <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="128" height="193"/>
         <element name="SetEntity" positionX="282.9082946777344" positionY="267.9727783203124" width="128" height="88"/>
-        <element name="WorkoutEntity" positionX="-166.5936279296875" positionY="-50.76431274414063" width="128" height="133"/>
+        <element name="WorkoutEntity" positionX="-93.40850830078125" positionY="-101.3866577148438" width="128" height="133"/>
     </elements>
 </model>
