@@ -13,16 +13,17 @@ import Foundation
 @objc(ExerciseEntity) public class ExerciseEntity: NSManagedObject {
 
     @NSManaged private var name_: String
-    @NSManaged private var shortName_: String?
-    @NSManaged private var information_: String?
     @NSManaged private var type_: String
     @NSManaged private var difficulty_: String
     @NSManaged private var mainBodyPart_: String
+    @NSManaged private var efforts: Set<EffortEntity>
+
+    @NSManaged private var shortName_: String?
+    @NSManaged private var information_: String?
     @NSManaged private var additionalBodyParts_: String?
 
     @NSManaged private(set) var id_: Int
     @NSManaged private(set) var isEditable: Bool
-    @NSManaged private(set) var efforts: [EffortEntity]
 
     var name: String {
         name_.localize()
@@ -34,6 +35,10 @@ import Foundation
 
     var information: String? {
         information_?.localize()
+    }
+
+    var numberOfEfforts: Int {
+        efforts.count
     }
 
     private(set) var difficulty: Difficulty {

@@ -20,10 +20,6 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         context = PersistenceController.preview.context
     }
 
-    override func tearDownWithError() throws {
-
-    }
-
     // MARK: - Tests
 
     func test_create_exercise_entity() throws {
@@ -112,7 +108,7 @@ extension ExerciseEntityTests {
         XCTAssertEqual(exercise.type, data.type)
         XCTAssertEqual(exercise.mainBodyPart, data.mainBodyPart)
         XCTAssertEqual(exercise.additionalBodyParts, data.additionalBodyParts)
-        XCTAssertEqual(exercise.efforts.count, 0)
+        XCTAssertEqual(exercise.numberOfEfforts, 0)
     }
 
     private func verifyExerciseIsRelatedToEffort(exercise: ExerciseEntity, effort: EffortEntity) throws {

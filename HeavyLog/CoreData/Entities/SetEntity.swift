@@ -11,9 +11,9 @@ import Foundation
 
 @objc(SetEntity) public class SetEntity: NSManagedObject {
 
-    @NSManaged public var reps: Int
-    @NSManaged public var weight: Double
-    @NSManaged public var effort: EffortEntity
+    @NSManaged private(set) var reps: Int
+    @NSManaged private(set) var weight: Double
+    @NSManaged private(set) var effort: EffortEntity
 }
 
 // MARK: - Methods

@@ -70,7 +70,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
         try fetchRequestShouldReturnElements(1, for: EffortEntity.self)
 
         // Verify that effort entity relatet to this set entity has no sets.
-        XCTAssertEqual(effortEntity.sets.count, 0)
+        XCTAssertEqual(effortEntity.numberOfSets, 0)
     }
 }
 

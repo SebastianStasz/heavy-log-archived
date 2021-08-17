@@ -14,7 +14,11 @@ import Foundation
     @NSManaged private(set) var exerciseId: Int
     @NSManaged private(set) var exercise: ExerciseEntity
     @NSManaged private(set) var workout: WorkoutEntity
-    @NSManaged private(set) var sets: [SetEntity]
+    @NSManaged private var sets: Set<SetEntity>
+
+    var numberOfSets: Int {
+        sets.count
+    }
 }
 
 // MARK: - Methods
@@ -32,6 +36,7 @@ extension EffortEntity {
     @discardableResult func modify(effort: Effort) -> EffortEntity {
         exercise = effort.exercise
         exerciseId = effort.exerciseId
+        deleteAllSets()
         addSets(effort.sets)
         return self
     }
@@ -39,17 +44,34 @@ extension EffortEntity {
     // MARK: - Helpers
 
     private func addSets(_ sets: [WorkoutSet]) {
-        clearSets()
-        _ = sets.map { addSet($0) }
+        for set in sets { addSet(set) }
     }
 
-    private func clearSets() {
-        _ = sets.map { $0.delete() }
+    private func deleteAllSets() {
+        for set in sets {
+            removeFromSets(set)
+            set.delete()
+        }
     }
 
     private func addSet(_ workoutSet: WorkoutSet) {
         SetEntity.create(in: self, workoutSet: workoutSet)
     }
+}
+
+extension EffortEntity {
+
+    @objc(addSetsObject:)
+    @NSManaged public func addToSets(_ value: SetEntity)
+
+    @objc(removeSetsObject:)
+    @NSManaged public func removeFromSets(_ value: SetEntity)
+
+    @objc(addSets:)
+    @NSManaged public func addToSets(_ values: NSSet)
+
+    @objc(removeSets:)
+    @NSManaged public func removeFromSets(_ values: NSSet)
 }
 
 extension EffortEntity: Identifiable {}

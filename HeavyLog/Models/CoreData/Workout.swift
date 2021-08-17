@@ -12,7 +12,7 @@ struct Workout {
     let notes: String?
     let startDate: Date
     let endDate: Date
-    let efforts: [Effort]
+    var efforts: [Effort]
     let rate: WorkoutRate
 }
 

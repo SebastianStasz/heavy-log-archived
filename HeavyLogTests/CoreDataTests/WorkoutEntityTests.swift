@@ -27,14 +27,17 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
         // Before creating there should not be any workouts.
         try fetchRequestShouldReturnElements(0, for: WorkoutEntity.self)
 
+        // Create effort data.
+        let effort = try createEffortData(exercise: .sampleBenchPress, sets: [.sample1, .sample2])
+
         // Create workout entity.
-        let workout = createWorkoutEntity(data: .sample1)
+        let workout = createWorkoutEntity(data: .sample1, efforts: [effort])
 
         // After creating there should be one workout.
         try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
         // Verify that workout entit data is correct.
-        try verifyWorkoutEntityData(workout, data: .sample1)
+        try verifyWorkoutEntityData(workout, data: .sample1, efforts: [effort])
     }
 
     func test_edit_exercise_entity() throws {
@@ -76,11 +79,11 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
 extension WorkoutEntityTests {
 
-    private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil) throws {
+    private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil, efforts: [Effort]? = nil) throws {
         XCTAssertEqual(workout.title, data.title)
         XCTAssertEqual(workout.notes, data.notes)
         XCTAssertEqual(workout.rate, data.rate)
-        XCTAssertEqual(workout.efforts.count, data.efforts.count)
+        XCTAssertEqual(workout.numberOfEfforts, efforts?.count ?? data.efforts.count)
         XCTAssertEqual(workout.startDate, startDate ?? data.startDate )
         XCTAssertEqual(workout.endDate, data.endDate)
     }

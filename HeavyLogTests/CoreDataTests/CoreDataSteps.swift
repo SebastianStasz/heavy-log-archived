@@ -21,6 +21,12 @@ extension CoreDataSteps {
         WorkoutEntity.create(in: context, workoutData: data)
     }
 
+    func createWorkoutEntity(data: Workout, efforts: [Effort]) -> WorkoutEntity {
+        var workoutData = data
+        workoutData.efforts = efforts
+        return WorkoutEntity.create(in: context, workoutData: workoutData)
+    }
+
     @discardableResult
     func createEffortEntity(in workout: WorkoutEntity, data: Effort) throws -> EffortEntity {
         try XCTUnwrap(EffortEntity.create(in: workout, effortData: data))
@@ -54,5 +60,10 @@ extension CoreDataSteps {
         let effortData = try createEffortData(exercise: exercise, sets: sets)
         let workout = createWorkoutEntity(data: workoutData)
         return try XCTUnwrap(EffortEntity.create(in: workout, effortData: effortData))
+    }
+
+    @discardableResult func createEffortEntity(in workoutEntity: WorkoutEntity, exercise: Exercise, sets: [WorkoutSet]) throws -> EffortEntity {
+        let effortData = try createEffortData(exercise: exercise, sets: sets)
+        return try XCTUnwrap(EffortEntity.create(in: workoutEntity, effortData: effortData))
     }
 }
