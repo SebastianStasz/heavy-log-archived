@@ -36,11 +36,11 @@ extension WorkoutEntity {
     @discardableResult static func create(in context: NSManagedObjectContext, workoutData: Workout) -> WorkoutEntity {
         let workout = WorkoutEntity(in: context)
         workout.startDate = workoutData.startDate
-        workout.modify(workout: workoutData)
+        workout.modify(workoutData: workoutData)
         return workout
     }
 
-    @discardableResult func modify(workout: Workout) -> WorkoutEntity {
+    @discardableResult func modify(workoutData workout: Workout) -> WorkoutEntity {
         title = workout.title
         notes = workout.notes
         endDate = workout.endDate

@@ -25,8 +25,8 @@ extension CoreDataSteps {
         try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: exerciseData))
     }
 
-    func createSetEntity(in effortEntity: EffortEntity, workoutSet: WorkoutSet) throws -> SetEntity {
-        try XCTUnwrap(SetEntity.create(in: effortEntity, workoutSet: workoutSet))
+    func createSetEntity(in effortEntity: EffortEntity, setData: WorkoutSet) throws -> SetEntity {
+        try XCTUnwrap(SetEntity.create(in: effortEntity, setData: setData))
     }
 
     func createEffortData(exerciseData: Exercise, setsData: [WorkoutSet]) throws -> Effort {
@@ -57,9 +57,10 @@ extension CoreDataSteps {
         return try createEffortEntity(in: workoutEntity, effortData: effortData)
     }
 
-    func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws {
+    @discardableResult func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws -> [T] {
         let request: NSFetchRequest<T> = T.createFetchRequest()
         let entities = try! context.fetch(request)
         XCTAssertEqual(entities.count, amount)
+        return entities
     }
 }

@@ -55,7 +55,7 @@ extension EffortEntity {
     }
 
     private func addSet(_ workoutSet: WorkoutSet) {
-        SetEntity.create(in: self, workoutSet: workoutSet)
+        SetEntity.create(in: self, setData: workoutSet)
     }
 }
 

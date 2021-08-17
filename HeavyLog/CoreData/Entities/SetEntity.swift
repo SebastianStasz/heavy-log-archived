@@ -20,17 +20,17 @@ import Foundation
 
 extension SetEntity {
 
-    @discardableResult static func create(in effort: EffortEntity, workoutSet: WorkoutSet) -> SetEntity? {
+    @discardableResult static func create(in effort: EffortEntity, setData: WorkoutSet) -> SetEntity? {
         guard let context = effort.getContext() else { return nil }
         let set = SetEntity(in: context)
         set.effort = effort
-        set.modify(workoutSet: workoutSet)
+        set.modify(setData: setData)
         return set
     }
 
-    @discardableResult func modify(workoutSet: WorkoutSet) -> SetEntity {
-        reps = workoutSet.reps
-        weight = workoutSet.weight
+    @discardableResult func modify(setData: WorkoutSet) -> SetEntity {
+        reps = setData.reps
+        weight = setData.weight
         return self
     }
 

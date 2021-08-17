@@ -17,55 +17,70 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
         context = PersistenceController.preview.context
     }
 
-    override func tearDownWithError() throws {
-
-    }
-
     // MARK: - Tests
 
     func test_create_workout_entity() throws {
-        // Before creating there should not be any workouts.
+        // Define workout data.
+        let workoutData = Workout.sample1
+
+        // Before creating, there should not be any workouts.
         try fetchRequestShouldReturnElements(0, for: WorkoutEntity.self)
 
-        // Create effort data.
-        let effort = try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2])
+        // Define efforts data that will be used to create workout entity.
+        let efforts = [try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2]),
+                       try createEffortData(exerciseData: .sampleClassicDeadlift, setsData: [.sample3])]
 
         // Create workout entity.
-        let workout = createWorkoutEntity(workoutData: .sample1, efforts: [effort])
+        let workoutEntity = createWorkoutEntity(workoutData: workoutData, efforts: efforts)
 
-        // After creating there should be one workout.
+        // After creating, there should be one workout.
         try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
 
-        // Verify that workout entit data is correct.
-        try verifyWorkoutEntityData(workout, data: .sample1, efforts: [effort])
+        // Two effort entities should also be created.
+        let effortEntities = try fetchRequestShouldReturnElements(2, for: EffortEntity.self)
+
+        // Verify that workout entity data is correct.
+        try verifyWorkoutEntityData(workoutEntity, data: workoutData, efforts: effortEntities)
     }
 
     func test_edit_exercise_entity() throws {
-        // Create workout entity using sample1 data.
-        let workout = createWorkoutEntity(workoutData: .sample1)
+        // Define initial effort data.
+        let initialEfforts = [try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1]),
+                               try createEffortData(exerciseData: .sampleClassicDeadlift, setsData: [.sample2])]
 
-        // Modify workout entity using sample2 data.
-        workout.modify(workout: .sample2)
+        // Define initial workout data.
+        let initialWorkoutData = Workout.sample1
 
-        // Verify that data has been changed.
-        try verifyWorkoutEntityData(workout, data: .sample2, startDate: Workout.sample1.startDate)
+        // Create workout entity using sample1 data and initial effort data.
+        let workoutEntity = createWorkoutEntity(workoutData: initialWorkoutData, efforts: initialEfforts)
+
+        // Define modified effort data.
+        let modifiedEfforts = [try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2])]
+
+        // Define modified workout data.
+        var modifiedWorkoutData = Workout.sample2
+        modifiedWorkoutData.efforts = modifiedEfforts
+
+        // Modify workout entity using modified workout data.
+        workoutEntity.modify(workoutData: modifiedWorkoutData)
+
+        // After modification, one effort should exist.
+        let effortEntities = try fetchRequestShouldReturnElements(1, for: EffortEntity.self)
+
+        // Verify that data has been changed, start date should be the same.
+        try verifyWorkoutEntityData(workoutEntity, data: .sample2, startDate: initialWorkoutData.startDate, efforts: effortEntities)
     }
 
     func test_delete_workout_entity() throws {
+        // Define efforts data that will be used to create workout entity.
+        let efforts = [try createEffortData(exerciseData: .sampleBenchPress, setsData: [.sample1, .sample2]),
+                       try createEffortData(exerciseData: .sampleClassicDeadlift, setsData: [.sample3])]
+
         // Create workout entity.
-        let workout = createWorkoutEntity(workoutData: .sample1)
-
-        // Create exercise entity.
-        let exercise = try createExerciseEntity(exerciseData: .sampleBenchPress)
-
-        // Add effort to workout.
-        try createEffortEntity(in: workout, effortData: .init(exercise: exercise))
-
-        // Verify that workout entity was created.
-        try fetchRequestShouldReturnElements(1, for: WorkoutEntity.self)
+        let workoutEntity = createWorkoutEntity(workoutData: .sample1, efforts: efforts)
 
         // Delete workout entity.
-        workout.delete()
+        workoutEntity.delete()
 
         // Verify that workout entity was deleted.
         try fetchRequestShouldReturnElements(0, for: WorkoutEntity.self)
@@ -79,12 +94,16 @@ class WorkoutEntityTests: XCTestCase, CoreDataSteps {
 
 extension WorkoutEntityTests {
 
-    private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil, efforts: [Effort]? = nil) throws {
+    private func verifyWorkoutEntityData(_ workout: WorkoutEntity, data: Workout, startDate: Date? = nil, efforts: [EffortEntity]) throws {
         XCTAssertEqual(workout.title, data.title)
         XCTAssertEqual(workout.notes, data.notes)
         XCTAssertEqual(workout.rate, data.rate)
-        XCTAssertEqual(workout.numberOfEfforts, efforts?.count ?? data.efforts.count)
+        XCTAssertEqual(workout.numberOfEfforts, efforts.count)
         XCTAssertEqual(workout.startDate, startDate ?? data.startDate )
         XCTAssertEqual(workout.endDate, data.endDate)
+
+        for effort in efforts {
+            XCTAssert(workout.efforts.contains(where: { $0.id == effort.id }))
+        }
     }
 }
