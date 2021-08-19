@@ -23,18 +23,18 @@ struct TabBarActionButton: View {
 
     private var popupButtons: some View {
         Group {
-            popupButton(Popup.first, angle: -90, action: {})
-            popupButton(Popup.second, angle: -135, action: {})
-            popupButton(Popup.third, angle: -45, action: {})
+            popupButton(Popup.first, angle: -90, action: tabBar.navigate(to: .workoutSheet))
+            popupButton(Popup.second, angle: -135, action: {}())
+            popupButton(Popup.third, angle: -45, action: {}())
         }
     }
 
     // MARK: Interactions
 
-    private func popupButton(_ popup: Popup, angle: Double, action: @escaping () -> Void) -> some View {
+    private func popupButton(_ popup: Popup, angle: Double, action: @autoclosure @escaping () -> Void) -> some View {
         let offset = getOffset(for: angle)
 
-        return Button(popup.title, action: action())
+        return Button(popup.title, action: action)
             .buttonStyle(TabBarPopupButtonStyle(image: popup.image))
             .offset(x: offset.x, y: offset.y)
             .frame(width: 47, height: 47)

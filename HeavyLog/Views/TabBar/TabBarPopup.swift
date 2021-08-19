@@ -17,7 +17,7 @@ extension TabBarModel {
         var title: String {
             switch self {
             case .first:
-                return "First"
+                return "Add workout"
             case .second:
                 return "Second"
             case .third:
@@ -28,7 +28,7 @@ extension TabBarModel {
         var image: String {
             switch self {
             case .first:
-                return "lock"
+                return "bolt.fill"
             case .second:
                 return "lock"
             case .third:

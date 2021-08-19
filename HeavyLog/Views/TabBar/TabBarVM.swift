@@ -30,6 +30,7 @@ extension TabBarVM {
         case tab(Tab)
         case popupItems
         case view
+        case workoutSheet
     }
 
     func navigate(to destination: Destination) {
@@ -39,6 +40,9 @@ extension TabBarVM {
         case .popupItems:
             arePopupsShown = true
         case .view:
+            arePopupsShown = false
+        case .workoutSheet:
+            AppController.shared.present(sheet: .workout)
             arePopupsShown = false
         }
     }

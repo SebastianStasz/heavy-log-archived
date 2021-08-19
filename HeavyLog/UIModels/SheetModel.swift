@@ -8,12 +8,12 @@
 import SwiftUI
 
 enum SheetModel: Int, View {
-    case test
+    case workout
 
     var body: some View {
         switch self {
-        case .test:
-            Text("Test")
+        case .workout:
+            WorkoutCreatorView()
         }
     }
 }
