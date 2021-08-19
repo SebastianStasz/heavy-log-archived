@@ -6,6 +6,8 @@
   
 */
 
+"common_close" = "Zamknij";
+
 "tab_dashboard_title" = "Pulpit";
 "tab_workouts_title" = "Treningi";
 "tab_summary_title" = "Podsumowanie";

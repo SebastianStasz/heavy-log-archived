@@ -12,3 +12,19 @@ final class WorkoutCreatorVM: ObservableObject {
 
     var availableTabs: [Tab] { Tab.allCases }
 }
+
+// MARK: - Navigator
+
+extension WorkoutCreatorVM {
+
+    enum Destination {
+        case dismiss
+    }
+
+    func navigate(to destination: Destination) {
+        switch destination {
+        case .dismiss:
+            AppController.shared.dismissSheet()
+        }
+    }
+}

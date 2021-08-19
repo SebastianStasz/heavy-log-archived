@@ -6,6 +6,8 @@
   
 */
 
+"common_close" = "Close";
+
 "tab_dashboard_title" = "Dashboard";
 "tab_workouts_title" = "Wokrouts";
 "tab_summary_title" = "Summary";

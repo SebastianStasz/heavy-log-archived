@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shared
 
 struct WorkoutCreatorView: View {
 
@@ -21,7 +22,14 @@ struct WorkoutCreatorView: View {
                 tab.tabItem { Label(tab.title, systemImage: tab.icon) }
             }
         }
+        .toolbar { toolbarContent }
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(.common_close, action: viewModel.navigate(to: .dismiss))
+        }
     }
 }
 

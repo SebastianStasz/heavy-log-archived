@@ -52,6 +52,10 @@ final class AppController {
         guard app.sheet == nil else { return }
         app.sheet = sheet
     }
+
+    func dismissSheet() {
+        app.sheet = nil
+    }
 }
 
 // MARK: - App View Model

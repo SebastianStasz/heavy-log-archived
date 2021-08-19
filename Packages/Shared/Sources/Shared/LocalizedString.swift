@@ -1,5 +1,5 @@
 //
-//  LocalizedStringKey+Ext.swift
+//  LocalizedString.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
@@ -8,6 +8,8 @@
 import SwiftUI
 
 public enum LocalizedString: String {
+    case common_close
+
     case tab_dashboard_title
     case tab_workouts_title
     case tab_summary_title
