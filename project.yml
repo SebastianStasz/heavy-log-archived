@@ -1,37 +1,64 @@
 # Documentation
 # https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md
 
+include:
+  - targetTemplate.yml
+
 name: "HeavyLog"
+
 options:
-  createIntermediateGroups: true
-  usesTabs: false
-  indentWidth: 4
-  tabWidth: 4
-  bundleIdPrefix: "de.number42"
+  bundleIdPrefix: "sebastian-staszczyk"
   groupSortPosition: "top"
+  platform: "iOS"
+  deploymentTarget:
+    iOS: "14.0"
 
 localPackages:
-  - ./Packages/HeavyLogCoreData
-  - ./Packages/Shared
+  - "./Packages/HeavyLogCoreData"
+  - "./Packages/Shared"
+
+configs:
+  Dev Debug: debug
+  Unmerged Debug: debug
+  AppStore Debug: debug
+  Dev Release: release
+  Unmerged Release: release
+  AppStore Release: release
 
 targets: 
   HeavyLog:
-    type: "application"
-    platform: "iOS"
-    deploymentTarget: "14.0"
-    sources:
-      - path: "HeavyLog"
+    scheme:
+      testTargets:
+        - HeavyLog
+        - name: "HeavyLog"
+          parallelizable: true
+      gatherCoverageData: true
+    templates:
+      - HeavyLog
     dependencies:
-      - package: HeavyLogCoreData
-      - package: Shared
+      - package: "HeavyLogCoreData"
+      - package: "Shared"
+
   HeavyLogTests:
     type: "bundle.unit-test"
     platform: "iOS"
-    deploymentTarget: "14.0"
     sources:
       - path: "HeavyLogTests"
+    scheme:
+      testTargets:
+        - HeavyLogTests
+      gatherCoverageData: true
+      configVariants:
+        - Dev
     dependencies:
       - target: "HeavyLog"
 
 
+targetTemplates:
+  HeavyLog:
+    platform: "iOS"
+    type: "application"
+    sources: ["HeavyLog"]
+    scheme:
+      configVariants: ["Unmerged"]
 
