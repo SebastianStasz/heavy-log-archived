@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct WorkoutCreatorView: View {
+
+    @StateObject private var viewModel = WorkoutCreatorVM()
+
+    init() {
+        UITabBar.appearance().isHidden = false
+    }
+
     var body: some View {
-        Text("Workout Creator")
+        TabView {
+            ForEach(viewModel.availableTabs) { tab in
+                tab.tabItem { Label(tab.title, systemImage: tab.icon) }
+            }
+        }
+        .embedInNavigationView(title: "Workout Name", displayMode: .inline)
     }
 }
 

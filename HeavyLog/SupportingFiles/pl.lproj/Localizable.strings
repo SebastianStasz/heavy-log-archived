@@ -45,3 +45,6 @@
 "common_bodyPart_triceps" = "Triceps";
 "common_bodyPart_forearms" = "Przedramiona";
 "common_bodyPart_neck" = "Szyja";
+
+"workoutCreator_tab_workout" = "Trening";
+"workoutCreator_tab_info" = "Info";

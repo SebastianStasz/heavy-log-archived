@@ -48,7 +48,14 @@ public enum LocalizedString: String {
     case common_bodyPart_forearms
     case common_bodyPart_neck
 
+    case workoutCreator_tab_workout
+    case workoutCreator_tab_info
+
     public var key: String {
         self.rawValue
+    }
+
+    public var text: String {
+        self.rawValue.localize()
     }
 }

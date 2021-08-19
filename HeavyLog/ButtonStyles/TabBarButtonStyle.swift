@@ -27,7 +27,7 @@ struct TabBarButtonStyle: ButtonStyle {
 
 extension TabBarButtonStyle {
     init(for tab: TabBarModel, isSelected: Bool) {
-        let image = Image(systemName: tab.image)
+        let image = Image(systemName: tab.icon)
         self.init(image: image, isSelected: isSelected)
     }
 }

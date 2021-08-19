@@ -27,7 +27,7 @@ enum TabBarModel: Int {
         }
     }
 
-    var image: String {
+    var icon: String {
         switch self {
         case .dashboard:
             return "house"

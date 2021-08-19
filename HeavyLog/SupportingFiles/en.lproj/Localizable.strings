@@ -45,3 +45,6 @@
 "common_bodyPart_triceps" = "Triceps";
 "common_bodyPart_forearms" = "Forearms";
 "common_bodyPart_neck" = "Neck";
+
+"workoutCreator_tab_workout" = "Workout";
+"workoutCreator_tab_info" = "Info";
