@@ -19,11 +19,9 @@ struct WorkoutCreatorView: View {
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
             ForEach(viewModel.availableTabs) { $0 }
-                .environmentObject(viewModel)
-                .padding(.vertical, .spacingHuge)
-                .padding(.horizontal, .spacingMedium)
         }
         .toolbar { toolbarContent }
+        .environmentObject(viewModel)
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
     }
 

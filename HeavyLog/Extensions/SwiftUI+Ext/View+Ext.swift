@@ -32,8 +32,8 @@ extension View {
     }
 
     /// Sets a fixed size for a view’s height.
-    func height(_ height: CGFloat) -> some View {
-        self.frame(height: height)
+    func maxHeight(_ height: CGFloat = .infinity) -> some View {
+        self.frame(maxHeight: height)
     }
 
     // MARK: - Other
@@ -47,9 +47,19 @@ extension View {
             .padding(.trailing, trailing)
     }
 
+    /// A view that pads this view inside the specified edge insets with a system-calculated amount of padding.
+    func padding(vertical: CGFloat, horizontal: CGFloat = 0) -> some View {
+        self
+            .padding(.vertical, horizontal)
+            .padding(.horizontal, horizontal)
+    }
+
     /// Layers the given view behind this view ignoring all safe area.
     func backgroundIgnoringSafeArea<T: View>(_ view: T) -> some View {
         self.background(view.edgesIgnoringSafeArea(.all))
     }
 
+    func embedInScrollView(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true) -> some View {
+        ScrollView(axes, showsIndicators: showsIndicators) { self }
+    }
 }

@@ -54,6 +54,8 @@ extension WorkoutCreator: View {
                 Text("Info")
             }
         }
+        .padding(vertical: .spacingHuge, horizontal: .spacingMedium)
+        .embedInScrollView()
     }
 }
 
