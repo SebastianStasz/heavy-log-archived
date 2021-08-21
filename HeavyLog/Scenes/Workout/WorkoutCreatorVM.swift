@@ -10,6 +10,9 @@ import Foundation
 final class WorkoutCreatorVM: ObservableObject {
     typealias Tab = WorkoutCreator
 
+    @Published var selectedTab: WorkoutCreator = .workoutTree
+    @Published var workout = WorkoutForm()
+
     var availableTabs: [Tab] { Tab.allCases }
 }
 
@@ -18,11 +21,17 @@ final class WorkoutCreatorVM: ObservableObject {
 extension WorkoutCreatorVM {
 
     enum Destination {
+        case workoutTree
+        case workoutInfo
         case dismiss
     }
 
     func navigate(to destination: Destination) {
         switch destination {
+        case .workoutTree:
+            selectedTab = .workoutTree
+        case .workoutInfo:
+            selectedTab = .workoutInfo
         case .dismiss:
             AppController.shared.dismissSheet()
         }

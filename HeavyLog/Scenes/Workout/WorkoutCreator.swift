@@ -10,8 +10,8 @@ import Shared
 import SwiftUI
 
 enum WorkoutCreator: Int {
-    case workout
-    case info
+    case workoutTree
+    case workoutInfo
 
     var title: String {
         return titleLocalized.text
@@ -19,18 +19,18 @@ enum WorkoutCreator: Int {
 
     var icon: String {
         switch self {
-        case .workout:
+        case .workoutTree:
             return SFSymbol.workoutCreatorWorkoutTab.name
-        case .info:
+        case .workoutInfo:
             return SFSymbol.workoutCreatorInfoTab.name
         }
     }
 
     private var titleLocalized: LocalizedString {
         switch self {
-        case .workout:
+        case .workoutTree:
             return LocalizedString.workoutCreator_tab_workout
-        case .info:
+        case .workoutInfo:
             return LocalizedString.workoutCreator_tab_info
         }
     }
@@ -41,11 +41,18 @@ enum WorkoutCreator: Int {
 extension WorkoutCreator: View {
 
     var body: some View {
-        switch self {
-        case .workout:
-            Text("Wokrout")
-        case .info:
-            Text("Info")
+        view.tabItem { Label(title, systemImage: icon) }
+            .tag(self)
+    }
+
+    private var view: some View {
+        Group {
+            switch self {
+            case .workoutTree:
+                WorkoutTreeView()
+            case .workoutInfo:
+                Text("Info")
+            }
         }
     }
 }

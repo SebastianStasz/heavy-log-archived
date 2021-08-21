@@ -17,18 +17,25 @@ struct WorkoutCreatorView: View {
     }
 
     var body: some View {
-        TabView {
-            ForEach(viewModel.availableTabs) { tab in
-                tab.tabItem { Label(tab.title, systemImage: tab.icon) }
-            }
+        TabView(selection: $viewModel.selectedTab) {
+            ForEach(viewModel.availableTabs) { $0 }
+                .environmentObject(viewModel)
+                .padding(.vertical, .spacingHuge)
+                .padding(.horizontal, .spacingMedium)
         }
         .toolbar { toolbarContent }
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
     }
 
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button(.common_close, action: viewModel.navigate(to: .dismiss))
+        Group {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(.common_close, action: viewModel.navigate(to: .dismiss))
+            }
+
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(.common_delete, action: viewModel.navigate(to: .dismiss))
+            }
         }
     }
 }

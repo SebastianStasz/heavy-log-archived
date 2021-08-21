@@ -9,6 +9,7 @@ import SwiftUI
 
 public enum LocalizedString: String {
     case common_close
+    case common_delete
 
     case tab_dashboard_title
     case tab_workouts_title
