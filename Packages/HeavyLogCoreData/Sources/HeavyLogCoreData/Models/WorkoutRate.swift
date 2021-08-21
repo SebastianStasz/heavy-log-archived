@@ -15,7 +15,7 @@ public enum WorkoutRate: String {
     case unknown
 
     public var name: String {
-        nameLocalized.key
+        nameLocalized.text
     }
 
     private var nameLocalized: LocalizedString {
@@ -30,6 +30,12 @@ public enum WorkoutRate: String {
             return LocalizedString.error_enum_unknown
         }
     }
+}
+
+extension WorkoutRate: CaseIterable {}
+
+extension WorkoutRate: Identifiable {
+    public var id: String { rawValue }
 }
 
 extension WorkoutRate: UnknownValueSupport {

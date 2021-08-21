@@ -111,6 +111,6 @@ extension WorkoutTreeView {
     }
 
     private static var line: some View {
-        Rectangle().fillColor(.accentGrayMain).width(1)
+        Rectangle().fillColor(.accentGrayMain).maxWidth(1)
     }
 }

@@ -10,11 +10,11 @@ import Foundation
 
 struct WorkoutForm {
     var title = ""
+    var notes = ""
     let startDate = Date()
     var efforts: [EffortData] = []
     var endDate: Date? = nil
-    var notes: String? = nil
-    var rate: WorkoutRate? = nil
+    var rate: WorkoutRate = .unknown
 }
 
 extension WorkoutForm {

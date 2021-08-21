@@ -16,7 +16,7 @@ final class BaseListVM: ObservableObject {
     var rows: [BaseListRowViewData] = []
     private unowned let parent: BaseListSupport
 
-    init(parent: SummaryVM) {
+    init(parent: BaseListSupport) {
         self.parent = parent
     }
 

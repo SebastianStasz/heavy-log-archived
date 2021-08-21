@@ -27,8 +27,8 @@ extension View {
     }
 
     /// Sets a fixed size for a view’s width.
-    func width(_ width: CGFloat) -> some View {
-        self.frame(width: width)
+    func maxWidth(_ width: CGFloat = .infinity) -> some View {
+        self.frame(maxWidth: width)
     }
 
     /// Sets a fixed size for a view’s height.

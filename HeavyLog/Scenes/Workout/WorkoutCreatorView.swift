@@ -19,6 +19,7 @@ struct WorkoutCreatorView: View {
     var body: some View {
         TabView(selection: $viewModel.selectedTab) {
             ForEach(viewModel.availableTabs) { $0 }
+                .background(Color.backgroundMain)
         }
         .toolbar { toolbarContent }
         .environmentObject(viewModel)

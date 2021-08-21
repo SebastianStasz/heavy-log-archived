@@ -51,7 +51,7 @@ extension WorkoutCreator: View {
             case .workoutTree:
                 WorkoutTreeView()
             case .workoutInfo:
-                Text("Info")
+                WorkoutInfoView()
             }
         }
         .padding(vertical: .spacingHuge, horizontal: .spacingMedium)

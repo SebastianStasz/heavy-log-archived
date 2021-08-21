@@ -12,10 +12,21 @@ final class WorkoutCreatorVM: ObservableObject {
 
     @Published var selectedTab: WorkoutCreator = .workoutTree
     @Published var workout = WorkoutForm()
-
+    @Published var workoutInfoListVM: BaseListVM!
     @Published var workoutTreeData = WorkoutTreeData.sample
 
+    init() {
+        workoutInfoListVM = .init(parent: self)
+    }
+
     var availableTabs: [Tab] { Tab.allCases }
+}
+
+extension WorkoutCreatorVM: BaseListSupport {
+
+    func open(_ row: BaseListRowViewData) {
+        print("Open: \(row)")
+    }
 }
 
 // MARK: - Navigator
