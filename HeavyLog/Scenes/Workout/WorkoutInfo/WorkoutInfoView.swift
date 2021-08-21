@@ -12,23 +12,23 @@ struct WorkoutInfoView: View {
 
     @EnvironmentObject var viewModel: WorkoutCreatorVM
 
-    //    init() {
-    //        UITableView.appearance().backgroundColor = .green
-    //    }
-
     var body: some View {
         VStack(spacing: .spacingHuge) {
             Form {
                 TextField("Workout title", text: $viewModel.workout.title)
-                TextField("Notes", text: $viewModel.workout.notes)
+                TextEditor(text: $viewModel.workout.notes)
+
+                Section {
+                    RatePicker(title: "Workout rating", selectedValue: $viewModel.workout.rate)
+                }
+                .plainStyle
+
+                Section {
+                    BaseListView(title: "Info", viewModel: viewModel.workoutInfoListVM)
+                }
+                .plainStyle
             }
-            .padding(.top, -82)
-            .padding(.horizontal, -20)
-            .frame(height: 88)
-
-            RatePicker(title: "Workout rating", selectedValue: $viewModel.workout.rate)
-
-            BaseListView(title: "Info", viewModel: viewModel.workoutInfoListVM)
+            .padding(vertical: .spacingHuge, horizontal: -20)
         }
     }
 }

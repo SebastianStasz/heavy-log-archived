@@ -11,7 +11,9 @@ import SwiftUI
 struct ExercisesView: View {
 
     @Environment(\.managedObjectContext) private var context
-    @FetchRequest(fetchRequest: ExerciseEntity.createFetchRequest()) private var exercises: FetchedResults<ExerciseEntity>
+    
+    @FetchRequest(fetchRequest: ExerciseEntity.createFetchRequest()
+    ) private var exercises: FetchedResults<ExerciseEntity>
 
     var body: some View {
         ScrollView {

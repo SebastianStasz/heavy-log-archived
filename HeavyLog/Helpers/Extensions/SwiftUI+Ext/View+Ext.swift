@@ -17,7 +17,7 @@ extension View {
     }
 
     /// Positions this view within an invisible infinite frame.
-    func infiniteFrame() -> some View {
+    var infiniteFrame: some View {
         self.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -48,7 +48,7 @@ extension View {
     }
 
     /// A view that pads this view inside the specified edge insets with a system-calculated amount of padding.
-    func padding(vertical: CGFloat, horizontal: CGFloat = 0) -> some View {
+    func padding(vertical: CGFloat = 0, horizontal: CGFloat) -> some View {
         self
             .padding(.vertical, horizontal)
             .padding(.horizontal, horizontal)
