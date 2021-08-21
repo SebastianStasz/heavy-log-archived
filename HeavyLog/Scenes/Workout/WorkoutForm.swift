@@ -16,3 +16,16 @@ struct WorkoutForm {
     var notes: String? = nil
     var rate: WorkoutRate? = nil
 }
+
+extension WorkoutForm {
+    static func sample(efforts: [EffortData]) -> WorkoutForm {
+        var form = WorkoutForm()
+        form.title = "FBW A"
+        form.notes = "Sample workout notes."
+        form.rate = .good
+        form.efforts = efforts
+        return form
+    }
+}
+
+

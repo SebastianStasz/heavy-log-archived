@@ -13,6 +13,8 @@ final class WorkoutCreatorVM: ObservableObject {
     @Published var selectedTab: WorkoutCreator = .workoutTree
     @Published var workout = WorkoutForm()
 
+    @Published var workoutTreeData = WorkoutTreeData.sample
+
     var availableTabs: [Tab] { Tab.allCases }
 }
 
