@@ -1,6 +1,6 @@
 //
-//  File.swift
-//  
+//  BodyParameter.swift
+//  HeavyLogCoreData
 //
 //  Created by Sebastian Staszczyk on 21/08/2021.
 //
