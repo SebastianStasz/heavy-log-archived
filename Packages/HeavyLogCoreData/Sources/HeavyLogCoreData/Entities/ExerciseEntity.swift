@@ -67,7 +67,7 @@ import Shared
 
 public extension ExerciseEntity {
 
-    @discardableResult static func create(in context: NSManagedObjectContext, exerciseData: Exercise, isUserExercise: Bool = true) -> ExerciseEntity? {
+    @discardableResult static func create(in context: NSManagedObjectContext, exerciseData: ExerciseData, isUserExercise: Bool = true) -> ExerciseEntity? {
         guard checkIsIdCorrect(exerciseData.id, isUserExercise: isUserExercise) else { return nil }
         let exercise = ExerciseEntity(in: context)
         exercise.id_ = exerciseData.id
@@ -76,7 +76,7 @@ public extension ExerciseEntity {
         return exercise
     }
 
-    @discardableResult func modify(exerciseData: Exercise) -> ExerciseEntity {
+    @discardableResult func modify(exerciseData: ExerciseData) -> ExerciseEntity {
         guard self.isEditable else {
             assertionFailure("Editing \"not editable\" exercise entity is not allowed.")
             return self
@@ -84,7 +84,7 @@ public extension ExerciseEntity {
         return fillInData(data: exerciseData)
     }
 
-    @discardableResult private func fillInData(data: Exercise) -> ExerciseEntity {
+    @discardableResult private func fillInData(data: ExerciseData) -> ExerciseEntity {
         name_ = data.name
         shortName_ = data.shortName
         information_ = data.information
@@ -121,7 +121,7 @@ public extension ExerciseEntity {
         additionalBodyParts_ = keys
     }
 
-    static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[Exercise], AppError> {
+    static private func getExercisesData(using apiService: APIProvider) -> AnyPublisher<[ExerciseData], AppError> {
         guard let url = Bundle.module.url(forResource: "exercisesData", withExtension: "json") else {
             fatalError("Failed to load exercisesData.json file.")
         }

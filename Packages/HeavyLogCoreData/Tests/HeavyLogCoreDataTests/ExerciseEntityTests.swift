@@ -24,7 +24,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
     func test_create_exercise_entity() throws {
         // Define exercise data.
-        let exerciseData = Exercise.sampleBenchPress
+        let exerciseData = ExerciseData.sampleBenchPress
 
         // Before creating, there should not be any exercises.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
@@ -44,7 +44,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
     func test_edit_exercise_entity() throws {
         // Define initial exercise data.
-        let exerciseData = Exercise.sampleBenchPress
+        let exerciseData = ExerciseData.sampleBenchPress
 
         // Create exercise entity using defined data.
         let exerciseEntity = try createExerciseEntity(exerciseData: exerciseData)
@@ -61,7 +61,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
     func test_delete_exercise_entity() throws {
         // Define exercise data.
-        let exerciseData = Exercise.sampleClassicDeadlift
+        let exerciseData = ExerciseData.sampleClassicDeadlift
 
         // Create exercise entity.
         let exerciseEntity = try createExerciseEntity(exerciseData: exerciseData)
@@ -109,7 +109,7 @@ extension ExerciseEntityTests {
         sleep(1)
     }
 
-    private func verifyExerciseEntityData(_ exercise: ExerciseEntity, exerciseData data: Exercise, id: Int? = nil) throws {
+    private func verifyExerciseEntityData(_ exercise: ExerciseEntity, exerciseData data: ExerciseData, id: Int? = nil) throws {
         XCTAssertEqual(exercise.type, data.type)
         XCTAssertEqual(exercise.name, data.name)
         XCTAssertEqual(exercise.shortName, data.shortName)

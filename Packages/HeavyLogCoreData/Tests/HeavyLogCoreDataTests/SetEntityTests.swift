@@ -47,7 +47,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
         let setEntity = try createSetEntity(in: effortEntity, setData: .sample1)
 
         // Define modified set data.
-        let modifiedSetData = WorkoutSet.sample2
+        let modifiedSetData = SetData.sample2
 
         // Modify set entity using sample2 data.
         setEntity.modify(setData: modifiedSetData)
@@ -87,7 +87,7 @@ class SetEntityTests: XCTestCase, CoreDataSteps {
 
 extension SetEntityTests {
 
-    private func verifySetEntityData(set: SetEntity, effort: EffortEntity, setData: WorkoutSet) throws {
+    private func verifySetEntityData(set: SetEntity, effort: EffortEntity, setData: SetData) throws {
         XCTAssertEqual(set.effort, effort)
         XCTAssertEqual(set.reps, setData.reps)
         XCTAssertEqual(set.weight, setData.weight)

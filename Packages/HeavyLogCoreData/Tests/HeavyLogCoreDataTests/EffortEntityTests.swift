@@ -74,8 +74,8 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
         let exercises = try fetchRequestShouldReturnElements(2, for: ExerciseEntity.self)
 
         // Get access to exercises.
-        let initialExercise = try XCTUnwrap(exercises.first(where: { $0.name == Exercise.sampleBenchPress.name }))
-        let modifiedExercise = try XCTUnwrap(exercises.first(where: { $0.name == Exercise.sampleClassicDeadlift.name }))
+        let initialExercise = try XCTUnwrap(exercises.first(where: { $0.name == ExerciseData.sampleBenchPress.name }))
+        let modifiedExercise = try XCTUnwrap(exercises.first(where: { $0.name == ExerciseData.sampleClassicDeadlift.name }))
 
         // Verify that data has been changed.
         try verifyEffortEntityData(effortEntity, data: modifiedEffortData, workout: workoutEntity, setEntities: setEntities)
@@ -127,7 +127,7 @@ class EffortEntityTests: XCTestCase, CoreDataSteps {
 
 extension EffortEntityTests {
 
-    private func verifyEffortEntityData(_ effort: EffortEntity, data: Effort, workout: WorkoutEntity, setEntities: [SetEntity]) throws {
+    private func verifyEffortEntityData(_ effort: EffortEntity, data: EffortData, workout: WorkoutEntity, setEntities: [SetEntity]) throws {
         XCTAssertEqual(effort.workout, workout)
         XCTAssertEqual(effort.exercise, data.exercise)
         XCTAssertEqual(effort.exerciseId, data.exerciseId)

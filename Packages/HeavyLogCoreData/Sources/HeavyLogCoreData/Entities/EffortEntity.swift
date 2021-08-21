@@ -25,7 +25,7 @@ import Foundation
 
 extension EffortEntity {
 
-    @discardableResult static func create(in workoutEntity: WorkoutEntity, effortData: Effort) -> EffortEntity? {
+    @discardableResult static func create(in workoutEntity: WorkoutEntity, effortData: EffortData) -> EffortEntity? {
         guard let context = workoutEntity.getContext() else { return nil }
         let effort = EffortEntity(in: context)
         effort.workout = workoutEntity
@@ -33,7 +33,7 @@ extension EffortEntity {
         return effort
     }
 
-    @discardableResult func modify(effort: Effort) -> EffortEntity {
+    @discardableResult func modify(effort: EffortData) -> EffortEntity {
         exercise = effort.exercise
         exerciseId = effort.exerciseId
         deleteAllSets()
@@ -43,7 +43,7 @@ extension EffortEntity {
 
     // MARK: - Helpers
 
-    private func addSets(_ sets: [WorkoutSet]) {
+    private func addSets(_ sets: [SetData]) {
         for set in sets { addSet(set) }
     }
 
@@ -54,7 +54,7 @@ extension EffortEntity {
         }
     }
 
-    private func addSet(_ workoutSet: WorkoutSet) {
+    private func addSet(_ workoutSet: SetData) {
         SetEntity.create(in: self, setData: workoutSet)
     }
 }

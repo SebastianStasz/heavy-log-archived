@@ -33,14 +33,14 @@ public class WorkoutEntity: NSManagedObject {
 
 extension WorkoutEntity {
 
-    @discardableResult static func create(in context: NSManagedObjectContext, workoutData: Workout) -> WorkoutEntity {
+    @discardableResult static func create(in context: NSManagedObjectContext, workoutData: WorkoutData) -> WorkoutEntity {
         let workout = WorkoutEntity(in: context)
         workout.startDate = workoutData.startDate
         workout.modify(workoutData: workoutData)
         return workout
     }
 
-    @discardableResult func modify(workoutData workout: Workout) -> WorkoutEntity {
+    @discardableResult func modify(workoutData workout: WorkoutData) -> WorkoutEntity {
         title = workout.title
         notes = workout.notes
         endDate = workout.endDate
@@ -52,7 +52,7 @@ extension WorkoutEntity {
 
     // MARK: - Helpers
 
-    private func addEfforts(_ efforts: [Effort]) {
+    private func addEfforts(_ efforts: [EffortData]) {
         for effort in efforts { addEffort(effort) }
     }
 
@@ -63,7 +63,7 @@ extension WorkoutEntity {
         }
     }
 
-    private func addEffort(_ effort: Effort) {
+    private func addEffort(_ effort: EffortData) {
         EffortEntity.create(in: self, effortData: effort)
     }
 }
