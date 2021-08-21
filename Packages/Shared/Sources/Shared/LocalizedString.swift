@@ -51,6 +51,13 @@ public enum LocalizedString: String {
     case common_bodyPart_forearms
     case common_bodyPart_neck
 
+    case common_bodyParameter_height
+    case common_bodyParameter_weight
+    case common_bodyParameter_waistline
+    case common_bodyParameter_hips
+    case common_bodyParameter_thigh
+    case common_bodyParameter_calf
+
     case workoutCreator_tab_workout
     case workoutCreator_tab_info
 

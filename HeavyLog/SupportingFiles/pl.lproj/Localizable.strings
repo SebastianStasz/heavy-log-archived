@@ -49,5 +49,12 @@
 "common_bodyPart_forearms" = "Przedramiona";
 "common_bodyPart_neck" = "Szyja";
 
+"common_bodyParameter_height" = "Wzrost";
+"common_bodyParameter_weight" = "Waga";
+"common_bodyParameter_waistline" = "Talia";
+"common_bodyParameter_hips" = "Biodra";
+"common_bodyParameter_thigh" = "Udo";
+"common_bodyParameter_calf" = "Łydka";
+
 "workoutCreator_tab_workout" = "Trening";
 "workoutCreator_tab_info" = "Info";

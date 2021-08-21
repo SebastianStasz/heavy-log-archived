@@ -1,6 +1,6 @@
 //
 //  Reps.swift
-//  HeavyLogCoreData
+//  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 24/07/2021.
 //

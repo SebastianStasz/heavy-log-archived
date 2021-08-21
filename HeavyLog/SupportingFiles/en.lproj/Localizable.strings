@@ -49,5 +49,12 @@
 "common_bodyPart_forearms" = "Forearms";
 "common_bodyPart_neck" = "Neck";
 
+"common_bodyParameter_height" = "Height";
+"common_bodyParameter_weight" = "Weight";
+"common_bodyParameter_waistline" = "Waistline";
+"common_bodyParameter_hips" = "Hips";
+"common_bodyParameter_thigh" = "Thigh";
+"common_bodyParameter_calf" = "Calf";
+
 "workoutCreator_tab_workout" = "Workout";
 "workoutCreator_tab_info" = "Info";
