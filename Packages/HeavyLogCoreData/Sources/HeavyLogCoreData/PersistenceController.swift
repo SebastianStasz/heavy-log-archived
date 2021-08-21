@@ -32,7 +32,7 @@ public final class PersistenceController {
 //        saveContextPublisher()
     }
 
-    private func save() {
+    func save() {
         do { try context.save() }
         catch let error { fatalError("Saving context error: \(error)") }
     }
@@ -58,16 +58,5 @@ public final class PersistenceController {
             fatalError("Failed to initialize managed object model from path: \(modelURL)")
         }
         return model
-    }
-}
-
-// MARK: -- Preview
-
-public extension PersistenceController {
-
-    static var preview: PersistenceController {
-        let persistenceController = PersistenceController(inMemory: true)
-        persistenceController.save()
-        return persistenceController
     }
 }

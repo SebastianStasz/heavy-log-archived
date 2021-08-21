@@ -10,11 +10,11 @@ import XCTest
 
 class SetEntityTests: XCTestCase, CoreDataSteps {
 
-    var context = PersistenceController.preview.context
+    var context = PersistenceController.previewEmpty.context
 
     override func setUpWithError() throws {
         context.reset()
-        context = PersistenceController.preview.context
+        context = PersistenceController.previewEmpty.context
     }
 
     // MARK: - Tests

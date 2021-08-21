@@ -12,12 +12,12 @@ import XCTest
 class ExerciseEntityTests: XCTestCase, CoreDataSteps {
 
     private var cancellable: AnyCancellable?
-    var context = PersistenceController.preview.context
+    var context = PersistenceController.previewEmpty.context
 
     override func setUpWithError() throws {
         context.reset()
         cancellable = nil
-        context = PersistenceController.preview.context
+        context = PersistenceController.previewEmpty.context
     }
 
     // MARK: - Tests
