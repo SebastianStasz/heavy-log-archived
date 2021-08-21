@@ -69,7 +69,7 @@ final class AppVM: ObservableObject {
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
 
-    fileprivate let context = PersistenceController.preview.context
+    fileprivate let context = PersistenceController.previewEmpty.context
     private var cancellable: AnyCancellable?
 
     init() {

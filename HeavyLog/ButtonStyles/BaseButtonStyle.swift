@@ -12,5 +12,6 @@ struct BaseButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.body)
+            .foregroundColor(.blue)
     }
 }
