@@ -37,7 +37,24 @@ extension BodyParameterEntity {
         return self
     }
 
+    static func getLastValue(for parameter: BodyParameter, in context: NSManagedObjectContext) -> Double? {
+        let request: NSFetchRequest<BodyParameterEntity> = BodyParameterEntity.createFetchRequest(sortDescriptors: [Self.sortByDateNewest], predicate: parameter.predicate)
+        request.fetchLimit = 1
+        let result = try? context.fetch(request)
+        return result?.first?.value
+    }
+
     // MARK: - Helpers
+
+    static private var sortByDateNewest: NSSortDescriptor {
+        NSSortDescriptor(key: "date", ascending: false)
+    }
 }
 
 extension BodyParameterEntity: Identifiable {}
+
+extension BodyParameter {
+    fileprivate var predicate: NSPredicate {
+        NSPredicate(format: "parameter_ == %@", self.rawValue)
+    }
+}

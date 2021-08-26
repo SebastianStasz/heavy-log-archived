@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 21/08/2021.
 //
 
+import CoreData
 import Foundation
 import Shared
 
@@ -23,6 +24,16 @@ public enum BodyParameter: String {
         nameLocalized.key.localize()
     }
 
+    public static var possibleCases: [BodyParameter] {
+        BodyParameter.allCases.dropLast()
+    }
+
+    public func getLastValue(in context: NSManagedObjectContext) -> Double? {
+        BodyParameterEntity.getLastValue(for: self, in: context)
+    }
+}
+
+extension BodyParameter {
     private var nameLocalized: LocalizedString {
         switch self {
         case .height:
@@ -46,6 +57,10 @@ public enum BodyParameter: String {
         }
     }
 }
+
+// MARK: - Helpers
+
+extension BodyParameter: CaseIterable {}
 
 extension BodyParameter: UnknownValueSupport {
     public static var unknownCase: BodyParameter { .unknown }

@@ -72,13 +72,35 @@ class BodyParameterEntityTests: XCTestCase, CoreDataSteps {
         // Save context.
         try saveContext()
     }
+
+    func test_get_last_value() throws {
+        // There are 3 weight parameters added in order.
+        createWeightParamatersWithValues([70, 73, 75])
+
+        // Last value for weight parameter should equal 75.
+        try lastValueForWeightParameterShouldEqual(75)
+    }
+
+
+    func test_get_last_value_if_there_is_no_data() throws {
+        // There is not weight parameter data available.
+        // Last value for weight parameter should be nil.
+        try lastValueForWeightParameterShouldEqual(nil)
+    }
+
+    func test_get_last_value_for_each_parameter() throws {
+        // For each possible case, check if last value is being fetched properly.
+        for parameter in BodyParameter.possibleCases {
+            try checkIsLastValueFetchingProperly(for: parameter)
+        }
+    }
 }
 
 // MARK: - Steps
 
 extension BodyParameterEntityTests {
 
-    private func createBodyParameterEntity(data: BodyParameterData) -> BodyParameterEntity {
+    @discardableResult private func createBodyParameterEntity(data: BodyParameterData) -> BodyParameterEntity {
         BodyParameterEntity.create(in: context, bodyParameterData: data)
     }
 
@@ -92,5 +114,21 @@ extension BodyParameterEntityTests {
         XCTAssertEqual(entity.parameter, initialData.parameter)
         XCTAssertEqual(entity.value, modifiedData.value)
         XCTAssertEqual(entity.date, modifiedData.date)
+    }
+
+    private func checkIsLastValueFetchingProperly(for parameter: BodyParameter) throws {
+        createBodyParameterEntity(data: .init(parameter: parameter, value: 1))
+        let lastValue = parameter.getLastValue(in: context)
+        XCTAssertEqual(lastValue, 1)
+    }
+
+    private func createWeightParamatersWithValues(_ values: [Double]) {
+        for value in values {
+            createBodyParameterEntity(data: .init(parameter: .weight, value: value))
+        }
+    }
+
+    private func lastValueForWeightParameterShouldEqual(_ value: Double?) throws {
+        XCTAssertEqual(BodyParameter.weight.getLastValue(in: context), value)
     }
 }
