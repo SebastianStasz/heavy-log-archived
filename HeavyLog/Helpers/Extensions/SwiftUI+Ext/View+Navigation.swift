@@ -11,8 +11,7 @@ import SwiftUI
 extension View {
 
     func onNavigation(_ action: @escaping () -> Void) -> some View {
-        self.contentShape(Rectangle())
-            .onTapGesture { action() }
+        Button(action: action) { self }
     }
 
     func navigation<Item, Destination: View>(item: Binding<Item?>, @ViewBuilder destination: (Item) -> Destination) -> some View {

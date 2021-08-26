@@ -31,24 +31,8 @@ struct BaseListView: View {
                     }
                 }
                 .padding(.top, .spacingMedium)
-
-//                headerSpacingGradient
             }
         }
-    }
-
-    private var headerSpacingGradient: some View {
-        Rectangle()
-            .fill(linearGradient)
-            .frame(height: .spacingMedium)
-    }
-
-    private var linearGradient: LinearGradient {
-        LinearGradient(gradient: gradient, startPoint: .top, endPoint: .bottom)
-    }
-
-    private var gradient: Gradient {
-        Gradient(colors: [.backgroundMain, .backgroundMain, .backgroundMain.opacity(0.1)])
     }
 }
 

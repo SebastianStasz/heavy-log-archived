@@ -21,10 +21,15 @@ final class BaseListVM: ObservableObject {
     }
 
     func open(_ row: BaseListRowViewData) {
+        guard let parent = getParent() else { return }
+        parent.open(row)
+    }
+
+    private func getParent() -> BaseListSupport? {
         guard let parent = parent else {
             assertionFailure("Clickable row used without specifying parent view model.")
-            return
+            return nil
         }
-        parent.open(row)
+        return parent
     }
 }
