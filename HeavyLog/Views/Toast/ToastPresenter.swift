@@ -15,7 +15,7 @@ struct ToastPresenter: ViewModifier {
     func body(content: Content) -> some View {
         ZStack(alignment: .top) {
 
-            content.infiniteFrame
+            content.infiniteFrame()
 
             if let toast = presenter.toast, presenter.isToastPresented {
                 Toast1View(toast: toast, dismiss: toast.isDismissable ? dismiss : nil)

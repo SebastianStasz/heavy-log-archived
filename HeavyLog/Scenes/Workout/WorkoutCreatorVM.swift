@@ -5,27 +5,37 @@
 //  Created by Sebastian Staszczyk on 19/08/2021.
 //
 
+import Combine
 import Foundation
 
 final class WorkoutCreatorVM: ObservableObject {
     typealias Tab = WorkoutCreator
 
+    var availableTabs: [Tab] { Tab.allCases }
+
+    private var cancellables: Set<AnyCancellable> = []
+
     @Published var selectedTab: WorkoutCreator = .workoutTree
     @Published var workout = WorkoutForm()
-    @Published var workoutInfoListVM: BaseListVM!
+    @Published var workoutInfoListVM = BaseListVM()
     @Published var workoutTreeData = WorkoutTreeData.sample
 
     init() {
-        workoutInfoListVM = .init(parent: self)
+        catchNestedModelsChanges()
+
+        $workout
+            .sink { [weak self] form in
+                self?.workoutInfoListVM.rows = form.info
+            }
+            .store(in: &cancellables)
     }
 
-    var availableTabs: [Tab] { Tab.allCases }
-}
-
-extension WorkoutCreatorVM: BaseListSupport {
-
-    func open(_ row: BaseListRowViewData) {
-        print("Open: \(row)")
+    private func catchNestedModelsChanges() {
+        workoutInfoListVM.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
     }
 }
 

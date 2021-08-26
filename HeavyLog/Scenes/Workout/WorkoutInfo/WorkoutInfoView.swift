@@ -21,14 +21,15 @@ struct WorkoutInfoView: View {
                 Section {
                     RatePicker(title: "Workout rating", selectedValue: $viewModel.workout.rate)
                 }
-                .plainStyle
+                .plainStyle()
 
                 Section {
                     BaseListView(title: "Info", viewModel: viewModel.workoutInfoListVM)
                 }
-                .plainStyle
+                .plainStyle()
             }
-            .padding(vertical: .spacingHuge, horizontal: -20)
+            .padding(.horizontal, -20)
+            .padding(.bottom, -110)
         }
     }
 }
@@ -42,7 +43,8 @@ struct WorkoutInfoView_Previews: PreviewProvider {
 
         WorkoutInfoView()
             .environmentObject(viewModel)
-            .padding(vertical: .spacingHuge, horizontal: .spacingMedium)
+            .padding(.horizontal, .spacingMedium)
             .backgroundIgnoringSafeArea(Color.backgroundMain)
+            .embedInNavigationView(title: "Workout Info", displayMode: .inline)
     }
 }

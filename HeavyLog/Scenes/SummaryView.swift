@@ -23,6 +23,7 @@ struct SummaryView: View {
                 .padding(.horizontal, .spacingMedium)
         }
         .padding(.top, .spacingMedium)
+        .embedInScrollView()
         .background(Color.backgroundMain.edgesIgnoringSafeArea(.all))
     }
 }
@@ -33,5 +34,6 @@ struct SummaryView: View {
 struct SummaryView_Previews: PreviewProvider {
     static var previews: some View {
         SummaryView()
+            .embedInNavigationView(title: "Summary", displayMode: .automatic)
     }
 }

@@ -17,7 +17,7 @@ extension View {
     }
 
     /// Positions this view within an invisible infinite frame.
-    var infiniteFrame: some View {
+    func infiniteFrame() -> some View {
         self.frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -50,7 +50,7 @@ extension View {
     /// A view that pads this view inside the specified edge insets with a system-calculated amount of padding.
     func padding(vertical: CGFloat = 0, horizontal: CGFloat) -> some View {
         self
-            .padding(.vertical, horizontal)
+            .padding(.vertical, vertical)
             .padding(.horizontal, horizontal)
     }
 
@@ -60,6 +60,6 @@ extension View {
     }
 
     func embedInScrollView(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true) -> some View {
-        ScrollView(axes, showsIndicators: showsIndicators) { self }
+        ScrollView(axes, showsIndicators: showsIndicators) { self }.fixFlickering()
     }
 }

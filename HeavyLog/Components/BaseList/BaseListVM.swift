@@ -13,14 +13,18 @@ protocol BaseListSupport: AnyObject {
 
 final class BaseListVM: ObservableObject {
 
-    var rows: [BaseListRowViewData] = []
-    private unowned let parent: BaseListSupport
+    @Published var rows: [BaseListRowViewData] = []
+    private unowned let parent: BaseListSupport?
 
-    init(parent: BaseListSupport) {
+    init(parent: BaseListSupport? = nil) {
         self.parent = parent
     }
 
     func open(_ row: BaseListRowViewData) {
+        guard let parent = parent else {
+            assertionFailure("Clickable row used without specifying parent view model.")
+            return
+        }
         parent.open(row)
     }
 }

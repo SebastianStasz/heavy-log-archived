@@ -16,14 +16,13 @@ struct ExercisesView: View {
     ) private var exercises: FetchedResults<ExerciseEntity>
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: .spacingMedium) {
-                ForEach(exercises) { exercise in
-                    ExerciseTileView(viewData: .init(exercise))
-                }
+        LazyVStack(spacing: .spacingMedium) {
+            ForEach(exercises) { exercise in
+                ExerciseTileView(viewData: .init(exercise))
             }
         }
         .padding(.horizontal, .spacingMedium)
+        .embedInScrollView()
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }
 }

@@ -15,6 +15,15 @@ struct WorkoutForm {
     var efforts: [EffortData] = []
     var endDate: Date? = nil
     var rate: WorkoutRate = .unknown
+
+    var currentDate = Date()
+
+    var info: [BaseListRowViewData] {
+        [BaseListRowViewData(title: "Date", value: startDate.string(format: .medium)),
+         BaseListRowViewData(title: "Started", value: startDate.getTime()),
+         BaseListRowViewData(title: "Duration", value: Date(timeIntervalSinceNow: startDate.timeIntervalSinceReferenceDate).getTime()),
+        ]
+    }
 }
 
 extension WorkoutForm {

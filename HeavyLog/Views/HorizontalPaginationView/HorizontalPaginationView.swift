@@ -62,7 +62,7 @@ struct HorizontalPaginationView_Previews: PreviewProvider {
             }
             .padding(.top, 16)
             .navigationTitle("Horizontal Pagination")
-            .infiniteFrame
+            .infiniteFrame()
             .backgroundIgnoringSafeArea(Color(.systemGroupedBackground))
         }
     }

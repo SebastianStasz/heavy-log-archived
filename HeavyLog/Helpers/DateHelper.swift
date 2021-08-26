@@ -13,23 +13,25 @@ class DateHelper {
     private let cachedDateFormattersQueue = DispatchQueue(label: "com.boles.date.formatter.queue")
     private var cachedDateFormatters: [String: DateFormatter] = [:]
 
-    func string(from date: Date, format: DateFormatter.Style, withTime time: Bool) -> String {
+    fileprivate func string(from date: Date, format: DateFormatter.Style?, withTime time: Bool) -> String {
         cachedDateFormatter(withFormat: format, time: time).string(from: date)
     }
 
-    func string(from date: Date, format: String) -> String {
+    fileprivate func string(from date: Date, format: String) -> String {
         cachedDateFormatter(withFormat: format).string(from: date)
     }
 
-    private func cachedDateFormatter(withFormat format: DateFormatter.Style, time: Bool) -> DateFormatter {
+    private func cachedDateFormatter(withFormat format: DateFormatter.Style?, time: Bool) -> DateFormatter {
         cachedDateFormattersQueue.sync {
-            let key = "\(format.rawValue) \(time ? 100 : 0)"
+            let key = "\(format?.rawValue ?? 1000) \(time ? 100 : 0)"
 
             if let cachedFormat = cachedDateFormatters[key] { return cachedFormat }
 
             let dateFormatter = DateFormatter()
             dateFormatter.locale = .current
-            dateFormatter.dateStyle = format
+            if let format = format {
+                dateFormatter.dateStyle = format
+            }
             if time { dateFormatter.timeStyle = .short }
 
             cachedDateFormatters[key] = dateFormatter
@@ -61,6 +63,10 @@ extension Date {
 
     func string(format: String) -> String {
         DateHelper.shared.string(from: self, format: format)
+    }
+
+    func getTime() -> String {
+        DateHelper.shared.string(from: self, format: nil, withTime: true)
     }
 }
 

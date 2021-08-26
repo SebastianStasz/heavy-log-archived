@@ -9,12 +9,12 @@ import SwiftUI
 
 struct BaseListRowViewData {
     let id = UUID()
-    let title: LocalizedStringKey
-    let value: LocalizedStringKey
+    let title: String
+    let value: String
     let image: Image?
     let isClicable: Bool
 
-    init(title: LocalizedStringKey, value: LocalizedStringKey, image: Image? = nil, isClicable: Bool = false) {
+    init(title: String, value: String, image: Image? = nil, isClicable: Bool = false) {
         self.title = title
         self.value = value
         self.image = image
@@ -28,7 +28,7 @@ extension BaseListRowViewData: Identifiable {}
 
 extension BaseListRowViewData {
 
-    init(title: LocalizedStringKey, value: LocalizedStringKey, sfSymbol: String) {
+    init(title: String, value: String, sfSymbol: String) {
         self.init(title: title, value: value, image: Image(systemName: sfSymbol))
     }
 }
