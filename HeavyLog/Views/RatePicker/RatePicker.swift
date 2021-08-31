@@ -38,7 +38,7 @@ struct RatePicker<T: RatePickerSupport>: View {
     var rateIndicator: some View {
         ZStack(alignment: .leading) {
             GeometryReader { geo in
-                ValueIndicator(color: .grayMedium, width: .infinity)
+                ValueIndicator(color: .grayLightPrimary, width: .infinity)
                 ValueIndicator(color: selectedValue.color, width: geo.size.width * multiplier)
             }
         }

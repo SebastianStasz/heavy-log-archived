@@ -27,7 +27,7 @@ struct BaseListView: View {
                         BaseListRowView(row: row)
                             .onNavigation { viewModel.open(row) }
                             .allowsHitTesting(row.isClicable)
-                        DividerMain(color: .grayMedium)
+                        DividerMain(color: .grayLightPrimary)
                     }
                 }
                 .padding(.top, .spacingMedium)
