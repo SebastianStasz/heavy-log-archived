@@ -62,6 +62,10 @@ extension BodyParameter {
 
 extension BodyParameter: CaseIterable {}
 
+extension BodyParameter: Identifiable {
+    public var id: String { rawValue }
+}
+
 extension BodyParameter: UnknownValueSupport {
     public static var unknownCase: BodyParameter { .unknown }
 }

@@ -28,6 +28,8 @@ struct HeavyLogApp: App {
 final class AppController {
     static let shared = AppController()
 
+    let context = AppVM.shared.context
+
     private unowned let app: AppVM
 
     init(appVM: AppVM = AppVM.shared) {
@@ -69,7 +71,7 @@ final class AppVM: ObservableObject {
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
 
-    fileprivate let context = PersistenceController.previewEmpty.context
+    let context = PersistenceController.previewEmpty.context
     private var cancellable: AnyCancellable?
 
     init() {

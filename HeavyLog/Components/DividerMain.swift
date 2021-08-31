@@ -13,7 +13,7 @@ struct DividerMain: View {
     private let paddingTop: CGFloat
     private let paddingBottom: CGFloat
 
-    init(color: Color = .grayLight, paddingTop: CGFloat = 0, paddingBottom: CGFloat = 0) {
+    init(color: Color = .grayLightSecondary, paddingTop: CGFloat = 0, paddingBottom: CGFloat = 0) {
         self.color = color
         self.paddingTop = paddingTop
         self.paddingBottom = paddingBottom
