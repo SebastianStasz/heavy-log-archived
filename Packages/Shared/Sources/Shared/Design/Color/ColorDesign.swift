@@ -32,6 +32,7 @@ enum ColorDesign {
         case gray_dark_secondary
         case gray_light_primary
         case gray_light_secondary
+        case gray_medium
     }
 }
 
@@ -40,5 +41,5 @@ protocol ColorAsset {
 }
 
 extension ColorAsset {
-    var color: Color { Color(self.rawValue) }
+    var color: Color { Color(self.rawValue, bundle: .module) }
 }

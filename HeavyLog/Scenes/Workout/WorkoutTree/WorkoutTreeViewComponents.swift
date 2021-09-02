@@ -103,7 +103,7 @@ extension WorkoutTreeView {
     // MARK: - Helpers
 
     static var circle: some View {
-        Circle().fillColor(.accentGrayMain).size(10)
+        Circle().fillColor(.grayMedium).size(10)
     }
 
     static func spacingLine(_ height: CGFloat? = nil) -> some View {
@@ -111,6 +111,6 @@ extension WorkoutTreeView {
     }
 
     private static var line: some View {
-        Rectangle().fillColor(.accentGrayMain).maxWidth(1)
+        Rectangle().fillColor(.grayMedium).maxWidth(1)
     }
 }

@@ -12,8 +12,7 @@ struct TabBarActionButtonStyle: ButtonStyle {
 
     let isEnabled: Bool
 
-    static private let colorAccentLight = AppColor.accentRedLight.color
-    static private let linearGradient = Gradient(colors: [.white, .white, Self.colorAccentLight])
+    static private let linearGradient = Gradient(colors: [.white, .white, .accentRedLight])
     static private let actionBtnGradient = LinearGradient(gradient: Self.linearGradient, startPoint: .top, endPoint: .bottom)
 
     func makeBody(configuration: Configuration) -> some View {
@@ -23,7 +22,7 @@ struct TabBarActionButtonStyle: ButtonStyle {
                 .scaleEffect(1.3)
 
             Circle()
-                .foregroundColor(AppColor.accentMain.color)
+                .foregroundColor(.tabBarActionButton)
 
             Image(systemName: "plus")
                 .foregroundColor(.white)

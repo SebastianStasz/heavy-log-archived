@@ -16,7 +16,7 @@ struct TabBarButtonStyle: ButtonStyle {
         image
             .scaledToFit(height: 18)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(isSelected ? AppColor.accentMain.color : AppColor.accentGrayMain.color)
+            .foregroundColor(isSelected ? .tabBarButtonSelected : .tabBarButton)
             .scaleEffect(configuration.isPressed ? 1.05 : 1)
             .animation(.easeInOut(duration: 0.1))
             .contentShape(Circle())
