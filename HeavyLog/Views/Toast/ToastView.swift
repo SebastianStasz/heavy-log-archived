@@ -28,8 +28,7 @@ struct Toast1View: View {
                 Text(title)
                     .foregroundColor(color).bold()
 
-                Text(message)
-                    .foregroundColor(AppColor.textMainNormal.color)
+                Text(message).textBodyNormal
             }
             .font(.footnote)
             .lineLimit(1)
@@ -73,7 +72,7 @@ extension Toast1View {
 struct Toast1View_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            AppColor.backgroundMain.color.edgesIgnoringSafeArea(.all)
+            Color.backgroundMain.edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 10) {
                 Toast1View(toast: ToastModel.sampleFailure, dismiss: nil)

@@ -11,7 +11,6 @@ import SwiftUI
 struct TabBarView: View {
 
     @ObservedObject private var tabBar: TabBarVM
-    private let backgroundColor = AppColor.backgroundMain.color
 
     init(viewModel: TabBarVM) {
         tabBar = viewModel
@@ -40,13 +39,13 @@ struct TabBarView: View {
             .infiniteWidth(maxHeight: 49)
             .background(tabBarBackground)
         }
-        .background(backgroundColor)
+        .background(Color.backgroundMain)
     }
 
     // MARK: View Components
 
     private var tabBarBackground: some View {
-        AppColor.backgroundSecondary.color
+        Color.backgroundSecondary
             .cornerRadius(15)
             .edgesIgnoringSafeArea(.bottom)
             .shadow(color: .black.opacity(0.05), radius: 5)

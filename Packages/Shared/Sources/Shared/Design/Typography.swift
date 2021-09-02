@@ -9,40 +9,56 @@ import SwiftUI
 
 public extension Text {
 
+    // MARK: - Body
+
+    var textBodyBold: Text {
+        self.textBody
+            .fontWeight(.bold)
+            .foregroundColor(.basicPrimaryInverted)
+    }
+
     var textBodyMedium: Text {
         self.textBody
             .fontWeight(.medium)
-            .foregroundColor(.textMainBold)
+            .foregroundColor(.basicPrimaryInverted)
     }
 
     var textBodyNormal: Text {
         self.textBody
             .fontWeight(.regular)
-            .foregroundColor(.textMainNormal)
+            .foregroundColor(.grayDarkPrimary)
     }
 
     var textBodyThin: Text {
         self.textBody
             .fontWeight(.regular)
-            .foregroundColor(.textMainThin)
+            .foregroundColor(.grayDarkPrimary05)
+    }
+
+    // MARK: - Headline
+
+    var textHeadlineBigBold: Text {
+        self.font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(.basicPrimaryInverted)
     }
 
     var textHeadlineBig: Text {
         self.font(.title3)
             .fontWeight(.medium)
-            .foregroundColor(.textMainLight)
+            .foregroundColor(.grayDarkSecondary)
     }
 
     var textHeadlineSmall: Text {
         self.font(.subheadline.smallCaps())
             .fontWeight(.medium)
-            .foregroundColor(.textMainLight)
+            .foregroundColor(.grayDarkSecondary)
     }
 
     var textFootnoteMain: Text {
         self.font(.subheadline.smallCaps())
             .fontWeight(.light)
-            .foregroundColor(.textMainNormal)
+            .foregroundColor(.grayDarkPrimary)
     }
 
     var textOutstanding: Text {

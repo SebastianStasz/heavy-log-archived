@@ -15,10 +15,10 @@ struct TabBarPopupButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         ZStack {
             Circle()
-                .foregroundColor(.tabBarPopupBackground)
+                .foregroundColor(.accentRedLight)
 
             Image(systemName: image)
-                .foregroundColor(.tabBarPopupForeground)
+                .foregroundColor(.accentRed)
                 .font(.system(size: 19, weight: .medium))
         }
         .shadow(color: .black.opacity(0.02), radius: 5)

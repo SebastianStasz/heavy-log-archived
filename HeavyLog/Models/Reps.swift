@@ -27,22 +27,22 @@ public enum Reps {
     public var color: Color {
         switch self {
         case .one:
-            return AppColor.accentRed.color
+            return .accentRed
         case .three:
-            return AppColor.accentOrange.color
+            return .accentOrange
         case .five:
-            return AppColor.accentGreen.color
+            return .accentGreen
         }
     }
 
     public var colorLight: Color {
         switch self {
         case .one:
-            return AppColor.accentRedLight.color
+            return .accentRedLight
         case .three:
-            return AppColor.accentOrangeLight.color
+            return .accentOrangeLight
         case .five:
-            return AppColor.accentGreenLight.color
+            return .accentGreenLight
         }
     }
 }

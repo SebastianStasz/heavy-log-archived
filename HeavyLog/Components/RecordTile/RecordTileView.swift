@@ -41,7 +41,7 @@ struct RecordTileView: View {
         }
         .padding(.spacingMedium)
         .frame(height: 291)
-        .background(AppColor.backgroundSecondary.color)
+        .background(Color.backgroundSecondary)
         .cornerRadius(.cornerRadiusBase)
     }
 

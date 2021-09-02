@@ -22,7 +22,7 @@ struct TabBarActionButtonStyle: ButtonStyle {
                 .scaleEffect(1.3)
 
             Circle()
-                .foregroundColor(.tabBarActionButton)
+                .foregroundColor(.accentRed)
 
             Image(systemName: "plus")
                 .foregroundColor(.white)

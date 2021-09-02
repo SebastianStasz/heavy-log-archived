@@ -26,7 +26,7 @@ struct BaseListRowView: View {
             if row.isClicable {
                 Image(systemName: "chevron.forward")
                     .font(.callout.weight(.light))
-                    .foregroundColor(.tabBarButton)
+                    .foregroundColor(.grayMedium)
                     .padding(.leading, .spacingMedium)
             }
         }

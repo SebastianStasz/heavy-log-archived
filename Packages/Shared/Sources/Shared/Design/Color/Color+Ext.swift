@@ -9,91 +9,77 @@ import SwiftUI
 
 public extension Color {
 
+    private typealias Basic = ColorDesign.Basic
+    private typealias AccentColor = ColorDesign.AccentColor
+    private typealias AccentGray = ColorDesign.AccentGray
+
     // MARK: - Accent Color
 
     static var accentGreenLight: Color {
-        AppColor.accentGreenLight.color
+        AccentColor.accent_green_light.color
     }
 
     static var accentGreen: Color {
-        AppColor.accentGreen.color
+        AccentColor.accent_green.color
     }
 
     static var accentOrangeLight: Color {
-        AppColor.accentOrangeLight.color
+        AccentColor.accent_orange_light.color
     }
 
     static var accentOrange: Color {
-        AppColor.accentOrange.color
+        AccentColor.accent_orange.color
     }
 
     static var accentRedLight: Color {
-        AppColor.accentRedLight.color
+        AccentColor.accent_red_light.color
     }
 
     static var accentRed: Color {
-        AppColor.accentRed.color
+        AccentColor.accent_red.color
     }
 
-    // MARK: - Tab Bar
+    // MARK: Accent Gray
 
-    static var tabBarActionButton: Color {
-        AppColor.tabBarActionButton.color
+    static var grayDarkPrimary05: Color {
+        AccentGray.gray_dark_primary_05.color
     }
 
-    static var tabBarPopupForeground: Color {
-        AppColor.tabBarPopupForeground.color
+    static var grayDarkPrimary: Color {
+        AccentGray.gray_dark_primary.color
     }
 
-    static var tabBarPopupBackground: Color {
-        AppColor.tabBarPopupBackground.color
+    static var grayDarkSecondary: Color {
+        AccentGray.gray_dark_secondary.color
     }
 
-    static var tabBarButton: Color {
-        AppColor.tabBarButton.color
+    static var grayLightPrimary: Color {
+        AccentGray.gray_light_primary.color
     }
 
-    static var tabBarButtonSelected: Color {
-        AppColor.tabBarButtonSelected.color
+    static var grayLightSecondary: Color {
+        AccentGray.gray_light_secondary.color
+    }
+
+    static var grayMedium: Color {
+        AccentGray.gray_medium.color
     }
 
     // MARK: - Basic
 
-    static var backgroundMain: Color {
-        AppColor.backgroundMain.color
+    static var actionPrimary: Color {
+        Basic.action_primary.color
     }
 
-    static var backgroundSecondary: Color {
-        AppColor.backgroundSecondary.color
+    static var basicPrimaryInverted: Color {
+        Basic.basic_primary_inverted.color
     }
 
-    static var grayLightPrimary: Color {
-        AppColor.grayLightPrimary.color
+    static var basicPrimary: Color {
+        Basic.basic_primary.color
     }
 
-    static var grayLightSecondary: Color {
-        AppColor.grayLightSecondary.color
+    static var basicSecondary: Color {
+        Basic.basic_secondary.color
     }
-
-    static var grayMedium: Color {
-        AppColor.grayMedium.color
-    }
-
-    static var textMainBold: Color {
-        AppColor.textMainBold.color
-    }
-
-    static var textMainNormal: Color {
-        AppColor.textMainNormal.color
-    }
-
-    static var textMainLight: Color {
-        AppColor.textMainLight.color
-    }
-
-    static var textMainThin: Color {
-        AppColor.textMainThin.color
-    }
-
-
 }
