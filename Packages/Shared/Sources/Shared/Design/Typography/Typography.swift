@@ -9,6 +9,26 @@ import SwiftUI
 
 public extension Text {
 
+    // MARK: - Headlines
+
+    var textHeadlineBigBold: Text {
+        self.font(.title3)
+            .fontWeight(.bold)
+            .foregroundColor(.basicPrimaryInverted)
+    }
+
+    var textHeadlineBig: Text {
+        self.font(.title3)
+            .fontWeight(.medium)
+            .foregroundColor(.grayDarkSecondary)
+    }
+
+    var textHeadlineSmall: Text {
+        self.font(.subheadline.smallCaps())
+            .fontWeight(.medium)
+            .foregroundColor(.grayDarkSecondary)
+    }
+
     // MARK: - Body
 
     var textBodyBold: Text {
@@ -35,25 +55,7 @@ public extension Text {
             .foregroundColor(.grayDarkPrimary05)
     }
 
-    // MARK: - Headline
-
-    var textHeadlineBigBold: Text {
-        self.font(.title3)
-            .fontWeight(.bold)
-            .foregroundColor(.basicPrimaryInverted)
-    }
-
-    var textHeadlineBig: Text {
-        self.font(.title3)
-            .fontWeight(.medium)
-            .foregroundColor(.grayDarkSecondary)
-    }
-
-    var textHeadlineSmall: Text {
-        self.font(.subheadline.smallCaps())
-            .fontWeight(.medium)
-            .foregroundColor(.grayDarkSecondary)
-    }
+    // MARK: - Other
 
     var textFootnoteMain: Text {
         self.font(.subheadline.smallCaps())

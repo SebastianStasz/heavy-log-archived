@@ -1,6 +1,6 @@
 //
 //  AppColor.swift
-//  HeavyLog
+//  Shared
 //
 //  Created by Sebastian Staszczyk on 23/07/2021.
 //

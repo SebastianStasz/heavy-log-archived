@@ -1,11 +1,11 @@
 //
 //  LocalizedString.swift
-//  HeavyLog
+//  Shared
 //
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
 
-import SwiftUI
+import Foundation
 
 public enum LocalizedString: String {
     case common_close
@@ -60,12 +60,13 @@ public enum LocalizedString: String {
 
     case workoutCreator_tab_workout
     case workoutCreator_tab_info
+}
 
-    public var key: String {
-        self.rawValue
-    }
+public extension LocalizedString {
 
-    public var text: String {
-        self.rawValue.localize()
+    var key: String { rawValue }
+
+    var text: String {
+        rawValue.localize()
     }
 }
