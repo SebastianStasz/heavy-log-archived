@@ -23,19 +23,24 @@ struct WorkoutCreatorView: View {
         }
         .toolbar { toolbarContent }
         .environmentObject(viewModel)
+        .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
     }
 
     private var toolbarContent: some ToolbarContent {
         Group {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(.common_close, action: viewModel.navigate(to: .dismiss))
-            }
+            ToolbarItem.cancel { viewModel.navigate(to: .dismiss) }
 
             ToolbarItem(placement: .navigationBarLeading) {
                 Button(.common_delete, action: viewModel.navigate(to: .dismiss))
             }
         }
+    }
+
+    private var exerciseList: some View {
+        ExercisesView()
+            .toolbar { ToolbarItem.cancel { viewModel.navigate(to: .exerciseList) } }
+            .embedInNavigationView(title: "Choose an exercise", displayMode: .inline)
     }
 }
 

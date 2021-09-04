@@ -54,6 +54,7 @@ extension WorkoutTreeView {
                 Button(action: action) {
                     Image(systemName: "plus")
                 }
+                .buttonStyle(TextButtonStyle())
             }
         }
     }

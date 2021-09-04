@@ -13,5 +13,6 @@ struct TextButtonStyle: ButtonStyle {
         configuration.label
             .font(.body)
             .foregroundColor(.actionPrimary)
+            .opacity(configuration.isPressed ? 0.4 : 1)
     }
 }

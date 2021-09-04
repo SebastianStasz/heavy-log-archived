@@ -19,6 +19,7 @@ final class WorkoutCreatorVM: ObservableObject {
     @Published var workout = WorkoutForm()
     @Published var workoutInfoListVM = BaseListVM()
     @Published var workoutTreeData = WorkoutTreeData.sample
+    @Published var isExerciseListPresented = false
 
     init() {
         catchNestedModelsChanges()
@@ -46,6 +47,7 @@ extension WorkoutCreatorVM {
     enum Destination {
         case workoutTree
         case workoutInfo
+        case exerciseList
         case dismiss
     }
 
@@ -55,6 +57,8 @@ extension WorkoutCreatorVM {
             selectedTab = .workoutTree
         case .workoutInfo:
             selectedTab = .workoutInfo
+        case .exerciseList:
+            isExerciseListPresented.toggle()
         case .dismiss:
             AppController.shared.dismissSheet()
         }

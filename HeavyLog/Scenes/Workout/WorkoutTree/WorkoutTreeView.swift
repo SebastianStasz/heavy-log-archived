@@ -18,7 +18,7 @@ struct WorkoutTreeView: View {
 
             ForEach(viewModel.workoutTreeData.efforts, content: EfforSection.init)
 
-            ButtonRow("Add exercise", action: {})
+            ButtonRow("Add exercise", action: { viewModel.navigate(to: .exerciseList) })
             Components.spacingLine(20)
             ButtonRow("Finish workout", action: {})
 

@@ -12,6 +12,10 @@ struct WorkoutInfoView: View {
 
     @EnvironmentObject var viewModel: WorkoutCreatorVM
 
+    init() {
+        UITableView.appearance().backgroundColor = .clear
+    }
+
     var body: some View {
         VStack(spacing: .spacingHuge) {
             Form {
