@@ -71,3 +71,9 @@ public extension Text {
         self.font(.callout)
     }
 }
+
+public extension ButtonStyleConfiguration.Label {
+    var textBodyBold: some View {
+        self.font(.callout.weight(.bold))
+    }
+}

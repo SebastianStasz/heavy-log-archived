@@ -6,6 +6,8 @@
   
 */
 
+"common_ok" = "OK";
+"common_cancel" = "Cancel";
 "common_close" = "Close";
 "common_delete" = "Delete";
 

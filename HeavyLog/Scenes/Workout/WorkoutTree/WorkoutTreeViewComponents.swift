@@ -93,7 +93,7 @@ extension WorkoutTreeView {
                 Components.circle
 
                 Button(title, action: action)
-                    .buttonStyle(BaseButtonStyle())
+                    .buttonStyle(TextButtonStyle())
 
                 Spacer()
             }

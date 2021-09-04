@@ -57,7 +57,7 @@ extension TabBarModel: View {
     var body: some View {
         switch self {
         case .dashboard:
-            Text(self.title.localize())
+            DashboardView()
         case .workouts:
             Text(self.title.localize())
         case .summary:

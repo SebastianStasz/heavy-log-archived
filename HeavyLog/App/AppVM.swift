@@ -55,6 +55,11 @@ final class AppController {
         app.sheet = sheet
     }
 
+    func present(popup: PopupModel) {
+        guard app.popup == nil else { return }
+        app.popup = popup
+    }
+
     func dismissSheet() {
         app.sheet = nil
     }
@@ -70,6 +75,7 @@ final class AppVM: ObservableObject {
     @Published var actionSheet: ActionSheetModel?
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
+    @Published var popup: PopupModel?
 
     let context = PersistenceController.previewEmpty.context
     private var cancellable: AnyCancellable?

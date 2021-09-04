@@ -13,4 +13,12 @@ public extension String {
     func localize() -> String {
         NSLocalizedString(self, comment: self)
     }
+
+    static var common_ok: String {
+        LocalizedString.common_ok.text
+    }
+
+    static var common_cancel: String {
+        LocalizedString.common_cancel.text
+    }
 }

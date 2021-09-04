@@ -8,6 +8,8 @@
 import Foundation
 
 public enum LocalizedString: String {
+    case common_ok
+    case common_cancel
     case common_close
     case common_delete
 
