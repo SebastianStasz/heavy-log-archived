@@ -10,14 +10,22 @@ import SwiftUI
 
 struct Popup: View {
 
-    let viewModel: PopupVM
+    @ObservedObject var viewModel: PopupVM
 
     var body: some View {
         VStack(alignment: .leading, spacing: .spacingHuge) {
             Text(viewModel.title).textHeadlineBigBold
 
-            if let message = viewModel.message {
-                Text(message).textBodyNormal
+            VStack(alignment: .leading, spacing: .spacingMedium) {
+                if let message = viewModel.message {
+                    Text(message).textBodyNormal
+                }
+
+                if let input = viewModel.input {
+                    TextField(input.placeholder, text: $viewModel.textFieldValue)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .keyboardType(input.type)
+                }
             }
 
             HStack(spacing: .spacingSmall) {
@@ -46,6 +54,7 @@ struct Popup_Previews: PreviewProvider {
         Group {
             Popup(viewModel: .init(.sampleInfo, dismiss: {}))
             Popup(viewModel: .init(.sampleAction, dismiss: {}))
+            Popup(viewModel: .init(.sampleIntpu, dismiss: {}))
         }
         .previewSizeThatFits()
     }

@@ -5,32 +5,42 @@
 //  Created by Sebastian Staszczyk on 04/09/2021.
 //
 
-import Foundation
+import SwiftUI
 
-struct PopupVM {
+class PopupVM: ObservableObject {
 
-    private let type: PopupModel
+    @Published var textFieldValue: String = ""
+
+    private let popup: PopupModel
     private let dismiss: () -> Void
 
     init(_ type: PopupModel, dismiss: @escaping () -> Void) {
-        self.type = type
+        self.popup = type
         self.dismiss = dismiss
     }
 
     var title: String {
-        type.title
+        popup.title
     }
 
     var message: String? {
-        type.message
+        popup.message
+    }
+
+    var input: PopupModel.Input? {
+        popup.input
     }
 
     var action: () -> Void {
-        { type.action?() ; dismiss() }
+        { [unowned self] in
+            popup.action?()
+            input?.output(textFieldValue)
+            dismiss()
+        }
     }
 
     var shouldDisplayCancelButton: Bool {
-        type.action != nil
+        input != nil || popup.action != nil
     }
 
     func dismissPopup() {

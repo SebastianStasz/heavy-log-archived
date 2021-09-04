@@ -5,34 +5,35 @@
 //  Created by Sebastian Staszczyk on 04/09/2021.
 //
 
-import Foundation
+import UIKit
 
-enum PopupModel {
-    case info(title: String, message: String)
-    case action(title: String, message: String, action: () -> Void)
+struct PopupModel {
+    let title: String
+    let message: String?
+    let action: (() -> Void)?
+    let input: Input?
 
-    var title: String {
-        switch self {
-        case let .info(title, _),
-             let .action(title, _, _):
-            return title
-        }
+    init(title: String, message: String, action: (() -> Void)? = nil, input: Input? = nil) {
+        self.title = title
+        self.message = message
+        self.action = action
+        self.input = input
     }
+}
 
-    var message: String? {
-        switch self {
-        case let .info(_, message),
-             let .action(_, message, _):
-            return message
-        }
-    }
+// MARK: - Pop-Up Model Input
 
-    var action: (() -> Void)? {
-        switch self {
-        case let .action(_, _, action):
-            return action
-        default:
-            return nil
+extension PopupModel {
+
+    struct Input {
+        let placeholder: String
+        let type: UIKeyboardType
+        let output: (String) -> Void
+
+        init(placeholder: String, type: UIKeyboardType = .default, output: @escaping (String) -> Void) {
+            self.placeholder = placeholder
+            self.type = type
+            self.output = output
         }
     }
 }
@@ -41,6 +42,7 @@ enum PopupModel {
 // MARK: - Sample Data
 
 extension PopupModel {
-    static let sampleInfo = PopupModel.info(title: "Title", message: "Lorem ipsum dolor sit amet, consect a dipiscing elit. Ut vel neque lont.")
-    static let sampleAction = PopupModel.action(title: "Print something", message: "Are you sure you want to print something in the console?", action: { print("Something was printed.") })
+    static let sampleInfo = PopupModel(title: "Info", message: "Lorem ipsum dolor sit amet, consect a dipiscing elit. Ut vel neque lont.")
+    static let sampleAction = PopupModel(title: "Action", message: "Are you sure you want to print something in the console?", action: { print("Something") })
+    static let sampleIntpu = PopupModel(title: "Input", message: "Enter some value:", action: nil, input: .init(placeholder: "Placeholder", output: { print($0) }))
 }
