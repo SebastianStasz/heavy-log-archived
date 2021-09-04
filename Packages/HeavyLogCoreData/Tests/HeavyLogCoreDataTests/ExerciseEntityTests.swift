@@ -114,6 +114,7 @@ extension ExerciseEntityTests {
         XCTAssertEqual(exercise.name, data.name)
         XCTAssertEqual(exercise.shortName, data.shortName)
         XCTAssertEqual(exercise.difficulty, data.difficulty)
+        XCTAssertEqual(exercise.section, data.section)
         XCTAssertEqual(exercise.information, data.information)
         XCTAssertEqual(exercise.mainBodyPart, data.mainBodyPart)
         XCTAssertEqual(exercise.additionalBodyParts, data.additionalBodyParts)

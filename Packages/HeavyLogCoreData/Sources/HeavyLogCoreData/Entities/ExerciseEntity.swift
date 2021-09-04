@@ -15,6 +15,7 @@ import Shared
 
     @NSManaged private var name_: String
     @NSManaged private var type_: String
+    @NSManaged private var section_: String
     @NSManaged private var difficulty_: String
     @NSManaged private var mainBodyPart_: String
 
@@ -40,6 +41,11 @@ import Shared
 
     public var numberOfEfforts: Int {
         efforts.count
+    }
+
+    public private(set) var section: ExerciseSection {
+        get { .getCase(for: section_) }
+        set { section_ = newValue.rawValue }
     }
 
     public private(set) var difficulty: Difficulty {
@@ -89,6 +95,7 @@ public extension ExerciseEntity {
         shortName_ = data.shortName
         information_ = data.information
         difficulty = data.difficulty
+        section = data.section
         type = data.type
         mainBodyPart = data.mainBodyPart
         additionalBodyParts = data.additionalBodyParts

@@ -19,6 +19,7 @@
         <attribute name="isEditable" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="mainBodyPart_" attributeType="String"/>
         <attribute name="name_" attributeType="String"/>
+        <attribute name="section_" attributeType="String"/>
         <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
         <relationship name="efforts" toMany="YES" deletionRule="Nullify" destinationEntity="EffortEntity" inverseName="exercise" inverseEntity="EffortEntity"/>
@@ -39,7 +40,7 @@
     <elements>
         <element name="BodyParameterEntity" positionX="288.9019775390625" positionY="-134.902099609375" width="128" height="74"/>
         <element name="EffortEntity" positionX="84.4190673828125" positionY="189.1649475097656" width="128" height="103"/>
-        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="128" height="193"/>
+        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="128" height="194"/>
         <element name="SetEntity" positionX="282.9082946777344" positionY="267.9727783203124" width="128" height="88"/>
         <element name="WorkoutEntity" positionX="-93.40850830078125" positionY="-101.3866577148438" width="128" height="133"/>
     </elements>

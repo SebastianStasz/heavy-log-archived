@@ -29,6 +29,10 @@
 "common_exerciseType_pull" = "Pull";
 "common_exerciseType_static" = "Static";
 
+"common_exerciseSection_upper" = "Upper";
+"common_exerciseSection_lower" = "Lower";
+"common_exerciseSection_global" = "Global";
+
 "error_enum_unknown" = "Unknown type";
 
 "common_bodyPart_calves" = "Calves";

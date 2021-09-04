@@ -31,6 +31,10 @@ public enum LocalizedString: String {
     case common_exerciseType_pull
     case common_exerciseType_static
 
+    case common_exerciseSection_upper
+    case common_exerciseSection_lower
+    case common_exerciseSection_global
+
     case error_enum_unknown
 
     case common_bodyPart_calves

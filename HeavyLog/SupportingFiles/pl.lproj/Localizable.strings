@@ -29,6 +29,10 @@
 "common_exerciseType_pull" = "Przyciąganie";
 "common_exerciseType_static" = "Statyczne";
 
+"common_exerciseSection_upper" = "Góra";
+"common_exerciseSection_lower" = "Dół";
+"common_exerciseSection_global" = "Globalne";
+
 "error_enum_unknown" = "Nieznaty typ";
 
 "common_bodyPart_calves" = "Łydki";

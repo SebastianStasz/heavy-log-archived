@@ -20,7 +20,7 @@ public extension RawRepresentable where RawValue == String, Self: UnknownValueSu
     /// - Returns: New instance or unknown case.
     static func getCase(for rawValue: String) -> Self {
         guard let enumCase = Self.init(rawValue: rawValue) else {
-            assertionFailure("Failed to load enum case for rawValue: \(rawValue)")
+            assertionFailure("Failed to load enum case for rawValue: '\(rawValue)'. Enum: \(self)")
             return .unknownCase
         }
         return enumCase
