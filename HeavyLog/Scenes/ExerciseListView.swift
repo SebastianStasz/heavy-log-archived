@@ -11,20 +11,27 @@ import SwiftUI
 struct ExerciseListView: View {
 
     @Environment(\.managedObjectContext) private var context
+    @FetchRequest private var exercises: FetchedResults<ExerciseEntity>
 
-    @FetchRequest(fetchRequest: ExerciseEntity.createFetchRequest()
-    ) private var exercises: FetchedResults<ExerciseEntity>
+    private let paddingTop: CGFloat
+    private let onTap: ((ExerciseEntity) -> Void)?
 
-    var paddingTop: CGFloat
+    init(paddingTop: CGFloat, notIncluding exercises: [ExerciseEntity] = [], onTap: ((ExerciseEntity) -> Void)? = nil) {
+        self.paddingTop = paddingTop
+        self.onTap = onTap
+        self._exercises = ExerciseEntity.exercises(notIncluding: exercises)
+    }
 
     var body: some View {
         LazyVStack(spacing: .spacingMedium) {
             ForEach(exercises) { exercise in
-                ExerciseTileView(viewData: .init(exercise))
+                Button(action: { onTap?(exercise) }) {
+                    ExerciseTileView(viewData: .init(exercise))
+                }
             }
         }
-        .padding(.top, paddingTop)
-        .padding(.horizontal, .spacingMedium)
+        .allowsHitTesting(onTap != nil)
+        .padding(top: paddingTop, horizontal: .spacingMedium)
         .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }

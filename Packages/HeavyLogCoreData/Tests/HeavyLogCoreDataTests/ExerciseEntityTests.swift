@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CoreData
 import XCTest
 @testable import HeavyLogCoreData
 

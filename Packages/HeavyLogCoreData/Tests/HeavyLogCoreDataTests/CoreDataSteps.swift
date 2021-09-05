@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import SwiftUI
 import XCTest
 @testable import HeavyLogCoreData
 
@@ -21,7 +22,7 @@ extension CoreDataSteps {
         return WorkoutEntity.create(in: context, workoutData: workoutData)
     }
 
-    func createExerciseEntity(exerciseData: ExerciseData) throws -> ExerciseEntity {
+    @discardableResult func createExerciseEntity(exerciseData: ExerciseData) throws -> ExerciseEntity {
         try XCTUnwrap(ExerciseEntity.create(in: context, exerciseData: exerciseData))
     }
 
@@ -59,6 +60,12 @@ extension CoreDataSteps {
 
     @discardableResult func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws -> [T] {
         let request: NSFetchRequest<T> = T.createFetchRequest()
+        let entities = try! context.fetch(request)
+        XCTAssertEqual(entities.count, amount)
+        return entities
+    }
+
+    @discardableResult  func customFetchRequestShouldReturnElements<T: NSManagedObject>(request: NSFetchRequest<T>, amount: Int, for entity: T.Type) throws -> [T] {
         let entities = try! context.fetch(request)
         XCTAssertEqual(entities.count, amount)
         return entities

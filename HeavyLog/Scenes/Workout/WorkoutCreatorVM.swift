@@ -6,6 +6,7 @@
 //
 
 import Combine
+import HeavyLogCoreData
 import Foundation
 
 final class WorkoutCreatorVM: ObservableObject {
@@ -18,8 +19,12 @@ final class WorkoutCreatorVM: ObservableObject {
     @Published var selectedTab: WorkoutCreator = .workoutTree
     @Published var workout = WorkoutForm()
     @Published var workoutInfoListVM = BaseListVM()
-    @Published var workoutTreeData = WorkoutTreeData.sample
+    @Published var workoutTreeData = WorkoutTreeData()
     @Published var isExerciseListPresented = false
+
+    var exercisesInUse: [ExerciseEntity] {
+        workoutTreeData.efforts.map { $0.exercise }
+    }
 
     init() {
         catchNestedModelsChanges()
@@ -29,6 +34,12 @@ final class WorkoutCreatorVM: ObservableObject {
                 self?.workoutInfoListVM.rows = form.info
             }
             .store(in: &cancellables)
+    }
+
+    func addExercise(_ exerciseEntity: ExerciseEntity) {
+        let effort = WorkoutTreeData.Effort(exercise: exerciseEntity, setRows: [])
+        workoutTreeData.efforts.append(effort)
+        navigate(to: .dismissExerciseList)
     }
 
     private func catchNestedModelsChanges() {
@@ -48,6 +59,7 @@ extension WorkoutCreatorVM {
         case workoutTree
         case workoutInfo
         case exerciseList
+        case dismissExerciseList
         case dismissCreator
     }
 
@@ -58,7 +70,9 @@ extension WorkoutCreatorVM {
         case .workoutInfo:
             selectedTab = .workoutInfo
         case .exerciseList:
-            isExerciseListPresented.toggle()
+            isExerciseListPresented = true
+        case .dismissExerciseList:
+            isExerciseListPresented = false
         case .dismissCreator:
             AppController.shared.dismissSheet()
         }

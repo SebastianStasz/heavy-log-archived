@@ -9,8 +9,7 @@ import SwiftUI
 import Shared
 
 struct WorkoutCreatorView: View {
-
-    @Environment(\.managedObjectContext) private var context
+    
     @StateObject private var viewModel = WorkoutCreatorVM()
 
     init() {
@@ -25,9 +24,6 @@ struct WorkoutCreatorView: View {
         .toolbar { toolbarContent }
         .environmentObject(viewModel)
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
-        .sheet(isPresented: $viewModel.isExerciseListPresented) {
-            exerciseList.environment(\.managedObjectContext, context)
-        }
     }
 
     private var toolbarContent: some ToolbarContent {
@@ -37,20 +33,10 @@ struct WorkoutCreatorView: View {
         }
     }
 
-    private var exerciseList: some View {
-        ExerciseListView(paddingTop: .spacingMedium)
-            .toolbar { Toolbar.cancel(action: toggleExerciseList) }
-            .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)
-    }
-
     // MARK: - Interactions
 
     private func dismissCreator() {
         viewModel.navigate(to: .dismissCreator)
-    }
-
-    private func toggleExerciseList() {
-        viewModel.navigate(to: .exerciseList)
     }
 }
 

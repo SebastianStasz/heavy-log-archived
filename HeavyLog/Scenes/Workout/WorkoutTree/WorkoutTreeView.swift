@@ -11,6 +11,7 @@ import SwiftUI
 struct WorkoutTreeView: View {
     typealias Components = WorkoutTreeView
 
+    @Environment(\.managedObjectContext) private var context
     @EnvironmentObject var viewModel: WorkoutCreatorVM
 
     var body: some View {
@@ -18,7 +19,7 @@ struct WorkoutTreeView: View {
 
             ForEach(viewModel.workoutTreeData.efforts, content: EfforSection.init)
 
-            ButtonRow("Add exercise", action: { viewModel.navigate(to: .exerciseList) })
+            ButtonRow("Add exercise", action: showExerciseList)
             Components.spacingLine(20)
             ButtonRow("Finish workout", action: {})
 
@@ -26,6 +27,28 @@ struct WorkoutTreeView: View {
         }
         .padding(top: .spacingBig, horizontal: .spacingMedium)
         .embedInScrollView()
+        .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
+    }
+
+    private var exerciseList: some View {
+        ExerciseListView(paddingTop: .spacingMedium, notIncluding: viewModel.exercisesInUse, onTap: addExercise)
+            .environment(\.managedObjectContext, context)
+            .toolbar { Toolbar.cancel(action: dismissExerciseList) }
+            .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)
+    }
+
+    // MARK: - Interactions
+
+    private func addExercise(_ exerciseEntity: ExerciseEntity) {
+        viewModel.addExercise(exerciseEntity)
+    }
+
+    private func showExerciseList() {
+        viewModel.navigate(to: .exerciseList)
+    }
+
+    private func dismissExerciseList() {
+        viewModel.navigate(to: .dismissExerciseList)
     }
 }
 

@@ -10,6 +10,7 @@ import Combine
 import CoreData
 import Foundation
 import Shared
+import SwiftUI
 
 @objc(ExerciseEntity) public class ExerciseEntity: NSManagedObject {
 
@@ -111,6 +112,12 @@ public extension ExerciseEntity {
             } receiveValue: { exercises in
                 _ = exercises.map { create(in: context, exerciseData: $0, isUserExercise: false) }
             }
+    }
+
+    // MARK: - Fetch Requests
+
+    static func exercises(notIncluding exercises: [ExerciseEntity]) -> FetchRequest<ExerciseEntity> {
+        ExerciseEntity.createFetchRequest(sortDescriptors: [], predicate: allExcept(exercises))
     }
 
     // MARK: - Helpers
