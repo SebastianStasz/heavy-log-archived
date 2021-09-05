@@ -22,7 +22,7 @@ struct SummaryView: View {
                 .navigation(item: $viewModel.listItemVM) { Text($0.title) }
                 .padding(.horizontal, .spacingMedium)
         }
-        .padding(.top, .spacingMedium)
+        .padding(.top, .spacingSmall)
         .embedInScrollView()
         .background(Color.backgroundMain.edgesIgnoringSafeArea(.all))
     }

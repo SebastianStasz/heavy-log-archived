@@ -54,12 +54,24 @@ extension View {
             .padding(.horizontal, horizontal)
     }
 
+    func padding(top: CGFloat, horizontal: CGFloat) -> some View {
+        self
+            .padding(.top, top)
+            .padding(.horizontal, horizontal)
+    }
+
     /// Layers the given view behind this view ignoring all safe area.
     func backgroundIgnoringSafeArea<T: View>(_ view: T) -> some View {
         self.background(view.edgesIgnoringSafeArea(.all))
     }
 
-    func embedInScrollView(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true) -> some View {
-        ScrollView(axes, showsIndicators: showsIndicators) { self }.fixFlickering()
+    func embedInScrollView(_ axes: Axis.Set = .vertical, showsIndicators: Bool = true, fixFlickering: Bool = false) -> some View {
+        ZStack {
+            if fixFlickering {
+                ScrollView(axes, showsIndicators: showsIndicators) { self }.fixFlickering()
+            } else {
+                ScrollView(axes, showsIndicators: showsIndicators) { self }
+            }
+        }
     }
 }

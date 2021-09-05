@@ -9,10 +9,16 @@ import SwiftUI
 
 struct TextButtonStyle: ButtonStyle {
 
+    private let type: TextButton
+
+    init(_ type: TextButton) {
+        self.type = type
+    }
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(.body)
-            .foregroundColor(.actionPrimary)
+            .foregroundColor(type.color)
             .opacity(configuration.isPressed ? 0.4 : 1)
     }
 }

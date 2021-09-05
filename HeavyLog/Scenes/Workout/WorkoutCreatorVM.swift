@@ -48,7 +48,7 @@ extension WorkoutCreatorVM {
         case workoutTree
         case workoutInfo
         case exerciseList
-        case dismiss
+        case dismissCreator
     }
 
     func navigate(to destination: Destination) {
@@ -59,7 +59,7 @@ extension WorkoutCreatorVM {
             selectedTab = .workoutInfo
         case .exerciseList:
             isExerciseListPresented.toggle()
-        case .dismiss:
+        case .dismissCreator:
             AppController.shared.dismissSheet()
         }
     }

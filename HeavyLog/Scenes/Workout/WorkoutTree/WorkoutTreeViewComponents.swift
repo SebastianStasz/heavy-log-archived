@@ -54,7 +54,7 @@ extension WorkoutTreeView {
                 Button(action: action) {
                     Image(systemName: "plus")
                 }
-                .buttonStyle(TextButtonStyle())
+                .buttonStyle(TextButtonStyle(.action))
             }
         }
     }
@@ -94,7 +94,7 @@ extension WorkoutTreeView {
                 Components.circle
 
                 Button(title, action: action)
-                    .buttonStyle(TextButtonStyle())
+                    .buttonStyle(TextButtonStyle(.action))
 
                 Spacer()
             }

@@ -7,11 +7,23 @@
 
 import SwiftUI
 
-extension ToolbarItem where ID == Void, Content == Button<Text> {
+struct Toolbar {}
 
-    static func cancel(action: @escaping () -> Void) -> ToolbarItem {
+extension Toolbar {
+
+    static func cancel(action: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
-            Button(.common_close, action: action())
+            Button(.common_close) { action() }
+        }
+    }
+
+    static func delete(action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            HStack {
+                Button(.common_delete) { action() }
+                    .buttonStyle(TextButtonStyle(.destructive))
+                Spacer()
+            }
         }
     }
 }

@@ -24,6 +24,8 @@ struct WorkoutTreeView: View {
 
             Spacer().layoutPriority(1)
         }
+        .padding(top: .spacingBig, horizontal: .spacingMedium)
+        .embedInScrollView()
     }
 }
 

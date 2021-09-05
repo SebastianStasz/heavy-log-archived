@@ -21,4 +21,8 @@ public extension String {
     static var common_cancel: String {
         LocalizedString.common_cancel.text
     }
+
+    static var workoutCreator_exerciseList_title: String {
+        LocalizedString.workoutCreator_exerciseList_title.text
+    }
 }

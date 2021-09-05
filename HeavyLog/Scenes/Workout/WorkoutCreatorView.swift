@@ -10,6 +10,7 @@ import Shared
 
 struct WorkoutCreatorView: View {
 
+    @Environment(\.managedObjectContext) private var context
     @StateObject private var viewModel = WorkoutCreatorVM()
 
     init() {
@@ -23,24 +24,33 @@ struct WorkoutCreatorView: View {
         }
         .toolbar { toolbarContent }
         .environmentObject(viewModel)
-        .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
         .embedInNavigationView(title: "Workout Name", displayMode: .inline)
+        .sheet(isPresented: $viewModel.isExerciseListPresented) {
+            exerciseList.environment(\.managedObjectContext, context)
+        }
     }
 
     private var toolbarContent: some ToolbarContent {
         Group {
-            ToolbarItem.cancel { viewModel.navigate(to: .dismiss) }
-
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button(.common_delete, action: viewModel.navigate(to: .dismiss))
-            }
+            Toolbar.cancel(action: dismissCreator)
+            Toolbar.delete(action: dismissCreator)
         }
     }
 
     private var exerciseList: some View {
-        ExercisesView()
-            .toolbar { ToolbarItem.cancel { viewModel.navigate(to: .exerciseList) } }
-            .embedInNavigationView(title: "Choose an exercise", displayMode: .inline)
+        ExerciseListView(paddingTop: .spacingMedium)
+            .toolbar { Toolbar.cancel(action: toggleExerciseList) }
+            .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)
+    }
+
+    // MARK: - Interactions
+
+    private func dismissCreator() {
+        viewModel.navigate(to: .dismissCreator)
+    }
+
+    private func toggleExerciseList() {
+        viewModel.navigate(to: .exerciseList)
     }
 }
 

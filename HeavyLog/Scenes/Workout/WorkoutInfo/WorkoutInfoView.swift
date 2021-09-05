@@ -32,8 +32,8 @@ struct WorkoutInfoView: View {
                 }
                 .plainStyle()
             }
-            .padding(.horizontal, -20)
-            .padding(.bottom, -110)
+            .plainStyle()
+            .padding(top: .spacingBig, horizontal: .spacingMedium)
         }
     }
 }
@@ -43,10 +43,8 @@ struct WorkoutInfoView: View {
 
 struct WorkoutInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = WorkoutCreatorVM()
-
         WorkoutInfoView()
-            .environmentObject(viewModel)
+            .environmentObject(WorkoutCreatorVM())
             .padding(.horizontal, .spacingMedium)
             .backgroundIgnoringSafeArea(Color.backgroundMain)
             .embedInNavigationView(title: "Workout Info", displayMode: .inline)

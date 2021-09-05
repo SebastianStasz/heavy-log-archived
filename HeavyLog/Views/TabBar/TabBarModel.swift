@@ -63,7 +63,7 @@ extension TabBarModel: View {
         case .summary:
             SummaryView()
         case .exercises:
-            ExercisesView()
+            ExerciseListView(paddingTop: .spacingSmall)
         }
     }
 }

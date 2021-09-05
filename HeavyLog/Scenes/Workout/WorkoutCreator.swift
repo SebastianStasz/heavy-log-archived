@@ -50,11 +50,8 @@ extension WorkoutCreator: View {
             switch self {
             case .workoutTree:
                 WorkoutTreeView()
-                    .padding(vertical: .spacingHuge, horizontal: .spacingMedium)
-                    .embedInScrollView()
             case .workoutInfo:
                 WorkoutInfoView()
-                    .padding(horizontal: .spacingMedium)
             }
         }
     }
