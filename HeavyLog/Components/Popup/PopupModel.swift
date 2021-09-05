@@ -21,9 +21,9 @@ struct PopupModel {
     }
 }
 
-// MARK: - Pop-Up Model Input
-
 extension PopupModel {
+
+    // MARK: - Pop-Up Model Input
 
     struct Input {
         let placeholder: String
@@ -35,6 +35,15 @@ extension PopupModel {
             self.type = type
             self.output = output
         }
+    }
+
+    // MARK: - Models
+
+    static func addEffort(_ effort: WorkoutTreeData.Effort, action: @escaping (String) -> Void) -> PopupModel {
+        let input = PopupModel.Input(placeholder: "100", type: .decimalPad) { output in
+            action(output)
+        }
+        return PopupModel(title: effort.exerciseName, message: "Enter the weight:", input: input)
     }
 }
 

@@ -9,29 +9,6 @@ import SwiftUI
 
 extension WorkoutTreeView {
 
-    // MARK: - Effort Section
-
-    struct EfforSection: View {
-        private let effort: WorkoutTreeData.Effort
-
-        init(_ effort: WorkoutTreeData.Effort) {
-            self.effort = effort
-        }
-
-        var body: some View {
-            VStack(spacing: 6) {
-                ExerciseRow(effort.exerciseName, action: {})
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Components.spacingLine(9)
-                    ForEach(effort.setRows) { EffortRow($0.text) }
-                    Components.spacingLine(8)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        }
-    }
-
     // MARK: - Exercise Row
 
     struct ExerciseRow: View {
@@ -55,25 +32,6 @@ extension WorkoutTreeView {
                     Image(systemName: "plus")
                 }
                 .buttonStyle(TextButtonStyle(.action))
-            }
-        }
-    }
-
-    // MARK: - Effort Row
-
-    struct EffortRow: View {
-        private let text: String
-
-        init(_ text: String) {
-            self.text = text
-        }
-
-        var body: some View {
-            ZStack(alignment: .leading) {
-                spacingLine()
-
-                Text(text).textBodyNormal
-                    .padding(bottom: .spacingMedium, leading: .spacingHuge)
             }
         }
     }
@@ -108,10 +66,10 @@ extension WorkoutTreeView {
     }
 
     static func spacingLine(_ height: CGFloat? = nil) -> some View {
-        ZStack { circle.hidden() ; line }.maxHeight(height ?? .infinity)
+        ZStack { circle.hidden() ; line }.frame(height: height)
     }
 
     private static var line: some View {
-        Rectangle().fillColor(.grayMedium).maxWidth(1)
+        Rectangle().fillColor(.grayMedium).frame(width: 1)
     }
 }

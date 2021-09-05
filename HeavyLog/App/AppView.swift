@@ -14,15 +14,17 @@ struct AppView: View {
     var body: some View {
         ZStack {
             TabBarView(viewModel: appVM.tabBarVM!)
-                .sheet(item: $appVM.sheet) { $0.screenPresenter(appVM: appVM) }
+                .sheet(item: $appVM.sheet) {
+                    $0.screenPresenter(appVM: appVM).overlay(PopupPresenter($appVM.popup))
+                }
 
             if appVM.sheet == nil {
                 Color.clear
                     .screenPresenter(appVM: appVM)
                     .transition(.opacity.animation(.easeInOut))
-            }
 
-            PopupPresenter($appVM.popup)
+                PopupPresenter($appVM.popup)
+            }
         }
     }
 }

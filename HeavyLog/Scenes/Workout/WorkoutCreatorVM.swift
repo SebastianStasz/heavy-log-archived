@@ -11,6 +11,9 @@ import Foundation
 
 final class WorkoutCreatorVM: ObservableObject {
     typealias Tab = WorkoutCreator
+    typealias Effort = WorkoutTreeData.Effort
+    typealias WorkoutSet = WorkoutTreeData.Set
+    typealias WeightRow = WorkoutTreeData.WeightRow
 
     var availableTabs: [Tab] { Tab.allCases }
 
@@ -37,9 +40,22 @@ final class WorkoutCreatorVM: ObservableObject {
     }
 
     func addExercise(_ exerciseEntity: ExerciseEntity) {
-        let effort = WorkoutTreeData.Effort(exercise: exerciseEntity, setRows: [])
+        let effort = Effort(exercise: exerciseEntity, weightRows: [])
         workoutTreeData.efforts.append(effort)
         navigate(to: .dismissExerciseList)
+    }
+
+    func addSet(to effort: Effort) {
+        let popup = PopupModel.addEffort(effort) { [unowned self] output in
+            workoutTreeData.addSet(WorkoutSet(weight: Double(output)!, reps: 0), to: effort)
+        }
+        AppController.shared.present(popup: popup)
+    }
+
+    func deleteSet(in effort: Effort, from weightRow: WeightRow) {
+        if let effortIndex = workoutTreeData.efforts.firstIndex(where: { $0.id == effort.id }) {
+            workoutTreeData.efforts[effortIndex].deleteLastSet(from: weightRow)
+        }
     }
 
     private func catchNestedModelsChanges() {

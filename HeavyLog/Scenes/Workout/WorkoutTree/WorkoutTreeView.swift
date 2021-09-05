@@ -20,13 +20,14 @@ struct WorkoutTreeView: View {
             ForEach(viewModel.workoutTreeData.efforts, content: EfforSection.init)
 
             ButtonRow("Add exercise", action: showExerciseList)
-            Components.spacingLine(20)
+            Components.spacingLine(30)
             ButtonRow("Finish workout", action: {})
 
             Spacer().layoutPriority(1)
         }
         .padding(top: .spacingBig, horizontal: .spacingMedium)
         .embedInScrollView()
+        .environmentObject(viewModel)
         .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
     }
 

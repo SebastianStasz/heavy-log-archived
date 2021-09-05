@@ -5,44 +5,26 @@
 //  Created by Sebastian Staszczyk on 21/08/2021.
 //
 
-import HeavyLogCoreData
 import Foundation
 
 struct WorkoutTreeData {
+    var efforts: [WorkoutTreeData.Effort] = []
 
-    var efforts: [Effort] = []
-
-    struct Effort: Identifiable {
-        let exercise: ExerciseEntity
-        var exerciseName: String {
-            exercise.name
-        }
-        let setRows: [SetRow]
-
-        var id: String { exerciseName }
+    mutating func addSet(_ set: Set, to effort: Effort) {
+        guard let index = getIndex(of: effort) else { return }
+        efforts[index].addSet(set)
     }
 
-    struct SetRow: Identifiable {
-        let weight: String
-        let reps: String
-
-        var id: String { weight }
-
-        var text: String {
-            "\(weight) kg \(reps)"
+    private func getIndex(of effort: Effort) -> Int? {
+        guard let index = efforts.firstIndex(where: { $0.id == effort.id }) else {
+            assertionFailure("WorkoutTreeData: No index of \(effort)")
+            return nil
         }
+        return index
     }
-}
 
-
-// MARK: - Sample Data
-
-extension WorkoutTreeData {
-
-//    static let sample = WorkoutTreeData(efforts: [
-//        Effort(exerciseName: "Classic deadlift", setRows: [SetRow(weight: "160", reps: "x2 x2"), SetRow(weight: "145", reps: "x5 x5")]),
-//        Effort(exerciseName: "Bench press", setRows: [SetRow(weight: "100", reps: "x5 x5 x4"), SetRow(weight: "90", reps: "x5 x5")]),
-//        Effort(exerciseName: "Overhand pull-ups", setRows: [SetRow(weight: "15", reps: "x6 x6 x6"), SetRow(weight: "0", reps: "x8 x8")]),
-//        Effort(exerciseName: "Overhead press", setRows: [SetRow(weight: "50", reps: "x8 x8 x8 x8")])
-//    ])
+    struct Set {
+        let weight: Double
+        let reps: Int
+    }
 }
