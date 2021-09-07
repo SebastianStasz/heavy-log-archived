@@ -9,8 +9,6 @@ import SwiftUI
 
 class PopupVM: ObservableObject {
 
-    @Published var textFieldValue: String = ""
-
     private let popup: PopupModel
     private let dismiss: () -> Void
 
@@ -27,23 +25,43 @@ class PopupVM: ObservableObject {
         popup.message
     }
 
-    var input: PopupModel.Input? {
-        popup.input
-    }
-
-    var action: () -> Void {
-        { [unowned self] in
-            popup.action?()
-            input?.output(textFieldValue)
-            dismiss()
-        }
-    }
-
     var shouldDisplayCancelButton: Bool {
-        input != nil || popup.action != nil
+        popup.isCancelButton
+    }
+
+    var textFieldVM: TextFieldVM? {
+        guard let vm = popup.textFieldVM else { return nil }
+        return vm
+    }
+
+    var picker: PopupModel.Picker? {
+        guard let vm = popup.picker else { return nil }
+        return vm
     }
 
     func dismissPopup() {
         dismiss()
+    }
+
+    func action() {
+        confirmAction?()
+        textFieldOutput?(textFieldVM!.value)
+        textFieldAndPickerOutput?(textFieldVM!.value, picker!.viewModel.selectedValue)
+        dismiss()
+    }
+
+    private var confirmAction: (() -> Void)? {
+        guard case let .action(_, action) = popup else { return nil }
+        return action
+    }
+
+    private var textFieldOutput: ((String) -> ())? {
+        guard case let .textField(_, _, output) = popup else { return nil }
+        return output
+    }
+
+    private var textFieldAndPickerOutput: ((String, Int) -> Void)? {
+        guard case let .textFieldAndPicker(_, _, _, output) = popup else { return nil }
+        return output
     }
 }

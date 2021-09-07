@@ -11,7 +11,7 @@ struct DashboardView: View {
     var body: some View {
         VStack {
             Button("Present pop-up") {
-                AppController.shared.present(popup: .sampleAction)
+                AppController.shared.present(popup: .sampleTextFieldAndPicker)
             }
         }
         .infiniteFrame()

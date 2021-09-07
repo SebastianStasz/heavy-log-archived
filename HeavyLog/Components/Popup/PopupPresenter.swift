@@ -36,6 +36,6 @@ struct PopupPresenter: View {
 
 struct PopupView_Previews: PreviewProvider {
     static var previews: some View {
-        PopupPresenter(.constant(.sampleInfo))
+        PopupPresenter(.constant(.textField(.init(title: "Input", message: "Sample message here."), .integer(), output: { print($0) })))
     }
 }

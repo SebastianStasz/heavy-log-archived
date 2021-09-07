@@ -46,8 +46,9 @@ final class WorkoutCreatorVM: ObservableObject {
     }
 
     func addSet(to effort: Effort) {
-        let popup = PopupModel.addEffort(effort) { [unowned self] output in
-            workoutTreeData.addSet(WorkoutSet(weight: Double(output)!, reps: 0), to: effort)
+        let popup = PopupModel.addSet(to: effort.exerciseName) { [weak self] weight, reps in
+            let set = WorkoutSet(weight: Double(weight)!, reps: reps)
+            self?.workoutTreeData.addSet(set, to: effort)
         }
         AppController.shared.present(popup: popup)
     }

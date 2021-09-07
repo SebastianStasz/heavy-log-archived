@@ -5,53 +5,87 @@
 //  Created by Sebastian Staszczyk on 04/09/2021.
 //
 
-import UIKit
+import Foundation
 
-struct PopupModel {
-    let title: String
-    let message: String?
-    let action: (() -> Void)?
-    let input: Input?
+enum PopupModel {
+    case info(Info)
+    case action(Info, action: () -> Void)
+    case textField(Info, TextFieldVM, output: (String) -> Void)
+    case textFieldAndPicker(Info, TextFieldVM, Picker, output: (String, Int) -> Void)
 
-    init(title: String, message: String, action: (() -> Void)? = nil, input: Input? = nil) {
-        self.title = title
-        self.message = message
-        self.action = action
-        self.input = input
+    struct Info {
+        let title: String
+        let message: String
+    }
+
+    struct Picker {
+        let hint: String
+        let viewModel: IntegerPickerVM
+    }
+
+    var title: String {
+        switch self {
+        case let .info(info),
+             let .action(info, _),
+             let .textField(info, _, _),
+             let .textFieldAndPicker(info, _, _, _):
+            return info.title
+        }
+    }
+
+    var message: String {
+        switch self {
+        case let .info(info),
+             let .action(info, _),
+             let .textField(info, _, _),
+             let .textFieldAndPicker(info, _, _, _):
+            return info.message
+        }
+    }
+
+    var isCancelButton: Bool {
+        switch self {
+        case .info:
+            return false
+        default:
+            return true
+        }
+    }
+
+    var textFieldVM: TextFieldVM? {
+        switch self {
+        case let .textField(_, vm, _):
+            return vm
+        case let .textFieldAndPicker(_, vm, _, _):
+            return vm
+        default:
+            return nil
+        }
+    }
+
+    var picker: Picker? {
+        switch self {
+        case let .textFieldAndPicker(_, _, picker, _):
+            return picker
+        default:
+            return nil
+        }
     }
 }
 
 extension PopupModel {
 
-    // MARK: - Pop-Up Model Input
-
-    struct Input {
-        let placeholder: String
-        let type: UIKeyboardType
-        let output: (String) -> Void
-
-        init(placeholder: String, type: UIKeyboardType = .default, output: @escaping (String) -> Void) {
-            self.placeholder = placeholder
-            self.type = type
-            self.output = output
-        }
-    }
-
-    // MARK: - Models
-
-    static func addEffort(_ effort: WorkoutTreeData.Effort, action: @escaping (String) -> Void) -> PopupModel {
-        let input = PopupModel.Input(placeholder: "100", type: .decimalPad) { output in
-            action(output)
-        }
-        return PopupModel(title: effort.exerciseName, message: "Enter the weight:", input: input)
+    static func addSet(to exercise: String, action: @escaping (String, Int) -> Void) -> PopupModel {
+        let info = Info(title: exercise, message: "Enter weight:")
+        return PopupModel.textFieldAndPicker(info, .integer(), .init(hint: "Number of reps:", viewModel: .repsPicker), output: action)
     }
 }
-
 
 // MARK: - Sample Data
 
 extension PopupModel {
-    static let sampleInfo = PopupModel(title: "Info", message: "Lorem ipsum dolor sit amet, consect a dipiscing elit. Ut vel neque lont.")
-    static let sampleAction = PopupModel(title: "Action", message: "Are you sure you want to print something in the console?", action: { print("Something") })
-    static let sampleIntpu = PopupModel(title: "Input", message: "Enter some value:", action: nil, input: .init(placeholder: "Placeholder", output: { print($0) }))
+    static let sampleInfo = PopupModel.info(.init(title: "Info", message: "Sample message here."))
+    static let sampleAction = PopupModel.action(.init(title: "Action", message: "Press OK if you want to print something."), action: { print("Something") })
+    static let sampleTextField = PopupModel.textField(.init(title: "Text Field", message: "Enter some value and press OK to print it."), .integer(), output: { print($0) })
+    static let sampleTextFieldAndPicker = PopupModel.addSet(to: "Bench Press", action: { print("Weight \($0), Reps\($1)") })
 }

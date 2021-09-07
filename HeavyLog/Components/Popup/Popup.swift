@@ -16,24 +16,31 @@ struct Popup: View {
         VStack(alignment: .leading, spacing: .spacingHuge) {
             Text(viewModel.title).textHeadlineBigBold
 
-            VStack(alignment: .leading, spacing: .spacingMedium) {
-                if let message = viewModel.message {
-                    Text(message).textBodyNormal
+            VStack(alignment: .leading, spacing: .spacingBig) {
+                VStack(alignment: .leading, spacing: .spacingSmall) {
+                    if let message = viewModel.message {
+                        Text(message).textBodyNormal
+                    }
+
+                    if let inputVM = viewModel.textFieldVM {
+                        TextFieldView(viewModel: inputVM)
+                    }
                 }
 
-                if let input = viewModel.input {
-                    TextField(input.placeholder, text: $viewModel.textFieldValue)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .keyboardType(input.type)
+                if let picker = viewModel.picker {
+                    VStack(alignment: .leading, spacing: .spacingSmall) {
+                        Text(picker.hint).textBodyNormal
+                        IntegerPickerView(viewModel: picker.viewModel, maxHeight: 100)
+                    }
                 }
             }
 
             HStack(spacing: .spacingSmall) {
-                Button(.common_cancel, action: viewModel.dismissPopup())
+                Button(.common_cancel, action: viewModel.dismissPopup)
                     .buttonStyle(BaseButtonStyle(.secondary))
                     .displayIf(viewModel.shouldDisplayCancelButton)
 
-                Button(.common_ok, action: viewModel.action())
+                Button(.common_ok, action: viewModel.action)
                     .buttonStyle(BaseButtonStyle(.action))
             }
             .frame(maxWidth: .infinity)
@@ -54,7 +61,8 @@ struct Popup_Previews: PreviewProvider {
         Group {
             Popup(viewModel: .init(.sampleInfo, dismiss: {}))
             Popup(viewModel: .init(.sampleAction, dismiss: {}))
-            Popup(viewModel: .init(.sampleIntpu, dismiss: {}))
+            Popup(viewModel: .init(.sampleTextField, dismiss: {}))
+            Popup(viewModel: .init(.sampleTextFieldAndPicker, dismiss: {}))
         }
         .previewSizeThatFits()
     }
