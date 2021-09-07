@@ -9,11 +9,19 @@ import Foundation
 
 final class IntegerPickerVM: ObservableObject {
 
-    @Published var selectedValue: Int?
+    @Published var selectedValue: Int
     let rangeOfValues: ClosedRange<Int>
+    let title: String
 
-    init(rangeOfValues: ClosedRange<Int>, initialValue: Int? = nil) {
+    init(title: String, rangeOfValues: ClosedRange<Int>, initialValue: Int? = nil) {
+        self.title = title
         self.rangeOfValues = rangeOfValues
-        self.selectedValue = initialValue ?? rangeOfValues.first
+        self.selectedValue = initialValue ?? rangeOfValues.first!
+    }
+}
+
+extension IntegerPickerVM {
+    static var repsPicker: IntegerPickerVM {
+        .init(title: "Reps picker", rangeOfValues: 1...30, initialValue: 5)
     }
 }
