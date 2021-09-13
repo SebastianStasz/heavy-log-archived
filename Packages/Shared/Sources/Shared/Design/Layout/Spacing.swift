@@ -8,6 +8,7 @@
 import SwiftUI
 
 public enum Spacing: CGFloat, Layout {
+    case micro  = 8
     case small  = 12
     case medium = 16
     case big    = 24
@@ -15,6 +16,11 @@ public enum Spacing: CGFloat, Layout {
 }
 
 public extension CGFloat {
+
+    /// Spacing of 6.
+    static var spacingMicro: CGFloat {
+        Spacing.micro.value
+    }
 
     /// Spacing of 12.
     static var spacingSmall: CGFloat {

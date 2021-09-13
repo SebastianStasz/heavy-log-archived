@@ -14,6 +14,10 @@ public extension String {
         NSLocalizedString(self, comment: self)
     }
 
+    var isNotEmpty: Bool {
+        !self.isEmpty
+    }
+
     static var common_ok: String {
         LocalizedString.common_ok.text
     }
