@@ -7,14 +7,23 @@
 
 import SwiftUI
 
-struct TextFieldView: View {
+struct TextFieldView<T: Comparable, Validation: ValidationService>: View where T == Validation.T {
 
-    @ObservedObject var viewModel: TextFieldVM
+    @ObservedObject var viewModel: TextFieldVM<T, Validation>
 
     var body: some View {
-        TextField(viewModel.placeholder, text: $viewModel.value)
-            .textFieldStyle(RoundedBorderTextFieldStyle())
-            .keyboardType(viewModel.type)
+        VStack(alignment: .leading, spacing: .spacingMicro) {
+            TextField(viewModel.placeholder, text: $viewModel.textField)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(viewModel.type)
+
+            if let message = viewModel.validationMessage {
+                Text(message)
+                    .font(.footnote)
+                    .fontWeight(.light)
+                    .foregroundColor(.accentRed)
+            }
+        }
     }
 }
 
@@ -23,7 +32,9 @@ struct TextFieldView: View {
 
 struct TextFieldView_Previews: PreviewProvider {
     static var previews: some View {
-        let vm = TextFieldVM(placeholder: "Integer value", type: .decimalPad)
-        TextFieldView(viewModel: vm)
+        Group {
+            TextFieldView(viewModel: .init(result: .constant(2), validation: ValueValidation(type: .integer)))
+        }
+        .previewSizeThatFits(backgroundColor: .backgroundSecondary)
     }
 }

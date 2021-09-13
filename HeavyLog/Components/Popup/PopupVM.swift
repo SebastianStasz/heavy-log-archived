@@ -29,7 +29,7 @@ class PopupVM: ObservableObject {
         popup.isCancelButton
     }
 
-    var textFieldVM: TextFieldVM? {
+    var textFieldVM: TextFieldType? {
         guard let vm = popup.textFieldVM else { return nil }
         return vm
     }
@@ -45,8 +45,8 @@ class PopupVM: ObservableObject {
 
     func action() {
         confirmAction?()
-        textFieldOutput?(textFieldVM!.value)
-        textFieldAndPickerOutput?(textFieldVM!.value, picker!.viewModel.selectedValue)
+        textFieldOutput?(textFieldVM!.textField)
+        textFieldAndPickerOutput?(textFieldVM!.textField, picker!.viewModel.selectedValue)
         dismiss()
     }
 

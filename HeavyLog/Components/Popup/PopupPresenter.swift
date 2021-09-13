@@ -18,7 +18,7 @@ struct PopupPresenter: View {
     var body: some View {
         ZStack {
             if let popup = popup {
-                Popup(viewModel: .init(popup, dismiss: dismissPopup))
+                Popup(viewModel: PopupVM(popup, dismiss: dismissPopup))
                     .dimBackground()
                     .transition(.opacity)
             }
@@ -36,6 +36,6 @@ struct PopupPresenter: View {
 
 struct PopupView_Previews: PreviewProvider {
     static var previews: some View {
-        PopupPresenter(.constant(.textField(.init(title: "Input", message: "Sample message here."), .integer(), output: { print($0) })))
+        PopupPresenter(.constant(.textField(.init(title: "Input", message: "Sample message here."), .integer(viewModel: .integer(value: .constant(2))), output: { print($0) })))
     }
 }

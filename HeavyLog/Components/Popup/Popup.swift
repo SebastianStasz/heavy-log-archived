@@ -22,7 +22,7 @@ struct Popup: View {
                         Text(message).textBodyNormal
                     }
 
-                    if let inputVM = viewModel.textFieldVM {
+                    if let inputVM = viewModel.textFieldVM?.intViewModel {
                         TextFieldView(viewModel: inputVM)
                     }
                 }
