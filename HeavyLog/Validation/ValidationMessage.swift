@@ -12,7 +12,7 @@ enum ValidationMessage {
     case invalid
     case tooShort
     case tooLong
-    case toSmall
+    case tooSmall
     case tooBig
 
     var message: String {
@@ -25,7 +25,7 @@ enum ValidationMessage {
             return "Value is too shrot."
         case .tooLong:
             return "Value is too long."
-        case .toSmall:
+        case .tooSmall:
             return "Value is too small."
         case .tooBig:
             return "Value is too big."

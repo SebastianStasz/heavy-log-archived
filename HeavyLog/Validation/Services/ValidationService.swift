@@ -16,9 +16,8 @@ protocol ValidationService {
 
 extension ValidationService {
     func checkIsEmpty(_ value: String) -> ValidationResult? {
-        guard !canBeEmpty && value.count != 0 else {
-            return ValidationResult(message: .empty)
-        }
-        return nil
+        if canBeEmpty { return nil }
+        if value.count != 0 { return nil }
+        return ValidationResult(message: .empty)
     }
 }

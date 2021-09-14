@@ -10,13 +10,12 @@ import Foundation
 struct ValueValidation: ValidationService {
 
     let type: NumberType
-    let canBeEmpty: Bool
+    let canBeEmpty = false
     let minValue: Double?
     let maxValue: Double?
 
-    init(type: NumberType, canBeEmpty: Bool = false, minValue: Double? = nil, maxValue: Double? = nil) {
+    init(type: NumberType, minValue: Double? = nil, maxValue: Double? = nil) {
         self.type = type
-        self.canBeEmpty = canBeEmpty
         self.minValue = minValue
         self.maxValue = maxValue
     }
@@ -29,7 +28,7 @@ struct ValueValidation: ValidationService {
             return Result(message: .invalid)
         }
         if let minValue = minValue, value < minValue {
-            return Result(message: .toSmall)
+            return Result(message: .tooSmall)
         }
         if let maxValue = maxValue, value > maxValue {
             return Result(message: .tooBig)
