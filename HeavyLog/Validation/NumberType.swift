@@ -11,12 +11,24 @@ enum NumberType {
     case integer
     case double
 
-    func checkIsValid<T>(_ value: String) -> T? {
+    func checkIsValid(_ value: String) -> Double? {
         switch self {
         case .integer:
-            return Int(value) as? T
+            return checkIsInt(value)
         case .double:
-            return Double(value) as? T
+            return checkIsDouble(value)
         }
     }
+
+    private func checkIsInt(_ value: String) -> Double? {
+        guard !value.contains(".") else { return nil }
+        return Double(value)
+    }
+
+    private func checkIsDouble(_ value: String) -> Double? {
+        var value = value
+        value = value.replacingOccurrences(of: ",", with: ".")
+        return Double(value)
+    }
 }
+

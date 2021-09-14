@@ -6,40 +6,21 @@
 //
 
 import Combine
-import UIKit
 import SwiftUI
 
-enum TextFieldType {
-    case integer(viewModel: TextFieldVM<Int, ValueValidation<Int>>)
-
-    var textField: String {
-        switch self {
-        case let .integer(viewModel):
-            return viewModel.textField
-        }
-    }
-
-    var intViewModel: TextFieldVM<Int, ValueValidation<Int>>? {
-        switch self {
-        case let .integer(viewModel):
-            return viewModel
-        }
-    }
-}
-
-final class TextFieldVM<T: Comparable, Validation: ValidationService>: ObservableObject where T == Validation.T {
+final class TextFieldVM: ObservableObject {
 
     private var cancellable: AnyCancellable?
-    private let validation: Validation
+    private let validation: ValidationService
     private let dropFirst: Int
 
-    @Binding var result: T?
+    @Binding var result: String?
     @Published var textField: String
     @Published var validationMessage: String?
     let placeholder: String
     let type: UIKeyboardType
 
-    init(result: Binding<T?>, validation: Validation, initialValue: String = "", placeholder: String = "", type: UIKeyboardType = .default, dropFirst: Int = 1) {
+    init(result: Binding<String?>, validation: ValidationService, initialValue: String = "", placeholder: String = "", type: UIKeyboardType = .default, dropFirst: Int = 1) {
         self._result = result
         self.validation = validation
         self.textField = initialValue
@@ -51,7 +32,7 @@ final class TextFieldVM<T: Comparable, Validation: ValidationService>: Observabl
             .removeDuplicates()
             .dropFirst(dropFirst)
             .debounce(for: 0.3, scheduler: RunLoop.main)
-            .map { value -> ValidationResult<T> in
+            .map { value -> ValidationResult in
                 validation.checkValue(value)
             }
             .sink { [weak self] validation in
@@ -65,7 +46,15 @@ final class TextFieldVM<T: Comparable, Validation: ValidationService>: Observabl
 
 extension TextFieldVM {
 
-    static func integer(value: Binding<Int>, placeholder: String = "100") -> TextFieldVM where T == Int {
-        TextFieldVM(result: .constant(0), validation: ValueValidation<Int>(type: .integer) as! Validation, placeholder: placeholder, type: .decimalPad)
+    static func text(result: Binding<String?>, placeholder: String = "") -> TextFieldVM {
+        TextFieldVM(result: result, validation: TextValidation(), placeholder: placeholder)
+    }
+
+    static func integer(result: Binding<String?>, placeholder: String = "100") -> TextFieldVM {
+        TextFieldVM(result: result, validation: ValueValidation(type: .integer), placeholder: placeholder, type: .decimalPad)
+    }
+
+    static func double(result: Binding<String?>, placeholder: String = "100.00") -> TextFieldVM {
+        TextFieldVM(result: result, validation: ValueValidation(type: .double), placeholder: placeholder, type: .decimalPad)
     }
 }

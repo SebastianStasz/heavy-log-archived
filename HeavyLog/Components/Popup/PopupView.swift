@@ -1,5 +1,5 @@
 //
-//  Popup.swift
+//  PopupView.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 04/09/2021.
@@ -8,7 +8,7 @@
 import Shared
 import SwiftUI
 
-struct Popup: View {
+struct PopupView: View {
 
     @ObservedObject var viewModel: PopupVM
 
@@ -22,7 +22,7 @@ struct Popup: View {
                         Text(message).textBodyNormal
                     }
 
-                    if let inputVM = viewModel.textFieldVM?.intViewModel {
+                    if let inputVM = viewModel.textFieldVM {
                         TextFieldView(viewModel: inputVM)
                     }
                 }
@@ -59,10 +59,10 @@ struct Popup: View {
 struct Popup_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            Popup(viewModel: .init(.sampleInfo, dismiss: {}))
-            Popup(viewModel: .init(.sampleAction, dismiss: {}))
-            Popup(viewModel: .init(.sampleTextField, dismiss: {}))
-            Popup(viewModel: .init(.sampleTextFieldAndPicker, dismiss: {}))
+            PopupView(viewModel: .init(.sampleInfo, dismiss: {}))
+            PopupView(viewModel: .init(.sampleAction, dismiss: {}))
+            PopupView(viewModel: .init(.sampleTextField, dismiss: {}))
+            PopupView(viewModel: .init(.sampleTextFieldAndPicker, dismiss: {}))
         }
         .previewSizeThatFits()
     }

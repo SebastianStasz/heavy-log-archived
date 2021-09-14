@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct ValidationResult<T> {
-    let value: T?
+struct ValidationResult {
+    let value: String?
     private let validationMessage: ValidationMessage?
 
     var message: String? {
         validationMessage?.message
     }
 
-    init(value: T) {
+    init(value: String) {
         self.value = value
         self.validationMessage = nil
     }

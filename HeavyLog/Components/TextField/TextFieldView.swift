@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct TextFieldView<T: Comparable, Validation: ValidationService>: View where T == Validation.T {
+struct TextFieldView: View {
 
-    @ObservedObject var viewModel: TextFieldVM<T, Validation>
+    @ObservedObject var viewModel: TextFieldVM
 
     var body: some View {
         VStack(alignment: .leading, spacing: .spacingMicro) {
@@ -33,7 +33,7 @@ struct TextFieldView<T: Comparable, Validation: ValidationService>: View where T
 struct TextFieldView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            TextFieldView(viewModel: .init(result: .constant(2), validation: ValueValidation(type: .integer)))
+            TextFieldView(viewModel: .integer(result: .constant("2")))
         }
         .previewSizeThatFits(backgroundColor: .backgroundSecondary)
     }

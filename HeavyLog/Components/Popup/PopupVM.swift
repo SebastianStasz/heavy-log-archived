@@ -29,7 +29,7 @@ class PopupVM: ObservableObject {
         popup.isCancelButton
     }
 
-    var textFieldVM: TextFieldType? {
+    var textFieldVM: TextFieldVM? {
         guard let vm = popup.textFieldVM else { return nil }
         return vm
     }

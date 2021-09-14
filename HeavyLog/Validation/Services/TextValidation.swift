@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TextValidation<T: StringProtocol>: ValidationService {
+struct TextValidation: ValidationService {
 
     let canBeEmpty: Bool
     let minLength: Int
@@ -19,8 +19,8 @@ struct TextValidation<T: StringProtocol>: ValidationService {
         self.maxLength = maxLength
     }
 
-    func checkValue(_ value: String) -> ValidationResult<String> {
-        if let result: ValidationResult<String> = checkIsEmpty(value) {
+    func checkValue(_ value: String) -> ValidationResult {
+        if let result = checkIsEmpty(value) {
             return result
         }
         guard value.count >= minLength else {

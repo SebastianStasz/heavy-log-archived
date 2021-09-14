@@ -9,7 +9,7 @@ import SwiftUI
 
 struct DashboardView: View {
 
-    @State private var result: Int?
+    @State private var result: String?
 
     var body: some View {
         VStack {
@@ -18,7 +18,7 @@ struct DashboardView: View {
             }
 
             Button("Present pop-up") {
-                AppController.shared.present(popup: .textFieldAndPicker(.init(title: "Sample", message: "Sample"), .integer(viewModel: .init(result: $result, validation: .init(type: .integer))), .init(hint: "", viewModel: .repsPicker), output: { print("Weight: \($0), Reps: \($1)") }))
+                AppController.shared.present(popup: .textFieldAndPicker(.init(title: "Sample", message: "Sample"), .init(result: $result, validation: ValueValidation(type: .double)), .init(hint: "", viewModel: .repsPicker), output: { print("Weight: \($0), Reps: \($1)") }))
             }
         }
         .infiniteFrame()
