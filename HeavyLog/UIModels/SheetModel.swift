@@ -7,17 +7,21 @@
 
 import SwiftUI
 
-enum SheetModel: Int, View {
-    case workout
+enum SheetModel: View {
+    case workout(viewModel: WorkoutCreatorVM)
 
     var body: some View {
         switch self {
-        case .workout:
-            WorkoutCreatorView()
+        case let .workout(vm):
+            WorkoutCreatorView(viewModel: vm)
         }
     }
 }
 
 extension SheetModel: Identifiable {
-    var id: Int { rawValue }
+    var id: Int {
+        switch self {
+        case .workout: return 0
+        }
+    }
 }

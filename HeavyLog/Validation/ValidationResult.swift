@@ -25,3 +25,5 @@ struct ValidationResult {
         self.validationMessage = message
     }
 }
+
+extension ValidationResult: Equatable {}

@@ -59,6 +59,11 @@ final class WorkoutCreatorVM: ObservableObject {
         }
     }
 
+    private func abortWorkoutCreator() {
+        navigate(to: .dismissCreator)
+        AppController.shared.abortWorkoutCreator()
+    }
+
     private func catchNestedModelsChanges() {
         workoutInfoListVM.objectWillChange
             .sink { [weak self] _ in
@@ -77,6 +82,7 @@ extension WorkoutCreatorVM {
         case workoutInfo
         case exerciseList
         case dismissExerciseList
+        case abortCreatorPopup
         case dismissCreator
     }
 
@@ -90,8 +96,16 @@ extension WorkoutCreatorVM {
             isExerciseListPresented = true
         case .dismissExerciseList:
             isExerciseListPresented = false
+        case .abortCreatorPopup:
+            presentAbortWorkoutCreatorPopup()
         case .dismissCreator:
             AppController.shared.dismissSheet()
         }
+    }
+
+    private func presentAbortWorkoutCreatorPopup() {
+        let info = PopupModel.Info(title: "Delete workout", message: "Are you sure you want to delete current workout?")
+        let popup = PopupModel.action(info, action: abortWorkoutCreator, isDestructive: true)
+        AppController.shared.present(popup: popup)
     }
 }

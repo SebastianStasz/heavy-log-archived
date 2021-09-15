@@ -40,10 +40,23 @@ extension TabBarVM {
         case .popupItems:
             arePopupsShown = true
         case .view:
-            arePopupsShown = false
+            dismissPopups()
         case .workoutSheet:
-            AppController.shared.present(sheet: .workout)
-            arePopupsShown = false
+            goToWorkoutCreator()
         }
+    }
+
+    private func goToWorkoutCreator() {
+        guard let vm = parent.workoutCreatorVM else {
+            parent.startWorkout()
+            navigate(to: .workoutSheet)
+            return
+        }
+        AppController.shared.present(sheet: .workout(viewModel: vm))
+        dismissPopups()
+    }
+
+    private func dismissPopups() {
+        arePopupsShown = false
     }
 }

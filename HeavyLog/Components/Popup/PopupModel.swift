@@ -9,7 +9,7 @@ import Foundation
 
 enum PopupModel {
     case info(Info)
-    case action(Info, action: () -> Void)
+    case action(Info, action: () -> Void, isDestructive: Bool = false)
     case textField(Info, TextFieldVM, output: (String) -> Void)
     case textFieldAndPicker(Info, TextFieldVM, Picker, output: (String, Int) -> Void)
 
@@ -26,7 +26,7 @@ enum PopupModel {
     var title: String {
         switch self {
         case let .info(info),
-             let .action(info, _),
+             let .action(info, _, _),
              let .textField(info, _, _),
              let .textFieldAndPicker(info, _, _, _):
             return info.title
@@ -36,7 +36,7 @@ enum PopupModel {
     var message: String {
         switch self {
         case let .info(info),
-             let .action(info, _),
+             let .action(info, _, _),
              let .textField(info, _, _),
              let .textFieldAndPicker(info, _, _, _):
             return info.message
@@ -49,6 +49,15 @@ enum PopupModel {
             return false
         default:
             return true
+        }
+    }
+
+    var isDestructive: Bool {
+        switch self {
+        case let .action(_, action: _, isDestructive):
+            return isDestructive
+        default:
+            return false
         }
     }
 
@@ -73,13 +82,18 @@ enum PopupModel {
     }
 }
 
+// MARK: - Models
+
 extension PopupModel {
 
     static func addSet(to exercise: String, action: @escaping (String, Int) -> Void) -> PopupModel {
-        let info = Info(title: exercise, message: "Enter weight:")
-        return PopupModel.textFieldAndPicker(info, .init(result: .constant(""), validation: ValueValidation(type: .double)), .init(hint: "Number of reps:", viewModel: .repsPicker), output: action)
+        let info = Info(title: exercise, message: .workoutCreator_enterWeight)
+        let textFieldVM = TextFieldVM(result: .constant(""), validation: ValueValidation(type: .double))
+        let pickerModel = PopupModel.Picker(hint: .workoutCreator_numberOfReps, viewModel: .repsPicker)
+        return PopupModel.textFieldAndPicker(info, textFieldVM, pickerModel, output: action)
     }
 }
+
 
 // MARK: - Sample Data
 

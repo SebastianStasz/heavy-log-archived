@@ -67,6 +67,15 @@ public enum LocalizedString: String {
     case workoutCreator_tab_workout
     case workoutCreator_tab_info
     case workoutCreator_exerciseList_title
+    case workoutCreator_enterWeight
+    case workoutCreator_numberOfReps
+
+    case validation_message_empty
+    case validation_message_invalid
+    case validation_message_tooShort
+    case validation_message_tooLong
+    case validation_message_tooSmall
+    case validation_message_tooBig
 }
 
 public extension LocalizedString {

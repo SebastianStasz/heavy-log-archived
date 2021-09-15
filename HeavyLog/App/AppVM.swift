@@ -63,6 +63,10 @@ final class AppController {
     func dismissSheet() {
         app.sheet = nil
     }
+
+    func abortWorkoutCreator() {
+        app.workoutCreatorVM = nil
+    }
 }
 
 // MARK: - App View Model
@@ -72,6 +76,7 @@ final class AppVM: ObservableObject {
 
     @Published private(set) var tabBarVM: TabBarVM?
     @Published private(set) var toastPresenter = ToastPresenterVM()
+    @Published fileprivate(set) var workoutCreatorVM: WorkoutCreatorVM?
     @Published var actionSheet: ActionSheetModel?
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
@@ -83,6 +88,10 @@ final class AppVM: ObservableObject {
     init() {
         tabBarVM = TabBarVM(parent: self)
         cancellable = ExerciseEntity.loadStaticData(to: context)
+    }
+
+    func startWorkout() {
+        workoutCreatorVM = WorkoutCreatorVM()
     }
 }
 

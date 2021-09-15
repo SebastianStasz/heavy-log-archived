@@ -29,4 +29,12 @@ public extension String {
     static var workoutCreator_exerciseList_title: String {
         LocalizedString.workoutCreator_exerciseList_title.text
     }
+
+    static var workoutCreator_enterWeight: String {
+        LocalizedString.workoutCreator_enterWeight.text
+    }
+
+    static var workoutCreator_numberOfReps: String {
+        LocalizedString.workoutCreator_numberOfReps.text
+    }
 }

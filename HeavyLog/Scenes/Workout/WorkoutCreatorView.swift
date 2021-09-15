@@ -10,9 +10,10 @@ import Shared
 
 struct WorkoutCreatorView: View {
     
-    @StateObject private var viewModel = WorkoutCreatorVM()
+    @ObservedObject private var viewModel: WorkoutCreatorVM
 
-    init() {
+    init(viewModel: WorkoutCreatorVM) {
+        self.viewModel = viewModel
         UITabBar.appearance().isHidden = false
     }
 
@@ -29,7 +30,7 @@ struct WorkoutCreatorView: View {
     private var toolbarContent: some ToolbarContent {
         Group {
             Toolbar.cancel(action: dismissCreator)
-            Toolbar.delete(action: dismissCreator)
+            Toolbar.delete(action: presentPopupToDeleteWorkout)
         }
     }
 
@@ -38,6 +39,10 @@ struct WorkoutCreatorView: View {
     private func dismissCreator() {
         viewModel.navigate(to: .dismissCreator)
     }
+
+    private func presentPopupToDeleteWorkout() {
+        viewModel.navigate(to: .abortCreatorPopup)
+    }
 }
 
 
@@ -45,6 +50,6 @@ struct WorkoutCreatorView: View {
 
 struct WorkoutCreatorView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutCreatorView()
+        WorkoutCreatorView(viewModel: WorkoutCreatorVM())
     }
 }

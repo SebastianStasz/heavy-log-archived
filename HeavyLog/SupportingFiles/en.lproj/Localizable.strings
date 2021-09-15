@@ -65,3 +65,12 @@
 "workoutCreator_tab_workout" = "Workout";
 "workoutCreator_tab_info" = "Info";
 "workoutCreator_exerciseList_title" = "Choose an exercise";
+"workoutCreator_enterWeight" = "Enter weight:";
+"workoutCreator_numberOfReps" = "Number of reps:";
+
+"validation_message_empty" = "Field can not be empty.";
+"validation_message_invalid" = "Value is invalid.";
+"validation_message_tooShort" = "Text is too short.";
+"validation_message_tooLong" = "Text is too long.";
+"validation_message_tooSmall" = "Value is too small.";
+"validation_message_tooBig" = "Value is too big.";

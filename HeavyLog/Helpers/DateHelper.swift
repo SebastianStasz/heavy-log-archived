@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DateHelper {
+final class DateHelper {
     static let shared = DateHelper()
 
     private let cachedDateFormattersQueue = DispatchQueue(label: "com.boles.date.formatter.queue")

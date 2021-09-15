@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Shared
 
 enum ValidationMessage {
     case empty
@@ -18,17 +19,17 @@ enum ValidationMessage {
     var message: String {
         switch self {
         case .empty:
-            return "Value can not be empty."
+            return LocalizedString.validation_message_empty.text
         case .invalid:
-            return "Value is invalid."
+            return LocalizedString.validation_message_invalid.text
         case .tooShort:
-            return "Value is too shrot."
+            return LocalizedString.validation_message_tooShort.text
         case .tooLong:
-            return "Value is too long."
+            return LocalizedString.validation_message_tooLong.text
         case .tooSmall:
-            return "Value is too small."
+            return LocalizedString.validation_message_tooSmall.text
         case .tooBig:
-            return "Value is too big."
+            return LocalizedString.validation_message_tooBig.text
         }
     }
 }

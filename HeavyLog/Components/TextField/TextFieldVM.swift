@@ -17,6 +17,7 @@ final class TextFieldVM: ObservableObject {
     @Binding var result: String?
     @Published var textField: String
     @Published var validationMessage: String?
+    @Published private var validationResult: ValidationResult?
     let placeholder: String
     let type: UIKeyboardType
 
@@ -28,17 +29,29 @@ final class TextFieldVM: ObservableObject {
         self.type = type
         self.dropFirst = dropFirst
 
-        cancellable = $textField
-            .removeDuplicates()
-            .dropFirst(dropFirst)
-            .debounce(for: 0.3, scheduler: RunLoop.main)
+        $textField
             .map { value -> ValidationResult in
                 validation.checkValue(value)
             }
+            .assign(to: &$validationResult)
+
+        cancellable = $validationResult
+            .removeDuplicates()
+            .dropFirst(dropFirst)
+            .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { [weak self] validation in
-                self?.validationMessage = validation.message
-                self?.result = validation.value
+                self?.validationMessage = validation?.message
+                self?.result = validation?.value
             }
+    }
+
+    var isValid: Bool {
+        validationResult?.value != nil
+    }
+
+    func forceValidation() {
+        validationMessage = validationResult?.message
+        result = validationResult?.value
     }
 }
 

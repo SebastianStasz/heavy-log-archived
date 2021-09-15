@@ -41,7 +41,7 @@ struct PopupView: View {
                     .displayIf(viewModel.shouldDisplayCancelButton)
 
                 Button(.common_ok, action: viewModel.action)
-                    .buttonStyle(BaseButtonStyle(.action))
+                    .buttonStyle(BaseButtonStyle(viewModel.isDestructive ? .destructive : .action))
             }
             .frame(maxWidth: .infinity)
         }

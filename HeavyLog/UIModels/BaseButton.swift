@@ -10,6 +10,7 @@ import SwiftUI
 enum BaseButton {
     case action
     case secondary
+    case destructive
 
     var backgroundColor: Color {
         switch self {
@@ -17,6 +18,8 @@ enum BaseButton {
             return .actionPrimary
         case .secondary:
             return .basicSecondary
+        case .destructive:
+            return .accentRed
         }
     }
 
@@ -26,6 +29,8 @@ enum BaseButton {
             return .basicPrimary
         case .secondary:
             return .grayDarkPrimary
+        case .destructive:
+            return .basicPrimary
         }
     }
 }
