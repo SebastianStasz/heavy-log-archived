@@ -1,24 +1,35 @@
 [
     {
         "id": 0,
-        "name": "Bench press",
+        "name": "exercise_name_benchPress",
         "short_name": null,
-        "description": "An upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench.",
+        "description": "exercise_desc_benchPress",
         "difficulty": "hard",
         "section": "upper",
         "type": "push",
         "main_body_part": "chest",
         "additional_body_parts": ["triceps"]
-    }, 
+    },
     {
         "id": 1,
-        "name": "Classic deadlift",
+        "name": "exercise_name_classicDeadlift",
         "short_name": null,
-        "description": "It is one of the three powerlifting exercises, along with the squat and bench press.",
+        "description": "exercise_desc_classicDeadlift",
         "difficulty": "hard",
         "section": "lower",
         "type": "pull",
         "main_body_part": "glutes",
         "additional_body_parts": ["lower_back", "traps", "hamstrings"]
+    },
+    {
+        "id": 2,
+        "name": "exercise_name_overheadPress",
+        "short_name": "OHP",
+        "description": "exercise_desc_overheadPress",
+        "difficulty": "hard",
+        "section": "upper",
+        "type": "push",
+        "main_body_part": "medial_deltoid",
+        "additional_body_parts": ["anterior_deltoid", "triceps"]
     }
 ]

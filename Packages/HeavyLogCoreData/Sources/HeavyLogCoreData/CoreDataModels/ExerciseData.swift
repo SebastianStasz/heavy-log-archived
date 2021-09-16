@@ -22,8 +22,9 @@ public struct ExerciseData {
 extension ExerciseData: Decodable {
 
     enum CodingKeys: String, CodingKey {
-        case id, name, information, difficulty, section, type
+        case id, name, difficulty, section, type
         case shortName = "short_name"
+        case information = "description"
         case mainBodyPart = "main_body_part"
         case additionalBodyParts = "additional_body_parts"
     }

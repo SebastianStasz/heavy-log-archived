@@ -40,7 +40,7 @@ struct ExerciseListView: View {
 
 // MARK: - Preview
 
-struct ExercisesView_Previews: PreviewProvider {
+struct ExerciseListView_Previews: PreviewProvider {
     static var previews: some View {
         ExerciseListView(paddingTop: .spacingSmall)
     }

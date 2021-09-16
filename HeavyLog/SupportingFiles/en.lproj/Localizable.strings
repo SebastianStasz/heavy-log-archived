@@ -74,3 +74,12 @@
 "validation_message_tooLong" = "Text is too long.";
 "validation_message_tooSmall" = "Value is too small.";
 "validation_message_tooBig" = "Value is too big.";
+
+"exercise_name_benchPress" = "Bench press";
+"exercise_name_classicDeadlift" = "Classic deadlift";
+"exercise_name_overheadPress" = "Overhead press";
+
+"exercise_desc_benchPress" = "An upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench.";
+"exercise_desc_classicDeadlift" = "It is one of the three powerlifting exercises, along with the squat and bench press.";
+"exercise_desc_overheadPress" = "Exercise in which a weight is pressed straight upwards from racking position until the arms are locked out overhead, while the legs, lower back and abs maintain balance.";
+

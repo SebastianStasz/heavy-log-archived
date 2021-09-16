@@ -74,3 +74,11 @@
 "validation_message_tooLong" = "Tekst jest za długi.";
 "validation_message_tooSmall" = "Wartość jest za mała.";
 "validation_message_tooBig" = "Wartość jest za duża.";
+
+"exercise_name_benchPress" = "Wyciskanie sztangi leżąc";
+"exercise_name_classicDeadlift" = "Martwy ciąg klasyczny";
+"exercise_name_overheadPress" = "Wyciskanie sztangi nad głowę";
+
+"exercise_desc_benchPress" = "Ćwiczenie siłowe na górne partie ciała, w którym osoba ćwicząca wyciska sztangę do góry leżąc na ławce poziomej.";
+"exercise_desc_classicDeadlift" = "Martwy ciąg to jedno z trzech ćwiczeń w trójboju siłowym, obok przysiadu i wyciskania na ławce.";
+"exercise_desc_overheadPress" = "Ćwiczenie, w którym sztanga jest wypychana w górę z pozycji stojącej, aż do zablokowania ramion nad głową, podczas gdy nogi, dolna część pleców i brzuch utrzymują równowagę.";
