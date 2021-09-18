@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Shared
 
 struct DoubleTextHeaderViewData {
     let title: String

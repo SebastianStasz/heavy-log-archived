@@ -70,11 +70,20 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         // Create effort entity.
         let effortEntity = try createEffortEntity(workoutData: .sample1, exerciseEntity: exerciseEntity, setsData: [])
 
+        // Create workout template entity that will use created exercise.
+        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity])
+
         // Delete exercise entity.
         exerciseEntity.delete()
 
         // Verify that exercise entity was deleted.
         try fetchRequestShouldReturnElements(0, for: ExerciseEntity.self)
+
+        // Verify that workout template entity still exist.
+        try fetchRequestShouldReturnElements(1, for: WorkoutTemplateEntity.self)
+
+        // Verify that workout template entity has no exercises.
+        XCTAssertEqual(workoutTemplateEntity.exercises.count, 0)
 
         // Verify that effort entity still exist.
         try fetchRequestShouldReturnElements(1, for: EffortEntity.self)

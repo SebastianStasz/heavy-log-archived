@@ -62,16 +62,16 @@ extension EffortEntity {
 extension EffortEntity {
 
     @objc(addSetsObject:)
-    @NSManaged public func addToSets(_ value: SetEntity)
+    @NSManaged func addToSets(_ value: SetEntity)
 
     @objc(removeSetsObject:)
-    @NSManaged public func removeFromSets(_ value: SetEntity)
+    @NSManaged func removeFromSets(_ value: SetEntity)
 
     @objc(addSets:)
-    @NSManaged public func addToSets(_ values: NSSet)
+    @NSManaged func addToSets(_ values: NSSet)
 
     @objc(removeSets:)
-    @NSManaged public func removeFromSets(_ values: NSSet)
+    @NSManaged func removeFromSets(_ values: NSSet)
 }
 
 extension EffortEntity: Identifiable {}

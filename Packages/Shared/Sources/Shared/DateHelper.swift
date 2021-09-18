@@ -55,7 +55,7 @@ final class DateHelper {
 
 // MARK: - Extensions
 
-extension Date {
+public extension Date {
 
     func string(format: DateFormatter.Style, withTime time: Bool = false) -> String {
         DateHelper.shared.string(from: self, format: format, withTime: time)
@@ -70,7 +70,7 @@ extension Date {
     }
 }
 
-extension Optional where Wrapped == Date {
+public extension Optional where Wrapped == Date {
 
     func string(format: DateFormatter.Style, withTime time: Bool = false) -> String {
         guard let date = self else { return "None" }

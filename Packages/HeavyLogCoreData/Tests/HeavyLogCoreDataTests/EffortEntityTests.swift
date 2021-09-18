@@ -133,7 +133,7 @@ extension EffortEntityTests {
         XCTAssertEqual(effort.exerciseId, data.exerciseId)
         XCTAssertEqual(effort.numberOfSets, data.sets.count)
         for set in setEntities {
-            XCTAssert(effort.sets.contains(where: { $0.id == set.id }))
+            XCTAssert(effort.sets.contains(set))
         }
     }
 }

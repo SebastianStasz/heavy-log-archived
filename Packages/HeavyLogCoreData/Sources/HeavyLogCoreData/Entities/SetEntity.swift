@@ -33,8 +33,6 @@ extension SetEntity {
         weight = setData.weight
         return self
     }
-
-    // MARK: - Helpers
 }
 
 extension SetEntity: Identifiable {}

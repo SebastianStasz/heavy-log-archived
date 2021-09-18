@@ -27,6 +27,7 @@ import SwiftUI
     @NSManaged private(set) var id_: Int
     @NSManaged private(set) var isEditable: Bool
     @NSManaged private(set) var efforts: Set<EffortEntity>
+    @NSManaged private(set) var templates: Set<WorkoutTemplateEntity>
 
     public var name: String {
         name_.localize()

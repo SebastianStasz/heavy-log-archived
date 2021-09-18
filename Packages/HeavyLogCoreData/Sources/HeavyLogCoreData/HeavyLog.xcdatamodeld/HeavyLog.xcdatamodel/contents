@@ -23,6 +23,7 @@
         <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
         <relationship name="efforts" toMany="YES" deletionRule="Nullify" destinationEntity="EffortEntity" inverseName="exercise" inverseEntity="EffortEntity"/>
+        <relationship name="templates" toMany="YES" deletionRule="Nullify" destinationEntity="WorkoutTemplateEntity" inverseName="exercises" inverseEntity="WorkoutTemplateEntity"/>
     </entity>
     <entity name="SetEntity" representedClassName="SetEntity" syncable="YES">
         <attribute name="reps" attributeType="Integer 64" usesScalarValueType="YES"/>
@@ -37,11 +38,17 @@
         <attribute name="title" attributeType="String"/>
         <relationship name="efforts" toMany="YES" deletionRule="Cascade" destinationEntity="EffortEntity" inverseName="workout" inverseEntity="EffortEntity"/>
     </entity>
+    <entity name="WorkoutTemplateEntity" representedClassName="WorkoutTemplateEntity" syncable="YES">
+        <attribute name="lastUse" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timesUsed" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="exercises" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="templates" inverseEntity="ExerciseEntity"/>
+    </entity>
     <elements>
         <element name="BodyParameterEntity" positionX="288.9019775390625" positionY="-134.902099609375" width="128" height="74"/>
         <element name="EffortEntity" positionX="84.4190673828125" positionY="189.1649475097656" width="128" height="103"/>
-        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="128" height="194"/>
+        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="134.0357666015625" height="223"/>
         <element name="SetEntity" positionX="282.9082946777344" positionY="267.9727783203124" width="128" height="88"/>
         <element name="WorkoutEntity" positionX="-93.40850830078125" positionY="-101.3866577148438" width="128" height="133"/>
+        <element name="WorkoutTemplateEntity" positionX="-560.8081665039062" positionY="33.03704833984375" width="151.8609619140625" height="88"/>
     </elements>
 </model>

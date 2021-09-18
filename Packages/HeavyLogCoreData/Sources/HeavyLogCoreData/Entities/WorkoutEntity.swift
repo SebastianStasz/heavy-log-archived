@@ -9,8 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(WorkoutEntity)
-public class WorkoutEntity: NSManagedObject {
+@objc(WorkoutEntity) public class WorkoutEntity: NSManagedObject {
 
     @NSManaged private(set) var title: String
     @NSManaged private(set) var startDate: Date
@@ -71,17 +70,16 @@ extension WorkoutEntity {
 extension WorkoutEntity {
 
     @objc(addEffortsObject:)
-    @NSManaged public func addToEfforts(_ value: EffortEntity)
+    @NSManaged func addToEfforts(_ value: EffortEntity)
 
     @objc(removeEffortsObject:)
-    @NSManaged public func removeFromEfforts(_ value: EffortEntity)
+    @NSManaged func removeFromEfforts(_ value: EffortEntity)
 
     @objc(addEfforts:)
-    @NSManaged public func addToEfforts(_ values: NSSet)
+    @NSManaged func addToEfforts(_ values: NSSet)
 
     @objc(removeEfforts:)
-    @NSManaged public func removeFromEfforts(_ values: NSSet)
-
+    @NSManaged func removeFromEfforts(_ values: NSSet)
 }
 
 extension WorkoutEntity: Identifiable {}
