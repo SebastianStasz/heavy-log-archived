@@ -82,7 +82,7 @@ struct TabBarView: View {
 
 struct TabBarView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = TabBarVM(parent: AppVM())
+        let viewModel = TabBarVM(startWorkout: { _ in })
         TabBarView(viewModel: viewModel)
     }
 }

@@ -10,6 +10,8 @@
 "common_cancel" = "Anuluj";
 "common_close" = "Zamknij";
 "common_delete" = "Usuń";
+"common_empty" = "Pusty";
+"common_showAll" = "Pokaż wszystkie";
 
 "tab_dashboard_title" = "Pulpit";
 "tab_workouts_title" = "Treningi";
@@ -62,6 +64,7 @@
 "common_bodyParameter_thigh" = "Udo";
 "common_bodyParameter_calf" = "Łydka";
 
+"workoutCreator_chooseTemplate" = "Wybierz szablon treningu:";
 "workoutCreator_tab_workout" = "Trening";
 "workoutCreator_tab_info" = "Info";
 "workoutCreator_exerciseList_title" = "Wybierz ćwiczenie";

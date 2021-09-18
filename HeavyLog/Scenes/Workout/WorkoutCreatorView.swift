@@ -9,7 +9,7 @@ import SwiftUI
 import Shared
 
 struct WorkoutCreatorView: View {
-    
+
     @ObservedObject private var viewModel: WorkoutCreatorVM
 
     init(viewModel: WorkoutCreatorVM) {

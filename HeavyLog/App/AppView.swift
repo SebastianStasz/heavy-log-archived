@@ -9,13 +9,16 @@ import SwiftUI
 
 struct AppView: View {
 
+    @Environment(\.managedObjectContext) private var context
     @ObservedObject var appVM: AppVM
 
     var body: some View {
         ZStack {
             TabBarView(viewModel: appVM.tabBarVM!)
                 .sheet(item: $appVM.sheet) {
-                    $0.screenPresenter(appVM: appVM).overlay(PopupPresenter($appVM.popup))
+                    $0.screenPresenter(appVM: appVM)
+                        .overlay(PopupPresenter($appVM.popup))
+                        .environment(\.managedObjectContext, context)
                 }
 
             if appVM.sheet == nil {

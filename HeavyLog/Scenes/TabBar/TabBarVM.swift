@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HeavyLogCoreData
 
 final class TabBarVM: ObservableObject {
     typealias Tab = TabBarModel
@@ -13,10 +14,14 @@ final class TabBarVM: ObservableObject {
     @Published var selectedTab: Tab = .dashboard
     @Published var arePopupsShown = false
 
-    private unowned let parent: AppVM
+    private let startWorkout: (WorkoutTemplateEntity?) -> Void
 
-    init(parent: AppVM) {
-        self.parent = parent
+    init(startWorkout: @escaping (WorkoutTemplateEntity?) -> Void) {
+        self.startWorkout = startWorkout
+    }
+
+    private var controller: AppController {
+        AppController.shared
     }
 
     var availableTabs: [Tab] { Tab.allCases }
@@ -30,7 +35,7 @@ extension TabBarVM {
         case tab(Tab)
         case popupItems
         case view
-        case workoutSheet
+        case workoutCreator
     }
 
     func navigate(to destination: Destination) {
@@ -41,18 +46,31 @@ extension TabBarVM {
             arePopupsShown = true
         case .view:
             dismissPopups()
-        case .workoutSheet:
-            goToWorkoutCreator()
+        case .workoutCreator:
+            startWorkoutCreatorProcess()
         }
     }
 
-    private func goToWorkoutCreator() {
-        guard let vm = parent.workoutCreatorVM else {
-            parent.startWorkout()
-            navigate(to: .workoutSheet)
-            return
+    private func startWorkoutCreatorProcess() {
+        controller.isWorkoutStarted
+            ? presentWorkoutCreator()
+            : chooseWorkoutTemplateIfNeeded()
+    }
+
+    private func chooseWorkoutTemplateIfNeeded() {
+        guard let templates = workoutTemplates, templates.isNotEmpty else {
+            presentWorkoutCreator() ; return
         }
-        AppController.shared.present(sheet: .workout(viewModel: vm))
+        controller.present(actionSheet: .chooseWorkoutTemplate(action: startWorkout, templates: templates))
+        dismissPopups()
+    }
+
+    private var workoutTemplates: [WorkoutTemplateEntity]? {
+        WorkoutTemplateEntity.getRecentlyUsedTemplates(from: controller.context, upTo: 3)
+    }
+
+    private func presentWorkoutCreator() {
+        startWorkout(nil)
         dismissPopups()
     }
 

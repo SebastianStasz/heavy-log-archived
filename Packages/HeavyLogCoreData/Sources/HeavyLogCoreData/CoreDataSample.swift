@@ -26,7 +26,9 @@ public extension CoreDataSample {
     }
 
     static func createSampleWorkoutTemplates(in context: NSManagedObjectContext) {
-        WorkoutTemplateEntity.create(in: context, data: .sample1)
+        let exercises = createSampleExerciseEntities(in: context)
+        WorkoutTemplateEntity.create(in: context, data: .init(name: "FBW A", exercises: exercises.map { _, e in e }))
         WorkoutTemplateEntity.create(in: context, data: .sample2)
+        WorkoutTemplateEntity.create(in: context, data: .sample3)
     }
 }

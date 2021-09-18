@@ -29,7 +29,7 @@ final class WorkoutCreatorVM: ObservableObject {
         workoutTreeData.efforts.map { $0.exercise }
     }
 
-    init() {
+    init(using template: WorkoutTemplateEntity? = nil) {
         catchNestedModelsChanges()
 
         $workout
@@ -37,6 +37,10 @@ final class WorkoutCreatorVM: ObservableObject {
                 self?.workoutInfoListVM.rows = form.info
             }
             .store(in: &cancellables)
+
+        if let template = template {
+            _ = template.exercises.map { addExercise($0) }
+        }
     }
 
     func addExercise(_ exerciseEntity: ExerciseEntity) {

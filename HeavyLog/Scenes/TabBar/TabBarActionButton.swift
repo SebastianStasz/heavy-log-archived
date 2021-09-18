@@ -23,7 +23,7 @@ struct TabBarActionButton: View {
 
     private var popupButtons: some View {
         Group {
-            popupButton(Popup.first, angle: -90, action: tabBar.navigate(to: .workoutSheet))
+            popupButton(Popup.first, angle: -90, action: tabBar.navigate(to: .workoutCreator))
             popupButton(Popup.second, angle: -135, action: {}())
             popupButton(Popup.third, angle: -45, action: {}())
         }
@@ -61,7 +61,7 @@ struct TabBarActionButton: View {
 
 struct TabBarAddButton_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = TabBarVM(parent: AppVM())
+        let viewModel = TabBarVM(startWorkout: { _ in })
         ZStack {
             Color.backgroundMain
             TabBarActionButton(tabBar: viewModel)

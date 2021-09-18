@@ -12,6 +12,8 @@ public enum LocalizedString: String {
     case common_cancel
     case common_close
     case common_delete
+    case common_empty
+    case common_showAll
 
     case tab_dashboard_title
     case tab_workouts_title
@@ -64,6 +66,7 @@ public enum LocalizedString: String {
     case common_bodyParameter_thigh
     case common_bodyParameter_calf
 
+    case workoutCreator_chooseTemplate
     case workoutCreator_tab_workout
     case workoutCreator_tab_info
     case workoutCreator_exerciseList_title

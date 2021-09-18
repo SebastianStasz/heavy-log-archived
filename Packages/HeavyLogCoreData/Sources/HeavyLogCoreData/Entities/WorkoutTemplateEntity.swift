@@ -6,15 +6,16 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
+import SwiftUI
 
 @objc(WorkoutTemplateEntity) public class WorkoutTemplateEntity: NSManagedObject {
 
-    @NSManaged private(set) var name: String
+    @NSManaged public private(set) var name: String
     @NSManaged private(set) var lastUse: Date?
     @NSManaged private(set) var timesUsed: Int64
-    @NSManaged private(set) var exercises: Set<ExerciseEntity>
+    @NSManaged public private(set) var exercises: Set<ExerciseEntity>
 }
 
 // MARK: - Methods
@@ -39,16 +40,26 @@ public extension WorkoutTemplateEntity {
         self.lastUse = Date()
     }
 
-    static func getRecentlyUsedTemplates(from context: NSManagedObjectContext, amount: Int) -> [WorkoutTemplateEntity]? {
+    // MARK: - Fetch Requests
+
+    static var all: FetchRequest<WorkoutTemplateEntity> {
+        WorkoutTemplateEntity.createFetchRequest(sortDescriptors: [recentlyUsed])
+    }
+
+    static func getRecentlyUsedTemplates(from context: NSManagedObjectContext, upTo quantity: Int) -> [WorkoutTemplateEntity]? {
         let request: NSFetchRequest<WorkoutTemplateEntity> = WorkoutTemplateEntity.createFetchRequest(sortDescriptors: [recentlyUsed])
-        request.fetchLimit = amount
+        request.fetchLimit = quantity
         return try? context.fetch(request)
     }
+
+    // MARK: - Sort Descriptors
 
     private static var recentlyUsed: NSSortDescriptor {
         NSSortDescriptor(key: "lastUse", ascending: false)
     }
 }
+
+// MARK: - Helpers
 
 extension WorkoutTemplateEntity {
 

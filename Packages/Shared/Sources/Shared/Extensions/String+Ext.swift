@@ -26,6 +26,18 @@ public extension String {
         LocalizedString.common_cancel.text
     }
 
+    static var common_empty: String {
+        LocalizedString.common_empty.text
+    }
+
+    static var common_showAll: String {
+        LocalizedString.common_showAll.text
+    }
+
+    static var workoutCreator_chooseTemplate: String {
+        LocalizedString.workoutCreator_chooseTemplate.text
+    }
+
     static var workoutCreator_exerciseList_title: String {
         LocalizedString.workoutCreator_exerciseList_title.text
     }

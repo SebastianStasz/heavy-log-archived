@@ -36,6 +36,10 @@ final class AppController {
         self.app = appVM
     }
 
+    var isWorkoutStarted: Bool {
+        app.workoutCreatorVM != nil
+    }
+
     func present(toast: ToastModel) {
         app.toastPresenter.presentToast(toast)
     }
@@ -76,7 +80,7 @@ final class AppVM: ObservableObject {
 
     @Published private(set) var tabBarVM: TabBarVM?
     @Published private(set) var toastPresenter = ToastPresenterVM()
-    @Published fileprivate(set) var workoutCreatorVM: WorkoutCreatorVM?
+    @Published fileprivate var workoutCreatorVM: WorkoutCreatorVM?
     @Published var actionSheet: ActionSheetModel?
     @Published var sheet: SheetModel?
     @Published var alert: AlertModel?
@@ -86,12 +90,17 @@ final class AppVM: ObservableObject {
     private var cancellable: AnyCancellable?
 
     init() {
-        tabBarVM = TabBarVM(parent: self)
+        tabBarVM = TabBarVM(startWorkout: startWorkout)
         cancellable = ExerciseEntity.loadStaticData(to: context)
+        CoreDataSample.createSampleWorkoutTemplates(in: context)
     }
 
-    func startWorkout() {
-        workoutCreatorVM = WorkoutCreatorVM()
+    func startWorkout(using template: WorkoutTemplateEntity? = nil) {
+        guard let vm = workoutCreatorVM else {
+            workoutCreatorVM = WorkoutCreatorVM(using: template)
+            startWorkout() ; return
+        }
+        AppController.shared.present(sheet: .workout(viewModel: vm))
     }
 }
 
@@ -109,7 +118,7 @@ extension AppVM {
         case .startView:
             tabBarVM = nil
         case .appView:
-            tabBarVM = TabBarVM(parent: self)
+            tabBarVM = TabBarVM(startWorkout: startWorkout)
         }
     }
 }

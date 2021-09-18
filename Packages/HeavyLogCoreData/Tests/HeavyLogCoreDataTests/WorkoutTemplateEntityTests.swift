@@ -128,7 +128,7 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         workoutTemplateEntity1.wasUsed()
 
         // Get two recently used workout templates.
-        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, amount: 2)
+        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, upTo: 2)
 
         // Result should contain 2 workout templates.
         XCTAssertEqual(result?.count, 2)
@@ -150,7 +150,7 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         let _ = createWorkoutTemplateEntity(using: .sample3)
 
         // Get two recently used workout templates.
-        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, amount: 2)
+        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, upTo: 2)
 
         // Result should contain 2 workout templates.
         XCTAssertEqual(result?.count, 2)

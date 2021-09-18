@@ -10,6 +10,8 @@
 "common_cancel" = "Cancel";
 "common_close" = "Close";
 "common_delete" = "Delete";
+"common_empty" = "Empty";
+"common_showAll" = "Show all";
 
 "tab_dashboard_title" = "Dashboard";
 "tab_workouts_title" = "Wokrouts";
@@ -62,6 +64,7 @@
 "common_bodyParameter_thigh" = "Thigh";
 "common_bodyParameter_calf" = "Calf";
 
+"workoutCreator_chooseTemplate" = "Choose workout template:";
 "workoutCreator_tab_workout" = "Workout";
 "workoutCreator_tab_info" = "Info";
 "workoutCreator_exerciseList_title" = "Choose an exercise";
