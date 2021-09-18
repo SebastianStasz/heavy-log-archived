@@ -105,6 +105,47 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         // Save context.
         try saveContext()
     }
+
+    func test_getRecentlyUsedTemplates() {
+        // Create three workout template entities.
+        let workoutTemplateEntity1 = createWorkoutTemplateEntity()
+        let workoutTemplateEntity2 = createWorkoutTemplateEntity()
+        let workoutTemplateEntity3 = createWorkoutTemplateEntity()
+
+        // First use workoutTemplateEntity3.
+        workoutTemplateEntity3.wasUsed()
+
+        // Next use workoutTemplateEntity1.
+        workoutTemplateEntity1.wasUsed()
+
+        // Get two recently used workout templates.
+        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, amount: 2)
+
+        // Result should contain 2 workout templates.
+        XCTAssertEqual(result?.count, 2)
+
+        // Result should not contain workoutTemplateEntity2, because it was not used.
+        XCTAssertFalse(result?.contains(workoutTemplateEntity2) ?? true)
+
+        // At the first index should be workoutTemplateEntity1.
+        XCTAssertEqual(result?[0], workoutTemplateEntity1)
+
+        // At the second index should be workoutTemplateEntity3.
+        XCTAssertEqual(result?[1], workoutTemplateEntity3)
+    }
+
+    func test_getRecentlyUsedTemplates_if_neither_has_been_used() {
+        // Create three workout template entities.
+        let _ = createWorkoutTemplateEntity()
+        let _ = createWorkoutTemplateEntity()
+        let _ = createWorkoutTemplateEntity()
+
+        // Get two recently used workout templates.
+        let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, amount: 2)
+
+        // Result should contain 2 workout templates.
+        XCTAssertEqual(result?.count, 2)
+    }
 }
 
 // MARK: - Steps

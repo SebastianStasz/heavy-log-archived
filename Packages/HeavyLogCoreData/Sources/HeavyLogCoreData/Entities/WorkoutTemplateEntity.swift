@@ -36,6 +36,16 @@ public extension WorkoutTemplateEntity {
         self.timesUsed += 1
         self.lastUse = Date()
     }
+
+    static func getRecentlyUsedTemplates(from context: NSManagedObjectContext, amount: Int) -> [WorkoutTemplateEntity]? {
+        let request: NSFetchRequest<WorkoutTemplateEntity> = WorkoutTemplateEntity.createFetchRequest(sortDescriptors: [recentlyUsed])
+        request.fetchLimit = amount
+        return try? context.fetch(request)
+    }
+
+    private static var recentlyUsed: NSSortDescriptor {
+        NSSortDescriptor(key: "lastUse", ascending: false)
+    }
 }
 
 extension WorkoutTemplateEntity {
