@@ -71,7 +71,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         let effortEntity = try createEffortEntity(workoutData: .sample1, exerciseEntity: exerciseEntity, setsData: [])
 
         // Create workout template entity that will use created exercise.
-        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity])
+        let workoutTemplateEntity = createWorkoutTemplateEntity(using: .init(name: "A", exercises: [exerciseEntity]))
 
         // Delete exercise entity.
         exerciseEntity.delete()

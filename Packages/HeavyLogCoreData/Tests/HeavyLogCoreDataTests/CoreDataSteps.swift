@@ -86,7 +86,7 @@ extension CoreDataSteps {
         }
     }
 
-    func createWorkoutTemplateEntity(exercises: [ExerciseEntity] = []) -> WorkoutTemplateEntity {
-        WorkoutTemplateEntity.create(in: context, exercises: exercises)
+    func createWorkoutTemplateEntity(using data: WorkoutTemplateData) -> WorkoutTemplateEntity {
+        WorkoutTemplateEntity.create(in: context, data: data)
     }
 }

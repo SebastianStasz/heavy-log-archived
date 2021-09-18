@@ -40,6 +40,7 @@
     </entity>
     <entity name="WorkoutTemplateEntity" representedClassName="WorkoutTemplateEntity" syncable="YES">
         <attribute name="lastUse" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String"/>
         <attribute name="timesUsed" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="exercises" toMany="YES" deletionRule="Nullify" destinationEntity="ExerciseEntity" inverseName="templates" inverseEntity="ExerciseEntity"/>
     </entity>
@@ -49,6 +50,6 @@
         <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="134.0357666015625" height="223"/>
         <element name="SetEntity" positionX="282.9082946777344" positionY="267.9727783203124" width="128" height="88"/>
         <element name="WorkoutEntity" positionX="-93.40850830078125" positionY="-101.3866577148438" width="128" height="133"/>
-        <element name="WorkoutTemplateEntity" positionX="-560.8081665039062" positionY="33.03704833984375" width="151.8609619140625" height="88"/>
+        <element name="WorkoutTemplateEntity" positionX="-560.8081665039062" positionY="33.03704833984375" width="151.8609619140625" height="103"/>
     </elements>
 </model>

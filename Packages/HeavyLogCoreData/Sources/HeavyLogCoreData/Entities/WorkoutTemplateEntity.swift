@@ -11,6 +11,7 @@ import CoreData
 
 @objc(WorkoutTemplateEntity) public class WorkoutTemplateEntity: NSManagedObject {
 
+    @NSManaged private(set) var name: String
     @NSManaged private(set) var lastUse: Date?
     @NSManaged private(set) var timesUsed: Int64
     @NSManaged private(set) var exercises: Set<ExerciseEntity>
@@ -20,16 +21,17 @@ import CoreData
 
 public extension WorkoutTemplateEntity {
 
-    @discardableResult static func create(in context: NSManagedObjectContext, exercises: [ExerciseEntity]) -> WorkoutTemplateEntity {
+    @discardableResult static func create(in context: NSManagedObjectContext, data: WorkoutTemplateData) -> WorkoutTemplateEntity {
         let template = WorkoutTemplateEntity(in: context)
-        template.modify(exercises: exercises)
+        template.modify(using: data)
         template.timesUsed = 0
         template.lastUse = nil
         return template
     }
 
-    func modify(exercises: [ExerciseEntity]) {
-        self.exercises = Set(exercises)
+    func modify(using data: WorkoutTemplateData) {
+        self.exercises = Set(data.exercises)
+        self.name = data.name
     }
 
     func wasUsed() {

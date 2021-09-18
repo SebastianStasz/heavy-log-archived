@@ -22,21 +22,24 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
     // MARK: - Tests
 
     func test_create_workoutTemplate_entity() throws {
-        // Before creating, there should not be any workout templates.
-        try fetchRequestShouldReturnElements(0, for: WorkoutTemplateEntity.self)
-
         // Create exercise entities that will be used in workout template.
         let exerciseEntity1 = try createExerciseEntity(exerciseData: .sampleBenchPress)
         let exerciseEntity2 = try createExerciseEntity(exerciseData: .sampleClassicDeadlift)
 
+        // Define workout template data that will be used to create entity.
+        let workoutTemplateData = WorkoutTemplateData(name: "FBW A", exercises: [exerciseEntity1, exerciseEntity2])
+
+        // Before creating, there should not be any workout templates.
+        try fetchRequestShouldReturnElements(0, for: WorkoutTemplateEntity.self)
+
         // Create workout template entity.
-        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity1, exerciseEntity2])
+        let workoutTemplateEntity = createWorkoutTemplateEntity(using: workoutTemplateData)
 
         // After creating there should be one workout template.
         try fetchRequestShouldReturnElements(1, for: WorkoutTemplateEntity.self)
 
         // Verify that wokrout template entity data is correct.
-        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, exercises: [exerciseEntity1, exerciseEntity2])
+        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, data: workoutTemplateData)
 
         // Verify that each exercise entity relatet to this workout template entity has one template.
         XCTAssertEqual(exerciseEntity1.templates.count, 1)
@@ -51,16 +54,19 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         let exerciseEntity1 = try createExerciseEntity(exerciseData: .sampleBenchPress)
 
         // Create workout template entity.
-        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity1])
+        let workoutTemplateEntity = createWorkoutTemplateEntity(using: .init(name: "A", exercises: [exerciseEntity1]))
 
         // Create exercise entity that will be used in modified workout template.
         let exerciseEntity2 = try createExerciseEntity(exerciseData: .sampleClassicDeadlift)
 
+        // Define workout template data that will be used to modify entity.
+        let modifiedWorkoutTemplateData = WorkoutTemplateData(name: "B", exercises: [exerciseEntity2])
+
         // Modify workout template entity.
-        workoutTemplateEntity.modify(exercises: [exerciseEntity2])
+        workoutTemplateEntity.modify(using: modifiedWorkoutTemplateData)
 
         // Verify that workout template data has been changed.
-        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, exercises: [exerciseEntity2])
+        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, data: modifiedWorkoutTemplateData)
 
         // Save context.
         try saveContext()
@@ -70,14 +76,17 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         // Create exercise entity that will be used in workout template.
         let exerciseEntity1 = try createExerciseEntity(exerciseData: .sampleBenchPress)
 
+        // Define workout template data that will be used to create entity.
+        let workoutTemplateData = WorkoutTemplateData(name: "FBW A", exercises: [exerciseEntity1])
+
         // Create workout template entity.
-        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity1])
+        let workoutTemplateEntity = createWorkoutTemplateEntity(using: workoutTemplateData)
 
         // Perform workout template was used 3 times.
         _ = (0..<3).map { _ in workoutTemplateEntity.wasUsed() }
 
         // Verify that workout template data has been changed.
-        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, exercises: [exerciseEntity1], lastUsed: Date(), timesUsed: 3)
+        try verifyWorkoutTemplateEntityData(template: workoutTemplateEntity, data: workoutTemplateData, lastUsed: Date(), timesUsed: 3)
 
         // Save context.
         try saveContext()
@@ -88,7 +97,7 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
         let exerciseEntity = try createExerciseEntity(exerciseData: .sampleBenchPress)
 
         // Create workout template entity.
-        let workoutTemplateEntity = createWorkoutTemplateEntity(exercises: [exerciseEntity])
+        let workoutTemplateEntity = createWorkoutTemplateEntity(using: .sample1)
 
         // Delete set entity
         workoutTemplateEntity.delete()
@@ -108,9 +117,9 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
 
     func test_getRecentlyUsedTemplates() {
         // Create three workout template entities.
-        let workoutTemplateEntity1 = createWorkoutTemplateEntity()
-        let workoutTemplateEntity2 = createWorkoutTemplateEntity()
-        let workoutTemplateEntity3 = createWorkoutTemplateEntity()
+        let workoutTemplateEntity1 = createWorkoutTemplateEntity(using: .sample1)
+        let workoutTemplateEntity2 = createWorkoutTemplateEntity(using: .sample2)
+        let workoutTemplateEntity3 = createWorkoutTemplateEntity(using: .sample3)
 
         // First use workoutTemplateEntity3.
         workoutTemplateEntity3.wasUsed()
@@ -136,9 +145,9 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
 
     func test_getRecentlyUsedTemplates_if_neither_has_been_used() {
         // Create three workout template entities.
-        let _ = createWorkoutTemplateEntity()
-        let _ = createWorkoutTemplateEntity()
-        let _ = createWorkoutTemplateEntity()
+        let _ = createWorkoutTemplateEntity(using: .sample1)
+        let _ = createWorkoutTemplateEntity(using: .sample2)
+        let _ = createWorkoutTemplateEntity(using: .sample3)
 
         // Get two recently used workout templates.
         let result = WorkoutTemplateEntity.getRecentlyUsedTemplates(from: context, amount: 2)
@@ -152,12 +161,13 @@ class WorkoutTemplateEntityTests: XCTestCase, CoreDataSteps {
 
 extension WorkoutTemplateEntityTests {
 
-    private func verifyWorkoutTemplateEntityData(template: WorkoutTemplateEntity, exercises: [ExerciseEntity], lastUsed: Date? = nil, timesUsed: Int64 = 0) throws {
-        XCTAssertEqual(template.lastUse.string(format: .medium), lastUsed.string(format: .medium))
+    private func verifyWorkoutTemplateEntityData(template: WorkoutTemplateEntity, data: WorkoutTemplateData, lastUsed: Date? = nil, timesUsed: Int64 = 0) throws {
+        XCTAssertEqual(template.name, data.name)
         XCTAssertEqual(template.timesUsed, timesUsed)
-        XCTAssertEqual(template.exercises.count, exercises.count)
+        XCTAssertEqual(template.exercises.count, data.exercises.count)
+        XCTAssertEqual(template.lastUse.string(format: .medium), lastUsed.string(format: .medium))
         for exercise in template.exercises {
-            XCTAssert(exercises.contains(exercise))
+            XCTAssert(data.exercises.contains(exercise))
         }
     }
 }

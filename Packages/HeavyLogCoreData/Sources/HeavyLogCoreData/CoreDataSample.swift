@@ -8,7 +8,9 @@
 import CoreData
 import Foundation
 
-struct CoreDataSample {
+public struct CoreDataSample {}
+
+public extension CoreDataSample {
     static func createSampleExerciseEntities(in context: NSManagedObjectContext) -> [String: ExerciseEntity] {
         let benchPress = ExerciseEntity.create(in: context, exerciseData: .sampleBenchPress)!
         let classicDeadlift = ExerciseEntity.create(in: context, exerciseData: .sampleClassicDeadlift)!
@@ -21,5 +23,10 @@ struct CoreDataSample {
             "overheadPress": overheadPress,
             "pullupsOverhand": pullupsOverhand,
         ]
+    }
+
+    static func createSampleWorkoutTemplates(in context: NSManagedObjectContext) {
+        WorkoutTemplateEntity.create(in: context, data: .sample1)
+        WorkoutTemplateEntity.create(in: context, data: .sample2)
     }
 }
