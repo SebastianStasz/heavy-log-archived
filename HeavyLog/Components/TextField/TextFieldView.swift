@@ -18,10 +18,7 @@ struct TextFieldView: View {
                 .keyboardType(viewModel.type)
 
             if let message = viewModel.validationMessage {
-                Text(message)
-                    .font(.footnote)
-                    .fontWeight(.light)
-                    .foregroundColor(.accentRed)
+                Text(message).textValidation
             }
         }
     }

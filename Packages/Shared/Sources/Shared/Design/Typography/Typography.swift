@@ -63,6 +63,12 @@ public extension Text {
             .foregroundColor(.grayDarkPrimary)
     }
 
+    var textValidation: Text {
+        self.font(.footnote)
+            .fontWeight(.light)
+            .foregroundColor(.accentRed)
+    }
+
     var textOutstanding: Text {
         self.font(.custom("Poppins-Black", size: 15))
     }

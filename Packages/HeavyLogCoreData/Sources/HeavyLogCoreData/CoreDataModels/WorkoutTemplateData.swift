@@ -10,6 +10,8 @@ import Foundation
 public struct WorkoutTemplateData {
     let name: String
     let exercises: [ExerciseEntity]
+    let timesUsed: Int = 0
+    let lastUse: Date? = nil
 
     init(name: String, exercises: [ExerciseEntity] = []) {
         self.name = name

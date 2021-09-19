@@ -14,6 +14,15 @@ public struct WorkoutData {
     let endDate: Date
     var efforts: [EffortData]
     let rate: WorkoutRate
+
+    public init(title: String, notes: String?, startDate: Date, endDate: Date, efforts: [EffortData], rate: WorkoutRate) {
+        self.title = title
+        self.notes = notes
+        self.startDate = startDate
+        self.endDate = endDate
+        self.efforts = efforts
+        self.rate = rate
+    }
 }
 
 // MARK: - Sample Data

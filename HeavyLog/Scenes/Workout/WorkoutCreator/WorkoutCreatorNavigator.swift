@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import HeavyLogCoreData
 
 final class WorkoutCreatorNavigator: ObservableObject {
 
@@ -14,8 +15,10 @@ final class WorkoutCreatorNavigator: ObservableObject {
         case workoutInfo
         case exerciseList
         case dismissExerciseList
+        case addSetPopup(Effort, (WorkoutSet, Effort) -> Void)
         case abortWorkoutPopup
         case dismissCreator
+        case finishWorkout
     }
 
     @Published var selectedTab: WorkoutCreator = .workoutTree
@@ -31,10 +34,14 @@ final class WorkoutCreatorNavigator: ObservableObject {
             isExerciseListPresented = true
         case .dismissExerciseList:
             isExerciseListPresented = false
+        case let .addSetPopup(effort, action):
+            presentAddSetPopup(for: effort, action: action)
         case .abortWorkoutPopup:
             presentAbortWorkoutCreatorPopup()
         case .dismissCreator:
-            AppController.shared.dismissSheet()
+            dismissWorkoutCreator()
+        case .finishWorkout:
+            abortWorkoutCreator()
         }
     }
 }
@@ -42,7 +49,6 @@ final class WorkoutCreatorNavigator: ObservableObject {
 // MARK: - Helpers
 
 extension WorkoutCreatorNavigator {
-    private var controller: AppController { AppController.shared }
 
     private func presentAbortWorkoutCreatorPopup() {
         let info = PopupModel.Info(title: .workoutCreator_deleteWorkout_title, message: .workoutCreator_deleteWorkout_message)
@@ -51,7 +57,21 @@ extension WorkoutCreatorNavigator {
     }
 
     private func abortWorkoutCreator() {
-        navigate(to: .dismissCreator)
+        dismissWorkoutCreator()
         controller.abortWorkoutCreator()
     }
+
+    private func presentAddSetPopup(for effort: Effort, action: @escaping (WorkoutSet, Effort) -> Void) {
+        let popup = PopupModel.addSet(to: effort.exerciseName) { weight, reps in
+            let set = WorkoutSet(weight: Double(weight)!, reps: reps)
+            action(set, effort)
+        }
+        controller.present(popup: popup)
+    }
+
+    private func dismissWorkoutCreator() {
+        controller.dismissSheet()
+    }
 }
+
+extension WorkoutCreatorNavigator: WorkoutCreatorHelper {}

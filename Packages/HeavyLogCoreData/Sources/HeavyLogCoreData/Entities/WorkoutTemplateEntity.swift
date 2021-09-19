@@ -25,8 +25,8 @@ public extension WorkoutTemplateEntity {
     @discardableResult static func create(in context: NSManagedObjectContext, data: WorkoutTemplateData) -> WorkoutTemplateEntity {
         let template = WorkoutTemplateEntity(in: context)
         template.modify(using: data)
-        template.timesUsed = 0
-        template.lastUse = nil
+        template.timesUsed = Int64(data.timesUsed)
+        template.lastUse = data.lastUse
         return template
     }
 

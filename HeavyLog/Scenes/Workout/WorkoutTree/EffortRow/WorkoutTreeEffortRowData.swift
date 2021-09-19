@@ -40,3 +40,12 @@ extension WorkoutTreeData {
         }
     }
 }
+
+extension WorkoutTreeData.Effort {
+    var effortData: EffortData {
+        let setsData = weightRows.flatMap { weightRow in
+            weightRow.reps.map { SetData(reps: $0, weight: weightRow.weight) }
+        }
+        return EffortData(exercise: self.exercise, sets: setsData)
+    }
+}

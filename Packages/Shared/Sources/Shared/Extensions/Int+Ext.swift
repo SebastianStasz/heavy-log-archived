@@ -9,5 +9,5 @@ import Foundation
 
 public extension Int {
     
-    var str: String { String(self) }
+    var asString: String { String(self) }
 }

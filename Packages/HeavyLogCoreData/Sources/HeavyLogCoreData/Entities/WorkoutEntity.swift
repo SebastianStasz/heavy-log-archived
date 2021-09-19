@@ -6,16 +6,17 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
+import SwiftUI
 
 @objc(WorkoutEntity) public class WorkoutEntity: NSManagedObject {
 
-    @NSManaged private(set) var title: String
-    @NSManaged private(set) var startDate: Date
-    @NSManaged private(set) var endDate: Date
-    @NSManaged private(set) var notes: String?
-    @NSManaged private(set) var efforts: Set<EffortEntity>
+    @NSManaged public private(set) var title: String
+    @NSManaged public private(set) var startDate: Date
+    @NSManaged public private(set) var endDate: Date
+    @NSManaged public private(set) var notes: String?
+    @NSManaged public private(set) var efforts: Set<EffortEntity>
     @NSManaged private var rate_: String
 
     public private(set) var rate: WorkoutRate {
@@ -30,7 +31,7 @@ import CoreData
 
 // MARK: - Methods
 
-extension WorkoutEntity {
+public extension WorkoutEntity {
 
     @discardableResult static func create(in context: NSManagedObjectContext, workoutData: WorkoutData) -> WorkoutEntity {
         let workout = WorkoutEntity(in: context)
@@ -47,6 +48,16 @@ extension WorkoutEntity {
         deleteEfforts()
         addEfforts(workout.efforts)
         return self
+    }
+
+    // MARK: - Fetch Requests
+
+    static var all: FetchRequest<WorkoutEntity> {
+        WorkoutEntity.createFetchRequest(sortDescriptors: [sortByDate])
+    }
+
+    private static var sortByDate: NSSortDescriptor {
+        NSSortDescriptor(key: "endDate", ascending: false)
     }
 
     // MARK: - Helpers

@@ -22,7 +22,7 @@ struct IntegerPickerView: View {
     var body: some View {
         Picker(viewModel.title, selection: $viewModel.selectedValue) {
             ForEach(viewModel.rangeOfValues, id: \.self) {
-                Text($0.str)
+                Text($0.asString)
             }
         }
         .frame(maxWidth: maxWidth, maxHeight: maxHeight)

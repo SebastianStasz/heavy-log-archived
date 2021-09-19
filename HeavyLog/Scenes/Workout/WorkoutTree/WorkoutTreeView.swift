@@ -21,7 +21,7 @@ struct WorkoutTreeView: View {
 
             ButtonRow(.workoutCreator_addExercise, action: showExerciseList)
             Components.spacingLine(30)
-            ButtonRow(.workoutCreator_finishWorkout, action: {})
+            ButtonRow(.workoutCreator_finishWorkout, action: finishWorkout)
 
             Spacer().layoutPriority(1)
         }
@@ -51,6 +51,10 @@ struct WorkoutTreeView: View {
     private func dismissExerciseList() {
         viewModel.navigator.navigate(to: .dismissExerciseList)
     }
+
+    private func finishWorkout() {
+        viewModel.finishWorkout()
+    }
 }
 
 
@@ -59,7 +63,7 @@ struct WorkoutTreeView: View {
 struct WorkoutTreeView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = WorkoutCreatorVM()
-        viewModel.workoutForm = .sample(efforts: EffortData.getSampleEfforts(in: PersistenceController.previewEmpty.context))
+        viewModel.workoutForm = .sample1
 
         return WorkoutTreeView()
             .environmentObject(viewModel)

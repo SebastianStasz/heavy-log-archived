@@ -59,7 +59,7 @@ extension TabBarModel: View {
         case .dashboard:
             DashboardView()
         case .workouts:
-            Text(self.title.localize())
+            WorkoutsView()
         case .summary:
             SummaryView()
         case .exercises:

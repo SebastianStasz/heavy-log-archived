@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 07/08/2021.
 //
 
+import HeavyLogCoreData
 import SwiftUI
 
 struct WorkoutTileViewData {
@@ -15,6 +16,46 @@ struct WorkoutTileViewData {
         assert(efforts.isNotEmpty, "Initialization with an empty efforts array should not happend.")
         headerViewData = .init(title: title, subtitle: date, color: color)
         doubleTextRows = efforts.map { .init($0.0, $0.1) }
+    }
+
+    init(workout: WorkoutEntity) {
+        var result = ""
+        var nrOfSets = 0
+        var lastWeight: Double = 1000
+        var lastNrOfReps: Int = 1000
+
+        let appendToResult = {
+            let nrOfSets = nrOfSets == 1 ? "" : nrOfSets.asString
+            result += " \(nrOfSets)x\(lastNrOfReps.asString)"
+        }
+
+        let efforts = workout.efforts.map { effort -> (String, String) in
+            let sets = effort.sets.sorted(by: { $0.weight > $1.weight }).sorted(by: { $0.reps > $1.reps })
+            for set in sets {
+                if set.weight < lastWeight {
+                    if nrOfSets != 0 {
+                        appendToResult()
+                        result += ", "
+                    }
+                    lastWeight = set.weight
+                    result += "\(String(format:"%g", set.weight))kg"
+                    nrOfSets = 1
+                    lastNrOfReps = set.reps
+                } else if set.reps < lastNrOfReps {
+                    appendToResult()
+                    nrOfSets = 1
+                    lastNrOfReps = set.reps
+                } else {
+                    nrOfSets += 1
+                }
+
+                if set == sets.last {
+                    appendToResult()
+                }
+            }
+            return (effort.exerciseName, result)
+        }
+        self.init(title: workout.title, date: workout.endDate.string(format: .medium), color: workout.rate.color, efforts: efforts)
     }
 
     func isLast(_ row: DoubleTextViewData) -> Bool {

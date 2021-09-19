@@ -10,6 +10,11 @@ import Foundation
 public struct SetData {
     let reps: Int
     let weight: Double
+
+    public init(reps: Int, weight: Double) {
+        self.reps = reps
+        self.weight = weight
+    }
 }
 
 // MARK: - Sample data

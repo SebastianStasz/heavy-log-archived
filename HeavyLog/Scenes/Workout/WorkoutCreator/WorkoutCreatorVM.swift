@@ -11,6 +11,7 @@ import HeavyLogCoreData
 
 final class WorkoutCreatorVM: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
+    private let timer = Timer.publish(every: 60.05, on: .main, in: .default).autoconnect()
 
     @Published var navigator = WorkoutCreatorNavigator()
     @Published var workoutInfoListVM = BaseListVM()
@@ -33,29 +34,28 @@ final class WorkoutCreatorVM: ObservableObject {
     }
 
     func addSet(to effort: Effort) {
-        let popup = getPopupModel(for: effort)
-        AppController.shared.present(popup: popup)
+        navigator.navigate(to: .addSetPopup(effort) { [weak self] set, effort in
+            self?.workoutTreeData.addSet(set, to: effort)
+        })
     }
 
     func deleteSet(in effort: Effort, from weightRow: WeightRow) {
         workoutTreeData.deleteLastSet(in: weightRow, from: effort)
     }
 
+    func finishWorkout() {
+        workoutForm.endDate = Date()
+        WorkoutEntity.create(in: controller.context, workoutData: getWorkoutData())
+        navigator.navigate(to: .finishWorkout)
+    }
+
+    private func getWorkoutData() -> WorkoutData {
+        let title = workoutForm.title.isNotEmpty ? workoutForm.title : "Workout \(workoutForm.endDate.string(format: .medium))"
+        let efforts = workoutTreeData.efforts.map { $0.effortData }
+        return WorkoutData(title: title, notes: workoutForm.notes, startDate: workoutForm.startDate, endDate: Date(), efforts: efforts, rate: workoutForm.rate)
+    }
+
     // MARK: - Private
-
-    private func getPopupModel(for effort: Effort) -> PopupModel {
-        PopupModel.addSet(to: effort.exerciseName) { [weak self] weight, reps in
-            let set = WorkoutSet(weight: Double(weight)!, reps: reps)
-            self?.workoutTreeData.addSet(set, to: effort)
-        }
-    }
-
-    private func fillWorkoutData(using template: WorkoutTemplateEntity?) {
-        guard let template = template else { return }
-        for ex in template.exercises { addEffort(with: ex) }
-        workoutForm.title = template.name
-        template.wasUsed()
-    }
 
     private func initCombine() {
         workoutInfoListVM.objectWillChange.merge(with: navigator.objectWillChange)
@@ -67,16 +67,24 @@ final class WorkoutCreatorVM: ObservableObject {
                 self?.workoutInfoListVM.rows = form.info
             }
             .store(in: &cancellables)
+
+        timer.sink { [weak self] date in
+            self?.workoutForm.updateDuration(for: date)
+        }
+        .store(in: &cancellables)
+    }
+
+    private func fillWorkoutData(using template: WorkoutTemplateEntity?) {
+        guard let template = template else { return }
+        for ex in template.exercises { addEffort(with: ex) }
+        workoutForm.title = template.name
+        template.wasUsed()
     }
 }
 
 // MARK: - Helpers
 
-extension WorkoutCreatorVM {
-    typealias Tab = WorkoutCreator
-    typealias Effort = WorkoutTreeData.Effort
-    typealias WorkoutSet = WorkoutTreeData.Set
-    typealias WeightRow = WorkoutTreeData.WeightRow
+extension WorkoutCreatorVM: WorkoutCreatorHelper {
 
     var availableTabs: [Tab] {
         Tab.allCases
