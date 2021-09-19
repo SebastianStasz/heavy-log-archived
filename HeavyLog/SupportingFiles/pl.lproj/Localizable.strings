@@ -70,6 +70,10 @@
 "workoutCreator_exerciseList_title" = "Wybierz ćwiczenie";
 "workoutCreator_enterWeight" = "Wpisz wagę:";
 "workoutCreator_numberOfReps" = "Liczba powtórzeń:";
+"workoutCreator_deleteWorkout_title" = "Usuń trening";
+"workoutCreator_deleteWorkout_message" = "Czy na pewno chcesz usunąć obecny trening?";
+"workoutCreator_addExercise" = "Dodaj ćwiczenie";
+"workoutCreator_finishWorkout" = "Zakończ trening";
 
 "validation_message_empty" = "Pole nie może być puste.";
 "validation_message_invalid" = "Wartość jest niepoprawna.";

@@ -23,7 +23,7 @@ enum ActionSheetModel {
         var buttons: [Button] = [
             .default(.common_empty, action: startWorkout(nil)), .cancel()
         ]
-        let templateButtons = templates.suffix(2).map { template in
+        let templateButtons = templates.prefix(2).map { template in
             Button.default(template.name, action: startWorkout(template))
         }
         if templates.count > 2 {

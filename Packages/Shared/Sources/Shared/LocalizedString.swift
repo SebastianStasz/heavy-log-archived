@@ -72,6 +72,10 @@ public enum LocalizedString: String {
     case workoutCreator_exerciseList_title
     case workoutCreator_enterWeight
     case workoutCreator_numberOfReps
+    case workoutCreator_deleteWorkout_title
+    case workoutCreator_deleteWorkout_message
+    case workoutCreator_addExercise
+    case workoutCreator_finishWorkout
 
     case validation_message_empty
     case validation_message_invalid

@@ -19,16 +19,16 @@ struct WorkoutTreeView: View {
 
             ForEach(viewModel.workoutTreeData.efforts, content: EfforSection.init)
 
-            ButtonRow("Add exercise", action: showExerciseList)
+            ButtonRow(.workoutCreator_addExercise, action: showExerciseList)
             Components.spacingLine(30)
-            ButtonRow("Finish workout", action: {})
+            ButtonRow(.workoutCreator_finishWorkout, action: {})
 
             Spacer().layoutPriority(1)
         }
         .padding(top: .spacingBig, horizontal: .spacingMedium)
         .embedInScrollView()
         .environmentObject(viewModel)
-        .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
+        .sheet(isPresented: $viewModel.navigator.isExerciseListPresented) { exerciseList }
     }
 
     private var exerciseList: some View {
@@ -41,15 +41,15 @@ struct WorkoutTreeView: View {
     // MARK: - Interactions
 
     private func addExercise(_ exerciseEntity: ExerciseEntity) {
-        viewModel.addExercise(exerciseEntity)
+        viewModel.addEffort(with: exerciseEntity)
     }
 
     private func showExerciseList() {
-        viewModel.navigate(to: .exerciseList)
+        viewModel.navigator.navigate(to: .exerciseList)
     }
 
     private func dismissExerciseList() {
-        viewModel.navigate(to: .dismissExerciseList)
+        viewModel.navigator.navigate(to: .dismissExerciseList)
     }
 }
 
@@ -59,7 +59,7 @@ struct WorkoutTreeView: View {
 struct WorkoutTreeView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = WorkoutCreatorVM()
-        viewModel.workout = .sample(efforts: EffortData.getSampleEfforts(in: PersistenceController.previewEmpty.context))
+        viewModel.workoutForm = .sample(efforts: EffortData.getSampleEfforts(in: PersistenceController.previewEmpty.context))
 
         return WorkoutTreeView()
             .environmentObject(viewModel)

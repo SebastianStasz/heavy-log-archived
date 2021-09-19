@@ -11,7 +11,7 @@ public extension String {
     
     /// Returns a localized string, using the main bundle.
     func localize() -> String {
-        NSLocalizedString(self, comment: self)
+        NSLocalizedString(self, bundle: .main, comment: self)
     }
 
     var isNotEmpty: Bool {
@@ -48,5 +48,21 @@ public extension String {
 
     static var workoutCreator_numberOfReps: String {
         LocalizedString.workoutCreator_numberOfReps.text
+    }
+
+    static var workoutCreator_deleteWorkout_title: String {
+        LocalizedString.workoutCreator_deleteWorkout_title.text
+    }
+
+    static var workoutCreator_deleteWorkout_message: String {
+        LocalizedString.workoutCreator_deleteWorkout_message.text
+    }
+
+    static var workoutCreator_addExercise: String {
+        LocalizedString.workoutCreator_addExercise.text
+    }
+
+    static var workoutCreator_finishWorkout: String {
+        LocalizedString.workoutCreator_finishWorkout.text
     }
 }

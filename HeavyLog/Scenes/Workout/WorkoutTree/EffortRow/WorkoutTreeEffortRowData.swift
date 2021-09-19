@@ -14,6 +14,11 @@ extension WorkoutTreeData {
         let exercise: ExerciseEntity
         var weightRows: [WeightRow]
 
+        init(exercise: ExerciseEntity, weightRows: [WeightRow] = []) {
+            self.exercise = exercise
+            self.weightRows = weightRows
+        }
+
         var exerciseName: String { exercise.name }
         var id: String { exerciseName }
 

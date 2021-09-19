@@ -6,110 +6,82 @@
 //
 
 import Combine
-import HeavyLogCoreData
 import Foundation
+import HeavyLogCoreData
 
 final class WorkoutCreatorVM: ObservableObject {
-    typealias Tab = WorkoutCreator
-    typealias Effort = WorkoutTreeData.Effort
-    typealias WorkoutSet = WorkoutTreeData.Set
-    typealias WeightRow = WorkoutTreeData.WeightRow
-
-    var availableTabs: [Tab] { Tab.allCases }
-
     private var cancellables: Set<AnyCancellable> = []
 
-    @Published var selectedTab: WorkoutCreator = .workoutTree
-    @Published var workout = WorkoutForm()
+    @Published var navigator = WorkoutCreatorNavigator()
     @Published var workoutInfoListVM = BaseListVM()
     @Published var workoutTreeData = WorkoutTreeData()
-    @Published var isExerciseListPresented = false
-
-    var exercisesInUse: [ExerciseEntity] {
-        workoutTreeData.efforts.map { $0.exercise }
-    }
+    @Published var workoutForm = WorkoutForm()
 
     init(using template: WorkoutTemplateEntity? = nil) {
-        catchNestedModelsChanges()
-
-        $workout
-            .sink { [weak self] form in
-                self?.workoutInfoListVM.rows = form.info
-            }
-            .store(in: &cancellables)
-
-        if let template = template {
-            _ = template.exercises.map { addExercise($0) }
-        }
+        initCombine()
+        fillWorkoutData(using: template)
     }
 
-    func addExercise(_ exerciseEntity: ExerciseEntity) {
-        let effort = Effort(exercise: exerciseEntity, weightRows: [])
-        workoutTreeData.efforts.append(effort)
-        navigate(to: .dismissExerciseList)
+    func addEffort(with exerciseEntity: ExerciseEntity) {
+        navigator.navigate(to: .dismissExerciseList)
+        let effort = Effort(exercise: exerciseEntity)
+        workoutTreeData.addEffort(effort)
+    }
+
+    func deleteEffort(_ effort: Effort) {
+        workoutTreeData.deleteEffort(effort)
     }
 
     func addSet(to effort: Effort) {
-        let popup = PopupModel.addSet(to: effort.exerciseName) { [weak self] weight, reps in
-            let set = WorkoutSet(weight: Double(weight)!, reps: reps)
-            self?.workoutTreeData.addSet(set, to: effort)
-        }
+        let popup = getPopupModel(for: effort)
         AppController.shared.present(popup: popup)
     }
 
     func deleteSet(in effort: Effort, from weightRow: WeightRow) {
-        if let effortIndex = workoutTreeData.efforts.firstIndex(where: { $0.id == effort.id }) {
-            workoutTreeData.efforts[effortIndex].deleteLastSet(from: weightRow)
+        workoutTreeData.deleteLastSet(in: weightRow, from: effort)
+    }
+
+    // MARK: - Private
+
+    private func getPopupModel(for effort: Effort) -> PopupModel {
+        PopupModel.addSet(to: effort.exerciseName) { [weak self] weight, reps in
+            let set = WorkoutSet(weight: Double(weight)!, reps: reps)
+            self?.workoutTreeData.addSet(set, to: effort)
         }
     }
 
-    private func abortWorkoutCreator() {
-        navigate(to: .dismissCreator)
-        AppController.shared.abortWorkoutCreator()
+    private func fillWorkoutData(using template: WorkoutTemplateEntity?) {
+        guard let template = template else { return }
+        for ex in template.exercises { addEffort(with: ex) }
+        workoutForm.title = template.name
+        template.wasUsed()
     }
 
-    private func catchNestedModelsChanges() {
-        workoutInfoListVM.objectWillChange
-            .sink { [weak self] _ in
-                self?.objectWillChange.send()
+    private func initCombine() {
+        workoutInfoListVM.objectWillChange.merge(with: navigator.objectWillChange)
+            .sink { [weak self] _ in self?.objectWillChange.send() }
+            .store(in: &cancellables)
+
+        $workoutForm
+            .sink { [weak self] form in
+                self?.workoutInfoListVM.rows = form.info
             }
             .store(in: &cancellables)
     }
 }
 
-// MARK: - Navigator
+// MARK: - Helpers
 
 extension WorkoutCreatorVM {
+    typealias Tab = WorkoutCreator
+    typealias Effort = WorkoutTreeData.Effort
+    typealias WorkoutSet = WorkoutTreeData.Set
+    typealias WeightRow = WorkoutTreeData.WeightRow
 
-    enum Destination {
-        case workoutTree
-        case workoutInfo
-        case exerciseList
-        case dismissExerciseList
-        case abortCreatorPopup
-        case dismissCreator
+    var availableTabs: [Tab] {
+        Tab.allCases
     }
-
-    func navigate(to destination: Destination) {
-        switch destination {
-        case .workoutTree:
-            selectedTab = .workoutTree
-        case .workoutInfo:
-            selectedTab = .workoutInfo
-        case .exerciseList:
-            isExerciseListPresented = true
-        case .dismissExerciseList:
-            isExerciseListPresented = false
-        case .abortCreatorPopup:
-            presentAbortWorkoutCreatorPopup()
-        case .dismissCreator:
-            AppController.shared.dismissSheet()
-        }
-    }
-
-    private func presentAbortWorkoutCreatorPopup() {
-        let info = PopupModel.Info(title: "Delete workout", message: "Are you sure you want to delete current workout?")
-        let popup = PopupModel.action(info, action: abortWorkoutCreator, isDestructive: true)
-        AppController.shared.present(popup: popup)
+    var exercisesInUse: [ExerciseEntity] {
+        workoutTreeData.efforts.map { $0.exercise }
     }
 }

@@ -9,33 +9,6 @@ import SwiftUI
 
 extension WorkoutTreeView {
 
-    // MARK: - Exercise Row
-
-    struct ExerciseRow: View {
-        private let title: String
-        private let action: () -> Void
-
-        init(_ title: String, action: @escaping () -> Void) {
-            self.title = title
-            self.action = action
-        }
-
-        var body: some View {
-            HStack(spacing: .spacingMedium) {
-                circle
-
-                Text(title).textBodyMedium
-
-                Spacer()
-
-                Button(action: action) {
-                    Image(systemName: "plus")
-                }
-                .buttonStyle(TextButtonStyle(.action))
-            }
-        }
-    }
-
     // MARK: - Button Row
 
     struct ButtonRow: View {

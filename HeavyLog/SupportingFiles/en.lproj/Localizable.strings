@@ -70,6 +70,10 @@
 "workoutCreator_exerciseList_title" = "Choose an exercise";
 "workoutCreator_enterWeight" = "Enter weight:";
 "workoutCreator_numberOfReps" = "Number of reps:";
+"workoutCreator_deleteWorkout_title" = "Delete workout";
+"workoutCreator_deleteWorkout_message" = "Are you sure you want to delete current workout?";
+"workoutCreator_addExercise" = "Add exercise";
+"workoutCreator_finishWorkout" = "Finish workout";
 
 "validation_message_empty" = "Field can not be empty.";
 "validation_message_invalid" = "Value is invalid.";

@@ -20,7 +20,7 @@ extension WorkoutTreeView {
 
         var body: some View {
             VStack(spacing: 6) {
-                ExerciseRow(effort.exerciseName) { addSetRow(to: effort) }
+                ExerciseRow(effort.exerciseName, onPlusTap: addSetRow(to: effort), onSwipe: deleteEffort())
 
                 VStack(alignment: .leading, spacing: 0) {
                     Components.spacingLine(9)
@@ -41,6 +41,10 @@ extension WorkoutTreeView {
 
         private func deleteSet(from weightRow: WorkoutTreeData.WeightRow) {
             viewModel.deleteSet(in: effort, from: weightRow)
+        }
+
+        private func deleteEffort() {
+            viewModel.deleteEffort(effort)
         }
     }
 }

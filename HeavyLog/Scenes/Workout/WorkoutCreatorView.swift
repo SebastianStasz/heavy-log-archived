@@ -18,7 +18,7 @@ struct WorkoutCreatorView: View {
     }
 
     var body: some View {
-        TabView(selection: $viewModel.selectedTab) {
+        TabView(selection: $viewModel.navigator.selectedTab) {
             ForEach(viewModel.availableTabs) { $0 }
                 .background(Color.backgroundMain)
         }
@@ -37,11 +37,11 @@ struct WorkoutCreatorView: View {
     // MARK: - Interactions
 
     private func dismissCreator() {
-        viewModel.navigate(to: .dismissCreator)
+        viewModel.navigator.navigate(to: .dismissCreator)
     }
 
     private func presentPopupToDeleteWorkout() {
-        viewModel.navigate(to: .abortCreatorPopup)
+        viewModel.navigator.navigate(to: .abortWorkoutPopup)
     }
 }
 

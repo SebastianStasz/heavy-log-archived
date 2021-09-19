@@ -88,7 +88,7 @@ extension PopupModel {
 
     static func addSet(to exercise: String, action: @escaping (String, Int) -> Void) -> PopupModel {
         let info = Info(title: exercise, message: .workoutCreator_enterWeight)
-        let textFieldVM = TextFieldVM(result: .constant(""), validation: ValueValidation(type: .double))
+        let textFieldVM = TextFieldVM.double(result: .constant(""))
         let pickerModel = PopupModel.Picker(hint: .workoutCreator_numberOfReps, viewModel: .repsPicker)
         return PopupModel.textFieldAndPicker(info, textFieldVM, pickerModel, output: action)
     }

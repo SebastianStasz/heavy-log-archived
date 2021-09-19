@@ -19,11 +19,11 @@ struct WorkoutInfoView: View {
     var body: some View {
         VStack(spacing: .spacingHuge) {
             Form {
-                TextField("Workout title", text: $viewModel.workout.title)
-                TextEditor(text: $viewModel.workout.notes)
+                TextField("Workout title", text: $viewModel.workoutForm.title)
+                TextEditor(text: $viewModel.workoutForm.notes)
 
                 Section {
-                    RatePicker(title: "Workout rating", selectedValue: $viewModel.workout.rate)
+                    RatePicker(title: "Workout rating", selectedValue: $viewModel.workoutForm.rate)
                 }
                 .plainStyle()
 
