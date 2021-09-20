@@ -24,7 +24,7 @@ struct WorkoutForm {
 
     mutating func updateDuration(for date: Date) {
         let duration = date.timeIntervalSince(startDate)
-        self.duration = duration.asStringFormat
+        self.duration = duration.asHoursAndMinutes
     }
 }
 

@@ -27,6 +27,10 @@ import SwiftUI
     public var numberOfEfforts: Int {
         efforts.count
     }
+
+    public var duration: String {
+        startDate.distance(to: endDate).asHoursAndMinutes
+    }
 }
 
 // MARK: - Methods
