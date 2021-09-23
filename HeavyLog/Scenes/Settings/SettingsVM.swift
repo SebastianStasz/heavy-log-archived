@@ -10,6 +10,7 @@ import HeavyLogCoreData
 
 final class SettingsVM: ObservableObject {
 
+    private lazy var activityController = ActivityController()
     let navigator = SettingsNavigator()
 
     func exportWorkoutData() {
@@ -19,20 +20,8 @@ final class SettingsVM: ObservableObject {
         guard workoutsData.isNotEmpty else {
             navigator.navigate(to: .noWorkoutDataPopup) ; return
         }
-    }
-
-    private func saveWorkoutsData(_ data: [WorkoutData.Coding]) {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-
-        do {
-            let jsonData = try encoder.encode(data)
-
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
+        let date = Date().string(format: .medium)
+        let fileName = "HeavyLog - Workout data \(date)"
+        activityController.writeData(workoutsData, withName: fileName, withExtension: "json")
     }
 }
