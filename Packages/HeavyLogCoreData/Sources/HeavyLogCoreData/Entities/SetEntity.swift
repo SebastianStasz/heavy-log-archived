@@ -33,6 +33,10 @@ extension SetEntity {
         weight = setData.weight
         return self
     }
+
+    var data: SetData {
+        SetData(reps: reps, weight: weight)
+    }
 }
 
 extension SetEntity: Identifiable {}

@@ -8,7 +8,7 @@
 import Foundation
 import Shared
 
-public enum WorkoutRate: String {
+public enum WorkoutRate: String, Codable {
     case bad
     case good
     case excelent

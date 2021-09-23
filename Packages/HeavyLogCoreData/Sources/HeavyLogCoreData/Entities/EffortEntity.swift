@@ -12,7 +12,7 @@ import Foundation
 @objc(EffortEntity) public class EffortEntity: NSManagedObject {
 
     @NSManaged private(set) var exerciseId: Int
-    @NSManaged private(set) var exercise: ExerciseEntity
+    @NSManaged public private(set) var exercise: ExerciseEntity
     @NSManaged private(set) var workout: WorkoutEntity
     @NSManaged public private(set) var sets: Set<SetEntity>
 
@@ -43,6 +43,10 @@ extension EffortEntity {
         deleteAllSets()
         addSets(effort.sets)
         return self
+    }
+
+    var codingData: EffortData.Coding {
+        .init(exerciseId: exerciseId, exerciseName: exercise.name, sets: sets.map { $0.data })
     }
 
     // MARK: - Helpers

@@ -25,6 +25,24 @@ public struct WorkoutData {
     }
 }
 
+// MARK: - Codable
+
+public extension WorkoutData {
+    var toCodable: Coding {
+        Coding(title: title, notes: notes, startDate: startDate, endDate: endDate, efforts: efforts.map { $0.toCodable() }, rate: rate)
+    }
+
+    struct Coding: Codable {
+        let title: String
+        let notes: String?
+        let startDate: Date
+        let endDate: Date
+        var efforts: [EffortData.Coding]
+        let rate: WorkoutRate
+    }
+}
+
+
 // MARK: - Sample Data
 
 public extension WorkoutData {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SetData {
+public struct SetData: Codable {
     let reps: Int
     let weight: Double
 

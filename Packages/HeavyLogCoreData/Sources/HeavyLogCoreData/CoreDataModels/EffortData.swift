@@ -13,12 +13,32 @@ public struct EffortData {
     public let exercise: ExerciseEntity
     public let sets: [SetData]
 
+    public var exerciseName: String {
+        exercise.name
+    }
+
     public init(exercise: ExerciseEntity, sets: [SetData] = []) {
         self.exercise = exercise
         self.exerciseId = exercise.id_
         self.sets = sets
     }
 }
+
+// MARK: - Codable
+
+public extension EffortData {
+    func toCodable() -> Coding {
+        Coding(exerciseId: exerciseId, exerciseName: exercise.name, sets: sets)
+    }
+
+    struct Coding: Codable {
+        let exerciseId: Int
+        let exerciseName: String
+        let sets: [SetData]
+    }
+}
+
+// MARK: - Helpers
 
 extension EffortData: Identifiable {
     public var id: Int { exerciseId }

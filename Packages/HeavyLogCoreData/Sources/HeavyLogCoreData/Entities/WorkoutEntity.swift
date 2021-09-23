@@ -54,10 +54,19 @@ public extension WorkoutEntity {
         return self
     }
 
+    static func getAllWorkoutsCodableData(from context: NSManagedObjectContext) -> [WorkoutData.Coding]? {
+        WorkoutEntity.getAll(from: context)?.compactMap { $0.codingData }
+    }
+
     // MARK: - Fetch Requests
 
     static var all: FetchRequest<WorkoutEntity> {
         WorkoutEntity.createFetchRequest(sortDescriptors: [sortByDate])
+    }
+
+    static func getAll(from context: NSManagedObjectContext) -> [WorkoutEntity]? {
+        let request: NSFetchRequest<WorkoutEntity> = WorkoutEntity.createFetchRequest(sortDescriptors: [sortByDate])
+        return try? context.fetch(request)
     }
 
     private static var sortByDate: NSSortDescriptor {
@@ -79,6 +88,10 @@ public extension WorkoutEntity {
 
     private func addEffort(_ effort: EffortData) {
         EffortEntity.create(in: self, effortData: effort)
+    }
+
+    private var codingData: WorkoutData.Coding {
+        WorkoutData.Coding(title: title, notes: notes, startDate: startDate, endDate: endDate, efforts: efforts.map { $0.codingData }, rate: rate)
     }
 }
 

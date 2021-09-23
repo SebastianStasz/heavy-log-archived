@@ -121,6 +121,22 @@ public extension ExerciseEntity {
         ExerciseEntity.createFetchRequest(sortDescriptors: [], predicate: allExcept(exercises))
     }
 
+    static func getExerciseWithId(_ id: Int, from context: NSManagedObjectContext) -> ExerciseEntity? {
+        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.createFetchRequest(predicate: Predicate.withId(id).get)
+        return try? context.fetch(request).first
+    }
+
+    private enum Predicate {
+        case withId(Int)
+
+        var get: NSPredicate {
+            switch self {
+            case let .withId(id):
+                return NSPredicate(format: "id_ == %@", id as CVarArg)
+            }
+        }
+    }
+
     // MARK: - Helpers
 
     private func decodeBodyParts() -> [BodyPart]? {
