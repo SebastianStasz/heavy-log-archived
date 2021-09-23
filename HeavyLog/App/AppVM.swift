@@ -23,6 +23,10 @@ struct HeavyLogApp: App {
     }
 }
 
+var controller: AppController {
+    AppController.shared
+}
+
 // MARK: - App Controller
 
 final class AppController {

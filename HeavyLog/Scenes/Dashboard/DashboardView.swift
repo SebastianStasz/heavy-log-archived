@@ -5,21 +5,17 @@
 //  Created by Sebastian Staszczyk on 04/09/2021.
 //
 
+import HeavyLogCoreData
 import SwiftUI
 
 struct DashboardView: View {
 
-    @State private var result: String?
+    @StateObject private var viewModel = DashboardVM()
 
     var body: some View {
         VStack {
-            if let text = result {
-                Text(String(text))
-            }
-
-            Button("Present pop-up") {
-                AppController.shared.present(popup: .textFieldAndPicker(.init(title: "Sample", message: "Sample"), .init(result: $result, validation: ValueValidation(type: .double)), .init(hint: "", viewModel: .repsPicker), output: { print("Weight: \($0), Reps: \($1)") }))
-            }
+            Button("Settings") { viewModel.navigate(to: .settings) }
+                .navigation(isActive: $viewModel.areSettingsShown, destination: SettingsView.init)
         }
         .infiniteFrame()
         .backgroundIgnoringSafeArea(Color.backgroundMain)
