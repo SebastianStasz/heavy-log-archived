@@ -59,7 +59,7 @@ extension CoreDataSteps {
     }
 
     @discardableResult func fetchRequestShouldReturnElements<T: NSManagedObject>(_ amount: Int, for entity: T.Type) throws -> [T] {
-        let request: NSFetchRequest<T> = T.createFetchRequest()
+        let request: NSFetchRequest<T> = T.nsFetchRequest()
         let entities = try! context.fetch(request)
         XCTAssertEqual(entities.count, amount)
         return entities

@@ -1,39 +1,12 @@
 //
-//  WorkoutEntity+CoreDataClass.swift
+//  WorkoutEntityMethods.swift
 //  HeavyLogCoreData
 //
-//  Created by Sebastian Staszczyk on 14/08/2021.
-//
+//  Created by Sebastian Staszczyk on 25/09/2021.
 //
 
 import CoreData
 import Foundation
-import SwiftUI
-
-@objc(WorkoutEntity) public class WorkoutEntity: NSManagedObject {
-
-    @NSManaged public private(set) var title: String
-    @NSManaged public private(set) var startDate: Date
-    @NSManaged public private(set) var endDate: Date
-    @NSManaged public private(set) var notes: String?
-    @NSManaged public private(set) var efforts: Set<EffortEntity>
-    @NSManaged private var rate_: String
-
-    public private(set) var rate: WorkoutRate {
-        get { .getCase(for: rate_) }
-        set { rate_ = newValue.rawValue }
-    }
-
-    public var numberOfEfforts: Int {
-        efforts.count
-    }
-
-    public var duration: String {
-        startDate.distance(to: endDate).asHoursAndMinutes
-    }
-}
-
-// MARK: - Methods
 
 public extension WorkoutEntity {
 
@@ -58,22 +31,15 @@ public extension WorkoutEntity {
         WorkoutEntity.getAll(from: context)?.compactMap { $0.codingData }
     }
 
-    // MARK: - Fetch Requests
-
-    static var all: FetchRequest<WorkoutEntity> {
-        WorkoutEntity.createFetchRequest(sortDescriptors: [sortByDate])
-    }
-
     static func getAll(from context: NSManagedObjectContext) -> [WorkoutEntity]? {
-        let request: NSFetchRequest<WorkoutEntity> = WorkoutEntity.createFetchRequest(sortDescriptors: [sortByDate])
+        let request: NSFetchRequest<WorkoutEntity> = WorkoutEntity.nsFetchRequest(sortDescriptors: [Sort.byDate(.forward).asNSSortDescriptor])
         return try? context.fetch(request)
     }
+}
 
-    private static var sortByDate: NSSortDescriptor {
-        NSSortDescriptor(key: "endDate", ascending: false)
-    }
+// MARK: - Helpers
 
-    // MARK: - Helpers
+private extension WorkoutEntity {
 
     private func addEfforts(_ efforts: [EffortData]) {
         for effort in efforts { addEffort(effort) }
@@ -95,7 +61,7 @@ public extension WorkoutEntity {
     }
 }
 
-extension WorkoutEntity {
+private extension WorkoutEntity {
 
     @objc(addEffortsObject:)
     @NSManaged func addToEfforts(_ value: EffortEntity)
@@ -109,5 +75,3 @@ extension WorkoutEntity {
     @objc(removeEfforts:)
     @NSManaged func removeFromEfforts(_ values: NSSet)
 }
-
-extension WorkoutEntity: Identifiable {}

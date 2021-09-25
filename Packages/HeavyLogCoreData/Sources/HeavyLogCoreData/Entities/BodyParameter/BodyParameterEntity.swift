@@ -38,7 +38,7 @@ extension BodyParameterEntity {
     }
 
     static func getLastValue(for parameter: BodyParameter, in context: NSManagedObjectContext) -> Double? {
-        let request: NSFetchRequest<BodyParameterEntity> = BodyParameterEntity.createFetchRequest(sortDescriptors: [Self.sortByDateNewest], predicate: parameter.predicate)
+        let request: NSFetchRequest<BodyParameterEntity> = BodyParameterEntity.nsFetchRequest(sortDescriptors: [Self.sortByDateNewest], predicate: parameter.predicate)
         request.fetchLimit = 1
         let result = try? context.fetch(request)
         return result?.first?.value

@@ -42,19 +42,15 @@ public extension WorkoutTemplateEntity {
 
     // MARK: - Fetch Requests
 
-    static var all: FetchRequest<WorkoutTemplateEntity> {
-        WorkoutTemplateEntity.createFetchRequest(sortDescriptors: [recentlyUsed])
-    }
-
     static func getRecentlyUsedTemplates(from context: NSManagedObjectContext, upTo quantity: Int) -> [WorkoutTemplateEntity]? {
-        let request: NSFetchRequest<WorkoutTemplateEntity> = WorkoutTemplateEntity.createFetchRequest(sortDescriptors: [recentlyUsed])
+        let request: NSFetchRequest<WorkoutTemplateEntity> = WorkoutTemplateEntity.nsFetchRequest(sortDescriptors: [recentlyUsed])
         request.fetchLimit = quantity
         return try? context.fetch(request)
     }
 
     // MARK: - Sort Descriptors
 
-    private static var recentlyUsed: NSSortDescriptor {
+    static var recentlyUsed: NSSortDescriptor {
         NSSortDescriptor(key: "lastUse", ascending: false)
     }
 }
