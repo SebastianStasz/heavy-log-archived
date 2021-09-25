@@ -10,8 +10,6 @@ import Foundation
 public extension ExerciseEntity {
 
     enum Sort: EntitySort {
-        public typealias Entity = ExerciseEntity
-
         case byName(SortOrder)
 
         public var get: SortDescriptor<ExerciseEntity> {

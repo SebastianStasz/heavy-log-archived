@@ -9,9 +9,13 @@ import Foundation
 
 public extension BodyParameterEntity {
     enum Filter: EntityFilter {
+        case byParameter(BodyParameter)
 
         public var get: NSPredicate {
-            switch self {}
+            switch self {
+            case let .byParameter(parameter):
+                return NSPredicate(format: "parameter_ == %@", parameter.rawValue)
+            }
         }
     }
 }

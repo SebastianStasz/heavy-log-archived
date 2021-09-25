@@ -17,9 +17,5 @@ public extension WorkoutEntity {
                 return SortDescriptor(\WorkoutEntity.endDate, order: order)
             }
         }
-
-        var asNSSortDescriptor: NSSortDescriptor {
-            NSSortDescriptor(get)
-        }
     }
 }
