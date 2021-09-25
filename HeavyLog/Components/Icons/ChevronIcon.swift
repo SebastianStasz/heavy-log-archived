@@ -1,5 +1,5 @@
 //
-//  Chevron.swift
+//  ChevronIcon.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 25/09/2021.
@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct Chevron: View {
+struct ChevronIcon: View {
     var body: some View {
         Image(systemName: "chevron.forward")
             .font(.callout.weight(.light))
             .foregroundColor(.grayMedium)
-            .padding(.leading, .spacingMedium)
     }
 }
 
@@ -21,6 +20,7 @@ struct Chevron: View {
 
 struct Chevron_Previews: PreviewProvider {
     static var previews: some View {
-        Chevron()
+        ChevronIcon()
+            .previewSizeThatFits(backgroundColor: .white)
     }
 }

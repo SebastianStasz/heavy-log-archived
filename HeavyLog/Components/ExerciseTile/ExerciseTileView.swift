@@ -9,13 +9,13 @@ import SwiftUI
 
 struct ExerciseTileView: View {
 
-    let title: String
+    let viewData: ExerciseTileViewData
 
     var body: some View {
-        HStack(spacing: 0) {
-            Text(title).textBodyNormal
+        HStack(spacing: .spacingMedium) {
+            Text(viewData.title).textBodyNormal
             Spacer()
-            Chevron()
+            viewData.icon
         }
         .lineLimit(1)
         .padding(.spacingMedium)
@@ -30,8 +30,10 @@ struct ExerciseTileView: View {
 struct ExerciseTileView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ExerciseTileView(title: "Bench press")
-            ExerciseTileView(title: "Very long exercise name here, very long lo")
+            ExerciseTileView(viewData: .benchPressNone)
+            ExerciseTileView(viewData: .benchPressPlus)
+            ExerciseTileView(viewData: .benchPressChevron)
+            ExerciseTileView(viewData: .sampleLongNone)
         }
         .previewSizeThatFits()
     }

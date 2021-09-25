@@ -23,7 +23,7 @@ struct BaseListRowView: View {
             Spacer()
             Text(row.value).textBodyNormal
 
-            Chevron().displayIf(row.isClicable)
+            ChevronIcon().displayIf(row.isClicable)
         }
     }
 }

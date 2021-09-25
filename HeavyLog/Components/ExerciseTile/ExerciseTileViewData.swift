@@ -9,23 +9,34 @@ import HeavyLogCoreData
 import SwiftUI
 
 struct ExerciseTileViewData {
-    let title: String
-    let type: String
-    let color: Color
-    let bodyParts: String
 
-    var headerViewData: DoubleTextHeaderViewData {
-        .init(title: title, subtitle: type, color: color)
+    enum Icon {
+        case chevron
+        case plus
+        case none
+    }
+
+    let title: String
+    let icon: Icon
+
+    init(title: String, icon: Icon = .none) {
+        self.title = title
+        self.icon = icon
     }
 }
 
-extension ExerciseTileViewData {
-    init(_ exercise: ExerciseEntity) {
-        title = exercise.name
-        type = exercise.type.name
-        color = exercise.difficulty.color
-        let additionalBodyParts = (exercise.additionalBodyParts ?? []).map { $0.name }.joined(separator: ", ")
-        bodyParts = "\(exercise.mainBodyPart.name), \(additionalBodyParts)"
+// MARK: - Icon Body
+
+extension ExerciseTileViewData.Icon: View {
+    var body: some View {
+        switch self {
+        case .chevron:
+            ChevronIcon()
+        case .plus:
+            PlusIcon()
+        case .none:
+            EmptyView()
+        }
     }
 }
 
@@ -33,5 +44,8 @@ extension ExerciseTileViewData {
 // MARK: - Sample Data
 
 extension ExerciseTileViewData {
-    static let sample1 = ExerciseTileViewData(title: "Bench press", type: "Push", color: .accentOrangeLight, bodyParts: "Chest, shoulders, tricpeps")
+    static let benchPressChevron = ExerciseTileViewData(title: "Bench press", icon: .chevron)
+    static let benchPressPlus = ExerciseTileViewData(title: "Bench press", icon: .plus)
+    static let benchPressNone = ExerciseTileViewData(title: "Bench press", icon: .none)
+    static let sampleLongNone = ExerciseTileViewData(title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.", icon: .none)
 }

@@ -14,19 +14,14 @@ struct ExerciseListView: View {
     @FetchRequest private var exercises: FetchedResults<ExerciseEntity>
 
     private let paddingTop: CGFloat
+    private let tileIcon: ExerciseTileViewData.Icon
     private let onTap: ((ExerciseEntity) -> Void)?
-
-    init(paddingTop: CGFloat, notIncluding exercises: [ExerciseEntity] = [], onTap: ((ExerciseEntity) -> Void)? = nil) {
-        self.paddingTop = paddingTop
-        self.onTap = onTap
-        self._exercises = ExerciseEntity.exercises(notIncluding: exercises)
-    }
 
     var body: some View {
         LazyVStack(spacing: .spacingMedium) {
             ForEach(exercises) { exercise in
                 Button(action: { onTap?(exercise) }) {
-                    ExerciseTileView(title: exercise.name)
+                    ExerciseTileView(viewData: .init(title: exercise.name, icon: tileIcon))
                 }
             }
         }
@@ -34,6 +29,17 @@ struct ExerciseListView: View {
         .padding(top: paddingTop, horizontal: .spacingMedium)
         .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
+    }
+
+    init(paddingTop: CGFloat,
+         notIncluding exercises: [ExerciseEntity] = [],
+         tileIcon: ExerciseTileViewData.Icon = .chevron,
+         onTap: ((ExerciseEntity) -> Void)? = nil
+    ) {
+        self.paddingTop = paddingTop
+        self.tileIcon = tileIcon
+        self.onTap = onTap
+        self._exercises = ExerciseEntity.exercises(notIncluding: exercises)
     }
 }
 
