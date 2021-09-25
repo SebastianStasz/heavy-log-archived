@@ -6,41 +6,6 @@
 //
 
 import CoreData
-import Foundation
-import SwiftUI
-
-public protocol EntityFilter {
-    var get: NSPredicate { get }
-}
-
-public protocol EntitySort {
-    associatedtype Entity: NSManagedObject
-
-    var get: SortDescriptor<Entity> { get }
-}
-
-extension EntitySort {
-    var asNSSortDescriptor: NSSortDescriptor {
-        NSSortDescriptor(get)
-    }
-}
-
-public protocol Entity {
-    associatedtype Filter: EntityFilter
-    associatedtype Sort: EntitySort
-}
-
-public extension Entity where Self: NSManagedObject {
-    static func all(sorting: [Sort] = [], filtering: [Filter]? = nil) -> FetchRequest<Self> {
-        let request: FetchRequest<Self> = FetchRequest(fetchRequest: Self.nsFetchRequest())
-        let sortDescriptors = sorting.map { $0.get } as! [SortDescriptor<Self>]
-        request.wrappedValue.sortDescriptors = sortDescriptors
-        if let predicates = filtering?.map({ $0.get }) {
-            request.wrappedValue.nsPredicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
-        }
-        return request
-    }
-}
 
 extension NSManagedObject {
 
@@ -78,11 +43,5 @@ extension NSManagedObject {
     func delete() {
         guard let context = getContext() else { return }
         context.delete(self)
-    }
-}
-
-extension NSPredicate {
-    static func allExcept<T: NSManagedObject>(_ entities: [T]) -> NSPredicate {
-        NSPredicate(format: "NOT (SELF IN %@)", entities)
     }
 }

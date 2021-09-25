@@ -10,7 +10,7 @@ import Foundation
 public extension BodyParameterEntity {
 
     enum Sort: EntitySort {
-        case byDate(SortOrder = .forward)
+        case byDate(SortOrder = .reverse)
 
         public var get: SortDescriptor<Entity> {
             switch self {

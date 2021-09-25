@@ -103,7 +103,7 @@ class ExerciseEntityTests: XCTestCase, CoreDataSteps {
         loadExerciseData()
 
         // After loading there should be three exercises.
-        try fetchRequestShouldReturnElements(3, for: ExerciseEntity.self)
+        try fetchRequestShouldReturnElements(10, for: ExerciseEntity.self)
 
         // Save context.
         try saveContext()

@@ -10,7 +10,7 @@ import Foundation
 public extension WorkoutTemplateEntity {
 
     enum Sort: EntitySort {
-        case recentlyUsed(SortOrder = .forward)
+        case recentlyUsed(SortOrder = .reverse)
 
         public var get: SortDescriptor<WorkoutTemplateEntity> {
             switch self {
