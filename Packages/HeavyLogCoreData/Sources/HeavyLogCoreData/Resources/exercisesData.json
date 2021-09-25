@@ -31,5 +31,82 @@
         "type": "push",
         "main_body_part": "medial_deltoid",
         "additional_body_parts": ["anterior_deltoid", "triceps"]
+    },
+    {
+        "id": 3,
+        "name": "exercise_name_legPress",
+        "short_name": null,
+        "description": "exercise_desc_legPress",
+        "difficulty": "easy",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "quadriceps",
+        "additional_body_parts": ["glutes"]
+    },
+    {
+        "id": 4,
+        "name": "exercise_name_lunge",
+        "short_name": null,
+        "description": "exercise_desc_lunge",
+        "difficulty": "moderate",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "quadriceps",
+        "additional_body_parts": ["glutes", "hamstrings"]
+    },
+    {
+        "id": 5,
+        "name": "exercise_name_legExtension",
+        "short_name": null,
+        "description": "exercise_desc_legExtension",
+        "difficulty": "easy",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "quadriceps",
+        "additional_body_parts": []
+    },
+    {
+        "id": 5,
+        "name": "exercise_name_legCurl",
+        "short_name": null,
+        "description": "exercise_desc_legCurl",
+        "difficulty": "easy",
+        "section": "lower",
+        "type": "pull",
+        "main_body_part": "hamstrings",
+        "additional_body_parts": []
+    },
+    {
+        "id": 6,
+        "name": "exercise_name_standingCalfRaise",
+        "short_name": null,
+        "description": "exercise_desc_standingCalfRaise",
+        "difficulty": "easy",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "calves",
+        "additional_body_parts": []
+    },
+    {
+        "id": 7,
+        "name": "exercise_name_seatedCalfRaise",
+        "short_name": null,
+        "description": "exercise_desc_seatedCalfRaise",
+        "difficulty": "easy",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "calves",
+        "additional_body_parts": []
+    },
+    {
+        "id": 8,
+        "name": "exercise_name_squad",
+        "short_name": null,
+        "description": "exercise_desc_squad",
+        "difficulty": "hard",
+        "section": "lower",
+        "type": "push",
+        "main_body_part": "quadriceps",
+        "additional_body_parts": ["glutes", "abdominal_oblique"]
     }
 ]

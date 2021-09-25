@@ -23,12 +23,7 @@ struct BaseListRowView: View {
             Spacer()
             Text(row.value).textBodyNormal
 
-            if row.isClicable {
-                Image(systemName: "chevron.forward")
-                    .font(.callout.weight(.light))
-                    .foregroundColor(.grayMedium)
-                    .padding(.leading, .spacingMedium)
-            }
+            Chevron().displayIf(row.isClicable)
         }
     }
 }
@@ -41,7 +36,7 @@ struct ListBaseRowView_Previews: PreviewProvider {
         Group {
             BaseListRowView(row: .sampleC1)
             BaseListRowView(row: .sampleC2)
-            BaseListRowView(row: .sampleC3)
+            BaseListRowView(row: .sample3)
             BaseListRowView(row: .sampleIC1)
         }
         .previewLayout(.sizeThatFits)

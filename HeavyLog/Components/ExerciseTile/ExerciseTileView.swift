@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ExerciseTileView: View {
 
-    let viewData: ExerciseTileViewData
+    let title: String
 
     var body: some View {
-        Text(viewData.bodyParts).textBodyNormal
-            .embedInBaseTileView(headerViewData: viewData.headerViewData)
+        HStack(spacing: 0) {
+            Text(title).textBodyNormal
+            Spacer()
+            Chevron()
+        }
+        .lineLimit(1)
+        .padding(.spacingMedium)
+        .background(Color.basicPrimary)
+        .cornerRadius(.cornerRadiusBase)
     }
 }
 
@@ -22,7 +29,10 @@ struct ExerciseTileView: View {
 
 struct ExerciseTileView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseTileView(viewData: .sample1)
-            .previewSizeThatFits()
+        Group {
+            ExerciseTileView(title: "Bench press")
+            ExerciseTileView(title: "Very long exercise name here, very long lo")
+        }
+        .previewSizeThatFits()
     }
 }

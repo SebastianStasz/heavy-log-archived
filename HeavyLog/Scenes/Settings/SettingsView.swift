@@ -13,7 +13,7 @@ struct SettingsView: View {
 
     var body: some View {
         VStack {
-            Button("Save workouts") { viewModel.exportWorkoutData() }
+            Button("Export workout data") { viewModel.exportWorkoutData() }
         }
     }
 }

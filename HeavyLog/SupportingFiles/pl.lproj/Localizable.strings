@@ -85,7 +85,21 @@
 "exercise_name_benchPress" = "Wyciskanie sztangi leżąc";
 "exercise_name_classicDeadlift" = "Martwy ciąg klasyczny";
 "exercise_name_overheadPress" = "Wyciskanie sztangi nad głowę";
+"exercise_name_legPress" = "Wypychanie nóg na suwnicy";
+"exercise_name_lunge" = "Wykroki";
+"exercise_name_legExtension" = "Wyprosty nóg";
+"exercise_name_legCurl" = "Uginanie nóg w leżeniu";
+"exercise_name_standingCalfRaise" = "Łydki stojąd";
+"exercise_name_seatedCalfRaise" = "Łydki siedząc";
+"exercise_name_squad" = "Przysiad";
 
 "exercise_desc_benchPress" = "Ćwiczenie siłowe na górne partie ciała, w którym osoba ćwicząca wyciska sztangę do góry leżąc na ławce poziomej.";
 "exercise_desc_classicDeadlift" = "Martwy ciąg to jedno z trzech ćwiczeń w trójboju siłowym, obok przysiadu i wyciskania na ławce.";
 "exercise_desc_overheadPress" = "Ćwiczenie, w którym sztanga jest wypychana w górę z pozycji stojącej, aż do zablokowania ramion nad głową, podczas gdy nogi, dolna część pleców i brzuch utrzymują równowagę.";
+"exercise_desc_legPress" = "Wypychanie nóg na suwnicy to proste ćwiczenie siłowe, w którym dana osoba odpycha od siebie ciężar lub opór za pomocą nóg.";
+"exercise_desc_lunge" = "Wykrok może odnosić się do dowolnej pozycji ludzkiego ciała, w której jedna noga jest skierowana do przodu z ugiętym kolanem i stopą płasko na ziemi, podczas gdy druga noga jest ustawiona z tyłu.";
+"exercise_desc_legExtension" = "Wyprostowanie nóg to ćwiczenie z obciążeniem oporowym, które jest ukierunkowane na mięsień czworogłowy w nogach.";
+"exercise_desc_legCurl" = "Zwijanie nóg, znane również jako zginanie ścięgien podkolanowych, to ćwiczenie izolacyjne, które celuje w mięśnie ścięgna podkolanowego.";
+"exercise_desc_standingCalfRaise" = "Podnoszenie łydek to metoda ćwiczeń mięśnia brzuchatego łydki, piszczelowego tylnego, strzałkowego i płaszczkowatego podudzia.";
+"exercise_desc_seatedCalfRaise" = "Podnoszenie łydek to metoda ćwiczeń mięśnia brzuchatego łydki, piszczelowego tylnego, strzałkowego i płaszczkowatego podudzia.";
+"exercise_desc_squad" = "Przysiad to ćwiczenie siłowe, w którym ćwiczący obniża biodra z pozycji stojącej, a następnie wstaje. Podczas schodzenia z przysiadu stawy biodrowe i kolanowe zginają się, podczas gdy staw skokowy zgina się; przeciwnie, stawy biodrowe i kolanowe wydłużają się, a staw skokowy zgina podeszwę podczas wstawania.";

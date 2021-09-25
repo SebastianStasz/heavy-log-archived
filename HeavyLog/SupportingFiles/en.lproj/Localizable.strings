@@ -85,8 +85,21 @@
 "exercise_name_benchPress" = "Bench press";
 "exercise_name_classicDeadlift" = "Classic deadlift";
 "exercise_name_overheadPress" = "Overhead press";
+"exercise_name_legPress" = "Leg press";
+"exercise_name_lunge" = "Lunge";
+"exercise_name_legExtension" = "Lex extension";
+"exercise_name_legCurl" = "Leg curl";
+"exercise_name_standingCalfRaise" = "Standing calf raise";
+"exercise_name_seatedCalfRaise" = "Seated calf raise";
+"exercise_name_squad" = "Squad";
 
 "exercise_desc_benchPress" = "An upper-body weight training exercise in which the trainee presses a weight upwards while lying on a weight training bench.";
 "exercise_desc_classicDeadlift" = "It is one of the three powerlifting exercises, along with the squat and bench press.";
 "exercise_desc_overheadPress" = "Exercise in which a weight is pressed straight upwards from racking position until the arms are locked out overhead, while the legs, lower back and abs maintain balance.";
-
+"exercise_desc_legPress" = "The leg press is a compound weight training exercise in which the individual pushes a weight or resistance away from them using their legs.";
+"exercise_desc_lunge" = "A lunge can refer to any position of the human body where one leg is positioned forward with knee bent and foot flat on the ground while the other leg is positioned behind.";
+"exercise_desc_legExtension" = "The leg extension is a resistance weight training exercise that targets the quadriceps muscle in the legs. The exercise is done using a machine called the Leg Extension Machine.";
+"exercise_desc_legCurl" = "The leg curl, also known as the hamstring curl, is an isolation exercise that targets the hamstring muscles.";
+"exercise_desc_standingCalfRaise" = "Calf raises are a method of exercising the gastrocnemius, tibialis posterior, peroneals and soleus muscles of the lower leg.";
+"exercise_desc_seatedCalfRaise" = "Calf raises are a method of exercising the gastrocnemius, tibialis posterior, peroneals and soleus muscles of the lower leg.";
+"exercise_desc_squad" = "A squat is a strength exercise in which the trainee lowers their hips from a standing position and then stands back up. During the descent of a squat, the hip and knee joints flex while the ankle joint dorsiflexes; conversely the hip and knee joints extend and the ankle joint plantarflexes when standing up.";

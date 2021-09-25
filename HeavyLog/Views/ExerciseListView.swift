@@ -26,7 +26,7 @@ struct ExerciseListView: View {
         LazyVStack(spacing: .spacingMedium) {
             ForEach(exercises) { exercise in
                 Button(action: { onTap?(exercise) }) {
-                    ExerciseTileView(viewData: .init(exercise))
+                    ExerciseTileView(title: exercise.name)
                 }
             }
         }
