@@ -26,8 +26,8 @@ struct TabBarView: View {
                 ForEach(tabBar.availableTabs) { tab in
                     tab.embedInNavigationView(title: tab.navigationTitle).tag(tab)
                 }
+                .disabled(tabBar.arePopupsShown)
             }
-            .allowsHitTesting(!tabBar.arePopupsShown)
 
             // TabBar
             HStack(spacing: 0) {

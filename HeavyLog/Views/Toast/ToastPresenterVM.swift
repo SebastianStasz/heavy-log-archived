@@ -24,13 +24,7 @@ final class ToastPresenterVM: ObservableObject {
         self.toast = toast
     }
 
-    deinit {
-        print("Toast Presenter deinit")
-    }
-
     init() {
-        print("Toast Presenter init")
-
         dismiss // Dismiss toast & check next
             .map { [unowned self] in isToastPresented = false }
             .debounce(for: .seconds(0.6), scheduler: RunLoop.main)

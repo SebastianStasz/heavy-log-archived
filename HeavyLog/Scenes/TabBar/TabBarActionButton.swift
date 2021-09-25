@@ -16,7 +16,7 @@ struct TabBarActionButton: View {
     // MARK: - View
 
     var body: some View {
-        Button("Add", action: tabBar.arePopupsShown.toggle())
+        Button("Add", action: togglePopupButtons)
             .buttonStyle(TabBarActionButtonStyle(isEnabled: tabBar.arePopupsShown))
             .disableInteractions(settings: interactionBlockerSettings)
     }
@@ -30,6 +30,10 @@ struct TabBarActionButton: View {
     }
 
     // MARK: Interactions
+
+    private func togglePopupButtons() {
+        tabBar.arePopupsShown.toggle()
+    }
 
     private func popupButton(_ popup: Popup, angle: Double, action: @autoclosure @escaping () -> Void) -> some View {
         let offset = getOffset(for: angle)
