@@ -12,34 +12,20 @@ struct ExerciseListView: View {
 
     @StateObject private var viewModel = ExerciseListVM()
 
-    private let paddingTop: CGFloat
     private let tileIcon: ExerciseTileViewData.Icon
     private let onTap: ((ExerciseEntity) -> Void)?
 
     var body: some View {
-        VStack {
-            Picker("", selection: $viewModel.filter.selectedTab) {
-                ForEach(ExerciseListVM.Filtering.Tab.allCases) {
-                    Text($0.title).tag($0)
-                }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal, .spacingMedium)
-            .displayIf(viewModel.areUserExercises)
-
-            ExerciseList(viewModel: viewModel, fetchRequest: viewModel.fetchRequest, paddingTop: paddingTop, tileIcon: tileIcon)
-        }
-        .searchable(text: $viewModel.searchText, prompt: "Search for exercises")
-        .onAppear { viewModel.onTap = onTap }
+        ExerciseList(viewModel: viewModel, fetchRequest: viewModel.fetchRequest, tileIcon: tileIcon)
+            .searchable(text: $viewModel.searchText, prompt: "Search for exercises")
+            .onAppear { viewModel.onTap = onTap }
     }
 
     // MARK: - Initializer
 
-    init(paddingTop: CGFloat,
-         tileIcon: ExerciseTileViewData.Icon = .chevron,
+    init(tileIcon: ExerciseTileViewData.Icon = .chevron,
          onTap: ((ExerciseEntity) -> Void)? = nil
     ) {
-        self.paddingTop = paddingTop
         self.tileIcon = tileIcon
         self.onTap = onTap
     }
@@ -50,7 +36,7 @@ struct ExerciseListView: View {
 
 struct ExerciseListView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseListView(paddingTop: .spacingSmall)
+        ExerciseListView()
             .embedInNavigationView(title: "Exercises")
             .environment(\.managedObjectContext, PersistenceController.previewWithData.context)
     }

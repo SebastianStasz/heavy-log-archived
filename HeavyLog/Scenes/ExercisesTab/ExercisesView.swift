@@ -13,7 +13,7 @@ struct ExercisesView: View {
     @StateObject private var viewModel = ExercisesVM()
 
     var body: some View {
-        ExerciseListView(paddingTop: .spacingMicro, onTap: openExercise)
+        ExerciseListView(onTap: openExercise)
             .navigation(item: $viewModel.exerciseDetailsVM) { ExerciseDetailsView(viewModel: $0) }
     }
 

@@ -5,20 +5,26 @@
 //  Created by Sebastian Staszczyk on 25/09/2021.
 //
 
-import SwiftUI
 import HeavyLogCoreData
+import SwiftUI
 
 struct ExerciseList: View {
+    typealias FilteringTabs = ExerciseListVM.Filtering.Tab
 
     @Environment(\.managedObjectContext) private var context
-    @FetchRequest var exercises: FetchedResults<ExerciseEntity>
+    @FetchRequest private var exercises: FetchedResults<ExerciseEntity>
     @ObservedObject private var viewModel: ExerciseListVM
 
-    private let paddingTop: CGFloat
     private let tileIcon: ExerciseTileViewData.Icon
 
     var body: some View {
         LazyVStack(spacing: .spacingMedium) {
+            Picker("", selection: $viewModel.filter.selectedTab) {
+                ForEach(FilteringTabs.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .displayIf(viewModel.areUserExercises)
+
             ForEach(exercises) { exercise in
                 Button(action: { viewModel.onTap?(exercise) }) {
                     ExerciseTileView(viewData: .init(title: exercise.name, icon: tileIcon))
@@ -26,7 +32,7 @@ struct ExerciseList: View {
             }
         }
         .allowsHitTesting(viewModel.onTap != nil)
-        .padding(top: paddingTop, horizontal: .spacingMedium)
+        .padding(.horizontal, .spacingMedium)
         .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }
@@ -35,12 +41,10 @@ struct ExerciseList: View {
 
     init(viewModel: ExerciseListVM,
          fetchRequest: FetchRequest<ExerciseEntity>,
-         paddingTop: CGFloat,
          tileIcon: ExerciseTileViewData.Icon = .chevron
     ) {
         self.viewModel = viewModel
         self._exercises = fetchRequest
-        self.paddingTop = paddingTop
         self.tileIcon = tileIcon
     }
 }
@@ -50,6 +54,6 @@ struct ExerciseList: View {
 
 struct ExerciseList_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseList(viewModel: .init(), fetchRequest: ExerciseEntity.all(), paddingTop: 0)
+        ExerciseList(viewModel: .init(), fetchRequest: ExerciseEntity.all())
     }
 }
