@@ -44,6 +44,12 @@ public extension ExerciseEntity {
         let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.withId(id).get)
         return try? context.fetch(request).first
     }
+
+    static func areUserExercises(in context: NSManagedObjectContext) -> Bool {
+        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.addedByUser.get)
+        let exercises = try? context.fetch(request)
+        return !(exercises?.isEmpty ?? true)
+    }
 }
 
 // MARK: - Helpers
@@ -51,7 +57,8 @@ public extension ExerciseEntity {
 private extension ExerciseEntity {
 
     @discardableResult private func fillInData(data: ExerciseData) -> ExerciseEntity {
-        name_ = data.name
+        nameKey = data.nameKey
+        name = data.name
         shortName_ = data.shortName
         information_ = data.information
         difficulty = data.difficulty

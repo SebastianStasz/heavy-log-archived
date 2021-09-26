@@ -16,7 +16,7 @@ struct WorkoutTemplateListView: View {
 
     init(onTap: ((WorkoutTemplateEntity) -> Void)? = nil) {
         self.onTap = onTap
-        self._templates = WorkoutTemplateEntity.all
+        self._templates = WorkoutTemplateEntity.all(sorting: [.recentlyUsed(.reverse)])
     }
 
     var body: some View {

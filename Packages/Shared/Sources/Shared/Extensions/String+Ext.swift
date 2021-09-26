@@ -14,6 +14,7 @@ public extension String {
         NSLocalizedString(self, bundle: .main, comment: self)
     }
 
+    /// A Boolean value indicating whether a string has characters.
     var isNotEmpty: Bool {
         !self.isEmpty
     }

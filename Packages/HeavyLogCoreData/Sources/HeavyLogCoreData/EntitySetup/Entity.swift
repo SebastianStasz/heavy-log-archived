@@ -14,15 +14,15 @@ public protocol Entity {
     associatedtype Sort: EntitySort
 }
 
-public extension Entity where Self: NSManagedObject {
+public extension Entity where Sort.Entity == Self {
     static func all(sorting: [Sort] = [], filtering: [Filter]? = nil) -> FetchRequest<Self> {
-        let request: FetchRequest<Self> = FetchRequest(fetchRequest: Self.nsFetchRequest())
-        let sortDescriptors = sorting.map { $0.get } as! [SortDescriptor<Self>]
-        request.wrappedValue.sortDescriptors = sortDescriptors
+        let sortDescriptors = sorting.map { $0.asNSSortDescriptor }
+        let request: NSFetchRequest<Self> = Self.nsFetchRequest(sortDescriptors: sortDescriptors)
         if let predicates = filtering?.map({ $0.get }) {
-            request.wrappedValue.nsPredicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
+//            if predicates.count == 1 { request.predicate = predicates.first }
+            request.predicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         }
-        return request
+        return FetchRequest(fetchRequest: request)
     }
 }
 

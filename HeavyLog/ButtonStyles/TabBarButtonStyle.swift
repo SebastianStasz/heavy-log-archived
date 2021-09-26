@@ -18,7 +18,7 @@ struct TabBarButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .foregroundColor(isSelected ? .accentRed : .grayMedium)
             .scaleEffect(configuration.isPressed ? 1.05 : 1)
-            .animation(.easeInOut(duration: 0.1))
+            .animation(.easeInOut, value: 0.1)
             .contentShape(Circle())
     }
 }

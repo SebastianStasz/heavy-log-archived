@@ -14,7 +14,7 @@ struct WorkoutsView: View {
     @FetchRequest private var workouts: FetchedResults<WorkoutEntity>
 
     init() {
-        self._workouts = WorkoutEntity.all
+        self._workouts = WorkoutEntity.all(sorting: [.byDate(.reverse)])
     }
 
     var body: some View {

@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(EffortEntity) public class EffortEntity: NSManagedObject {
+@objc(EffortEntity) public class EffortEntity: NSManagedObject, Entity {
 
     @NSManaged var exerciseId: Int
     @NSManaged var workout: WorkoutEntity

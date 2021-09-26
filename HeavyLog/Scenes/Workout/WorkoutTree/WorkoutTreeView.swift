@@ -32,7 +32,7 @@ struct WorkoutTreeView: View {
     }
 
     private var exerciseList: some View {
-        ExerciseListView(paddingTop: .spacingMedium, notIncluding: viewModel.exercisesInUse, tileIcon: .plus, onTap: addExercise)
+        ExerciseListView(paddingTop: .spacingMedium, tileIcon: .plus, onTap: addExercise)
             .environment(\.managedObjectContext, context)
             .toolbar { Toolbar.cancel(action: dismissExerciseList) }
             .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)

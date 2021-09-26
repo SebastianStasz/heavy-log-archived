@@ -9,7 +9,7 @@
 import CoreData
 import Foundation
 
-@objc(SetEntity) public class SetEntity: NSManagedObject {
+@objc(SetEntity) public class SetEntity: NSManagedObject, Entity {
 
     @NSManaged var effort: EffortEntity
     @NSManaged public internal(set) var reps: Int

@@ -10,7 +10,7 @@ import Foundation
 public extension ExerciseEntity {
 
     enum Sort: EntitySort {
-        case byName(SortOrder)
+        case byName(SortOrder = .forward)
 
         public var get: SortDescriptor<ExerciseEntity> {
             switch self {

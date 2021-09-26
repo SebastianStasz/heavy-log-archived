@@ -8,7 +8,7 @@
 import CoreData
 import Foundation
 
-@objc(BodyParameterEntity) public class BodyParameterEntity: NSManagedObject {
+@objc(BodyParameterEntity) public class BodyParameterEntity: NSManagedObject, Entity {
 
     @NSManaged var parameter_: String
     @NSManaged public internal(set) var date: Date

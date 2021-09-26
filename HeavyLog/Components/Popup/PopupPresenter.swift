@@ -23,7 +23,7 @@ struct PopupPresenter: View {
                     .transition(.opacity)
             }
         }
-        .animation(.easeInOut(duration: 0.08))
+        .animation(.easeInOut, value: 0.08)
     }
 
     private func dismissPopup() {

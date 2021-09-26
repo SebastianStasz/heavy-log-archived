@@ -121,6 +121,7 @@ extension ExerciseEntityTests {
 
     private func verifyExerciseEntityData(_ exercise: ExerciseEntity, exerciseData data: ExerciseData, id: Int? = nil) throws {
         XCTAssertEqual(exercise.type, data.type)
+        XCTAssertEqual(exercise.nameKey, data.nameKey)
         XCTAssertEqual(exercise.name, data.name)
         XCTAssertEqual(exercise.shortName, data.shortName)
         XCTAssertEqual(exercise.difficulty, data.difficulty)

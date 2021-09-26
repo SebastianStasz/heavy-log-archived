@@ -17,6 +17,7 @@ public extension PersistenceController {
 
     static var previewWithData: PersistenceController {
         let persistenceController = PersistenceController(inMemory: true)
+        CoreDataSample.createSampleWorkoutTemplates(in: persistenceController.context)
         persistenceController.save()
         return persistenceController
     }

@@ -11,7 +11,7 @@ import Foundation
 
 @objc(ExerciseEntity) public class ExerciseEntity: NSManagedObject, Entity {
 
-    @NSManaged var name_: String
+    @NSManaged var nameKey: String
     @NSManaged var type_: String
     @NSManaged var section_: String
     @NSManaged var difficulty_: String
@@ -25,10 +25,7 @@ import Foundation
     @NSManaged var isEditable: Bool
     @NSManaged var efforts: Set<EffortEntity>
     @NSManaged var templates: Set<WorkoutTemplateEntity>
-
-    public var name: String {
-        name_.localize()
-    }
+    @NSManaged public internal(set) var name: String
 
     public var shortName: String? {
         shortName_?.localize()

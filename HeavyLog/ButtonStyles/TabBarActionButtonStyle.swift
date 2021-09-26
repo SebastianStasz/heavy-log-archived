@@ -29,6 +29,6 @@ struct TabBarActionButtonStyle: ButtonStyle {
                 .font(.system(size: 26, weight: .medium))
                 .rotationEffect(isEnabled ? Angle(degrees: 45) : .zero)
         }
-        .animation(.easeInOut(duration: 0.2))
+        .animation(.easeInOut, value: 0.2)
     }
 }

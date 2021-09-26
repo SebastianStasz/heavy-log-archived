@@ -10,7 +10,7 @@ import CoreData
 import Foundation
 import SwiftUI
 
-@objc(WorkoutTemplateEntity) public class WorkoutTemplateEntity: NSManagedObject {
+@objc(WorkoutTemplateEntity) public class WorkoutTemplateEntity: NSManagedObject, Entity {
 
     @NSManaged var lastUse: Date?
     @NSManaged var timesUsed: Int64

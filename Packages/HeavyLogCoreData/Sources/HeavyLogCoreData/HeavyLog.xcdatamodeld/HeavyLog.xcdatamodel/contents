@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19197" systemVersion="20G165" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BodyParameterEntity" representedClassName="BodyParameterEntity" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="parameter_" attributeType="String"/>
@@ -18,7 +18,8 @@
         <attribute name="information_" optional="YES" attributeType="String"/>
         <attribute name="isEditable" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="mainBodyPart_" attributeType="String"/>
-        <attribute name="name_" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="nameKey" attributeType="String"/>
         <attribute name="section_" attributeType="String"/>
         <attribute name="shortName_" optional="YES" attributeType="String"/>
         <attribute name="type_" attributeType="String"/>
@@ -47,7 +48,7 @@
     <elements>
         <element name="BodyParameterEntity" positionX="288.9019775390625" positionY="-134.902099609375" width="128" height="74"/>
         <element name="EffortEntity" positionX="84.4190673828125" positionY="189.1649475097656" width="128" height="103"/>
-        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="134.0357666015625" height="223"/>
+        <element name="ExerciseEntity" positionX="-341.9046630859375" positionY="21.97454833984375" width="134.0357666015625" height="238"/>
         <element name="SetEntity" positionX="282.9082946777344" positionY="267.9727783203124" width="128" height="88"/>
         <element name="WorkoutEntity" positionX="-93.40850830078125" positionY="-101.3866577148438" width="128" height="133"/>
         <element name="WorkoutTemplateEntity" positionX="-560.8081665039062" positionY="33.03704833984375" width="151.8609619140625" height="103"/>

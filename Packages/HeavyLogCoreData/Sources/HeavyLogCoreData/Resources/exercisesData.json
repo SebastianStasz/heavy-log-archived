@@ -100,9 +100,9 @@
     },
     {
         "id": 8,
-        "name": "exercise_name_squad",
+        "name": "exercise_name_squat",
         "short_name": null,
-        "description": "exercise_desc_squad",
+        "description": "exercise_desc_squat",
         "difficulty": "hard",
         "section": "lower",
         "type": "push",
