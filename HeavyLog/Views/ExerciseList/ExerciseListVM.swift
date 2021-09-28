@@ -33,7 +33,12 @@ final class ExerciseListVM: ObservableObject {
     func makeOutput() -> Output {
         let filterFormOutput = filterVM.makeOutput()
 
-        let filters: AnyPublisher<[Filter], Never> = Publishers.CombineLatest3($searchText, $selectedTab, filterFormOutput.filters)
+        let nameFilter = $searchText
+            .removeDuplicates()
+            .debounce(for: 0.3, scheduler: RunLoop.main)
+            .map { $0.count > 2 ? $0 : "" }
+
+        let filters: AnyPublisher<[Filter], Never> = Publishers.CombineLatest3(nameFilter, $selectedTab, filterFormOutput.filters)
             .dropFirst()
             .map { text, tab, filters in
                 [Filter.byName(text), .byKind(tab.filter)] + filters
@@ -57,25 +62,6 @@ final class ExerciseListVM: ObservableObject {
                 self?.fetchRequest.applyFiltering(filters)
             }
             .store(in: &cancellables)
-
-//        $searchText
-//            .removeDuplicates()
-//            .debounce(for: 0.3, scheduler: RunLoop.main)
-//            .map { $0.count > 2 ? $0 : "" }
-//            .sink { [weak self] text in
-//                self?.filterVM.searchText = text
-//            }
-//            .store(in: &cancellables)
-//
-//        input.filterBtnTap
-//            .combineLatest($filterVM)
-//            .map { _, filter in filter }
-//            .removeDuplicates()
-//            .print()
-//            .sink { [weak self] filter in
-//                self?.fetchRequest.applyFiltering(filter.filters)
-//            }
-//            .store(in: &cancellables)
     }
 }
 

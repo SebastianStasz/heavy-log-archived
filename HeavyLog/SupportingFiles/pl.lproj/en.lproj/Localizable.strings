@@ -17,6 +17,11 @@
 "common_builtin" = "Built-in";
 "common_own" = "Own";
 "common_searchForExercises" = "Search for exercises";
+"common_reset" = "Reset";
+"common_section" = "Section";
+"common_type" = "Type";
+"common_difficulty" = "Difficulty";
+"common_all" = "All";
 
 "tab_dashboard_title" = "Dashboard";
 "tab_workouts_title" = "Wokrouts";
@@ -42,7 +47,7 @@
 "common_exerciseSection_lower" = "Lower";
 "common_exerciseSection_global" = "Global";
 
-"error_enum_unknown" = "None";
+"error_enum_unknown" = "Unknown";
 
 "common_bodyPart_calves" = "Calves";
 "common_bodyPart_quadriceps" = "Quadriceps";
@@ -79,6 +84,8 @@
 "workoutCreator_deleteWorkout_message" = "Are you sure you want to delete current workout?";
 "workoutCreator_addExercise" = "Add exercise";
 "workoutCreator_finishWorkout" = "Finish workout";
+
+"exerciseList_filterExercises" = "Filter exercises";
 
 "validation_message_empty" = "Field can not be empty.";
 "validation_message_invalid" = "Value is invalid.";

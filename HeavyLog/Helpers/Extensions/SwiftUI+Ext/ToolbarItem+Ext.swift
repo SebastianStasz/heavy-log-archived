@@ -17,6 +17,12 @@ extension Toolbar {
         }
     }
 
+    static func cancel(action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(.common_cancel) { action() }
+        }
+    }
+
     static func leading(_ text: String, action: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             Button(text) { action() }

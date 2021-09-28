@@ -47,6 +47,7 @@ public enum Difficulty: String {
 
 extension Difficulty: Decodable {}
 extension Difficulty: CaseIterable {}
+extension Difficulty: Filterable {}
 
 extension Difficulty: Identifiable {
     public var id: String { rawValue }

@@ -34,6 +34,7 @@ public enum ExerciseType: String {
 
 extension ExerciseType: Decodable {}
 extension ExerciseType: CaseIterable {}
+extension ExerciseType: Filterable {}
 
 extension ExerciseType: Identifiable {
     public var id: String { rawValue }

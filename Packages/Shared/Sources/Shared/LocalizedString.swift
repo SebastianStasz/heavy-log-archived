@@ -19,6 +19,11 @@ public enum LocalizedString: String {
     case common_builtin
     case common_own
     case common_searchForExercises
+    case common_reset
+    case common_section
+    case common_type
+    case common_difficulty
+    case common_all
 
     case tab_dashboard_title
     case tab_workouts_title
@@ -81,6 +86,8 @@ public enum LocalizedString: String {
     case workoutCreator_deleteWorkout_message
     case workoutCreator_addExercise
     case workoutCreator_finishWorkout
+
+    case exerciseList_filterExercises
 
     case validation_message_empty
     case validation_message_invalid

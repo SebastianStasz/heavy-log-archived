@@ -17,6 +17,11 @@
 "common_builtin" = "Wbudowane";
 "common_own" = "Własne";
 "common_searchForExercises" = "Wyszukaj ćwiczenie";
+"common_reset" = "Resetuj";
+"common_section" = "Sekcja";
+"common_type" = "Typ";
+"common_difficulty" = "Trudność";
+"common_all" = "Wszystko";
 
 "tab_dashboard_title" = "Pulpit";
 "tab_workouts_title" = "Treningi";
@@ -42,7 +47,7 @@
 "common_exerciseSection_lower" = "Dół";
 "common_exerciseSection_global" = "Globalne";
 
-"error_enum_unknown" = "Brak";
+"error_enum_unknown" = "Nieznany";
 
 "common_bodyPart_calves" = "Łydki";
 "common_bodyPart_quadriceps" = "Czworogłowy";
@@ -79,6 +84,8 @@
 "workoutCreator_deleteWorkout_message" = "Czy na pewno chcesz usunąć obecny trening?";
 "workoutCreator_addExercise" = "Dodaj ćwiczenie";
 "workoutCreator_finishWorkout" = "Zakończ trening";
+
+"exerciseList_filterExercises" = "Filtruj ćwiczenia";
 
 "validation_message_empty" = "Pole nie może być puste.";
 "validation_message_invalid" = "Wartość jest niepoprawna.";

@@ -8,7 +8,7 @@
 import Foundation
 
 /// Forces the definition of an unknown value
-public protocol UnknownValueSupport {
+public protocol UnknownValueSupport where Self: Equatable {
     static var unknownCase: Self { get }
 }
 

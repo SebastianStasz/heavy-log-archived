@@ -15,19 +15,19 @@ struct ExerciseFilterView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: .spacingHuge) {
-            SegmentedPicker("", selection: $viewModel.form.section, options: ExerciseSection.allCases)
-                .withTitle("Section")
+            SegmentedPicker(.common_section, selection: $viewModel.form.section, options: ExerciseSection.allCases)
+                .withTitle(.common_section)
 
-            SegmentedPicker("", selection: $viewModel.form.type, options: ExerciseType.allCases)
-                .withTitle("Type")
+            SegmentedPicker(.common_type, selection: $viewModel.form.type, options: ExerciseType.allCases)
+                .withTitle(.common_type)
 
-            SegmentedPicker("", selection: $viewModel.form.difficulty, options: Difficulty.allCases)
-                .withTitle("Difficulty")
+            SegmentedPicker(.common_difficulty, selection: $viewModel.form.difficulty, options: Difficulty.allCases)
+                .withTitle(.common_difficulty)
 
             Spacer()
 
             VStack(spacing: .spacingSmall) {
-                Button("Reset", action: resetFilterToDefault)
+                Button(.common_reset, action: resetFilterToDefault)
                     .buttonStyle(BaseButtonStyle(.secondary(.big)))
 
                 Button(.common_filter, action: performFiltering)
@@ -37,7 +37,7 @@ struct ExerciseFilterView: View {
         .padding(.top, .spacingBig)
         .padding(.horizontal, .spacingMedium)
         .toolbar { toolbarContent }
-        .embedInNavigationView(title: "Filter exercises", displayMode: .inline)
+        .embedInNavigationView(title: .exerciseList_filterExercises, displayMode: .inline)
         .onDisappear { viewModel.input.viewDisappeared.send() }
     }
 
@@ -45,7 +45,7 @@ struct ExerciseFilterView: View {
 
     private var toolbarContent: some ToolbarContent {
         Group {
-            Toolbar.close(action: dismiss.callAsFunction)
+            Toolbar.cancel(action: dismiss.callAsFunction)
         }
     }
 

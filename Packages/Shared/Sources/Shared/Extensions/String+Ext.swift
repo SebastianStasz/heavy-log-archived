@@ -55,6 +55,26 @@ public extension String {
         LocalizedString.common_searchForExercises.text
     }
 
+    static var common_reset: String {
+        LocalizedString.common_reset.text
+    }
+
+    static var common_section: String {
+        LocalizedString.common_section.text
+    }
+
+    static var common_type: String {
+        LocalizedString.common_type.text
+    }
+
+    static var common_difficulty: String {
+        LocalizedString.common_difficulty.text
+    }
+
+    static var common_all: String {
+        LocalizedString.common_all.text
+    }
+
     static var workoutCreator_chooseTemplate: String {
         LocalizedString.workoutCreator_chooseTemplate.text
     }
@@ -85,5 +105,9 @@ public extension String {
 
     static var workoutCreator_finishWorkout: String {
         LocalizedString.workoutCreator_finishWorkout.text
+    }
+
+    static var exerciseList_filterExercises: String {
+        LocalizedString.exerciseList_filterExercises.text
     }
 }
