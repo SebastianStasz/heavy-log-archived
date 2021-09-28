@@ -37,11 +37,11 @@ struct PopupView: View {
 
             HStack(spacing: .spacingSmall) {
                 Button(.common_cancel, action: viewModel.dismissPopup)
-                    .buttonStyle(BaseButtonStyle(.secondary))
+                    .buttonStyle(BaseButtonStyle(.secondary(.medium)))
                     .displayIf(viewModel.shouldDisplayCancelButton)
 
                 Button(.common_ok, action: viewModel.action)
-                    .buttonStyle(BaseButtonStyle(viewModel.isDestructive ? .destructive : .action))
+                    .buttonStyle(BaseButtonStyle(viewModel.isDestructive ? .destructive(.medium) : .action(.medium)))
             }
             .frame(maxWidth: .infinity)
         }

@@ -11,9 +11,21 @@ struct Toolbar {}
 
 extension Toolbar {
 
-    static func cancel(action: @escaping () -> Void) -> some ToolbarContent {
+    static func close(action: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarTrailing) {
             Button(.common_close) { action() }
+        }
+    }
+
+    static func leading(_ text: String, action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button(text) { action() }
+        }
+    }
+
+    static func trailing(_ text: String, action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(text) { action() }
         }
     }
 

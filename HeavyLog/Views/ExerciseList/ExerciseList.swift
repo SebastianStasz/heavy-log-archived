@@ -9,7 +9,7 @@ import HeavyLogCoreData
 import SwiftUI
 
 struct ExerciseList: View {
-    typealias FilteringTabs = ExerciseListVM.Filtering.Tab
+    typealias FilteringTabs = ExerciseFilterVM.Tab
 
     @Environment(\.managedObjectContext) private var context
     @FetchRequest private var exercises: FetchedResults<ExerciseEntity>
@@ -19,7 +19,7 @@ struct ExerciseList: View {
 
     var body: some View {
         LazyVStack(spacing: .spacingMedium) {
-            Picker("", selection: $viewModel.filter.selectedTab) {
+            Picker("", selection: $viewModel.filterVM.selectedTab) {
                 ForEach(FilteringTabs.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)

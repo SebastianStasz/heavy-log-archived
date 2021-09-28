@@ -21,9 +21,10 @@ struct BaseButtonStyle: ButtonStyle {
                 .fill(style.backgroundColor)
 
             configuration.label.textBodyBold
+                .textCase(style.size.textCase)
                 .foregroundColor(style.textColor)
         }
         .opacity(configuration.isPressed ? 0.75 : 1)
-        .frame(height: 40)
+        .frame(height: style.size.size)
     }
 }

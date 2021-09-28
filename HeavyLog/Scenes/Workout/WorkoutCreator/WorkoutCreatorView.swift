@@ -29,7 +29,7 @@ struct WorkoutCreatorView: View {
 
     private var toolbarContent: some ToolbarContent {
         Group {
-            Toolbar.cancel(action: dismissCreator)
+            Toolbar.close(action: dismissCreator)
             Toolbar.delete(action: presentPopupToDeleteWorkout)
         }
     }

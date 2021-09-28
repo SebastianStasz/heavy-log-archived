@@ -8,7 +8,7 @@
 import HeavyLogCoreData
 import SwiftUI
 
-protocol RatePickerSupport where Self: RawRepresentable, Self: Hashable, Self: Identifiable {
+protocol RatePickerSupport where Self: RawRepresentable, Self: Pickerable {
     static var possibleCases: [Self] { get }
 
     var name: String { get }

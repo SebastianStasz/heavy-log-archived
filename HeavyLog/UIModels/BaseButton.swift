@@ -8,16 +8,16 @@
 import SwiftUI
 
 enum BaseButton {
-    case action
-    case secondary
-    case destructive
+    case action(BaseButtonSize)
+    case secondary(BaseButtonSize)
+    case destructive(BaseButtonSize)
 
     var backgroundColor: Color {
         switch self {
         case .action:
             return .actionPrimary
-        case .secondary:
-            return .basicSecondary
+        case let .secondary(size):
+            return size == .medium ? .basicSecondary : .grayDarkSecondary
         case .destructive:
             return .accentRed
         }
@@ -27,10 +27,17 @@ enum BaseButton {
         switch self {
         case .action:
             return .basicPrimary
-        case .secondary:
-            return .grayDarkPrimary
+        case let .secondary(size):
+            return size == .medium ? .grayDarkPrimary : .basicPrimary
         case .destructive:
             return .basicPrimary
+        }
+    }
+
+    var size: BaseButtonSize {
+        switch self {
+        case let .action(size), let .secondary(size), let .destructive(size):
+            return size
         }
     }
 }

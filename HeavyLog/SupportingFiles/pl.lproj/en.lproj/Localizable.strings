@@ -12,6 +12,11 @@
 "common_delete" = "Delete";
 "common_empty" = "Empty";
 "common_showAll" = "Show all";
+"common_add" = "Add";
+"common_filter" = "Filter";
+"common_builtin" = "Built-in";
+"common_own" = "Own";
+"common_searchForExercises" = "Search for exercises";
 
 "tab_dashboard_title" = "Dashboard";
 "tab_workouts_title" = "Wokrouts";
@@ -37,7 +42,7 @@
 "common_exerciseSection_lower" = "Lower";
 "common_exerciseSection_global" = "Global";
 
-"error_enum_unknown" = "Unknown type";
+"error_enum_unknown" = "None";
 
 "common_bodyPart_calves" = "Calves";
 "common_bodyPart_quadriceps" = "Quadriceps";

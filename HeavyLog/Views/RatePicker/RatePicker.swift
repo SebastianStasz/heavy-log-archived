@@ -18,7 +18,7 @@ struct RatePicker<T: RatePickerSupport>: View {
     var body: some View {
         VStack(spacing: .spacingMedium) {
             rateIndicator
-            segmentedPicker
+            SegmentedPicker(title, selection: $selectedValue, options: T.possibleCases)
         }
         .addHeadlineBig(title)
     }
@@ -43,17 +43,6 @@ struct RatePicker<T: RatePickerSupport>: View {
             }
         }
         .frame(height: 10)
-    }
-
-    // MARK: - Segmented Picker
-
-    var segmentedPicker: some View {
-        Picker(title, selection: $selectedValue) {
-            ForEach(T.possibleCases) {
-                Text($0.name).tag($0)
-            }
-        }
-        .pickerStyle(SegmentedPickerStyle())
     }
 
     // MARK: - Value Indicator

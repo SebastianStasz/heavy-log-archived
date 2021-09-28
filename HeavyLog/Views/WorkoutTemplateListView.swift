@@ -30,7 +30,7 @@ struct WorkoutTemplateListView: View {
         .allowsHitTesting(onTap != nil)
         .padding(top: .spacingMedium, horizontal: .spacingMedium)
         .embedInScrollView(fixFlickering: true)
-        .toolbar { Toolbar.cancel { dismiss() } }
+        .toolbar { Toolbar.close { dismiss() } }
         .embedInNavigationView(title: .workoutCreator_chooseTemplate, displayMode: .inline)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }

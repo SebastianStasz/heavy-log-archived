@@ -41,12 +41,12 @@ public extension ExerciseEntity {
     }
 
     static func getExerciseWithId(_ id: Int, from context: NSManagedObjectContext) -> ExerciseEntity? {
-        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.withId(id).get)
+        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.byId(id).nsPredicate)
         return try? context.fetch(request).first
     }
 
     static func areUserExercises(in context: NSManagedObjectContext) -> Bool {
-        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.addedByUser.get)
+        let request: NSFetchRequest<ExerciseEntity> = ExerciseEntity.nsFetchRequest(predicate: Filter.byKind(.addedByUser).nsPredicate)
         let exercises = try? context.fetch(request)
         return !(exercises?.isEmpty ?? true)
     }

@@ -46,6 +46,11 @@ public enum Difficulty: String {
 }
 
 extension Difficulty: Decodable {}
+extension Difficulty: CaseIterable {}
+
+extension Difficulty: Identifiable {
+    public var id: String { rawValue }
+}
 
 extension Difficulty: UnknownValueSupport {
     public static var unknownCase: Difficulty = .unknown

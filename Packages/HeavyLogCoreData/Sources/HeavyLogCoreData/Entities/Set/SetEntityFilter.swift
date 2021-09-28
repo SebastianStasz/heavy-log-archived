@@ -10,7 +10,7 @@ import Foundation
 public extension SetEntity {
     enum Filter: EntityFilter {
 
-        public var get: NSPredicate {
+        public var nsPredicate: NSPredicate? {
             switch self {}
         }
     }

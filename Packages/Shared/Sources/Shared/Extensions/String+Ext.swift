@@ -35,6 +35,26 @@ public extension String {
         LocalizedString.common_showAll.text
     }
 
+    static var common_add: String {
+        LocalizedString.common_add.text
+    }
+
+    static var common_filter: String {
+        LocalizedString.common_filter.text
+    }
+
+    static var common_builtin: String {
+        LocalizedString.common_builtin.text
+    }
+
+    static var common_own: String {
+        LocalizedString.common_own.text
+    }
+
+    static var common_searchForExercises: String {
+        LocalizedString.common_searchForExercises.text
+    }
+
     static var workoutCreator_chooseTemplate: String {
         LocalizedString.workoutCreator_chooseTemplate.text
     }

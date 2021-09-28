@@ -33,6 +33,11 @@ public enum ExerciseType: String {
 }
 
 extension ExerciseType: Decodable {}
+extension ExerciseType: CaseIterable {}
+
+extension ExerciseType: Identifiable {
+    public var id: String { rawValue }
+}
 
 extension ExerciseType: UnknownValueSupport {
     public static let unknownCase: ExerciseType = .unknown

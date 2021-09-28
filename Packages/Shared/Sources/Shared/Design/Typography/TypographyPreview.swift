@@ -21,7 +21,7 @@ struct TypographyPreview: View {
                 Text("Headline small")
                     .textHeadlineSmall
             }
-            .fontGroup("Headlines")
+            .designGroup("Headlines")
 
             Group {
                 Text("Body bold")
@@ -33,13 +33,13 @@ struct TypographyPreview: View {
                 Text("Body normal")
                     .textBodyNormal
             }
-            .fontGroup("Body")
+            .designGroup("Body")
 
             Group {
                 Text("Footnote main")
                     .textFootnoteMain
             }
-            .fontGroup("Other")
+            .designGroup("Other")
         }
     }
 }

@@ -33,6 +33,11 @@ public enum ExerciseSection: String {
 }
 
 extension ExerciseSection: Decodable {}
+extension ExerciseSection: CaseIterable {}
+
+extension ExerciseSection: Identifiable {
+    public var id: String { rawValue }
+}
 
 extension ExerciseSection: UnknownValueSupport {
     public static var unknownCase: ExerciseSection = .unknown

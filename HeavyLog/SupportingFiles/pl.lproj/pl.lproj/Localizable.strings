@@ -12,6 +12,11 @@
 "common_delete" = "Usuń";
 "common_empty" = "Pusty";
 "common_showAll" = "Pokaż wszystkie";
+"common_add" = "Dodaj";
+"common_filter" = "Filtruj";
+"common_builtin" = "Wbudowane";
+"common_own" = "Własne";
+"common_searchForExercises" = "Wyszukaj ćwiczenie";
 
 "tab_dashboard_title" = "Pulpit";
 "tab_workouts_title" = "Treningi";
@@ -37,7 +42,7 @@
 "common_exerciseSection_lower" = "Dół";
 "common_exerciseSection_global" = "Globalne";
 
-"error_enum_unknown" = "Nieznaty typ";
+"error_enum_unknown" = "Brak";
 
 "common_bodyPart_calves" = "Łydki";
 "common_bodyPart_quadriceps" = "Czworogłowy";

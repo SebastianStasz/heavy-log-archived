@@ -11,7 +11,7 @@ public extension WorkoutEntity {
     enum Filter: EntityFilter {
         case withName(String)
 
-        public var get: NSPredicate {
+        public var nsPredicate: NSPredicate? {
             switch self {
             case let .withName(name):
                 return NSPredicate(format: "name == %@", name as CVarArg)

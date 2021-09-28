@@ -14,6 +14,11 @@ public enum LocalizedString: String {
     case common_delete
     case common_empty
     case common_showAll
+    case common_add
+    case common_filter
+    case common_builtin
+    case common_own
+    case common_searchForExercises
 
     case tab_dashboard_title
     case tab_workouts_title

@@ -18,7 +18,7 @@ public extension Entity where Sort.Entity == Self {
     static func all(sorting: [Sort] = [], filtering: [Filter]? = nil) -> FetchRequest<Self> {
         let sortDescriptors = sorting.map { $0.asNSSortDescriptor }
         let request: NSFetchRequest<Self> = Self.nsFetchRequest(sortDescriptors: sortDescriptors)
-        if let predicates = filtering?.map({ $0.get }) {
+        if let predicates = filtering?.compactMap({ $0.nsPredicate }) {
 //            if predicates.count == 1 { request.predicate = predicates.first }
             request.predicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         }

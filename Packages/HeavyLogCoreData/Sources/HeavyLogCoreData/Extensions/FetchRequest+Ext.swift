@@ -12,7 +12,8 @@ public extension FetchRequest {
         wrappedValue.nsPredicate = nil
     }
 
-    func applyFiltering(_ predicates: [NSPredicate]) {
+    func applyFiltering(_ filters: [EntityFilter]) {
+        let predicates = filters.compactMap { $0.nsPredicate }
         let predicate = NSCompoundPredicate(type: .and, subpredicates: predicates)
         wrappedValue.nsPredicate = predicate
     }

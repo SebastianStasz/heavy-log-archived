@@ -10,7 +10,7 @@ import Foundation
 public extension WorkoutTemplateEntity {
     enum Filter: EntityFilter {
 
-        public var get: NSPredicate {
+        public var nsPredicate: NSPredicate? {
             switch self {}
         }
     }

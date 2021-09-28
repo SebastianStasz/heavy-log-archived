@@ -11,7 +11,7 @@ public extension BodyParameterEntity {
     enum Filter: EntityFilter {
         case byParameter(BodyParameter)
 
-        public var get: NSPredicate {
+        public var nsPredicate: NSPredicate? {
             switch self {
             case let .byParameter(parameter):
                 return NSPredicate(format: "parameter_ == %@", parameter.rawValue)

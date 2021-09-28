@@ -95,7 +95,7 @@ final class AppVM: ObservableObject {
     init() {
         tabBarVM = TabBarVM(startWorkout: startWorkout)
         cancellable = ExerciseEntity.loadStaticData(to: context)
-//        CoreDataSample.createSampleWorkoutTemplates(in: context)
+        CoreDataSample.createSampleWorkoutTemplates(in: context)
     }
 
     func startWorkout(using template: WorkoutTemplateEntity? = nil) {

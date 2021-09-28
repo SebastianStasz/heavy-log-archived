@@ -11,6 +11,7 @@ import SwiftUI
 enum SheetModel: View {
     case workout(viewModel: WorkoutCreatorVM)
     case workoutTemplateList(onTap: (WorkoutTemplateEntity) -> Void)
+    case exerciseFilter(ExerciseListVM)
 
     var body: some View {
         switch self {
@@ -18,6 +19,8 @@ enum SheetModel: View {
             WorkoutCreatorView(viewModel: vm)
         case let .workoutTemplateList(action):
             WorkoutTemplateListView(onTap: action)
+        case let .exerciseFilter(viewModel):
+            ExerciseFilterView(viewModel: viewModel)
         }
     }
 }
@@ -27,6 +30,7 @@ extension SheetModel: Identifiable {
         switch self {
         case .workout: return 0
         case .workoutTemplateList: return 1
+        case .exerciseFilter: return 2
         }
     }
 }

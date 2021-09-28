@@ -17,8 +17,23 @@ struct ExerciseListView: View {
 
     var body: some View {
         ExerciseList(viewModel: viewModel, fetchRequest: viewModel.fetchRequest, tileIcon: tileIcon)
-            .searchable(text: $viewModel.searchText, prompt: "Search for exercises")
+            .searchable(text: $viewModel.searchText, prompt: String.common_searchForExercises)
+            .toolbar { toolbarContent }
+            .sheet(item: $viewModel.navigator.sheet) { $0 }
             .onAppear { viewModel.onTap = onTap }
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        Group {
+            Toolbar.leading(.common_add, action: {})
+            Toolbar.trailing(.common_filter, action: presentFilterSheet)
+        }
+    }
+
+    // MARK: - Interactions
+
+    private func presentFilterSheet() {
+        viewModel.navigator.navigate(to: .exerciseFilterSheet)
     }
 
     // MARK: - Initializer
