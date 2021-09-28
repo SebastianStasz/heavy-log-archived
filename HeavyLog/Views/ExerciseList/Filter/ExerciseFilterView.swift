@@ -11,17 +11,17 @@ import SwiftUI
 struct ExerciseFilterView: View {
 
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject var viewModel: ExerciseListVM
+    @ObservedObject var viewModel: ExerciseFilterVM
 
     var body: some View {
         VStack(alignment: .leading, spacing: .spacingHuge) {
-            SegmentedPicker("", selection: $viewModel.filterVM.section, options: ExerciseSection.allCases)
+            SegmentedPicker("", selection: $viewModel.form.section, options: ExerciseSection.allCases)
                 .withTitle("Section")
 
-            SegmentedPicker("", selection: $viewModel.filterVM.type, options: ExerciseType.allCases)
+            SegmentedPicker("", selection: $viewModel.form.type, options: ExerciseType.allCases)
                 .withTitle("Type")
 
-            SegmentedPicker("", selection: $viewModel.filterVM.difficulty, options: Difficulty.allCases)
+            SegmentedPicker("", selection: $viewModel.form.difficulty, options: Difficulty.allCases)
                 .withTitle("Difficulty")
 
             Spacer()
@@ -38,6 +38,7 @@ struct ExerciseFilterView: View {
         .padding(.horizontal, .spacingMedium)
         .toolbar { toolbarContent }
         .embedInNavigationView(title: "Filter exercises", displayMode: .inline)
+        .onDisappear { viewModel.input.viewDisappeared.send() }
     }
 
     // MARK: - Interactions
@@ -49,7 +50,7 @@ struct ExerciseFilterView: View {
     }
 
     private func resetFilterToDefault() {
-        viewModel.filterVM.resetToDefault()
+        viewModel.input.resetToDefaultBtnTap.send()
     }
 
     private func performFiltering() {
@@ -82,7 +83,7 @@ private extension SegmentedPicker {
 
 struct ExerciseFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseFilterView(viewModel: ExerciseListVM())
+        ExerciseFilterView(viewModel: ExerciseFilterVM(dismissSheet: {}))
             .embedInNavigationView(title: "Filter exercise", displayMode: .inline)
     }
 }

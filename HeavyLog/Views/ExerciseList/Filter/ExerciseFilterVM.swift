@@ -5,59 +5,53 @@
 //  Created by Sebastian Staszczyk on 27/09/2021.
 //
 
+import Combine
 import HeavyLogCoreData
 import Foundation
 import SwiftUI
 
-struct ExerciseFilterVM: Equatable {
-    var searchText = ""
-    var selectedTab: Tab = .builtIn
-    var difficulty: Difficulty = .unknown
-    var section: ExerciseSection = .unknown
-    var type: ExerciseType = .unknown
-
-    var filters: [Filter] {
-        [Filter.byName(searchText),
-         Filter.byKind(selectedTab.filter),
-         Filter.byDifficulty(difficulty),
-         Filter.bySection(section),
-         Filter.byType(type)]
+final class ExerciseFilterVM: ObservableObject {
+    struct Input {
+        let viewDisappeared = PassthroughSubject<Void, Never>()
+        let filterBtnTap = PassthroughSubject<Void, Never>()
+        let resetToDefaultBtnTap = PassthroughSubject<Void, Never>()
     }
 
-    mutating func resetToDefault() {
-        difficulty = .unknown
-        section = .unknown
-        type = .unknown
+    struct Output {
+        let filters: AnyPublisher<[ExerciseEntity.Filter], Never>
     }
-}
 
-// MARK: - Tabs
+    @Published var form = ExerciseFilterForm()
+    private var temporaryForm = ExerciseFilterForm()
 
-extension ExerciseFilterVM {
-    typealias Filter = ExerciseEntity.Filter
+    private var cancellables: Set<AnyCancellable> = []
+    private let dismissSheet: () -> Void
+    let input = Input()
 
-    enum Tab: Int, Identifiable, CaseIterable {
-        case builtIn
-        case own
+    init(dismissSheet: @escaping () -> Void) {
+        self.dismissSheet = dismissSheet
+    }
 
-        var title: String {
-            switch self {
-            case .builtIn:
-                return .common_builtin
-            case .own:
-                return .common_own
-            }
-        }
+    func makeOutput() -> Output {
+        input.viewDisappeared
+            .sink { self.form = self.temporaryForm }
+            .store(in: &cancellables)
 
-        var filter: Filter.Kind {
-            switch self {
-            case .builtIn:
-                return Filter.Kind.builtIn
-            case .own:
-                return Filter.Kind.addedByUser
-            }
-        }
+        let resetToDefaults = input.resetToDefaultBtnTap
+            .handleEvents(receiveOutput: { _ in
+                self.form.resetToDefault()
+            })
 
-        var id: Int { rawValue }
+        let filters = Publishers.Merge(input.filterBtnTap, resetToDefaults)
+            .handleEvents(receiveOutput: { _ in
+                self.temporaryForm = self.form
+                self.dismissSheet()
+            })
+            .map { self.form.filters }
+            .prepend([])
+            .eraseToAnyPublisher()
+
+        return Output(filters: filters)
     }
 }
+

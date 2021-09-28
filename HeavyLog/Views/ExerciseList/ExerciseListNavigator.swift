@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ExerciseListNavigator {
     enum Destination {
+        case exerciseList
         case exerciseFilterSheet
     }
 
@@ -22,6 +23,8 @@ struct ExerciseListNavigator {
 
     mutating func navigate(to destination: Destination) {
         switch destination {
+        case .exerciseList:
+            sheet = nil
         case .exerciseFilterSheet:
             sheet = .exerciseFilter(viewModel)
         }
@@ -33,7 +36,7 @@ struct ExerciseListNavigator {
         var body: some View {
             switch self {
             case let .exerciseFilter(viewModel):
-                ExerciseFilterView(viewModel: viewModel)
+                ExerciseFilterView(viewModel: viewModel.filterVM)
             }
         }
 
