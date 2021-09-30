@@ -1,5 +1,5 @@
 //
-//  WorkoutTreeEffortRowView.swift
+//  WorkoutTreeView+EffortView.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 05/09/2021.
@@ -8,9 +8,9 @@
 import SwiftUI
 
 extension WorkoutTreeView {
-    struct EfforSection: View {
 
-        @EnvironmentObject private var viewModel: WorkoutCreatorVM
+    struct EffortView: View {
+        @EnvironmentObject private var viewModel: WorkoutTreeVM
 
         private let effort: WorkoutTreeData.Effort
 
@@ -20,12 +20,12 @@ extension WorkoutTreeView {
 
         var body: some View {
             VStack(spacing: 6) {
-                ExerciseRow(effort.exerciseName, onPlusTap: addSetRow(to: effort), onSwipe: deleteEffort())
+                ExerciseRowView(effort.exerciseName, onPlusTap: addSetRow(to: effort), onSwipe: deleteEffort())
 
                 VStack(alignment: .leading, spacing: 0) {
                     Components.spacingLine(9)
                     ForEach(effort.weightRows) { weightRow in
-                        WeightRow(weightRow.text) { deleteSet(from: weightRow) }
+                        WeightRowView(weightRow.text) { deleteSet(from: weightRow) }
                     }
                     Components.spacingLine(8)
                 }
@@ -36,15 +36,15 @@ extension WorkoutTreeView {
         // MARK: - Interactions
 
         private func addSetRow(to effort: WorkoutTreeData.Effort) {
-            viewModel.addSet(to: effort)
+            viewModel.input.addSetToEffort.send(effort)
         }
 
         private func deleteSet(from weightRow: WorkoutTreeData.WeightRow) {
-            viewModel.deleteSet(in: effort, from: weightRow)
+            viewModel.input.deleteSet.send((effort, weightRow))
         }
 
         private func deleteEffort() {
-            viewModel.deleteEffort(effort)
+            viewModel.input.deleteEffort.send(effort)
         }
     }
 }
@@ -54,6 +54,6 @@ extension WorkoutTreeView {
 
 //struct WorkoutTreeEffortRowView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        WorkoutTreeView.EfforSection
+//        WorkoutTreeView.EffortView
 //    }
 //}

@@ -25,15 +25,15 @@ struct ExerciseListView: View {
 
     private var toolbarContent: some ToolbarContent {
         Group {
-            Toolbar.leading(.common_add, action: {})
-            Toolbar.trailing(.common_filter, action: presentFilterSheet)
+            Toolbar.trailing(.common_add, action: {})
+            Toolbar.leading(.common_filter, action: presentFilterSheet)
         }
     }
 
     // MARK: - Interactions
 
     private func presentFilterSheet() {
-        viewModel.navigator.navigate(to: .exerciseFilterSheet)
+        viewModel.navigate(to: .exerciseFilterSheet)
     }
 
     // MARK: - Initializer

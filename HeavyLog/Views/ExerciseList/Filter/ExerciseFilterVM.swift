@@ -25,29 +25,31 @@ final class ExerciseFilterVM: ObservableObject {
     private var temporaryForm = ExerciseFilterForm()
 
     private var cancellables: Set<AnyCancellable> = []
-    private let dismissSheet: () -> Void
     let input = Input()
 
-    init(dismissSheet: @escaping () -> Void) {
-        self.dismissSheet = dismissSheet
+    deinit {
+        print("ExerciseFilterVM deinit")
     }
 
     func makeOutput() -> Output {
         input.viewDisappeared
-            .sink { self.form = self.temporaryForm }
+            .sink { [unowned self] in
+                form = temporaryForm
+            }
             .store(in: &cancellables)
 
         let resetToDefaults = input.resetToDefaultBtnTap
-            .handleEvents(receiveOutput: { _ in
-                self.form.resetToDefault()
+            .handleEvents(receiveOutput: { [unowned self] _ in
+                form.resetToDefault()
             })
 
         let filters = Publishers.Merge(input.filterBtnTap, resetToDefaults)
-            .handleEvents(receiveOutput: { _ in
-                self.temporaryForm = self.form
-                self.dismissSheet()
+            .handleEvents(receiveOutput: { [unowned self] _ in
+                temporaryForm = form
             })
-            .map { self.form.filters }
+            .compactMap { [unowned self] _ in
+                form.filters
+            }
             .prepend([])
             .eraseToAnyPublisher()
 

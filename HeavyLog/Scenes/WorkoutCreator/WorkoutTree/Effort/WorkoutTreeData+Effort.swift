@@ -1,5 +1,5 @@
 //
-//  WorkoutTreeEffortRowData.swift
+//  WorkoutTreeData+Effort.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 05/09/2021.

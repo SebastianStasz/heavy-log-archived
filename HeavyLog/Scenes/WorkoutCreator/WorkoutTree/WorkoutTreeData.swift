@@ -5,6 +5,7 @@
 //  Created by Sebastian Staszczyk on 21/08/2021.
 //
 
+import HeavyLogCoreData
 import Foundation
 
 struct WorkoutTreeData {
@@ -20,7 +21,8 @@ struct WorkoutTreeData {
         efforts[index].deleteLastSet(from: weightRow)
     }
 
-    mutating func addEffort(_ effort: Effort) {
+    mutating func addEffort(withExercise exercise: ExerciseEntity) {
+        let effort = Effort(exercise: exercise)
         efforts.append(effort)
     }
 

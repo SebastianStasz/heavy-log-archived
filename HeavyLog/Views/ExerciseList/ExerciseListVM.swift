@@ -14,23 +14,23 @@ final class ExerciseListVM: ObservableObject {
     typealias Filter = ExerciseEntity.Filter
 
     struct Output {
-        var filters: AnyPublisher<[Filter], Never>
+        let filters: AnyPublisher<[Filter], Never>
     }
 
     private var cancellables: Set<AnyCancellable> = []
+    private var filterVM = ExerciseFilterVM()
     private(set) var fetchRequest: FetchRequest<ExerciseEntity>
     var onTap: ((ExerciseEntity) -> Void)?
 
     @Published var searchText = ""
-    @Published var selectedTab: Tab = .builtIn
-    @Published var filterVM: ExerciseFilterVM!
-    @Published var navigator: ExerciseListNavigator!
+    @Published var navigator = ExerciseListNavigator()
 
     var areUserExercises: Bool {
         ExerciseEntity.areUserExercises(in: controller.context)
     }
 
-    func makeOutput() -> Output {
+    init() {
+        fetchRequest = ExerciseEntity.all(sorting: [.byName()], filtering: [.byKind(.builtIn)])
         let filterFormOutput = filterVM.makeOutput()
 
         let nameFilter = $searchText
@@ -38,80 +38,25 @@ final class ExerciseListVM: ObservableObject {
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .map { $0.count > 2 ? $0 : "" }
 
-        let filters: AnyPublisher<[Filter], Never> = Publishers.CombineLatest3(nameFilter, $selectedTab, filterFormOutput.filters)
+        Publishers.CombineLatest3(nameFilter, $navigator, filterFormOutput.filters)
             .dropFirst()
-            .map { text, tab, filters in
-                [Filter.byName(text), .byKind(tab.filter)] + filters
+            .map { name, navigator, filters in
+                [Filter.byName(name), .byKind(navigator.selectedTab.filter)] + filters
             }
-            .eraseToAnyPublisher()
-
-        return Output(filters: filters)
-    }
-
-    init() {
-        fetchRequest = ExerciseEntity.all(sorting: [.byName()])
-        navigator = ExerciseListNavigator(viewModel: self)
-        filterVM = ExerciseFilterVM(dismissSheet: { [weak self] in
-            self?.navigator.navigate(to: .exerciseList)
-        })
-
-        let output = makeOutput()
-
-        output.filters
-            .sink { [weak self] filters in
-                self?.fetchRequest.applyFiltering(filters)
+            .sink { [unowned self] filters in
+                navigate(to: .exerciseList)
+                fetchRequest.applyFiltering(filters)
             }
             .store(in: &cancellables)
     }
-}
 
-// MARK: - Tab
-
-extension ExerciseListVM {
-    enum Tab: Int, Identifiable, CaseIterable {
-        case builtIn
-        case own
-
-        var title: String {
-            switch self {
-            case .builtIn:
-                return .common_builtin
-            case .own:
-                return .common_own
-            }
+    func navigate(to destination: ExerciseListNavigator.Destination) {
+        switch destination {
+        case .exerciseList:
+            navigator.sheet = nil
+        case .exerciseFilterSheet:
+            navigator.sheet = .exerciseFilter(filterVM)
         }
-
-        var filter: Filter.Kind {
-            switch self {
-            case .builtIn:
-                return Filter.Kind.builtIn
-            case .own:
-                return Filter.Kind.addedByUser
-            }
-        }
-
-        var id: Int { rawValue }
     }
 }
 
-//extension Publisher {
-//    func combineLatestOptional<Other: Publisher>(_ other: Other)
-//        -> AnyPublisher<(Output, Other.Output?), Failure>
-//        where Other.Failure == Failure {
-//
-//            self.compactMap { Optional.some($0) }.prepend(nil)
-//            .combineLatest(
-//                other.map { Optional.some($0) }.prepend(nil)
-//            )
-//            .dropFirst() // drop the first (nil, nil)
-//            .eraseToAnyPublisher()
-//    }
-//}
-
-//extension Set {
-//    func insert<T>(contentsOf set: Set<T>) {
-//        for element in set {
-//            self.insert(element)
-//        }
-//    }
-//}

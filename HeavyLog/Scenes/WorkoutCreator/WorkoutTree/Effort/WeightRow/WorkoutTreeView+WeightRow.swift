@@ -1,5 +1,5 @@
 //
-//  WorkoutTreeWeightRowView.swift
+//  WorkoutTreeView+WeightRowView.swift
 //  HeavyLog
 //
 //  Created by Sebastian Staszczyk on 05/09/2021.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 extension WorkoutTreeView {
-    struct WeightRow: View {
+    struct WeightRowView: View {
 
         @State private var swipePosition: CGFloat = 0
         private let text: String
@@ -61,6 +61,6 @@ extension WorkoutTreeView {
 
 struct WorkoutTreeEffortRowView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutTreeView.WeightRow("", swipeAction: {})
+        WorkoutTreeView.WeightRowView("", swipeAction: {})
     }
 }

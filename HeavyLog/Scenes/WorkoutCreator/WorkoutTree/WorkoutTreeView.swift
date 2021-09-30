@@ -12,12 +12,13 @@ struct WorkoutTreeView: View {
     typealias Components = WorkoutTreeView
 
     @Environment(\.managedObjectContext) private var context
-    @EnvironmentObject var viewModel: WorkoutCreatorVM
+    @EnvironmentObject var viewModel: WorkoutTreeVM
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
 
-            ForEach(viewModel.workoutTreeData.efforts, content: EfforSection.init)
+            ForEach(viewModel.workoutTreeData.efforts, content: EffortView.init)
+                .environmentObject(viewModel)
 
             ButtonRow(.workoutCreator_addExercise, action: showExerciseList)
             Components.spacingLine(30)
@@ -27,46 +28,44 @@ struct WorkoutTreeView: View {
         }
         .padding(top: .spacingBig, horizontal: .spacingMedium)
         .embedInScrollView()
-        .environmentObject(viewModel)
-        .sheet(isPresented: $viewModel.navigator.isExerciseListPresented) { exerciseList }
+        .sheet(isPresented: $viewModel.isExerciseListPresented) { exerciseList }
     }
 
     private var exerciseList: some View {
         ExerciseListView(tileIcon: .plus, onTap: addExercise)
             .environment(\.managedObjectContext, context)
-            .toolbar { Toolbar.close(action: dismissExerciseList) }
+            .toolbar { Toolbar.cancel(action: dismissExerciseList) }
             .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)
     }
 
     // MARK: - Interactions
 
     private func addExercise(_ exerciseEntity: ExerciseEntity) {
-        viewModel.addEffort(with: exerciseEntity)
+        viewModel.input.addEffortWithExercise.send(exerciseEntity)
     }
 
     private func showExerciseList() {
-        viewModel.navigator.navigate(to: .exerciseList)
+        viewModel.input.showExerciseList.send()
     }
 
     private func dismissExerciseList() {
-        viewModel.navigator.navigate(to: .dismissExerciseList)
+        viewModel.input.dismissExerciseList.send()
     }
 
     private func finishWorkout() {
-        viewModel.finishWorkout()
+        viewModel.input.finishWorkout.send()
     }
 }
 
 
 // MARK: - Preview
 
-struct WorkoutTreeView_Previews: PreviewProvider {
-    static var previews: some View {
-        let viewModel = WorkoutCreatorVM()
-        viewModel.workoutForm = .sample1
-
-        return WorkoutTreeView()
-            .environmentObject(viewModel)
-            .previewSizeThatFits(backgroundColor: .backgroundMain)
-    }
-}
+//struct WorkoutTreeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let viewModel = WorkoutTreeVM()
+//
+//        return WorkoutTreeView(viewModel: viewModel)
+//            .environmentObject(viewModel)
+//            .previewSizeThatFits(backgroundColor: .backgroundMain)
+//    }
+//}

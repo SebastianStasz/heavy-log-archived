@@ -10,7 +10,7 @@ import SwiftUI
 
 struct WorkoutInfoView: View {
 
-    @EnvironmentObject var viewModel: WorkoutCreatorVM
+    @EnvironmentObject var viewModel: WorkoutInfoVM
 
     init() {
         UITableView.appearance().backgroundColor = .clear
@@ -19,11 +19,11 @@ struct WorkoutInfoView: View {
     var body: some View {
         VStack(spacing: .spacingHuge) {
             Form {
-                TextField("Workout title", text: $viewModel.workoutForm.title)
-                TextEditor(text: $viewModel.workoutForm.notes)
+                TextField("Workout title", text: $viewModel.form.title)
+                TextEditor(text: $viewModel.form.notes)
 
                 Section {
-                    RatePicker(title: "Workout rating", selectedValue: $viewModel.workoutForm.rate)
+                    RatePicker(title: "Workout rating", selectedValue: $viewModel.form.rate)
                 }
                 .plainStyle()
 

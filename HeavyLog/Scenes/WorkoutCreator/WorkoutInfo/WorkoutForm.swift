@@ -11,10 +11,10 @@ import Foundation
 struct WorkoutForm {
     var title = ""
     var notes = ""
-    var duration = "00:00"
     let startDate = Date()
     var endDate: Date? = nil
     var rate: WorkoutRate = .good
+    private(set) var duration = "00:00"
 
     var info: [BaseListRowViewData] {
         [BaseListRowViewData(title: "Date", value: startDate.string(format: .medium)),

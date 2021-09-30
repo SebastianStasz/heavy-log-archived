@@ -83,7 +83,7 @@ private extension SegmentedPicker {
 
 struct ExerciseFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseFilterView(viewModel: ExerciseFilterVM(dismissSheet: {}))
+        ExerciseFilterView(viewModel: ExerciseFilterVM())
             .embedInNavigationView(title: "Filter exercise", displayMode: .inline)
     }
 }

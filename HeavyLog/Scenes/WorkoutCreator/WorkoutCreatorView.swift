@@ -21,6 +21,8 @@ struct WorkoutCreatorView: View {
         TabView(selection: $viewModel.navigator.selectedTab) {
             ForEach(viewModel.availableTabs) { $0 }
                 .background(Color.backgroundMain)
+                .environmentObject(viewModel.workoutTreeVM)
+                .environmentObject(viewModel.workoutInfoVM)
         }
         .toolbar { toolbarContent }
         .environmentObject(viewModel)
