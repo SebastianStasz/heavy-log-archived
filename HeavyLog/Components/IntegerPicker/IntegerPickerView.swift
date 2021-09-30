@@ -26,6 +26,7 @@ struct IntegerPickerView: View {
             }
         }
         .frame(maxWidth: maxWidth, maxHeight: maxHeight)
+        .pickerStyle(.wheel)
         .clipped()
     }
 }

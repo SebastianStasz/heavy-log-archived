@@ -13,17 +13,17 @@ import SwiftUI
 final class ExerciseListVM: ObservableObject {
     typealias Filter = ExerciseEntity.Filter
 
-    struct Output {
-        let filters: AnyPublisher<[Filter], Never>
+    struct Input {
+        let didTapExercise = PassthroughSubject<ExerciseEntity, Never>()
     }
 
     private var cancellables: Set<AnyCancellable> = []
     private var filterVM = ExerciseFilterVM()
     private(set) var fetchRequest: FetchRequest<ExerciseEntity>
-    var onTap: ((ExerciseEntity) -> Void)?
-
-    @Published var searchText = ""
+    let input = Input()
     @Published var navigator = ExerciseListNavigator()
+    @Published var searchText = ""
+    @Published var notIncludingExercises: [ExerciseEntity] = []
 
     var areUserExercises: Bool {
         ExerciseEntity.areUserExercises(in: controller.context)
@@ -38,10 +38,10 @@ final class ExerciseListVM: ObservableObject {
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .map { $0.count > 2 ? $0 : "" }
 
-        Publishers.CombineLatest3(nameFilter, $navigator, filterFormOutput.filters)
+        Publishers.CombineLatest4(nameFilter, $navigator,  $notIncludingExercises, filterFormOutput.filters)
             .dropFirst()
-            .map { name, navigator, filters in
-                [Filter.byName(name), .byKind(navigator.selectedTab.filter)] + filters
+            .map { name, navigator, exercises, filters in
+                [Filter.byName(name), .byKind(navigator.selectedTab.filter), .notIncluding(exercises)] + filters
             }
             .sink { [unowned self] filters in
                 navigate(to: .exerciseList)

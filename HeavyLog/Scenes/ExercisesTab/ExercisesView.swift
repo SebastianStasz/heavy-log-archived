@@ -13,14 +13,8 @@ struct ExercisesView: View {
     @StateObject private var viewModel = ExercisesVM()
 
     var body: some View {
-        ExerciseListView(onTap: openExercise)
+        ExerciseListView(viewModel: viewModel.exerciseListVM)
             .navigation(item: $viewModel.exerciseDetailsVM) { ExerciseDetailsView(viewModel: $0) }
-    }
-
-    // MARK: - Interactions
-
-    private func openExercise(_ exercise: ExerciseEntity) {
-        viewModel.open(exercise)
     }
 }
 

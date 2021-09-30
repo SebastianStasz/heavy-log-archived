@@ -10,17 +10,15 @@ import SwiftUI
 
 struct ExerciseListView: View {
 
-    @StateObject private var viewModel = ExerciseListVM()
+    @ObservedObject var viewModel: ExerciseListVM
 
     private let tileIcon: ExerciseTileViewData.Icon
-    private let onTap: ((ExerciseEntity) -> Void)?
 
     var body: some View {
         ExerciseList(viewModel: viewModel, fetchRequest: viewModel.fetchRequest, tileIcon: tileIcon)
             .searchable(text: $viewModel.searchText, prompt: String.common_searchForExercises)
             .toolbar { toolbarContent }
             .sheet(item: $viewModel.navigator.sheet) { $0 }
-            .onAppear { viewModel.onTap = onTap }
     }
 
     private var toolbarContent: some ToolbarContent {
@@ -38,11 +36,11 @@ struct ExerciseListView: View {
 
     // MARK: - Initializer
 
-    init(tileIcon: ExerciseTileViewData.Icon = .chevron,
-         onTap: ((ExerciseEntity) -> Void)? = nil
+    init(viewModel: ExerciseListVM,
+         tileIcon: ExerciseTileViewData.Icon = .chevron
     ) {
+        self.viewModel = viewModel
         self.tileIcon = tileIcon
-        self.onTap = onTap
     }
 }
 
@@ -51,7 +49,7 @@ struct ExerciseListView: View {
 
 struct ExerciseListView_Previews: PreviewProvider {
     static var previews: some View {
-        ExerciseListView()
+        ExerciseListView(viewModel: .init())
             .embedInNavigationView(title: "Exercises")
             .environment(\.managedObjectContext, PersistenceController.previewWithData.context)
     }

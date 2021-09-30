@@ -12,7 +12,6 @@ import Foundation
 final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
 
     struct Input {
-        let addEffortWithExercise = PassthroughSubject<ExerciseEntity, Never>()
         let deleteEffort = PassthroughSubject<Effort, Never>()
         let addSetToEffort = PassthroughSubject<Effort, Never>()
         let deleteSet = PassthroughSubject<(Effort, WeightRow), Never>()
@@ -30,6 +29,7 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
     private let controller: AppController
     @Published var isExerciseListPresented = false
     @Published var workoutTreeData = WorkoutTreeData()
+    let exerciseListVM = ExerciseListVM()
 
     init(controller: AppController = .shared) {
         self.controller = controller
@@ -45,10 +45,11 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
             .sink { [unowned self] in isExerciseListPresented = false }
             .store(in: &cancellables)
 
-        input.addEffortWithExercise
+        exerciseListVM.input.didTapExercise
             .sink { [unowned self] exercise in
                 isExerciseListPresented = false
                 workoutTreeData.addEffort(withExercise: exercise)
+                exerciseListVM.notIncludingExercises = workoutTreeData.efforts.map { $0.exercise }
             }
             .store(in: &cancellables)
 

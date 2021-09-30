@@ -32,17 +32,13 @@ struct WorkoutTreeView: View {
     }
 
     private var exerciseList: some View {
-        ExerciseListView(tileIcon: .plus, onTap: addExercise)
+        ExerciseListView(viewModel: viewModel.exerciseListVM, tileIcon: .plus)
             .environment(\.managedObjectContext, context)
             .toolbar { Toolbar.cancel(action: dismissExerciseList) }
             .embedInNavigationView(title: .workoutCreator_exerciseList_title, displayMode: .inline)
     }
 
     // MARK: - Interactions
-
-    private func addExercise(_ exerciseEntity: ExerciseEntity) {
-        viewModel.input.addEffortWithExercise.send(exerciseEntity)
-    }
 
     private func showExerciseList() {
         viewModel.input.showExerciseList.send()

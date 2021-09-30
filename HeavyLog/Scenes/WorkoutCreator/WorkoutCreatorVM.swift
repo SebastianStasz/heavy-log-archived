@@ -58,8 +58,4 @@ extension WorkoutCreatorVM: WorkoutCreatorHelper {
     var availableTabs: [Tab] {
         Tab.allCases
     }
-    var exercisesInUse: [ExerciseEntity] {
-        //        workoutTreeData.efforts.map { $0.exercise }
-        []
-    }
 }

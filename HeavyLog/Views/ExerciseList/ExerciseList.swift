@@ -26,15 +26,19 @@ struct ExerciseList: View {
             .displayIf(viewModel.areUserExercises)
 
             ForEach(exercises) { exercise in
-                Button(action: { viewModel.onTap?(exercise) }) {
+                Button(action: { selectExercise(exercise) }) {
                     ExerciseTileView(viewData: .init(title: exercise.name, icon: tileIcon))
                 }
             }
         }
-        .allowsHitTesting(viewModel.onTap != nil)
+//        .allowsHitTesting(viewModel.onTap != nil)
         .padding(.horizontal, .spacingMedium)
         .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
+    }
+
+    private func selectExercise(_ exerciseEntity: ExerciseEntity) {
+        viewModel.input.didTapExercise.send(exerciseEntity)
     }
 
     // MARK: - Initializer
