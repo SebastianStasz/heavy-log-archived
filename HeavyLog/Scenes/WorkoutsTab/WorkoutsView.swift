@@ -18,13 +18,20 @@ struct WorkoutsView: View {
     }
 
     var body: some View {
-        LazyVStack(spacing: .spacingMedium) {
-            ForEach(workouts) { workout in
-                WorkoutTileView(viewData: .init(workout: workout))
+        Group {
+            if workouts.isEmpty {
+                Text("You don't have any workouts yet").textBodyThin
+                    .infiniteFrame()
+            } else {
+                LazyVStack(spacing: .spacingMedium) {
+                    ForEach(workouts) { workout in
+                        WorkoutTileView(viewData: .init(workout: workout))
+                    }
+                }
+                .padding(top: .spacingMedium, horizontal: .spacingMedium)
+                .embedInScrollView(fixFlickering: true)
             }
         }
-        .padding(top: .spacingMedium, horizontal: .spacingMedium)
-        .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }
 }

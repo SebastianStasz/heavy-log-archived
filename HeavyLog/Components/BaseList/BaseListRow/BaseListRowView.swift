@@ -23,7 +23,9 @@ struct BaseListRowView: View {
             Spacer()
             Text(row.value).textBodyNormal
 
-            ChevronIcon().displayIf(row.isClicable)
+            ChevronIcon()
+                .padding(.leading, .spacingMedium)
+                .displayIf(row.isClicable)
         }
     }
 }

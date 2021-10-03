@@ -7,6 +7,7 @@
 
 import HeavyLogCoreData
 import SwiftUI
+import Shared
 
 struct DashboardView: View {
 
@@ -14,11 +15,16 @@ struct DashboardView: View {
 
     var body: some View {
         VStack {
-            Button("Settings") { viewModel.navigate(to: .settings) }
+            Text("")
                 .navigation(isActive: $viewModel.areSettingsShown, destination: SettingsView.init)
         }
         .infiniteFrame()
         .backgroundIgnoringSafeArea(Color.backgroundMain)
+        .toolbar { toolbarContent }
+    }
+
+    private var toolbarContent: some ToolbarContent {
+        Toolbar.leading(systemImage: SFSymbol.settings.rawValue, action: { viewModel.navigate(to: .settings) })
     }
 }
 

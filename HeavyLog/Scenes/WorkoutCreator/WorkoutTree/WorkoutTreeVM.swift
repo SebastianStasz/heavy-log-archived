@@ -53,13 +53,20 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
             .sink { [unowned self] exercise in
                 isExerciseListPresented = false
                 workoutTreeData.addEffort(withExercise: exercise)
-                exerciseListVM.notIncludingExercises = workoutTreeData.efforts.map { $0.exercise }
+                updateExercisesInUse()
             }
             .store(in: &cancellables)
 
         input.deleteEffort
             .sink { [unowned self] effort in
-                workoutTreeData.deleteEffort(effort)
+                let deleteEffort = { workoutTreeData.deleteEffort(effort) ; updateExercisesInUse() }
+                guard effort.weightRows.isEmpty else {
+                    let info = PopupModel.Info(title: "Delete \(effort.exerciseName)", message: "Are you sure you want to delete this exercise with all sets?")
+                    let popup = PopupModel.action(info, action: deleteEffort, isDestructive: true)
+                    controller.present(popup: popup)
+                    return
+                }
+                deleteEffort()
             }
             .store(in: &cancellables)
 
@@ -78,5 +85,9 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
                 workoutTreeData.deleteLastSet(in: weightRow, from: effort)
             }
             .store(in: &cancellables)
+    }
+
+    private func updateExercisesInUse() {
+        exerciseListVM.notIncludingExercises = workoutTreeData.efforts.map { $0.exercise }
     }
 }

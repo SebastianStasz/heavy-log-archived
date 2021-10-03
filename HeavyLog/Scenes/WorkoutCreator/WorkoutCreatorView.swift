@@ -43,7 +43,7 @@ struct WorkoutCreatorView: View {
     }
 
     private func presentPopupToDeleteWorkout() {
-        viewModel.navigator.navigate(to: .abortWorkoutPopup)
+        viewModel.abortWorkoutCreator()
     }
 }
 

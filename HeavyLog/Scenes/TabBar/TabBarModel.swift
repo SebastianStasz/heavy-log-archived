@@ -30,13 +30,13 @@ enum TabBarModel: Int {
     var icon: String {
         switch self {
         case .dashboard:
-            return "house"
+            return SFSymbol.tabBarTab1.rawValue
         case .workouts:
-            return "speedometer"
+            return SFSymbol.tabBarTab2.rawValue
         case .summary:
-            return "calendar"
+            return SFSymbol.tabBarTab3.rawValue
         case .exercises:
-            return "gearshape"
+            return SFSymbol.tabBarTab4.rawValue
         }
     }
 

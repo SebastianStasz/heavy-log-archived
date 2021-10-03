@@ -28,6 +28,14 @@ final class WorkoutCreatorVM: ObservableObject {
             .store(in: &cancellables)
     }
 
+    func abortWorkoutCreator() {
+        guard workoutTreeVM.workoutTreeData.efforts.isEmpty else {
+            navigator.navigate(to: .abortWorkoutPopup)
+            return 
+        }
+        navigator.navigate(to: .finishWorkout)
+    }
+
     private func finishWorkout() {
         workoutInfoVM.form.endDate = Date()
         let workoutData = getWorkoutData()

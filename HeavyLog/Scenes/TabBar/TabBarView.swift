@@ -8,9 +8,16 @@
 import Shared
 import SwiftUI
 
+extension UIApplication {
+    func closeKeyboard() {
+        sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 struct TabBarView: View {
 
     @ObservedObject private var tabBar: TabBarVM
+    @State private var isKeyboardPresented = false
 
     init(viewModel: TabBarVM) {
         tabBar = viewModel
@@ -38,8 +45,11 @@ struct TabBarView: View {
             }
             .infiniteWidth(maxHeight: 49)
             .background(tabBarBackground)
+            .displayIf(!isKeyboardPresented)
         }
         .background(Color.backgroundMain)
+        .onReceive(NotificationCenter.keyboardWillShow) { _ in isKeyboardPresented = true }
+        .onReceive(NotificationCenter.keyboardWillHide) { _ in isKeyboardPresented = false }
     }
 
     // MARK: View Components

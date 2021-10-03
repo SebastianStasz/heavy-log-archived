@@ -35,6 +35,18 @@ extension Toolbar {
         }
     }
 
+    static func trailing(systemImage: String, action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button(systemImage: systemImage, action: action())
+        }
+    }
+
+    static func leading(systemImage: String, action: @escaping () -> Void) -> some ToolbarContent {
+        ToolbarItem(placement: .navigationBarLeading) {
+            Button(systemImage: systemImage, action: action())
+        }
+    }
+
     static func delete(action: @escaping () -> Void) -> some ToolbarContent {
         ToolbarItem(placement: .navigationBarLeading) {
             HStack {

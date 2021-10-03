@@ -27,10 +27,13 @@ struct BaseListView: View {
                         BaseListRowView(row: row)
                             .onNavigation { viewModel.open(row) }
                             .allowsHitTesting(row.isClicable)
+
                         DividerMain(color: .grayLightPrimary)
+                            .displayIf(row != viewModel.rows.last)
                     }
                 }
                 .padding(.top, .spacingMedium)
+                .padding(.bottom, .spacingMedium)
             }
         }
     }

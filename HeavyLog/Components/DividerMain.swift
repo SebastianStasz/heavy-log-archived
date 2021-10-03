@@ -28,6 +28,12 @@ struct DividerMain: View {
     }
 }
 
+extension DividerMain {
+    init(color: Color = .grayLightSecondary, spacing: CGFloat = 0) {
+        self.init(color: color, paddingTop: spacing, paddingBottom: spacing)
+    }
+}
+
 
 // MARK: - Preview
 

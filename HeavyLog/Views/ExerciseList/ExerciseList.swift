@@ -31,8 +31,8 @@ struct ExerciseList: View {
                 }
             }
         }
-//        .allowsHitTesting(viewModel.onTap != nil)
         .padding(.horizontal, .spacingMedium)
+        .padding(.bottom, .spacingMedium)
         .embedInScrollView(fixFlickering: true)
         .backgroundIgnoringSafeArea(Color.backgroundMain)
     }

@@ -23,6 +23,7 @@ struct BaseListRowViewData {
 }
 
 extension BaseListRowViewData: Identifiable {}
+extension BaseListRowViewData: Equatable {}
 
 // MARK: - Initializers
 

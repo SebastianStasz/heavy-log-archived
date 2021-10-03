@@ -13,6 +13,6 @@ extension Section where Parent: View, Content: View, Footer: View {
     func plainStyle() -> some View {
         self.listRowBackground(Color.backgroundMain)
             .buttonStyle(PlainButtonStyle())
-            .padding(.horizontal, -20)
+            .padding(.horizontal, -13)
     }
 }

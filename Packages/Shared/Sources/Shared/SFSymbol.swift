@@ -8,6 +8,11 @@
 import Foundation
 
 public enum SFSymbol: String {
+    case settings   = "gearshape"
+    case tabBarTab1 = "house"
+    case tabBarTab2 = "speedometer"
+    case tabBarTab3 = "calendar"
+    case tabBarTab4 = "menucard"
     case workoutCreatorWorkoutTab = "doc.text.magnifyingglass"
     case workoutCreatorInfoTab    = "pencil.circle"
 }
