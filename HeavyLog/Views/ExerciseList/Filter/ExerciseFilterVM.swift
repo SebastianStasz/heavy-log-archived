@@ -22,14 +22,10 @@ final class ExerciseFilterVM: ObservableObject {
     }
 
     @Published var form = ExerciseFilterForm()
-    private var temporaryForm = ExerciseFilterForm()
+    private(set) var temporaryForm = ExerciseFilterForm()
 
     private var cancellables: Set<AnyCancellable> = []
     let input = Input()
-
-    deinit {
-        print("ExerciseFilterVM deinit")
-    }
 
     func makeOutput() -> Output {
         input.viewDisappeared

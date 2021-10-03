@@ -42,7 +42,7 @@ struct TabBarActionButton: View {
             .buttonStyle(TabBarPopupButtonStyle(image: popup.image))
             .offset(x: offset.x, y: offset.y)
             .frame(width: 47, height: 47)
-            .animation(.easeInOut, value: 0.2)
+            .animation(.easeInOut(duration: 0.2))
     }
 
     // MARK: - Helpers

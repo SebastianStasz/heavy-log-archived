@@ -36,6 +36,10 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
         bindEvents()
     }
 
+    var workoutIsNotEmpty: Bool {
+        workoutTreeData.efforts.first?.weightRows.isNotEmpty ?? false
+    }
+
     private func bindEvents() {
         input.showExerciseList
             .sink { [unowned self] in isExerciseListPresented = true }
@@ -74,9 +78,5 @@ final class WorkoutTreeVM: ObservableObject, WorkoutCreatorHelper {
                 workoutTreeData.deleteLastSet(in: weightRow, from: effort)
             }
             .store(in: &cancellables)
-    }
-
-    func makeOutput() -> Output {
-        Output(finishWorkout: input.finishWorkout.eraseToAnyPublisher())
     }
 }

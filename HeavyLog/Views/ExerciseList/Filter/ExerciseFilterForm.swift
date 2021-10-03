@@ -19,6 +19,12 @@ struct ExerciseFilterForm {
          Filter.byType(type)]
     }
 
+    var activeFilters: Int {
+        (difficulty == .unknown ? 0 : 1) +
+        (section == .unknown ? 0 : 1) +
+        (type == .unknown ? 0 : 1)
+    }
+
     mutating func resetToDefault() {
         difficulty = .unknown
         section = .unknown

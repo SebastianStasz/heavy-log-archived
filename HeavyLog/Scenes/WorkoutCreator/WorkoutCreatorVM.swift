@@ -21,10 +21,10 @@ final class WorkoutCreatorVM: ObservableObject {
             fillWorkoutData(using: template)
         }
 
-        let workoutTreeOutput = workoutTreeVM.makeOutput()
-
-        workoutTreeOutput.finishWorkout
-            .sink { [weak self] in self?.finishWorkout() }
+        workoutTreeVM.input.finishWorkout
+            .sink { [unowned self] in
+                navigator.navigate(to: .finishWorkoutPopup(finishWorkout))
+            }
             .store(in: &cancellables)
     }
 
@@ -38,7 +38,7 @@ final class WorkoutCreatorVM: ObservableObject {
     private func getWorkoutData() -> WorkoutData {
         let form = workoutInfoVM.form
         let title = form.title.isNotEmpty ? form.title : "Workout \(form.endDate.string(format: .medium))"
-        let efforts = workoutTreeVM.workoutTreeData.efforts.map { $0.effortData }
+        let efforts = workoutTreeData.efforts.map { $0.effortData }
         return WorkoutData(title: title, notes: form.notes, startDate: form.startDate, endDate: Date(), efforts: efforts, rate: form.rate)
     }
 
@@ -57,5 +57,9 @@ extension WorkoutCreatorVM: WorkoutCreatorHelper {
 
     var availableTabs: [Tab] {
         Tab.allCases
+    }
+
+    private var workoutTreeData: WorkoutTreeData {
+        workoutTreeVM.workoutTreeData
     }
 }

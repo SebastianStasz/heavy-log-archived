@@ -29,6 +29,11 @@ final class ExerciseListVM: ObservableObject {
         ExerciseEntity.areUserExercises(in: controller.context)
     }
 
+    var activeFilters: String {
+        let numberOfFilters = filterVM.temporaryForm.activeFilters
+        return numberOfFilters == 0 ? "" : "(\(numberOfFilters.asString))"
+    }
+
     init() {
         fetchRequest = ExerciseEntity.all(sorting: [.byName()], filtering: [.byKind(.builtIn)])
         let filterFormOutput = filterVM.makeOutput()

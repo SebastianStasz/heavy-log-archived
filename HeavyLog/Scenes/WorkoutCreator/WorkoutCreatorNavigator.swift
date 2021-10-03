@@ -16,6 +16,7 @@ final class WorkoutCreatorNavigator: ObservableObject {
         case exerciseList
         case dismissExerciseList
         case addSetPopup(Effort, (WorkoutSet, Effort) -> Void)
+        case finishWorkoutPopup(() -> Void)
         case abortWorkoutPopup
         case dismissCreator
         case finishWorkout
@@ -36,6 +37,8 @@ final class WorkoutCreatorNavigator: ObservableObject {
             isExerciseListPresented = false
         case let .addSetPopup(effort, action):
             presentAddSetPopup(for: effort, action: action)
+        case let .finishWorkoutPopup(action):
+            presentFinishWorkoutPopup(action: action)
         case .abortWorkoutPopup:
             presentAbortWorkoutCreatorPopup()
         case .dismissCreator:
@@ -56,7 +59,7 @@ extension WorkoutCreatorNavigator {
         controller.present(popup: popup)
     }
 
-    private func abortWorkoutCreator() {
+    func abortWorkoutCreator() {
         dismissWorkoutCreator()
         controller.abortWorkoutCreator()
     }
@@ -66,6 +69,12 @@ extension WorkoutCreatorNavigator {
             let set = WorkoutSet(weight: Double(weight)!, reps: reps)
             action(set, effort)
         }
+        controller.present(popup: popup)
+    }
+
+    private func presentFinishWorkoutPopup(action: @escaping () -> Void) {
+        let info = PopupModel.Info(title: "Finish workout", message: "Are you sure you want to finish workout?")
+        let popup = PopupModel.action(info, action: action)
         controller.present(popup: popup)
     }
 

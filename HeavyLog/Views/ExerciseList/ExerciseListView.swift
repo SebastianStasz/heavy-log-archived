@@ -24,7 +24,7 @@ struct ExerciseListView: View {
     private var toolbarContent: some ToolbarContent {
         Group {
             Toolbar.trailing(.common_add, action: {})
-            Toolbar.leading(.common_filter, action: presentFilterSheet)
+            Toolbar.leading("\(String.common_filter) \(viewModel.activeFilters)", action: presentFilterSheet)
         }
     }
 

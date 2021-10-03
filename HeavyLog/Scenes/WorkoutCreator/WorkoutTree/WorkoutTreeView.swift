@@ -21,8 +21,11 @@ struct WorkoutTreeView: View {
                 .environmentObject(viewModel)
 
             ButtonRow(.workoutCreator_addExercise, action: showExerciseList)
-            Components.spacingLine(30)
-            ButtonRow(.workoutCreator_finishWorkout, action: finishWorkout)
+
+            if viewModel.workoutIsNotEmpty {
+                Components.spacingLine(30)
+                ButtonRow(.workoutCreator_finishWorkout, action: finishWorkout)
+            }
 
             Spacer().layoutPriority(1)
         }
